@@ -25,6 +25,13 @@ public class Map : MonoBehaviour
     public Wave[] heatWaves;
     private float[,] heatMap;
 
+    [Header("Filtering")]
+    public int filterIterations = 1;
+    public int neighbourThreshold = 3;
+    public int neighbourDepth = 1;
+
+    private Tile[,] tiles;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +46,8 @@ public class Map : MonoBehaviour
 
     void GenerateMap ()
     {
+        tiles = new Tile[width, height];
+
         // height map
         heightMap = NoiseGenerator.Generate(width, height, scale, heightWaves, offset);
         // moisture map
@@ -49,13 +58,80 @@ public class Map : MonoBehaviour
         int halfWidth = width / 2;
         int halfHeight = height / 2;
 
-        for(int x = 0; x < width; ++x)
+        for (int x = 0; x < width; ++x)
         {
             for(int y = 0; y < height; ++y)
             {
-                GameObject tile = Instantiate(tilePrefab, new Vector3(x - halfWidth, y - halfHeight, 0), Quaternion.identity);
-                tile.transform.SetParent(transform);
-                tile.GetComponent<SpriteRenderer>().sprite = GetBiome(heightMap[x, y], moistureMap[x, y], heatMap[x, y]).GetTleSprite();
+                GameObject tileObject = Instantiate(tilePrefab, new Vector3(x - halfWidth, y - halfHeight, 0), Quaternion.identity);
+                Tile tile = tileObject.GetComponent<Tile>();
+                tile.selectedBiome = GetBiome(heightMap[x, y], moistureMap[x, y], heatMap[x, y]);
+                tileObject.transform.SetParent(transform);
+                tileObject.GetComponent<SpriteRenderer>().sprite = tile.selectedBiome.GetTileSprite();
+                tiles[x, y] = tile;
+            }
+        }
+
+        for (int i = 0; i < filterIterations; ++i)
+            FilterGeneratedMap();
+    }
+
+    void FilterGeneratedMap()
+    {
+        // iterate over all tiles
+        for (int x = 0; x < width; ++x)
+        {
+            for(int y = 0; y < height; ++y)
+            {
+                BiomePreset biome = tiles[x, y].selectedBiome;
+                List<Tile> neighbours = new List<Tile>();
+                int neighbourCount = 0;
+
+                for (int neighbourX = x - neighbourDepth; neighbourX <= x + neighbourDepth; ++neighbourX)
+                {
+                    for (int neighbourY = y - neighbourDepth; neighbourY <= y + neighbourDepth; ++neighbourY)
+                    {
+                        if(neighbourX >= 0 && neighbourX < width && neighbourY >= 0 && neighbourY < height)
+                        {
+                            if(neighbourX != x || neighbourY != y)
+                            {
+                                neighbours.Add(tiles[neighbourX, neighbourY]);
+                                ++neighbourCount;
+                            }
+                        }
+                    }
+                }
+
+                int myBiomeCount = 0;
+                foreach(Tile neighbour in neighbours)
+                {
+                    if(neighbour != null && neighbour.selectedBiome == biome)
+                        ++myBiomeCount;
+                }
+
+                if(myBiomeCount < neighbourThreshold)
+                {
+                    // change biome
+                    BiomePreset newBiome = null;
+                    int newBiomeCount = 0;
+                    foreach(BiomePreset biomeToCheck in biomes)
+                    {
+                        int biomeToCheckCount = 0;
+                        foreach(Tile neighbour in neighbours)
+                        {
+                            if(neighbour != null && neighbour.selectedBiome == biomeToCheck)
+                                ++biomeToCheckCount;
+                        }
+
+                        if(biomeToCheckCount > newBiomeCount)
+                        {
+                            newBiome = biomeToCheck;
+                            newBiomeCount = biomeToCheckCount;
+                        }
+                    }
+
+                    tiles[x, y].selectedBiome = newBiome;
+                    tiles[x, y].GetComponent<SpriteRenderer>().sprite = newBiome.GetTileSprite();
+                }
             }
         }
     }

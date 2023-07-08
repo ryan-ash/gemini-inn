@@ -23,7 +23,7 @@ public class BiomePreset : ScriptableObject
         
     }
 
-    public Sprite GetTleSprite()
+    public Sprite GetTileSprite()
     {
         return tiles[Random.Range(0, tiles.Length)];
     }

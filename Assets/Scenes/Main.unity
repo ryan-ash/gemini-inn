@@ -964,3 +964,6 @@ MonoBehaviour:
   - seed: 329.7
     frequency: 0.02
     amplitude: 0.5
+  filterIterations: 2
+  neighbourThreshold: 8
+  neighbourDepth: 2
