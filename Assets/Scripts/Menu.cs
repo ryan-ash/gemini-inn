@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameMode : MonoBehaviour
+public class Menu : MonoBehaviour
 {
-    [SerializeField] private GameObject _menu;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -18,11 +16,9 @@ public class GameMode : MonoBehaviour
         
     }
 
-    public void StartGame()
+    public void HideMenu()
     {
-        // reset world state
-        // hide ui
-        // open inn / global map (decide later)
-        _menu.SendMessage("HideMenu");
+        gameObject.SetActive(false);
+        // todo: fade out, then disable
     }
 }

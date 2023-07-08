@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7957572c22bc51c4297efede4339fdc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _menu: {fileID: 1942561285}
 --- !u!4 &85088161
 Transform:
   m_ObjectHideFlags: 0
@@ -181,7 +182,7 @@ GameObject:
   - component: {fileID: 412931023}
   - component: {fileID: 412931022}
   m_Layer: 5
-  m_Name: UI
+  m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -795,8 +796,10 @@ GameObject:
   - component: {fileID: 1942561286}
   - component: {fileID: 1942561288}
   - component: {fileID: 1942561287}
+  - component: {fileID: 1942561289}
+  - component: {fileID: 1942561290}
   m_Layer: 5
-  m_Name: Background
+  m_Name: MenuBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -861,3 +864,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1942561285}
   m_CullTransparentMesh: 1
+--- !u!225 &1942561289
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942561285}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &1942561290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942561285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e82231802c6df0409de67bcd90dc43e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
