@@ -6,6 +6,7 @@ public class Map : MonoBehaviour
 {
     public BiomePreset[] biomes;
     public GameObject tilePrefab;
+    public GameObject tileParent;
 
     [Header("Dimensions")]
     public int width = 50;
@@ -65,7 +66,7 @@ public class Map : MonoBehaviour
                 GameObject tileObject = Instantiate(tilePrefab, new Vector3(x - halfWidth, y - halfHeight, 0), Quaternion.identity);
                 Tile tile = tileObject.GetComponent<Tile>();
                 tile.selectedBiome = GetBiome(heightMap[x, y], moistureMap[x, y], heatMap[x, y]);
-                tileObject.transform.SetParent(transform);
+                tileObject.transform.SetParent(tileParent.transform);
                 tileObject.GetComponent<SpriteRenderer>().sprite = tile.selectedBiome.GetTileSprite();
                 tiles[x, y] = tile;
             }

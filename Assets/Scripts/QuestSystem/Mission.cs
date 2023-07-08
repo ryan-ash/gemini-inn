@@ -22,6 +22,7 @@ public class Mission
         for (int I = 0; I < QuestsNum; ++I)
         {
             Quest Quest = new Quest();
+            Quest.QuestName = "Quest " + Random.Range(0, 1000).ToString();
             Quest.BaseSuccessRate = Random.Range(0.5f, 1.0f);
             int MaxAbilities = Enum.GetValues(typeof(AbilityType)).Length;
             int MaxStats = Enum.GetValues(typeof(StatType)).Length;
@@ -48,5 +49,46 @@ public class Mission
             Generated.Quests.Add(Quest);
         }
         return Generated;
+    }
+
+    public Quest GetAvailableQuest()
+    {
+        foreach (Quest Quest in Quests)
+        {
+            if (Quest.questState == QuestState.InProgress)
+            {
+                return null;
+            }
+
+            if (Quest.questState == QuestState.NotStarted)
+            {
+                return Quest;
+            }
+        }
+        return null;
+    }
+
+    public bool IsMissionOver()
+    {
+        foreach (Quest quest in Quests)
+        {
+            if (quest.questState != QuestState.Success && quest.questState != QuestState.Failure)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public bool IsMissionSuccessful()
+    {
+        foreach (Quest quest in Quests)
+        {
+            if (quest.questState != QuestState.Success)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

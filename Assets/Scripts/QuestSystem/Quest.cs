@@ -2,6 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum QuestState
+{
+    NotStarted,
+    InProgress,
+    Success,
+    Failure
+}
+
 [System.Serializable]
 public class Quest
 {
@@ -10,6 +18,8 @@ public class Quest
     public float BaseSuccessRate = 1.0f;
     public List<AbilityModifier> AbilityModifiers;
     public List<StatModifier> StatModifiers;
+    public Vector3 questPosition;
+    public QuestState questState = QuestState.NotStarted;
 
     public Quest()
     {
@@ -37,5 +47,15 @@ public class Quest
         }
         float Modifier = Mod.Modifier * Mathf.Lerp(1.0f, 2.0f, InStat.Value / 100.0f);
         return Modifier;
+    }
+
+    public void SetState(QuestState inState)
+    {
+        questState = inState;
+    }
+
+    public void SetPosition(Vector3 inPosition)
+    {
+        questPosition = inPosition;
     }
 }
