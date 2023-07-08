@@ -950,13 +950,13 @@ MonoBehaviour:
   - seed: 56
     frequency: 0.05
     amplitude: 1
-  - seed: 199.36
+  - seed: 200
     frequency: 0.1
     amplitude: 0.5
   moistureWaves:
-  - seed: 621
+  - seed: 100
     frequency: 0.03
-    amplitude: 1
+    amplitude: 0.25
   heatWaves:
   - seed: 318.6
     frequency: 0.04

@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Forest
   m_EditorClassIdentifier: 
   tiles:
-  - {fileID: -1401941680, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: -1043825284, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: 1796545131, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: -1667381994, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: -1315304677, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: -659056162, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: 1997766533, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: 850810283, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
   minHeight: 0.2
   minMoisture: 0.4
   minHeat: 0.4

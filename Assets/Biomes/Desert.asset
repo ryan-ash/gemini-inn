@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Desert
   m_EditorClassIdentifier: 
   tiles:
-  - {fileID: -882831345, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: 1203913449, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: -1929516288, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: 889245348, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: 385164535, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: -1752801108, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: -708902716, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: -208170315, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: -1685620090, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: 675306669, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: 233749372, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: 1007346391, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: 1503932453, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: 860167610, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: 655515363, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: -2000519748, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
   minHeight: 0.2
   minMoisture: 0
   minHeat: 0.5

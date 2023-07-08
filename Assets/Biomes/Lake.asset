@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Lake
   m_EditorClassIdentifier: 
   tiles:
-  - {fileID: -282172693, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: -1434494096, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: -800126967, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: 1637912298, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: 1422242198, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: 793386638, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: -820563854, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: -762504865, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: 1948201514, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: 297004804, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
   minHeight: 0
   minMoisture: 0
   minHeat: 0

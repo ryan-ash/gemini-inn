@@ -13,12 +13,10 @@ MonoBehaviour:
   m_Name: Tundra
   m_EditorClassIdentifier: 
   tiles:
-  - {fileID: -1642225072, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: 1804621515, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: -1564206503, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: -1185188633, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: 227289307, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: -585330930, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: -1083916793, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: 942712545, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: -2137843291, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: -1115932334, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
   minHeight: 0.2
   minMoisture: 0
   minHeat: 0

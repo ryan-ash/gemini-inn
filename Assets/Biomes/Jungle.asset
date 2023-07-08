@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Jungle
   m_EditorClassIdentifier: 
   tiles:
-  - {fileID: -1971849932, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: 1765356429, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: -1612660047, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: 1861376434, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: 248190053, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: -1290035305, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: -1116818671, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: 1647337427, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
   minHeight: 0.3
   minMoisture: 0.5
   minHeat: 0.62

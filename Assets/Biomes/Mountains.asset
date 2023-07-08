@@ -13,18 +13,14 @@ MonoBehaviour:
   m_Name: Mountains
   m_EditorClassIdentifier: 
   tiles:
-  - {fileID: -1610965762, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: -1317892022, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: 953222566, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: 1861025632, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: -278956462, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: 575182992, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: -38036984, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: -662728972, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: 885010217, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: -1266892292, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: 935803288, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: -111013129, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: -1437172753, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: -318664119, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: -1744136294, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: -1324198163, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: 1001055168, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: -501507921, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: -1421497799, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: 496649818, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
   minHeight: 0.5
   minMoisture: 0
   minHeat: 0
