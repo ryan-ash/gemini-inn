@@ -1,0 +1,97 @@
+{
+    "Quests": [
+        {
+            "QuestName": "",
+            "BaseSuccessRate": 0.7326451539993286,
+            "AbilityModifiers": [
+                {
+                    "Type": 2,
+                    "Modifier": 0.8040317296981812
+                }
+            ],
+            "StatModifiers": [
+                {
+                    "Type": 2,
+                    "Modifier": 0.8753470182418823
+                },
+                {
+                    "Type": 3,
+                    "Modifier": 1.1321773529052735
+                },
+                {
+                    "Type": 1,
+                    "Modifier": 1.0746477842330933
+                }
+            ]
+        },
+        {
+            "QuestName": "",
+            "BaseSuccessRate": 0.5158365964889526,
+            "AbilityModifiers": [
+                {
+                    "Type": 1,
+                    "Modifier": 0.8158921003341675
+                },
+                {
+                    "Type": 1,
+                    "Modifier": 1.1663379669189454
+                }
+            ],
+            "StatModifiers": [
+                {
+                    "Type": 3,
+                    "Modifier": 1.1834120750427247
+                },
+                {
+                    "Type": 1,
+                    "Modifier": 0.9670354127883911
+                }
+            ]
+        },
+        {
+            "QuestName": "",
+            "BaseSuccessRate": 0.6566261053085327,
+            "AbilityModifiers": [
+                {
+                    "Type": 2,
+                    "Modifier": 1.2176427841186524
+                }
+            ],
+            "StatModifiers": [
+                {
+                    "Type": 2,
+                    "Modifier": 0.920264720916748
+                },
+                {
+                    "Type": 3,
+                    "Modifier": 0.80177903175354
+                },
+                {
+                    "Type": 1,
+                    "Modifier": 1.0294342041015626
+                }
+            ]
+        },
+        {
+            "QuestName": "",
+            "BaseSuccessRate": 0.9744970798492432,
+            "AbilityModifiers": [
+                {
+                    "Type": 1,
+                    "Modifier": 0.8365377187728882
+                }
+            ],
+            "StatModifiers": [
+                {
+                    "Type": 3,
+                    "Modifier": 0.9645475149154663
+                },
+                {
+                    "Type": 1,
+                    "Modifier": 0.9341671466827393
+                }
+            ]
+        }
+    ],
+    "CompletionReward": {}
+}
