@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ece7e5984d947149a87a64ea07c26ee, type: 3}
+  m_Name: Mountains
+  m_EditorClassIdentifier: 
+  tiles:
+  - {fileID: -1610965762, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: -1317892022, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: 953222566, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: 1861025632, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: -278956462, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: 575182992, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: -38036984, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: -662728972, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: 885010217, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: -1266892292, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: 935803288, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: -111013129, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  minHeight: 0.5
+  minMoisture: 0
+  minHeat: 0

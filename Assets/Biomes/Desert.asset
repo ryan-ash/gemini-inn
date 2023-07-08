@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ece7e5984d947149a87a64ea07c26ee, type: 3}
+  m_Name: Desert
+  m_EditorClassIdentifier: 
+  tiles:
+  - {fileID: -882831345, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: 1203913449, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: -1929516288, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: 889245348, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: 385164535, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: -1752801108, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: -708902716, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: -208170315, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  minHeight: 0.2
+  minMoisture: 0
+  minHeat: 0.5
