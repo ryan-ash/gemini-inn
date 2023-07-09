@@ -7,6 +7,7 @@ using Random=UnityEngine.Random;
 [System.Serializable]
 public class Mission
 {
+    public string MissionName;
     public List<Quest> Quests;
     public Reward CompletionReward;
 
