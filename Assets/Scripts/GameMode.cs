@@ -49,7 +49,7 @@ public class GameMode : MonoBehaviour
 
     void Update()
     {
-        if (!isMapOpen && !isChoosingAdventurers)
+        if (!isMapOpen && !isChoosingAdventurers && !isNegotiating)
             return;
 
         if (isMapOpen)
@@ -131,6 +131,14 @@ public class GameMode : MonoBehaviour
                 _consideredAdventurerGroup = null;
             }
         }
+
+        if (isNegotiating)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                DisagreeToQuest();
+            }
+        }
     }
 
     public void ToggleMap()
@@ -184,6 +192,7 @@ public class GameMode : MonoBehaviour
     {
         isNegotiating = false;
         isChoosingAdventurers = true;
+        CursorSetter.SetHoverCursor(true);
         AdventurerGroup adventurerGroup = _selectedAdventurerGroup.GetComponent<AdventurerGroup>();
         foreach (Adventurer adventurer in adventurerGroup.adventurers)
         {
