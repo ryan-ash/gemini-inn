@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameMode : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class GameMode : MonoBehaviour
     [SerializeField] private GameObject _inn;
     [SerializeField] private GameObject _innHUD;
     [SerializeField] private GameObject _map;
+    [SerializeField] private Text _questCounter;
 
     [Header("Quest Generation")]
     [SerializeField] private float _questGenerationInterval = 10.0f;
@@ -59,6 +61,11 @@ public class GameMode : MonoBehaviour
         StartCoroutine(SpawnQuest());
     }
 
+    private void UpdateQuestCounter()
+    {
+        _questCounter.text = Missions.Count.ToString();
+    }
+
     IEnumerator SpawnQuest()
     {
         while (true)
@@ -74,6 +81,8 @@ public class GameMode : MonoBehaviour
                 questVisual.transform.SetParent(_questRoot.transform, false);
 
                 Missions.Add(mission);
+
+                UpdateQuestCounter();
             }
 
             yield return new WaitForSeconds(_questGenerationInterval);
