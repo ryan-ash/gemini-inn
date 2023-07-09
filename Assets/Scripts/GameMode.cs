@@ -17,6 +17,8 @@ public class GameMode : MonoBehaviour
     [Header("Quest Generation")]
     [SerializeField] private float _questGenerationInterval = 10.0f;
     [SerializeField] private float _questGenerationChance = 0.25f;
+    [SerializeField] private float _questSafeDistance = 5.0f;
+    [SerializeField] private float _questTileRetryThreshold = 0.5f;
     [SerializeField] private Vector2 _questGenerationRange = new Vector2(160.0f, 90.0f);
     [SerializeField] private GameObject _questVisualPrefab;
     [SerializeField] private GameObject _questRoot;
@@ -41,6 +43,8 @@ public class GameMode : MonoBehaviour
     private GameObject _selectedQuest;
     private GameObject _consideredAdventurerGroup;
     private GameObject _selectedAdventurerGroup;
+
+    private List<Transform> _generatedQuests = new List<Transform>();
 
     void Start()
     {
@@ -224,6 +228,17 @@ public class GameMode : MonoBehaviour
         _questCounter.text = Missions.Count.ToString();
     }
 
+    private bool CheckIfSafe(Vector3 positionToTest)
+    {
+        foreach (Transform questPosition in _generatedQuests)
+        {
+            if (Vector3.Distance(positionToTest, questPosition.localPosition) < _questSafeDistance)
+                return false;
+        }
+
+        return true;
+    }
+
     IEnumerator SpawnQuest()
     {
         while (true)
@@ -240,15 +255,33 @@ public class GameMode : MonoBehaviour
                     continue;
                 }
 
-                Vector3 questPosition = new Vector3(Random.Range(-_questGenerationRange.x, _questGenerationRange.x), Random.Range(-_questGenerationRange.y, _questGenerationRange.y), 0.0f);
+                int initialTileCount = availableBiomeTiles.Count;
 
-                var closestTile = availableBiomeTiles
-                .GroupBy(x => System.Math.Pow(questPosition.x - x.X, 2) + System.Math.Pow(questPosition.y - x.Y, 2))
-                .OrderBy(x => x.Key)
-                .First().First();
 
-                questPosition.x = closestTile.X;
-                questPosition.y = closestTile.Y;
+                Vector3 questPosition = Vector3.zero;
+                bool isSafe = false;
+                while (!isSafe)
+                {
+                    int tileID = Random.Range(0, availableBiomeTiles.Count);
+                    questPosition = availableBiomeTiles[tileID].transform.localPosition;
+                    questPosition.z = 0.0f;
+
+                    isSafe = CheckIfSafe(questPosition);
+
+                    if (isSafe)
+                        break;                        
+
+                    availableBiomeTiles.RemoveAt(tileID);
+
+                    Debug.Log(availableBiomeTiles.Count.ToString());
+
+                    if (availableBiomeTiles.Count < initialTileCount * _questTileRetryThreshold)
+                        break;
+                }
+                if (!isSafe)
+                    yield return new WaitForSeconds(_questGenerationInterval);
+                // questPosition.x = closestTile.X;
+                // questPosition.y = closestTile.Y;
 
                 newAvailableQuest.SetPosition(questPosition);
 
@@ -257,6 +290,8 @@ public class GameMode : MonoBehaviour
 
                 QuestInfo questInfo = questVisual.GetComponent<QuestInfo>();
                 questInfo.quest = newAvailableQuest;
+
+                _generatedQuests.Add(questVisual.transform);
 
                 Missions.Add(mission);
 

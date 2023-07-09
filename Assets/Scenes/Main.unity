@@ -23304,7 +23304,7 @@ PrefabInstance:
       objectReference: {fileID: 1387532379}
     - target: {fileID: 7594314928649065236, guid: 45cdd3c87513240399d7b33daf9ca750, type: 3}
       propertyPath: useMockQuests
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7594314928649065236, guid: 45cdd3c87513240399d7b33daf9ca750, type: 3}
       propertyPath: distanceDuringNegotiation

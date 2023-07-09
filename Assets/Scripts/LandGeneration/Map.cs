@@ -213,7 +213,7 @@ public class Map : MonoBehaviour
         return biomeToReturn;
     }
 
-    public static IReadOnlyList<Tile> GetBiomeTiles(params string[] biomes)
+    public static List<Tile> GetBiomeTiles(params string[] biomes)
     {
         if (biomes == null)
         {
