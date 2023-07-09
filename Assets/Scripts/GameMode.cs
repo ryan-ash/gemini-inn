@@ -24,20 +24,20 @@ public class GameMode : MonoBehaviour
     [SerializeField] private LayerMask raycastLayerMask;
 
     private bool isMapOpen = false;
+    private bool scheduledHide = false;
+    private bool isChoosingAdventurers = false;
+
     [HideInInspector] public List<Mission> Missions;
     private GameObject _selectedQuest;
-    private bool scheduledHide = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         CursorSetter.SetDefaultCursor();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (!isMapOpen)
+        if (!isMapOpen && !isChoosingAdventurers)
             return;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -81,6 +81,13 @@ public class GameMode : MonoBehaviour
         }
 
         EventSystem.current.SetSelectedGameObject(null);
+    }
+
+    public void ChooseAdventurers()
+    {
+        ToggleMap();
+        CursorSetter.SetBribeCursor(true);
+        isChoosingAdventurers = true;
     }
 
     public void StartGame()

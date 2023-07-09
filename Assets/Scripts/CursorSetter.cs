@@ -6,8 +6,8 @@ public class CursorSetter : MonoBehaviour
 {
     public CursorPreset[] cursors;
     public static CursorSetter instance;
+    public bool isPriorityCursor = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         instance = this;    
@@ -39,24 +39,46 @@ public class CursorSetter : MonoBehaviour
         Cursor.SetCursor(cursor.cursorTexture, cursor.hotspot, CursorMode.ForceSoftware);
     }
 
-    public static void SetDefaultCursor()
+    public static void SetDefaultCursor(bool isPriority = false)
     {
-        SetCursor("Default");
+        if (isPriority || !instance.isPriorityCursor)
+        {
+            SetCursor("Default");
+            instance.isPriorityCursor = isPriority;
+        }
     }
 
-    public static void SetHoverCursor()
+    public static void SetHoverCursor(bool isPriority = false)
     {
-        SetCursor("Hover");
+        if (isPriority || !instance.isPriorityCursor)
+        {
+            SetCursor("Hover");
+            instance.isPriorityCursor = isPriority;
+        }
     }
 
-    public static void SetFistCursor()
+    public static void SetFistCursor(bool isPriority = false)
     {
-        SetCursor("Fist");
+        if (isPriority || !instance.isPriorityCursor)
+        {
+            SetCursor("Fist");
+            instance.isPriorityCursor = isPriority;
+        }
     }
 
-    public static void SetBribeCursor()
+    public static void SetBribeCursor(bool isPriority = false)
     {
-        SetCursor("Bribe");
+        if (isPriority || !instance.isPriorityCursor)
+        {
+            SetCursor("Bribe");
+            instance.isPriorityCursor = isPriority;
+        }
+    }
+
+    public static void ResetPriorityCursor()
+    {
+        instance.isPriorityCursor = false;
+        SetDefaultCursor();
     }
 }
 
