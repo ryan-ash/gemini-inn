@@ -27,10 +27,13 @@ public class GameMode : MonoBehaviour
 
     [Header("Adventurer Selection")]
     [SerializeField] private LayerMask adventurerRaycastLayerMask;
+    [SerializeField] private float distanceDuringNegotiation = 1.5f;
+    [SerializeField] private float distanceRandomizationDuringNegotiation = 1.5f;
 
     private bool isMapOpen = false;
     private bool scheduledHide = false;
     private bool isChoosingAdventurers = false;
+    private bool isNegotiating = false;
 
     [HideInInspector] public List<Mission> Missions;
 
@@ -92,6 +95,12 @@ public class GameMode : MonoBehaviour
                 if (_consideredAdventurerGroup != null)
                 {
                     _selectedAdventurerGroup = _consideredAdventurerGroup;
+                    bool useFistNotBribe = Random.Range(0.0f, 1.0f) <= 0.5f;
+                    if (useFistNotBribe)
+                        CursorSetter.SetFistCursor(true);
+                    else
+                        CursorSetter.SetBribeCursor(true);
+                    MoveSelectedAdventurersToNegotiation();
                 }
                 else
                 {
@@ -148,6 +157,38 @@ public class GameMode : MonoBehaviour
         ToggleMap();
         CursorSetter.SetHoverCursor(true);
         isChoosingAdventurers = true;
+    }
+
+    public void MoveSelectedAdventurersToNegotiation()
+    {
+        AdventurerGroup adventurerGroup = _selectedAdventurerGroup.GetComponent<AdventurerGroup>();
+        foreach (Adventurer adventurer in adventurerGroup.adventurers)
+        {
+            Vector3 directionFromOwner = Vector3.Normalize(adventurer.transform.position - Camera.main.transform.position);
+            float actualDistanceDuringNegotiation = distanceDuringNegotiation + Random.Range(-distanceRandomizationDuringNegotiation, distanceRandomizationDuringNegotiation);
+            Vector3 newPosition = new Vector3(Camera.main.transform.position.x + directionFromOwner.x * actualDistanceDuringNegotiation, 0.0f, Camera.main.transform.position.z + directionFromOwner.z * actualDistanceDuringNegotiation);
+            adventurer.MoveTo(newPosition);
+            adventurerGroup.LightDownAdventurerTable();
+        }
+        isNegotiating = true;
+    }
+
+    public void AgreeToQuest()
+    {
+        // generate result
+        // show result
+    }
+
+    public void DisagreeToQuest()
+    {
+        isNegotiating = false;
+        isChoosingAdventurers = true;
+        AdventurerGroup adventurerGroup = _selectedAdventurerGroup.GetComponent<AdventurerGroup>();
+        foreach (Adventurer adventurer in adventurerGroup.adventurers)
+        {
+            adventurer.MoveBack();
+        }
+        adventurerGroup.LightUpAdventurerTable();
     }
 
     public void StartGame()

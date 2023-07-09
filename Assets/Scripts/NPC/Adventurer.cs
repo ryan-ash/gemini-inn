@@ -33,6 +33,8 @@ public class Adventurer : MonoBehaviour
     [SerializeField]
     private List<Mesh> FeetVariations;
 
+    private Vector3 initialPosition;
+
     public void RandomizeCharacter()
     {
         int Index = Random.Range(0, HeadVariations.Count);
@@ -82,8 +84,19 @@ public class Adventurer : MonoBehaviour
         }
     }
 
+    public void MoveTo(Vector3 position)
+    {
+        transform.position = position;
+    }
+
+    public void MoveBack()
+    {
+        transform.position = initialPosition;
+    }
+
     void Start()
     {
         RandomizeCharacter();
+        initialPosition = transform.position;
     }
 }
