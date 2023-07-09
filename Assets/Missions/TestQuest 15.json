@@ -1,0 +1,173 @@
+{
+    "Quests": [
+        {
+            "questName": "Quest 15",
+            "questDescription": "Lorem ipsum dolor sit amet, consectetur adipi",
+            "BaseSuccessRate": 0.5702752470970154,
+            "AbilityModifiers": [
+                {
+                    "Type": 1,
+                    "Modifier": 0.8902852535247803
+                },
+                {
+                    "Type": 3,
+                    "Modifier": 0.9041998386383057
+                }
+            ],
+            "StatModifiers": [
+                {
+                    "Type": 1,
+                    "Modifier": 0.9691028594970703
+                },
+                {
+                    "Type": 3,
+                    "Modifier": 1.2248097658157349
+                }
+            ],
+            "questPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Biomes": [
+                "Jungle",
+                "Forest",
+                "Lake"
+            ],
+            "questState": 0
+        },
+        {
+            "questName": "Quest 306",
+            "questDescription": "Lorem ipsum dolor sit amet, consectetur adipi",
+            "BaseSuccessRate": 0.6031654477119446,
+            "AbilityModifiers": [
+                {
+                    "Type": 1,
+                    "Modifier": 0.7761332988739014
+                }
+            ],
+            "StatModifiers": [
+                {
+                    "Type": 2,
+                    "Modifier": 0.8564949035644531
+                },
+                {
+                    "Type": 2,
+                    "Modifier": 1.194092869758606
+                },
+                {
+                    "Type": 2,
+                    "Modifier": 1.1414436101913453
+                }
+            ],
+            "questPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Biomes": [
+                "Jungle",
+                "Forest",
+                "Lake"
+            ],
+            "questState": 0
+        },
+        {
+            "questName": "Quest 841",
+            "questDescription": "Lorem ipsum dolor sit amet, consectetur adipi",
+            "BaseSuccessRate": 0.6709784269332886,
+            "AbilityModifiers": [
+                {
+                    "Type": 1,
+                    "Modifier": 0.8080506324768066
+                }
+            ],
+            "StatModifiers": [
+                {
+                    "Type": 3,
+                    "Modifier": 1.1034128665924073
+                }
+            ],
+            "questPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Biomes": [
+                "Jungle",
+                "Forest",
+                "Lake"
+            ],
+            "questState": 0
+        },
+        {
+            "questName": "Quest 908",
+            "questDescription": "Lorem ipsum dolor sit amet, consectetur adipi",
+            "BaseSuccessRate": 0.5181481242179871,
+            "AbilityModifiers": [
+                {
+                    "Type": 3,
+                    "Modifier": 1.1465258598327637
+                },
+                {
+                    "Type": 1,
+                    "Modifier": 0.9508641958236694
+                }
+            ],
+            "StatModifiers": [
+                {
+                    "Type": 3,
+                    "Modifier": 1.0836726427078248
+                }
+            ],
+            "questPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Biomes": [
+                "Jungle",
+                "Forest",
+                "Lake"
+            ],
+            "questState": 0
+        },
+        {
+            "questName": "Quest 319",
+            "questDescription": "Lorem ipsum dolor sit amet, consectetur adipi",
+            "BaseSuccessRate": 0.9661350846290588,
+            "AbilityModifiers": [
+                {
+                    "Type": 1,
+                    "Modifier": 1.018017292022705
+                },
+                {
+                    "Type": 2,
+                    "Modifier": 0.9215303659439087
+                }
+            ],
+            "StatModifiers": [
+                {
+                    "Type": 2,
+                    "Modifier": 0.7839183807373047
+                },
+                {
+                    "Type": 1,
+                    "Modifier": 1.0860252380371094
+                }
+            ],
+            "questPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Biomes": [
+                "Jungle",
+                "Forest",
+                "Lake"
+            ],
+            "questState": 0
+        }
+    ],
+    "CompletionReward": {}
+}

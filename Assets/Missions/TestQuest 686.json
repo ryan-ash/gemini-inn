@@ -1,0 +1,73 @@
+{
+    "Quests": [
+        {
+            "questName": "Quest 686",
+            "questDescription": "Lorem ipsum dolor sit amet, consectetur adipi",
+            "BaseSuccessRate": 0.9104088544845581,
+            "AbilityModifiers": [
+                {
+                    "Type": 1,
+                    "Modifier": 1.067704677581787
+                },
+                {
+                    "Type": 2,
+                    "Modifier": 0.8680733442306519
+                }
+            ],
+            "StatModifiers": [
+                {
+                    "Type": 2,
+                    "Modifier": 0.983745813369751
+                }
+            ],
+            "questPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Biomes": [
+                "Jungle",
+                "Forest",
+                "Lake"
+            ],
+            "questState": 0
+        },
+        {
+            "questName": "Quest 896",
+            "questDescription": "Lorem ipsum dolor sit amet, consectetur adipi",
+            "BaseSuccessRate": 0.659356951713562,
+            "AbilityModifiers": [
+                {
+                    "Type": 3,
+                    "Modifier": 1.0907686948776246
+                },
+                {
+                    "Type": 3,
+                    "Modifier": 1.0902559757232667
+                }
+            ],
+            "StatModifiers": [
+                {
+                    "Type": 2,
+                    "Modifier": 1.0402977466583253
+                },
+                {
+                    "Type": 3,
+                    "Modifier": 0.9205046892166138
+                }
+            ],
+            "questPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Biomes": [
+                "Jungle",
+                "Forest",
+                "Lake"
+            ],
+            "questState": 0
+        }
+    ],
+    "CompletionReward": {}
+}

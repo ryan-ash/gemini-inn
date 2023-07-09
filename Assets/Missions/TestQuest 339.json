@@ -1,0 +1,65 @@
+{
+    "Quests": [
+        {
+            "questName": "Quest 339",
+            "questDescription": "Lorem ipsum dolor sit amet, consectetur adipi",
+            "BaseSuccessRate": 0.7146496772766113,
+            "AbilityModifiers": [
+                {
+                    "Type": 1,
+                    "Modifier": 1.0906569957733155
+                }
+            ],
+            "StatModifiers": [
+                {
+                    "Type": 1,
+                    "Modifier": 0.9502913951873779
+                }
+            ],
+            "questPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Biomes": [
+                "Jungle",
+                "Forest",
+                "Lake"
+            ],
+            "questState": 0
+        },
+        {
+            "questName": "Quest 476",
+            "questDescription": "Lorem ipsum dolor sit amet, consectetur adipi",
+            "BaseSuccessRate": 0.6748287677764893,
+            "AbilityModifiers": [
+                {
+                    "Type": 2,
+                    "Modifier": 0.8804643154144287
+                }
+            ],
+            "StatModifiers": [
+                {
+                    "Type": 3,
+                    "Modifier": 1.0945842266082764
+                },
+                {
+                    "Type": 3,
+                    "Modifier": 0.8376915454864502
+                }
+            ],
+            "questPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Biomes": [
+                "Jungle",
+                "Forest",
+                "Lake"
+            ],
+            "questState": 0
+        }
+    ],
+    "CompletionReward": {}
+}

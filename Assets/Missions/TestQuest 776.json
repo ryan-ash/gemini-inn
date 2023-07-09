@@ -1,0 +1,137 @@
+{
+    "Quests": [
+        {
+            "questName": "Quest 776",
+            "questDescription": "Lorem ipsum dolor sit amet, consectetur adipi",
+            "BaseSuccessRate": 0.879521906375885,
+            "AbilityModifiers": [
+                {
+                    "Type": 2,
+                    "Modifier": 1.2288951873779297
+                }
+            ],
+            "StatModifiers": [
+                {
+                    "Type": 3,
+                    "Modifier": 1.0686330795288087
+                },
+                {
+                    "Type": 2,
+                    "Modifier": 0.7878046035766602
+                }
+            ],
+            "questPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Biomes": [
+                "Jungle",
+                "Forest",
+                "Lake"
+            ],
+            "questState": 0
+        },
+        {
+            "questName": "Quest 752",
+            "questDescription": "Lorem ipsum dolor sit amet, consectetur adipi",
+            "BaseSuccessRate": 0.8385123610496521,
+            "AbilityModifiers": [
+                {
+                    "Type": 1,
+                    "Modifier": 0.8805214166641235
+                }
+            ],
+            "StatModifiers": [
+                {
+                    "Type": 3,
+                    "Modifier": 1.1082735061645508
+                },
+                {
+                    "Type": 3,
+                    "Modifier": 0.8026515245437622
+                },
+                {
+                    "Type": 2,
+                    "Modifier": 1.1864690780639649
+                }
+            ],
+            "questPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Biomes": [
+                "Jungle",
+                "Forest",
+                "Lake"
+            ],
+            "questState": 0
+        },
+        {
+            "questName": "Quest 334",
+            "questDescription": "Lorem ipsum dolor sit amet, consectetur adipi",
+            "BaseSuccessRate": 0.7224299907684326,
+            "AbilityModifiers": [
+                {
+                    "Type": 3,
+                    "Modifier": 1.0411721467971802
+                },
+                {
+                    "Type": 2,
+                    "Modifier": 1.0422414541244507
+                },
+                {
+                    "Type": 3,
+                    "Modifier": 0.8583223819732666
+                }
+            ],
+            "StatModifiers": [
+                {
+                    "Type": 3,
+                    "Modifier": 1.2142069339752198
+                }
+            ],
+            "questPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Biomes": [
+                "Jungle",
+                "Forest",
+                "Lake"
+            ],
+            "questState": 0
+        },
+        {
+            "questName": "Quest 82",
+            "questDescription": "Lorem ipsum dolor sit amet, consectetur adipi",
+            "BaseSuccessRate": 0.7819987535476685,
+            "AbilityModifiers": [
+                {
+                    "Type": 3,
+                    "Modifier": 1.2001011371612549
+                }
+            ],
+            "StatModifiers": [
+                {
+                    "Type": 3,
+                    "Modifier": 1.0631123781204224
+                }
+            ],
+            "questPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Biomes": [
+                "Jungle",
+                "Forest",
+                "Lake"
+            ],
+            "questState": 0
+        }
+    ],
+    "CompletionReward": {}
+}
