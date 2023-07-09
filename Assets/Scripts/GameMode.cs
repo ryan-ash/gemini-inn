@@ -71,7 +71,7 @@ public class GameMode : MonoBehaviour
                 newAvailableQuest.SetPosition(questPosition);
 
                 GameObject questVisual = Instantiate(_questVisualPrefab, questPosition, Quaternion.identity);
-                questVisual.transform.SetParent(_questRoot.transform);
+                questVisual.transform.SetParent(_questRoot.transform, false);
 
                 Missions.Add(mission);
             }
