@@ -1,0 +1,109 @@
+{
+    "Quests": [
+        {
+            "questName": "Quest 513",
+            "questDescription": "Lorem ipsum dolor sit amet, consectetur adipi",
+            "BaseSuccessRate": 0.7472668886184692,
+            "AbilityModifiers": [
+                {
+                    "Type": 2,
+                    "Modifier": 1.007004737854004
+                },
+                {
+                    "Type": 2,
+                    "Modifier": 1.0776159763336182
+                },
+                {
+                    "Type": 1,
+                    "Modifier": 1.0535457134246827
+                }
+            ],
+            "StatModifiers": [
+                {
+                    "Type": 2,
+                    "Modifier": 0.9069279432296753
+                },
+                {
+                    "Type": 2,
+                    "Modifier": 0.978535532951355
+                },
+                {
+                    "Type": 3,
+                    "Modifier": 1.19882071018219
+                }
+            ],
+            "questPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Biomes": [],
+            "questState": 0
+        },
+        {
+            "questName": "Quest 191",
+            "questDescription": "Lorem ipsum dolor sit amet, consectetur adipi",
+            "BaseSuccessRate": 0.5055179595947266,
+            "AbilityModifiers": [
+                {
+                    "Type": 3,
+                    "Modifier": 1.1518397331237794
+                },
+                {
+                    "Type": 3,
+                    "Modifier": 0.9302825927734375
+                }
+            ],
+            "StatModifiers": [
+                {
+                    "Type": 1,
+                    "Modifier": 0.7919005155563355
+                },
+                {
+                    "Type": 3,
+                    "Modifier": 1.203514814376831
+                },
+                {
+                    "Type": 2,
+                    "Modifier": 0.9767504930496216
+                }
+            ],
+            "questPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Biomes": [],
+            "questState": 0
+        },
+        {
+            "questName": "Quest 93",
+            "questDescription": "Lorem ipsum dolor sit amet, consectetur adipi",
+            "BaseSuccessRate": 0.894561767578125,
+            "AbilityModifiers": [
+                {
+                    "Type": 2,
+                    "Modifier": 0.9255392551422119
+                },
+                {
+                    "Type": 1,
+                    "Modifier": 0.9375180006027222
+                }
+            ],
+            "StatModifiers": [
+                {
+                    "Type": 3,
+                    "Modifier": 1.1609725952148438
+                }
+            ],
+            "questPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Biomes": [],
+            "questState": 0
+        }
+    ],
+    "CompletionReward": {}
+}

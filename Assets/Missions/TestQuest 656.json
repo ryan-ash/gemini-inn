@@ -1,0 +1,165 @@
+{
+    "Quests": [
+        {
+            "questName": "Quest 656",
+            "questDescription": "Lorem ipsum dolor sit amet, consectetur adipi",
+            "BaseSuccessRate": 0.7730604410171509,
+            "AbilityModifiers": [
+                {
+                    "Type": 3,
+                    "Modifier": 0.7884166240692139
+                }
+            ],
+            "StatModifiers": [
+                {
+                    "Type": 2,
+                    "Modifier": 0.753629207611084
+                }
+            ],
+            "questPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Biomes": [],
+            "questState": 0
+        },
+        {
+            "questName": "Quest 72",
+            "questDescription": "Lorem ipsum dolor sit amet, consectetur adipi",
+            "BaseSuccessRate": 0.7686327695846558,
+            "AbilityModifiers": [
+                {
+                    "Type": 2,
+                    "Modifier": 0.9939378499984741
+                },
+                {
+                    "Type": 3,
+                    "Modifier": 0.8440027236938477
+                }
+            ],
+            "StatModifiers": [
+                {
+                    "Type": 1,
+                    "Modifier": 1.0799164772033692
+                },
+                {
+                    "Type": 3,
+                    "Modifier": 1.093289852142334
+                },
+                {
+                    "Type": 1,
+                    "Modifier": 1.231092929840088
+                }
+            ],
+            "questPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Biomes": [],
+            "questState": 0
+        },
+        {
+            "questName": "Quest 125",
+            "questDescription": "Lorem ipsum dolor sit amet, consectetur adipi",
+            "BaseSuccessRate": 0.9707643389701843,
+            "AbilityModifiers": [
+                {
+                    "Type": 2,
+                    "Modifier": 1.0869247913360596
+                },
+                {
+                    "Type": 1,
+                    "Modifier": 1.0371710062026978
+                }
+            ],
+            "StatModifiers": [
+                {
+                    "Type": 1,
+                    "Modifier": 1.1838116645812989
+                },
+                {
+                    "Type": 2,
+                    "Modifier": 0.7729058265686035
+                }
+            ],
+            "questPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Biomes": [],
+            "questState": 0
+        },
+        {
+            "questName": "Quest 745",
+            "questDescription": "Lorem ipsum dolor sit amet, consectetur adipi",
+            "BaseSuccessRate": 0.9070987105369568,
+            "AbilityModifiers": [
+                {
+                    "Type": 2,
+                    "Modifier": 1.1623177528381348
+                },
+                {
+                    "Type": 3,
+                    "Modifier": 1.0923786163330079
+                },
+                {
+                    "Type": 1,
+                    "Modifier": 0.8066004514694214
+                }
+            ],
+            "StatModifiers": [
+                {
+                    "Type": 2,
+                    "Modifier": 1.0252604484558106
+                },
+                {
+                    "Type": 1,
+                    "Modifier": 1.1831846237182618
+                },
+                {
+                    "Type": 3,
+                    "Modifier": 0.9969737529754639
+                }
+            ],
+            "questPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Biomes": [],
+            "questState": 0
+        },
+        {
+            "questName": "Quest 60",
+            "questDescription": "Lorem ipsum dolor sit amet, consectetur adipi",
+            "BaseSuccessRate": 0.9355013966560364,
+            "AbilityModifiers": [
+                {
+                    "Type": 1,
+                    "Modifier": 0.9310541152954102
+                },
+                {
+                    "Type": 2,
+                    "Modifier": 0.7730692625045776
+                }
+            ],
+            "StatModifiers": [
+                {
+                    "Type": 1,
+                    "Modifier": 1.2064721584320069
+                }
+            ],
+            "questPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Biomes": [],
+            "questState": 0
+        }
+    ],
+    "CompletionReward": {}
+}

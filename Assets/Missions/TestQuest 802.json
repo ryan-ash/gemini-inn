@@ -1,0 +1,153 @@
+{
+    "Quests": [
+        {
+            "questName": "Quest 802",
+            "questDescription": "Lorem ipsum dolor sit amet, consectetur adipi",
+            "BaseSuccessRate": 0.9684086441993713,
+            "AbilityModifiers": [
+                {
+                    "Type": 2,
+                    "Modifier": 1.240614414215088
+                }
+            ],
+            "StatModifiers": [
+                {
+                    "Type": 3,
+                    "Modifier": 1.237685203552246
+                },
+                {
+                    "Type": 2,
+                    "Modifier": 0.8874671459197998
+                },
+                {
+                    "Type": 3,
+                    "Modifier": 1.0664572715759278
+                }
+            ],
+            "questPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Biomes": [],
+            "questState": 0
+        },
+        {
+            "questName": "Quest 892",
+            "questDescription": "Lorem ipsum dolor sit amet, consectetur adipi",
+            "BaseSuccessRate": 0.7900998592376709,
+            "AbilityModifiers": [
+                {
+                    "Type": 3,
+                    "Modifier": 0.8030208349227905
+                }
+            ],
+            "StatModifiers": [
+                {
+                    "Type": 1,
+                    "Modifier": 1.162264347076416
+                },
+                {
+                    "Type": 1,
+                    "Modifier": 0.9884443283081055
+                }
+            ],
+            "questPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Biomes": [],
+            "questState": 0
+        },
+        {
+            "questName": "Quest 417",
+            "questDescription": "Lorem ipsum dolor sit amet, consectetur adipi",
+            "BaseSuccessRate": 0.5336834192276001,
+            "AbilityModifiers": [
+                {
+                    "Type": 2,
+                    "Modifier": 1.2084157466888428
+                },
+                {
+                    "Type": 2,
+                    "Modifier": 0.8349514007568359
+                }
+            ],
+            "StatModifiers": [
+                {
+                    "Type": 2,
+                    "Modifier": 1.1607133150100709
+                },
+                {
+                    "Type": 3,
+                    "Modifier": 0.99024498462677
+                }
+            ],
+            "questPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Biomes": [],
+            "questState": 0
+        },
+        {
+            "questName": "Quest 731",
+            "questDescription": "Lorem ipsum dolor sit amet, consectetur adipi",
+            "BaseSuccessRate": 0.7490252256393433,
+            "AbilityModifiers": [
+                {
+                    "Type": 2,
+                    "Modifier": 0.9024801254272461
+                }
+            ],
+            "StatModifiers": [
+                {
+                    "Type": 2,
+                    "Modifier": 1.2353200912475587
+                },
+                {
+                    "Type": 2,
+                    "Modifier": 1.133436918258667
+                }
+            ],
+            "questPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Biomes": [],
+            "questState": 0
+        },
+        {
+            "questName": "Quest 889",
+            "questDescription": "Lorem ipsum dolor sit amet, consectetur adipi",
+            "BaseSuccessRate": 0.6096658706665039,
+            "AbilityModifiers": [
+                {
+                    "Type": 1,
+                    "Modifier": 1.1162867546081544
+                }
+            ],
+            "StatModifiers": [
+                {
+                    "Type": 3,
+                    "Modifier": 1.147639274597168
+                },
+                {
+                    "Type": 2,
+                    "Modifier": 1.1292383670806885
+                }
+            ],
+            "questPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Biomes": [],
+            "questState": 0
+        }
+    ],
+    "CompletionReward": {}
+}
