@@ -7,9 +7,10 @@ public class Tile : MonoBehaviour
     public BiomePreset selectedBiome;
     public float waitBeforeRotating = 0.1f;
     public float rotationSpeed = 10.0f;
-    public int N;
-    public int NFromEnd;
-    public int NFromCenter;
+    public int X;
+    public int Y;
+    public int XFromEnd;
+    public int XFromCenter;
 
     private bool isRotating = false;
     private bool isOn = false;
@@ -53,14 +54,14 @@ public class Tile : MonoBehaviour
     public void Show()
     {
         isOn = true;
-        startOffset = NFromCenter;
+        startOffset = XFromCenter;
         StartCoroutine(StartRotation());
     }
 
     public void Hide()
     {
         isOn = false;
-        startOffset = Mathf.Min(N, NFromEnd);
+        startOffset = Mathf.Min(X, XFromEnd);
         StartCoroutine(StartRotation());
     }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Linq;
 
 public class GameMode : MonoBehaviour
 {
@@ -172,7 +173,19 @@ public class GameMode : MonoBehaviour
             {
                 Mission mission = Mission.GenerateRandomMission();
                 Quest newAvailableQuest = mission.GetAvailableQuest();
+
+                var availableBiomeTiles = Map.GetBiomeTiles(newAvailableQuest.Biomes.ToArray());
+
                 Vector3 questPosition = new Vector3(Random.Range(-_questGenerationRange.x, _questGenerationRange.x), Random.Range(-_questGenerationRange.y, _questGenerationRange.y), 0.0f);
+
+                var closestTile = availableBiomeTiles
+                .GroupBy(x => System.Math.Pow(questPosition.x - x.X, 2) + System.Math.Pow(questPosition.y - x.Y, 2))
+                .OrderBy(x => x.Key)
+                .First().First();
+
+                questPosition.x = closestTile.X;
+                questPosition.y = closestTile.Y;
+
                 newAvailableQuest.SetPosition(questPosition);
 
                 GameObject questVisual = Instantiate(_questVisualPrefab, questPosition, Quaternion.identity);

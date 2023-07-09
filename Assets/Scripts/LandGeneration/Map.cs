@@ -33,6 +33,7 @@ public class Map : MonoBehaviour
     public int neighbourDepth = 1;
 
     private Tile[,] tiles;
+    private static Dictionary<string, List<Tile>> biomeTilesCache;
 
     // Start is called before the first frame update
     void Start()
@@ -43,12 +44,13 @@ public class Map : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void GenerateMap()
     {
         tiles = new Tile[width, height];
+        biomeTilesCache = new Dictionary<string, List<Tile>>(biomes?.Length ?? 0);
 
         // height map
         heightMap = NoiseGenerator.Generate(width, height, scale, heightWaves, offset);
@@ -62,13 +64,14 @@ public class Map : MonoBehaviour
         int totalTiles = width;
         for (int x = 0; x < width; ++x)
         {
-            for(int y = 0; y < height; ++y)
+            for (int y = 0; y < height; ++y)
             {
                 GameObject tileObject = Instantiate(tilePrefab, new Vector3(x - halfWidth, y - halfHeight, 0), Quaternion.identity);
                 Tile tile = tileObject.GetComponent<Tile>();
-                tile.N = x;
-                tile.NFromEnd = totalTiles - tile.N;
-                tile.NFromCenter = Mathf.Abs(tile.N - (totalTiles / 2));
+                tile.X = x;
+                tile.Y = y;
+                tile.XFromEnd = totalTiles - tile.X;
+                tile.XFromCenter = Mathf.Abs(tile.X - (totalTiles / 2));
                 tile.selectedBiome = GetBiome(heightMap[x, y], moistureMap[x, y], heatMap[x, y]);
                 tileObject.transform.SetParent(tileParent.transform);
                 tileObject.GetComponent<SpriteRenderer>().sprite = tile.selectedBiome.GetTileSprite();
@@ -80,7 +83,7 @@ public class Map : MonoBehaviour
 
         for (int x = 0; x < width; ++x)
         {
-            for(int y = 0; y < height; ++y)
+            for (int y = 0; y < height; ++y)
             {
                 tiles[x, y].Prepare();
             }
@@ -88,6 +91,26 @@ public class Map : MonoBehaviour
 
         for (int i = 0; i < filterIterations; ++i)
             FilterGeneratedMap();
+
+        foreach (var tile in tiles)
+        {
+            var currentTileBiomeName = tile.selectedBiome.name;
+
+            if (biomeTilesCache.ContainsKey(currentTileBiomeName))
+            {
+                var cachedTiles = biomeTilesCache[currentTileBiomeName];
+
+                if (!cachedTiles.Contains(tile))
+                {
+                    cachedTiles.Add(tile);
+                }
+            }
+            else
+            {
+                var cachedTiles = new List<Tile> { tile };
+                biomeTilesCache.Add(currentTileBiomeName, cachedTiles);
+            }
+        }
     }
 
     void FilterGeneratedMap()
@@ -95,7 +118,7 @@ public class Map : MonoBehaviour
         // iterate over all tiles
         for (int x = 0; x < width; ++x)
         {
-            for(int y = 0; y < height; ++y)
+            for (int y = 0; y < height; ++y)
             {
                 BiomePreset biome = tiles[x, y].selectedBiome;
                 List<Tile> neighbours = new List<Tile>();
@@ -105,9 +128,9 @@ public class Map : MonoBehaviour
                 {
                     for (int neighbourY = y - neighbourDepth; neighbourY <= y + neighbourDepth; ++neighbourY)
                     {
-                        if(neighbourX >= 0 && neighbourX < width && neighbourY >= 0 && neighbourY < height)
+                        if (neighbourX >= 0 && neighbourX < width && neighbourY >= 0 && neighbourY < height)
                         {
-                            if(neighbourX != x || neighbourY != y)
+                            if (neighbourX != x || neighbourY != y)
                             {
                                 neighbours.Add(tiles[neighbourX, neighbourY]);
                                 ++neighbourCount;
@@ -117,27 +140,27 @@ public class Map : MonoBehaviour
                 }
 
                 int myBiomeCount = 0;
-                foreach(Tile neighbour in neighbours)
+                foreach (Tile neighbour in neighbours)
                 {
-                    if(neighbour != null && neighbour.selectedBiome == biome)
+                    if (neighbour != null && neighbour.selectedBiome == biome)
                         ++myBiomeCount;
                 }
 
-                if(myBiomeCount < neighbourThreshold)
+                if (myBiomeCount < neighbourThreshold)
                 {
                     // change biome
                     BiomePreset newBiome = null;
                     int newBiomeCount = 0;
-                    foreach(BiomePreset biomeToCheck in biomes)
+                    foreach (BiomePreset biomeToCheck in biomes)
                     {
                         int biomeToCheckCount = 0;
-                        foreach(Tile neighbour in neighbours)
+                        foreach (Tile neighbour in neighbours)
                         {
-                            if(neighbour != null && neighbour.selectedBiome == biomeToCheck)
+                            if (neighbour != null && neighbour.selectedBiome == biomeToCheck)
                                 ++biomeToCheckCount;
                         }
 
-                        if(biomeToCheckCount > newBiomeCount)
+                        if (biomeToCheckCount > newBiomeCount)
                         {
                             newBiome = biomeToCheck;
                             newBiomeCount = biomeToCheckCount;
@@ -154,26 +177,26 @@ public class Map : MonoBehaviour
     BiomePreset GetBiome(float height, float moisture, float heat)
     {
         List<BiomeTempData> biomeTemp = new List<BiomeTempData>();
-        foreach(BiomePreset biome in biomes)
+        foreach (BiomePreset biome in biomes)
         {
-            if(biome.MatchCondition(height, moisture, heat))
+            if (biome.MatchCondition(height, moisture, heat))
             {
-                biomeTemp.Add(new BiomeTempData(biome));                
+                biomeTemp.Add(new BiomeTempData(biome));
             }
         }
 
         BiomePreset biomeToReturn = null;
         float curVal = 0.0f;
-        foreach(BiomeTempData biome in biomeTemp)
+        foreach (BiomeTempData biome in biomeTemp)
         {
-            if(biomeToReturn == null)
+            if (biomeToReturn == null)
             {
                 biomeToReturn = biome.biome;
                 curVal = biome.GetDiffValue(height, moisture, heat);
             }
             else
             {
-                if(biome.GetDiffValue(height, moisture, heat) < curVal)
+                if (biome.GetDiffValue(height, moisture, heat) < curVal)
                 {
                     biomeToReturn = biome.biome;
                     curVal = biome.GetDiffValue(height, moisture, heat);
@@ -181,16 +204,37 @@ public class Map : MonoBehaviour
             }
         }
 
-        if(biomeToReturn == null)
+        if (biomeToReturn == null)
             biomeToReturn = biomes[0];
         return biomeToReturn;
     }
 
+    public static IReadOnlyList<Tile> GetBiomeTiles(params string[] biomes)
+    {
+        if (biomes == null)
+        {
+            throw new System.Exception("Empty biomes array provided");
+        }
+
+        var result = new List<Tile>();
+
+        foreach (string biome in biomes)
+        {
+            if (string.IsNullOrWhiteSpace(biome) || !biomeTilesCache.ContainsKey(biome))
+            {
+                throw new System.Exception($"Incorrect biome name - '{biome}'");
+            }
+
+            result.AddRange(biomeTilesCache[biome]);
+        }
+
+        return result;
+    }
     public void ShowMap()
     {
         for (int x = 0; x < width; ++x)
         {
-            for(int y = 0; y < height; ++y)
+            for (int y = 0; y < height; ++y)
             {
                 tiles[x, y].Show();
             }
@@ -201,7 +245,7 @@ public class Map : MonoBehaviour
     {
         for (int x = 0; x < width; ++x)
         {
-            for(int y = 0; y < height; ++y)
+            for (int y = 0; y < height; ++y)
             {
                 tiles[x, y].Hide();
             }
@@ -212,12 +256,12 @@ public class Map : MonoBehaviour
 public class BiomeTempData
 {
     public BiomePreset biome;
-    public BiomeTempData (BiomePreset preset)
+    public BiomeTempData(BiomePreset preset)
     {
         biome = preset;
     }
-        
-    public float GetDiffValue (float height, float moisture, float heat)
+
+    public float GetDiffValue(float height, float moisture, float heat)
     {
         return (height - biome.minHeight) + (moisture - biome.minMoisture) + (heat - biome.minHeat);
     }
