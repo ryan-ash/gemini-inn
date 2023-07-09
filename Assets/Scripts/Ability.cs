@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using UnityEngine;
 
 public enum StatType
@@ -21,6 +23,7 @@ public enum AbilityType
 [System.Serializable]
 public class Stat
 {
+    [JsonConverter(typeof(StringEnumConverter))]
     public StatType Type;
     [Range(0, 100)]
     public int Value;
@@ -29,6 +32,7 @@ public class Stat
 [System.Serializable]
 public class StatModifier
 {
+    [JsonConverter(typeof(StringEnumConverter))]
     public StatType Type;
     [Range(0.0f, 1.0f)]
     public float Modifier;
@@ -37,6 +41,7 @@ public class StatModifier
 [System.Serializable]
 public class Ability
 {
+    [JsonConverter(typeof(StringEnumConverter))]
     public AbilityType Type;
     [Range(1, 100)]
     public int Level = 0;
@@ -45,6 +50,7 @@ public class Ability
 [System.Serializable]
 public class AbilityModifier
 {
+    [JsonConverter(typeof(StringEnumConverter))]
     public AbilityType Type;
     [Range(0.0f, 1.0f)]
     public float Modifier;

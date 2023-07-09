@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
+using Newtonsoft.Json;
 using UnityEngine;
 
 public class MissionsLoader
@@ -21,7 +20,7 @@ public class MissionsLoader
         }
         
         string Json = File.ReadAllText(InFilename);
-        Mission Mission = JsonUtility.FromJson<Mission>(Json);
+        Mission Mission = JsonConvert.DeserializeObject<Mission>(Json);
         return Mission;
     }
 }
