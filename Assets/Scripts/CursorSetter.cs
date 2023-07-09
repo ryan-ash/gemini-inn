@@ -44,9 +44,19 @@ public class CursorSetter : MonoBehaviour
         SetCursor("Default");
     }
 
+    public static void SetHoverCursor()
+    {
+        SetCursor("Hover");
+    }
+
     public static void SetFistCursor()
     {
         SetCursor("Fist");
+    }
+
+    public static void SetBribeCursor()
+    {
+        SetCursor("Bribe");
     }
 }
 

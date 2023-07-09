@@ -762,11 +762,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursors:
   - Name: Default
+    cursorTexture: {fileID: 2800000, guid: 51cb6ee928f89b64691ef4dfd57c03e9, type: 3}
+    hotspot: {x: 20, y: 4}
+  - Name: Hover
     cursorTexture: {fileID: 2800000, guid: 42ec8a0e710138343a271d732299cfb6, type: 3}
     hotspot: {x: 19, y: 6}
   - Name: Fist
     cursorTexture: {fileID: 2800000, guid: d0bd63dc4e8d4a845a0f198c39644e18, type: 3}
     hotspot: {x: 30, y: 4}
+  - Name: Bribe
+    cursorTexture: {fileID: 2800000, guid: 6d0916f30d4a8e84c839a037bed24d2a, type: 3}
+    hotspot: {x: 9, y: 32}
 --- !u!4 &85580566 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1149450743610261583, guid: dc02f77b0506f764c9d22c61c681c4af, type: 3}
@@ -7522,7 +7528,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 85088162}
           m_TargetAssemblyTypeName: CursorSetter, Assembly-CSharp
-          m_MethodName: SetFistCursor
+          m_MethodName: SetHoverCursor
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -13133,7 +13139,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 85088162}
           m_TargetAssemblyTypeName: CursorSetter, Assembly-CSharp
-          m_MethodName: SetFistCursor
+          m_MethodName: SetHoverCursor
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -22408,7 +22414,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 85088162}
           m_TargetAssemblyTypeName: CursorSetter, Assembly-CSharp
-          m_MethodName: SetFistCursor
+          m_MethodName: SetHoverCursor
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
