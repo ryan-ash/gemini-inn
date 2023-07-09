@@ -52,13 +52,15 @@ public class GameMode : MonoBehaviour
 
     public void StartGame()
     {
-        // reset world state
-        // hide ui
-        // open inn / global map (decide later)
         _menu.SendMessage("HideMenu");
         _map.SendMessage("GenerateMap");
         _innHUD.SetActive(true);
         StartCoroutine(SpawnQuest());
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
     private void UpdateQuestCounter()
