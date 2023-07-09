@@ -97,6 +97,13 @@ public class AdventurerManager : MonoBehaviour
         Adventurer adventurer = adventurerObject.GetComponent<Adventurer>();
         adventurerGroups[adventurerGroupIndex].AddAdventurer(adventurer);
         adventurers.Add(adventurer);
+
+        if (!ignoreChance)
+        {
+            AudioManager.PlaySound(AudioNames.DoorSquek);
+            AudioManager.PlaySound(AudioNames.DoorClosing);
+            AudioManager.PlaySound(AudioNames.Footsteps);
+        }
     }
 
     IEnumerator TryToSpawnAdventurer()

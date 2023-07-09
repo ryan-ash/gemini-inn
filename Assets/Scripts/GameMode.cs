@@ -125,6 +125,8 @@ public class GameMode : MonoBehaviour
 
     public void ToggleMap()
     {
+        AudioManager.PlaySound(AudioNames.MapSound);
+        AudioManager.PlaySound(AudioNames.CameraWoosh);
         isMapOpen = !isMapOpen;
         if (isMapOpen)
         {
@@ -149,6 +151,8 @@ public class GameMode : MonoBehaviour
 
     public void StartGame()
     {
+        AudioManager.PlaySound(AudioNames.Click);
+        AudioManager.PlaySound(AudioNames.Crowd);
         _menu.SendMessage("HideMenu");
         _map.SendMessage("GenerateMap");
         _innHUD.SetActive(true);
@@ -157,11 +161,13 @@ public class GameMode : MonoBehaviour
 
     public void QuitGame()
     {
+        AudioManager.PlaySound(AudioNames.Click);
         Application.Quit();
     }
 
     private void UpdateQuestCounter()
     {
+        AudioManager.PlaySound(AudioNames.PencilWriting);
         _questCounter.text = Missions.Count.ToString();
     }
 
