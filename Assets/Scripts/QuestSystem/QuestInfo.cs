@@ -43,6 +43,7 @@ public class QuestInfo : MonoBehaviour
     void Start()
     {
         openCollider = infoCanvas.gameObject.GetComponent<BoxCollider>();
+        infoCanvas.alpha = 0.0f;
     }
 
     // Update is called once per frame
