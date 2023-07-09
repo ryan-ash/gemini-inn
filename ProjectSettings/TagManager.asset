@@ -11,7 +11,7 @@ TagManager:
   - Post
   - Water
   - UI
-  - 
+  - QuestInfo
   - 
   - 
   - 
@@ -40,4 +40,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: BackGround
+    uniqueID: 4196744255
+    locked: 0
+  - name: MiddleGround
+    uniqueID: 2077378767
+    locked: 0
+  - name: ForeGround
+    uniqueID: 2991409007
     locked: 0

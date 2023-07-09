@@ -13,7 +13,7 @@ public class MissionsDatabaseEditor : Editor
         {
             Mission Mission = Mission.GenerateRandomMission();
             MyScript.Missions.Add(Mission);
-            MissionsLoader.SaveMission(Mission, "Test" + Mission.Quests[0].QuestName + ".json");
+            MissionsLoader.SaveMission(Mission, "Test" + Mission.Quests[0].questName + ".json");
         }
     }
 }

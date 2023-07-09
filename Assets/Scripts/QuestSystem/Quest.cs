@@ -13,7 +13,8 @@ public enum QuestState
 [System.Serializable]
 public class Quest
 {
-    public string QuestName;
+    public string questName;
+    public string questDescription;
     [Range(0.0f, 1.0f)]
     public float BaseSuccessRate = 1.0f;
     public List<AbilityModifier> AbilityModifiers;

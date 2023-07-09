@@ -71,8 +71,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -98223041
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -94,10 +94,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6407407266228038904}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d9ca9e1c22480b48b4ee4ebbd602c04, type: 3}
+  m_Script: {fileID: 11500000, guid: d2d1d2caf9b4ef440921e78287c2e8ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   selectedBiome: {fileID: 0}
-  waitBeforeRotating: 0.0001
-  rotationSpeed: 500
+  waitBeforeRotating: 0.01
+  rotationSpeed: 100
   N: 0
+  NFromEnd: 0
+  NFromCenter: 0

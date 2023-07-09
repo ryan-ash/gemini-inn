@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class GameMode : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class GameMode : MonoBehaviour
     [SerializeField] private GameObject _inn;
     [SerializeField] private GameObject _innHUD;
     [SerializeField] private GameObject _map;
+    [SerializeField] private Text _questCounter;
 
     [Header("Quest Generation")]
     [SerializeField] private float _questGenerationInterval = 10.0f;
@@ -17,20 +20,50 @@ public class GameMode : MonoBehaviour
     [SerializeField] private GameObject _questVisualPrefab;
     [SerializeField] private GameObject _questRoot;
 
-    public List<Mission> Missions;
+    [Header("Quest Selection")]
+    [SerializeField] private LayerMask raycastLayerMask;
 
     private bool isMapOpen = false;
+    [HideInInspector] public List<Mission> Missions;
+    private GameObject _selectedQuest;
+    private bool scheduledHide = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        CursorSetter.SetDefaultCursor();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (!isMapOpen)
+            return;
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        float maxDistance = 100.0f;
+        if (Physics.Raycast(ray, out hit, maxDistance, raycastLayerMask))
+        {
+            QuestInfo questInfo = hit.transform.gameObject.GetComponentInParent<QuestInfo>();
+            GameObject potentialNewSelection = questInfo.gameObject;
+            if (potentialNewSelection != _selectedQuest)
+            {
+                _selectedQuest = potentialNewSelection;
+                questInfo.ShowInfo();
+            }
+        }
+        else if (_selectedQuest != null && !scheduledHide)
+        {
+            scheduledHide = true;
+        }
+        else if (_selectedQuest != null && scheduledHide)
+        {
+            scheduledHide = false;
+            QuestInfo questInfo = _selectedQuest.GetComponent<QuestInfo>();
+            questInfo.HideInfo();
+            _selectedQuest = null;
+        }
     }
 
     public void ToggleMap()
@@ -46,17 +79,26 @@ public class GameMode : MonoBehaviour
             _inn.SendMessage("HideMap");
             _map.SendMessage("HideMap");
         }
+
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void StartGame()
     {
-        // reset world state
-        // hide ui
-        // open inn / global map (decide later)
         _menu.SendMessage("HideMenu");
         _map.SendMessage("GenerateMap");
         _innHUD.SetActive(true);
         StartCoroutine(SpawnQuest());
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    private void UpdateQuestCounter()
+    {
+        _questCounter.text = Missions.Count.ToString();
     }
 
     IEnumerator SpawnQuest()
@@ -71,9 +113,14 @@ public class GameMode : MonoBehaviour
                 newAvailableQuest.SetPosition(questPosition);
 
                 GameObject questVisual = Instantiate(_questVisualPrefab, questPosition, Quaternion.identity);
-                questVisual.transform.SetParent(_questRoot.transform);
+                questVisual.transform.SetParent(_questRoot.transform, false);
+
+                QuestInfo questInfo = questVisual.GetComponent<QuestInfo>();
+                questInfo.quest = newAvailableQuest;
 
                 Missions.Add(mission);
+
+                UpdateQuestCounter();
             }
 
             yield return new WaitForSeconds(_questGenerationInterval);

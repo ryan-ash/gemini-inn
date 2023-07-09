@@ -15,6 +15,8 @@ public class Mission
         Quests = new List<Quest>();
     }
 
+    private static string textMockup = "Lorem ipsum dolor sit amet, consectetur adipi";
+
     public static Mission GenerateRandomMission()
     {
         Mission Generated = new Mission();
@@ -22,7 +24,8 @@ public class Mission
         for (int I = 0; I < QuestsNum; ++I)
         {
             Quest Quest = new Quest();
-            Quest.QuestName = "Quest " + Random.Range(0, 1000).ToString();
+            Quest.questName = "Quest " + Random.Range(0, 1000).ToString();
+            Quest.questDescription = textMockup;
             Quest.BaseSuccessRate = Random.Range(0.5f, 1.0f);
             int MaxAbilities = Enum.GetValues(typeof(AbilityType)).Length;
             int MaxStats = Enum.GetValues(typeof(StatType)).Length;
