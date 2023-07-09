@@ -161,6 +161,7 @@ public class GameMode : MonoBehaviour
 
     public void MoveSelectedAdventurersToNegotiation()
     {
+        AudioManager.PlaySound(AudioNames.Footsteps);
         AdventurerGroup adventurerGroup = _selectedAdventurerGroup.GetComponent<AdventurerGroup>();
         foreach (Adventurer adventurer in adventurerGroup.adventurers)
         {
