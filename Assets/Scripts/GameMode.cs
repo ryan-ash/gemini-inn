@@ -280,8 +280,6 @@ public class GameMode : MonoBehaviour
                 }
                 if (!isSafe)
                     yield return new WaitForSeconds(_questGenerationInterval);
-                // questPosition.x = closestTile.X;
-                // questPosition.y = closestTile.Y;
 
                 newAvailableQuest.SetPosition(questPosition);
 
