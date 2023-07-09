@@ -151,7 +151,7 @@ public class Map : MonoBehaviour
         }
     }
 
-    BiomePreset GetBiome (float height, float moisture, float heat)
+    BiomePreset GetBiome(float height, float moisture, float heat)
     {
         List<BiomeTempData> biomeTemp = new List<BiomeTempData>();
         foreach(BiomePreset biome in biomes)

@@ -82,6 +82,9 @@ public class GameMode : MonoBehaviour
                 GameObject questVisual = Instantiate(_questVisualPrefab, questPosition, Quaternion.identity);
                 questVisual.transform.SetParent(_questRoot.transform, false);
 
+                QuestInfo questInfo = questVisual.GetComponent<QuestInfo>();
+                questInfo.quest = newAvailableQuest;
+
                 Missions.Add(mission);
 
                 UpdateQuestCounter();
