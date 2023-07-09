@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class GameMode : MonoBehaviour
 {
@@ -78,6 +79,8 @@ public class GameMode : MonoBehaviour
             _inn.SendMessage("HideMap");
             _map.SendMessage("HideMap");
         }
+
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void StartGame()

@@ -1,10 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuestInfo : MonoBehaviour
 {
+    [Header("Mapping")]
     public CanvasGroup infoCanvas;
+    public Text questName;
+    public Text questDescription;
+
+    [Header("Settings")]
     public float fadeDuration = 0.5f;
     [HideInInspector] public Quest quest;
 
@@ -25,12 +31,12 @@ public class QuestInfo : MonoBehaviour
     {
         isInfoOpen = false;
         isInfoAnimating = true;
-        openCollider.gameObject.SetActive(false);
     }
 
     void FillData()
     {
-
+        questName.text = quest.questName;
+        questDescription.text = quest.questDescription;
     }
 
     // Start is called before the first frame update
@@ -53,6 +59,11 @@ public class QuestInfo : MonoBehaviour
         {
             infoCanvas.alpha = isInfoOpen ? 1.0f : 0.0f;
             isInfoAnimating = false;
+
+            if (!isInfoOpen)
+            {
+                openCollider.gameObject.SetActive(false);
+            }
         }
     }
 }

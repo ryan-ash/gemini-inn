@@ -723,7 +723,7 @@ MonoBehaviour:
   _questCounter: {fileID: 642469482}
   _questGenerationInterval: 10
   _questGenerationChance: 1
-  _questGenerationRange: {x: 60, y: 25}
+  _questGenerationRange: {x: 50, y: 30}
   _questVisualPrefab: {fileID: 8620448564361897051, guid: 9e40f1a99f1307c4d86f5de1eeab24d3, type: 3}
   _questRoot: {fileID: 1387532379}
   raycastLayerMask:
@@ -8706,6 +8706,18 @@ PrefabInstance:
     - target: {fileID: 167024, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
       propertyPath: m_Name
       value: Quit
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408476, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
+      propertyPath: m_Colors.m_NormalColor.b
+      value: 0.36862746
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408476, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
+      propertyPath: m_Colors.m_NormalColor.g
+      value: 0.36862746
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408476, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
+      propertyPath: m_Colors.m_NormalColor.r
+      value: 0.36862746
       objectReference: {fileID: 0}
     - target: {fileID: 11408476, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -22045,9 +22057,37 @@ PrefabInstance:
       value: Map
       objectReference: {fileID: 0}
     - target: {fileID: 4250655089793665720, guid: e147fa57fde0d5946b748fc76b63f42a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4250655089793665720, guid: e147fa57fde0d5946b748fc76b63f42a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4250655089793665720, guid: e147fa57fde0d5946b748fc76b63f42a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 85088160}
+    - target: {fileID: 4250655089793665720, guid: e147fa57fde0d5946b748fc76b63f42a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 647306250}
+    - target: {fileID: 4250655089793665720, guid: e147fa57fde0d5946b748fc76b63f42a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4250655089793665720, guid: e147fa57fde0d5946b748fc76b63f42a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4250655089793665720, guid: e147fa57fde0d5946b748fc76b63f42a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UnityEngine.UI.Selectable, UnityEngine.UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 4250655089793665720, guid: e147fa57fde0d5946b748fc76b63f42a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e147fa57fde0d5946b748fc76b63f42a, type: 3}
 --- !u!1001 &4373291094288460560
@@ -22060,6 +22100,18 @@ PrefabInstance:
     - target: {fileID: 167024, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
       propertyPath: m_Name
       value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408476, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
+      propertyPath: m_Colors.m_NormalColor.b
+      value: 0.3679245
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408476, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
+      propertyPath: m_Colors.m_NormalColor.g
+      value: 0.3679245
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408476, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
+      propertyPath: m_Colors.m_NormalColor.r
+      value: 0.3679245
       objectReference: {fileID: 0}
     - target: {fileID: 11408476, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
