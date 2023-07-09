@@ -17900,6 +17900,14 @@ PrefabInstance:
       propertyPath: Loop
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7095990998469695318, guid: caf29bfbda4bc4d7bbaa4a4f08396d44, type: 3}
+      propertyPath: m_Volume
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129348023410061082, guid: caf29bfbda4bc4d7bbaa4a4f08396d44, type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8654731349421857049, guid: caf29bfbda4bc4d7bbaa4a4f08396d44, type: 3}
       propertyPath: m_RootOrder
       value: 5

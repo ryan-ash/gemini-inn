@@ -5,7 +5,7 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
-    public Dictionary<string, AudioClip> audioClips = new Dictionary<string, AudioClip>();
+    public Dictionary<string, AudioSource> audioSources = new Dictionary<string, AudioSource>();
 
     // Start is called before the first frame update
     void Start()
@@ -14,10 +14,10 @@ public class AudioManager : MonoBehaviour
         for (int i = 0; i < transform.childCount; i++)
         {
             Transform child = transform.GetChild(i);
-            AudioClip clip = child.GetComponent<AudioClip>();
-            if (clip != null)
+            AudioSource source = child.GetComponent<AudioSource>();
+            if (source != null)
             {
-                audioClips.Add(child.name, clip);
+                audioSources.Add(child.name, source);
             }
         }
     }
@@ -30,9 +30,9 @@ public class AudioManager : MonoBehaviour
 
     public static void PlaySound(string soundName)
     {
-        if (instance.audioClips.ContainsKey(soundName))
+        if (instance.audioSources.ContainsKey(soundName))
         {
-            AudioSource.PlayClipAtPoint(instance.audioClips[soundName], Camera.main.transform.position);
+            instance.audioSources[soundName].Play();
         }
         else
         {
