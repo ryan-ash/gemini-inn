@@ -36,7 +36,7 @@ public class Map : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GenerateMap();
+
     }
 
     // Update is called once per frame
@@ -45,7 +45,7 @@ public class Map : MonoBehaviour
         
     }
 
-    void GenerateMap ()
+    public void GenerateMap()
     {
         tiles = new Tile[width, height];
 
@@ -58,14 +58,19 @@ public class Map : MonoBehaviour
 
         int halfWidth = width / 2;
         int halfHeight = height / 2;
+        int totalTiles = width * height;
 
+        int tileNumber = 0;
         for (int x = 0; x < width; ++x)
         {
             for(int y = 0; y < height; ++y)
             {
                 GameObject tileObject = Instantiate(tilePrefab, new Vector3(x - halfWidth, y - halfHeight, 0), Quaternion.identity);
                 Tile tile = tileObject.GetComponent<Tile>();
+                tile.N = tileNumber++;
+                tile.NFromEnd = totalTiles - tile.N;
                 tile.selectedBiome = GetBiome(heightMap[x, y], moistureMap[x, y], heatMap[x, y]);
+                tile.Prepare();
                 tileObject.transform.SetParent(tileParent.transform);
                 tileObject.GetComponent<SpriteRenderer>().sprite = tile.selectedBiome.GetTileSprite();
                 tiles[x, y] = tile;

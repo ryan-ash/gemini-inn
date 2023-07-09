@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class GameMode : MonoBehaviour
 {
+    [Header("Mapping")]
     [SerializeField] private GameObject _menu;
+    [SerializeField] private GameObject _map;
 
     [Header("Quest Generation")]
     [SerializeField] private float _questGenerationInterval = 10.0f;
@@ -33,6 +35,7 @@ public class GameMode : MonoBehaviour
         // hide ui
         // open inn / global map (decide later)
         _menu.SendMessage("HideMenu");
+        _map.SendMessage("GenerateMap");
         StartCoroutine(SpawnQuest());
     }
 

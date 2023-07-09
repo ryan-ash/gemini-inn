@@ -97,3 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d9ca9e1c22480b48b4ee4ebbd602c04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedBiome: {fileID: 0}
+  waitBeforeRotating: 0.0001
+  rotationSpeed: 500
+  N: 0

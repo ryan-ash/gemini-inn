@@ -153,9 +153,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _menu: {fileID: 1942561285}
+  _map: {fileID: 2007433809}
   _questGenerationInterval: 10
   _questGenerationChance: 1
-  _questGenerationRange: {x: 80, y: 45}
+  _questGenerationRange: {x: 70, y: 35}
   _questVisualPrefab: {fileID: 8620448564361897051, guid: 9e40f1a99f1307c4d86f5de1eeab24d3, type: 3}
   _questRoot: {fileID: 1387532379}
   Missions: []
@@ -1023,11 +1024,11 @@ MonoBehaviour:
     frequencyRandomness: 0
     amplitude: 1
     amplitudeRandomness: 0
-  - seed: 600
-    seedRandomness: 50
+  - seed: 3000
+    seedRandomness: 3000
     frequency: 0.1
     frequencyRandomness: 0.01
-    amplitude: 0.5
+    amplitude: 1
     amplitudeRandomness: 0
   moistureWaves:
   - seed: 500
@@ -1049,6 +1050,6 @@ MonoBehaviour:
     frequencyRandomness: 0
     amplitude: 0.5
     amplitudeRandomness: 0
-  filterIterations: 2
+  filterIterations: 3
   neighbourThreshold: 10
   neighbourDepth: 2
