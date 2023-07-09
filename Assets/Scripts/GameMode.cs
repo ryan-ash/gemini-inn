@@ -154,6 +154,7 @@ public class GameMode : MonoBehaviour
     {
         AudioManager.PlaySound(AudioNames.Click);
         AudioManager.PlaySound(AudioNames.Crowd);
+        AdventurerManager.instance.StartSpawning();
         _menu.SendMessage("HideMenu");
         _map.SendMessage("GenerateMap");
         _innHUD.SetActive(true);

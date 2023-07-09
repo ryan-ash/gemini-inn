@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AdventurerManager : MonoBehaviour
 {
+    public static AdventurerManager instance;
+
     [Header("Settings")]
     public int maxAdventurers = 30;
     public int minAdventurers = 5;
@@ -26,7 +28,17 @@ public class AdventurerManager : MonoBehaviour
     void Start()
     {
         adventurerGroups = FindObjectsOfType<AdventurerGroup>();
+        instance = this;
+    }
 
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public void StartSpawning()
+    {
         int initialAdventurerNumber = minAdventurers + Random.Range(0, initialRandomizer);
         for (int i = 0; i < initialAdventurerNumber; i++)
         {
@@ -34,12 +46,6 @@ public class AdventurerManager : MonoBehaviour
         }
 
         StartCoroutine(TryToSpawnAdventurer());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void SpawnAdventurer(bool ignoreChance = false)
