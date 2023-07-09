@@ -11,14 +11,33 @@ public class Tile : MonoBehaviour
     public int NFromEnd;
 
     private bool isRotating = false;
+    private bool isOn = false;
+    private float initialY = 0.0f;
 
-    // Start is called before the first frame update
-    void Start()
+    // Update is called once per frame
+    void Update()
+    {
+        if (isRotating /* && transform.localEulerAngles.y > 0.0f*/)
+        {
+            float step = Time.deltaTime * rotationSpeed;
+            float newY = isOn ? transform.localEulerAngles.y - step : transform.localEulerAngles.y + step;
+            transform.localEulerAngles = new Vector3(0.0f, newY, 0.0f);
+
+            float currentEdge = isOn ? Mathf.Abs(transform.localEulerAngles.y) : Mathf.Abs(transform.localEulerAngles.y - initialY);
+            if (currentEdge < step * 2)
+            {
+                transform.localEulerAngles = isOn ? Vector3.zero : new Vector3(0.0f, initialY, 0.0f);
+                isRotating = false;
+            }
+        }
+    }
+
+    public void Prepare()
     {
         Vector3 targetDirection = Camera.main.transform.position - transform.position;
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, Mathf.PI, 0.0f);
         transform.rotation = Quaternion.LookRotation(newDirection);
-        float initialY = transform.localEulerAngles.y + 90.0f;
+        initialY = transform.localEulerAngles.y + 90.0f;
         if (initialY < 0.0f)
             initialY += 180.0f;
         if (initialY > 180.0f)
@@ -26,27 +45,19 @@ public class Tile : MonoBehaviour
         transform.localEulerAngles = new Vector3(0.0f, initialY, 0.0f);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Show()
     {
-        if (isRotating && transform.localEulerAngles.y > 0.0f)
-        {
-            float step = Time.deltaTime * rotationSpeed;
-            transform.localEulerAngles = new Vector3(0.0f, transform.localEulerAngles.y - step, 0.0f);
-            if (Mathf.Abs(transform.localEulerAngles.y) < step * 2)
-            {
-                transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
-                isRotating = false;
-            }
-        }        
+        isOn = true;
+        StartCoroutine(StartRotation());
     }
 
-    public void Prepare()
+    public void Hide()
     {
-        StartCoroutine(RotateToDefault());
+        isOn = false;
+        StartCoroutine(StartRotation());
     }
 
-    IEnumerator RotateToDefault()
+    IEnumerator StartRotation()
     {
         float startOffset = Mathf.Min(N, NFromEnd);
         yield return new WaitForSeconds(waitBeforeRotating * startOffset);

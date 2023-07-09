@@ -7,6 +7,7 @@ public class Map : MonoBehaviour
     public BiomePreset[] biomes;
     public GameObject tilePrefab;
     public GameObject tileParent;
+    public GameObject mapRoot;
 
     [Header("Dimensions")]
     public int width = 50;
@@ -70,10 +71,19 @@ public class Map : MonoBehaviour
                 tile.N = tileNumber++;
                 tile.NFromEnd = totalTiles - tile.N;
                 tile.selectedBiome = GetBiome(heightMap[x, y], moistureMap[x, y], heatMap[x, y]);
-                tile.Prepare();
                 tileObject.transform.SetParent(tileParent.transform);
                 tileObject.GetComponent<SpriteRenderer>().sprite = tile.selectedBiome.GetTileSprite();
                 tiles[x, y] = tile;
+            }
+        }
+
+        tileParent.transform.SetParent(mapRoot.transform, false);
+
+        for (int x = 0; x < width; ++x)
+        {
+            for(int y = 0; y < height; ++y)
+            {
+                tiles[x, y].Prepare();
             }
         }
 
@@ -175,6 +185,28 @@ public class Map : MonoBehaviour
         if(biomeToReturn == null)
             biomeToReturn = biomes[0];
         return biomeToReturn;
+    }
+
+    public void ShowMap()
+    {
+        for (int x = 0; x < width; ++x)
+        {
+            for(int y = 0; y < height; ++y)
+            {
+                tiles[x, y].Show();
+            }
+        }
+    }
+
+    public void HideMap()
+    {
+        for (int x = 0; x < width; ++x)
+        {
+            for(int y = 0; y < height; ++y)
+            {
+                tiles[x, y].Hide();
+            }
+        }
     }
 }
 

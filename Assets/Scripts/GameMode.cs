@@ -6,6 +6,8 @@ public class GameMode : MonoBehaviour
 {
     [Header("Mapping")]
     [SerializeField] private GameObject _menu;
+    [SerializeField] private GameObject _inn;
+    [SerializeField] private GameObject _innHUD;
     [SerializeField] private GameObject _map;
 
     [Header("Quest Generation")]
@@ -16,6 +18,8 @@ public class GameMode : MonoBehaviour
     [SerializeField] private GameObject _questRoot;
 
     public List<Mission> Missions;
+
+    private bool isMapOpen = false;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +33,21 @@ public class GameMode : MonoBehaviour
         
     }
 
+    public void ToggleMap()
+    {
+        isMapOpen = !isMapOpen;
+        if (isMapOpen)
+        {
+            _inn.SendMessage("ShowMap");
+            _map.SendMessage("ShowMap");
+        }
+        else
+        {
+            _inn.SendMessage("HideMap");
+            _map.SendMessage("HideMap");
+        }
+    }
+
     public void StartGame()
     {
         // reset world state
@@ -36,6 +55,7 @@ public class GameMode : MonoBehaviour
         // open inn / global map (decide later)
         _menu.SendMessage("HideMenu");
         _map.SendMessage("GenerateMap");
+        _innHUD.SetActive(true);
         StartCoroutine(SpawnQuest());
     }
 
