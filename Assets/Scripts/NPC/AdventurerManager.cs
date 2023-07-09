@@ -69,13 +69,6 @@ public class AdventurerManager : MonoBehaviour
             proposedPosition = new Vector3(adventurerGroup.transform.position.x + Random.Range(-randomizer, randomizer), 0.0f, adventurerGroup.transform.position.z + Random.Range(-randomizer, randomizer));
             Collider[] colliders = Physics.OverlapSphere(proposedPosition, spawnCheckRadius, spawnCheckLayerMask);
             isColliding = colliders.Length > 0;
-            if (isColliding)
-            {
-                foreach (Collider collider in colliders)
-                {
-                    Debug.Log(collider.gameObject.name);
-                }
-            }
         }
 
         // look at light source
