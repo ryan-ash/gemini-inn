@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Map : MonoBehaviour
 {
+    public static Map instance;
+
     public BiomePreset[] biomes;
     public GameObject tilePrefab;
     public GameObject tileParent;
@@ -35,10 +37,12 @@ public class Map : MonoBehaviour
     private Tile[,] tiles;
     private static Dictionary<string, List<Tile>> biomeTilesCache;
 
+    private List<string> nonPresentBiomes = new List<string>();
+
     // Start is called before the first frame update
     void Start()
     {
-
+        instance = this;
     }
 
     // Update is called once per frame
@@ -220,9 +224,18 @@ public class Map : MonoBehaviour
 
         foreach (string biome in biomes)
         {
-            if (string.IsNullOrWhiteSpace(biome) || !biomeTilesCache.ContainsKey(biome))
+            if (instance.nonPresentBiomes.Contains(biome))
             {
-                throw new System.Exception($"Incorrect biome name - '{biome}'");
+                continue;
+            }
+            if (!biomeTilesCache.ContainsKey(biome))
+            {
+                if (!biomeTilesCache.ContainsKey(biome))
+                {
+                    Debug.LogWarning($"No tiles for '{biome}' found");
+                    instance.nonPresentBiomes.Add(biome);
+                }
+                return result;
             }
 
             result.AddRange(biomeTilesCache[biome]);
@@ -230,6 +243,7 @@ public class Map : MonoBehaviour
 
         return result;
     }
+
     public void ShowMap()
     {
         for (int x = 0; x < width; ++x)

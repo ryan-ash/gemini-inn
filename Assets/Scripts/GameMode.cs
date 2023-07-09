@@ -234,6 +234,11 @@ public class GameMode : MonoBehaviour
                 Quest newAvailableQuest = mission.GetAvailableQuest();
 
                 var availableBiomeTiles = Map.GetBiomeTiles(newAvailableQuest.Biomes.ToArray());
+                if (availableBiomeTiles.Count == 0)
+                {
+                    Debug.LogError("No available tiles for quest: " + newAvailableQuest.questName);
+                    continue;
+                }
 
                 Vector3 questPosition = new Vector3(Random.Range(-_questGenerationRange.x, _questGenerationRange.x), Random.Range(-_questGenerationRange.y, _questGenerationRange.y), 0.0f);
 

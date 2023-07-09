@@ -12,7 +12,7 @@ public class MissionsDatabase : MonoBehaviour
     public void Start()
     {
         instance = this;
-        LoadMissionsFromDirectory();
+        // LoadMissionsFromDirectory();
     }
 
     public void LoadMissionsFromDirectory()
