@@ -6,15 +6,12 @@ using UnityEngine;
 [System.Serializable]
 public class MissionsDatabase : MonoBehaviour
 {
-    public List<Mission> Missions;
-
-    public MissionsDatabase()
-    {
-        Missions = new List<Mission>();
-    }
+    [SerializeField] public List<Mission> Missions = new List<Mission>();
+    public static MissionsDatabase instance;
 
     public void Start()
     {
+        instance = this;
         LoadMissionsFromDirectory();
     }
 

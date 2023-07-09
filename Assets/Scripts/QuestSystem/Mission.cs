@@ -7,6 +7,7 @@ using Random=UnityEngine.Random;
 [System.Serializable]
 public class Mission
 {
+    public string MissionName;
     public List<Quest> Quests;
     public Reward CompletionReward;
 
@@ -55,6 +56,11 @@ public class Mission
             Generated.Quests.Add(Quest);
         }
         return Generated;
+    }
+
+    public static Mission GrabRandomMissionFromDB()
+    {
+        return MissionsDatabase.instance.Missions[Random.Range(0, MissionsDatabase.instance.Missions.Count)];
     }
 
     public Quest GetAvailableQuest()

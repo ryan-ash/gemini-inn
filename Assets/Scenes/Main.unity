@@ -703,6 +703,140 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc02f77b0506f764c9d22c61c681c4af, type: 3}
+<<<<<<< HEAD
+=======
+--- !u!1 &85088157
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 85088161}
+  - component: {fileID: 85088160}
+  - component: {fileID: 85088162}
+  - component: {fileID: 85088163}
+  - component: {fileID: 85088164}
+  m_Layer: 0
+  m_Name: GameMode
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &85088160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85088157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7957572c22bc51c4297efede4339fdc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _menu: {fileID: 1942561285}
+  _inn: {fileID: 96541305}
+  _innHUD: {fileID: 647306250}
+  _map: {fileID: 2007433809}
+  _questCounter: {fileID: 642469482}
+  _questGenerationInterval: 10
+  _questGenerationChance: 1
+  _questGenerationRange: {x: 50, y: 25}
+  _questVisualPrefab: {fileID: 8620448564361897051, guid: 9e40f1a99f1307c4d86f5de1eeab24d3, type: 3}
+  _questRoot: {fileID: 1387532379}
+  useMockQuests: 1
+  questRaycastLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  adventurerRaycastLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  Missions: []
+--- !u!4 &85088161
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85088157}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 412931025}
+  - {fileID: 2007433810}
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &85088162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85088157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea67e248c42e595429c998d5d1dd4a78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursors:
+  - Name: Default
+    cursorTexture: {fileID: 2800000, guid: 51cb6ee928f89b64691ef4dfd57c03e9, type: 3}
+    hotspot: {x: 20, y: 4}
+  - Name: Hover
+    cursorTexture: {fileID: 2800000, guid: 42ec8a0e710138343a271d732299cfb6, type: 3}
+    hotspot: {x: 19, y: 6}
+  - Name: Fist
+    cursorTexture: {fileID: 2800000, guid: d0bd63dc4e8d4a845a0f198c39644e18, type: 3}
+    hotspot: {x: 30, y: 4}
+  - Name: Bribe
+    cursorTexture: {fileID: 2800000, guid: 6d0916f30d4a8e84c839a037bed24d2a, type: 3}
+    hotspot: {x: 9, y: 32}
+  isPriorityCursor: 0
+--- !u!114 &85088163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85088157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 505d18fbbdaa8214193677af3ab2ab25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAdventurers: 30
+  minAdventurers: 5
+  initialRandomizer: 5
+  spawnInterval: 3
+  spawnChance: 0.1
+  offsetFromCenter: 1
+  randomizerStep: 0.1
+  spawnCheckRadius: 0.75
+  spawnCheckLayerMask:
+    serializedVersion: 2
+    m_Bits: 768
+  adventurerPrefab: {fileID: 1291452690306674300, guid: 6ae02991ace934a49bdc213fb5534d3e, type: 3}
+  adventurerParent: {fileID: 1151597992}
+--- !u!114 &85088164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85088157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7f5f0e170cba4ba4a2839ca8b79eee8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Missions: []
+>>>>>>> 593cf42b6066dd3bbff1f7b7d8f363d5c8bde4b1
 --- !u!4 &85580566 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1149450743610261583, guid: dc02f77b0506f764c9d22c61c681c4af, type: 3}
