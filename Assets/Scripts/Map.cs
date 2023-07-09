@@ -59,17 +59,16 @@ public class Map : MonoBehaviour
 
         int halfWidth = width / 2;
         int halfHeight = height / 2;
-        int totalTiles = width * height;
-
-        int tileNumber = 0;
+        int totalTiles = width;
         for (int x = 0; x < width; ++x)
         {
             for(int y = 0; y < height; ++y)
             {
                 GameObject tileObject = Instantiate(tilePrefab, new Vector3(x - halfWidth, y - halfHeight, 0), Quaternion.identity);
                 Tile tile = tileObject.GetComponent<Tile>();
-                tile.N = tileNumber++;
+                tile.N = x;
                 tile.NFromEnd = totalTiles - tile.N;
+                tile.NFromCenter = Mathf.Abs(tile.N - (totalTiles / 2));
                 tile.selectedBiome = GetBiome(heightMap[x, y], moistureMap[x, y], heatMap[x, y]);
                 tileObject.transform.SetParent(tileParent.transform);
                 tileObject.GetComponent<SpriteRenderer>().sprite = tile.selectedBiome.GetTileSprite();

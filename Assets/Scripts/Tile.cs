@@ -9,18 +9,22 @@ public class Tile : MonoBehaviour
     public float rotationSpeed = 10.0f;
     public int N;
     public int NFromEnd;
+    public int NFromCenter;
 
     private bool isRotating = false;
     private bool isOn = false;
     private float initialY = 0.0f;
+    private int startOffset = 0;
 
-    // Update is called once per frame
     void Update()
     {
-        if (isRotating /* && transform.localEulerAngles.y > 0.0f*/)
+        if (isRotating)
         {
             float step = Time.deltaTime * rotationSpeed;
-            float newY = isOn ? transform.localEulerAngles.y - step : transform.localEulerAngles.y + step;
+            float newY = isOn ? (transform.localEulerAngles.y % 180) - step : (transform.localEulerAngles.y % 180) + step;
+
+            // Debug.Log("Tile #" + N.ToString() + ": " + newY.ToString());
+
             transform.localEulerAngles = new Vector3(0.0f, newY, 0.0f);
 
             float currentEdge = isOn ? Mathf.Abs(transform.localEulerAngles.y) : Mathf.Abs(transform.localEulerAngles.y - initialY);
@@ -38,6 +42,7 @@ public class Tile : MonoBehaviour
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, Mathf.PI, 0.0f);
         transform.rotation = Quaternion.LookRotation(newDirection);
         initialY = transform.localEulerAngles.y + 90.0f;
+        initialY = initialY % 360.0f;
         if (initialY < 0.0f)
             initialY += 180.0f;
         if (initialY > 180.0f)
@@ -48,18 +53,19 @@ public class Tile : MonoBehaviour
     public void Show()
     {
         isOn = true;
+        startOffset = NFromCenter;
         StartCoroutine(StartRotation());
     }
 
     public void Hide()
     {
         isOn = false;
+        startOffset = Mathf.Min(N, NFromEnd);
         StartCoroutine(StartRotation());
     }
 
     IEnumerator StartRotation()
     {
-        float startOffset = Mathf.Min(N, NFromEnd);
         yield return new WaitForSeconds(waitBeforeRotating * startOffset);
         isRotating = true;
     }
