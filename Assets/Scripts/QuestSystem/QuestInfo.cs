@@ -25,7 +25,7 @@ public class QuestInfo : MonoBehaviour
         isInfoOpen = true;
         isInfoAnimating = true;
         openCollider.gameObject.SetActive(true); // why doesn't this work?..
-        CursorSetter.SetFistCursor();
+        CursorSetter.SetHoverCursor();
     }
 
     public void HideInfo()
