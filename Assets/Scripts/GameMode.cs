@@ -21,14 +21,21 @@ public class GameMode : MonoBehaviour
     [SerializeField] private GameObject _questRoot;
 
     [Header("Quest Selection")]
-    [SerializeField] private LayerMask raycastLayerMask;
+    [SerializeField] private LayerMask questRaycastLayerMask;
+
+    [Header("Adventurer Selection")]
+    [SerializeField] private LayerMask adventurerRaycastLayerMask;
 
     private bool isMapOpen = false;
     private bool scheduledHide = false;
     private bool isChoosingAdventurers = false;
 
     [HideInInspector] public List<Mission> Missions;
+
+    private GameObject _consideredQuest;
     private GameObject _selectedQuest;
+    private GameObject _consideredAdventurerGroup;
+    private GameObject _selectedAdventurerGroup;
 
     void Start()
     {
@@ -40,29 +47,78 @@ public class GameMode : MonoBehaviour
         if (!isMapOpen && !isChoosingAdventurers)
             return;
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        float maxDistance = 100.0f;
-        if (Physics.Raycast(ray, out hit, maxDistance, raycastLayerMask))
+        if (isMapOpen)
         {
-            QuestInfo questInfo = hit.transform.gameObject.GetComponentInParent<QuestInfo>();
-            GameObject potentialNewSelection = questInfo.gameObject;
-            if (potentialNewSelection != _selectedQuest)
+            if (_consideredQuest != null && Input.GetMouseButtonDown(0))
             {
-                _selectedQuest = potentialNewSelection;
-                questInfo.ShowInfo();
+                _selectedQuest = _consideredQuest;
+                StartChoosingAdventurers();
+                return;
+            }
+
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            float maxDistance = 100.0f;
+            if (Physics.Raycast(ray, out hit, maxDistance, questRaycastLayerMask))
+            {
+                QuestInfo questInfo = hit.transform.gameObject.GetComponentInParent<QuestInfo>();
+                GameObject potentialNewSelection = questInfo.gameObject;
+                if (potentialNewSelection != _consideredQuest)
+                {
+                    _consideredQuest = potentialNewSelection;
+                    questInfo.ShowInfo();
+                }
+            }
+            else if (_consideredQuest != null && !scheduledHide)
+            {
+                scheduledHide = true;
+            }
+            else if (_consideredQuest != null && scheduledHide)
+            {
+                scheduledHide = false;
+                QuestInfo questInfo = _consideredQuest.GetComponent<QuestInfo>();
+                questInfo.HideInfo();
+                _consideredQuest = null;
             }
         }
-        else if (_selectedQuest != null && !scheduledHide)
+
+        if (isChoosingAdventurers)
         {
-            scheduledHide = true;
-        }
-        else if (_selectedQuest != null && scheduledHide)
-        {
-            scheduledHide = false;
-            QuestInfo questInfo = _selectedQuest.GetComponent<QuestInfo>();
-            questInfo.HideInfo();
-            _selectedQuest = null;
+            if (Input.GetMouseButtonDown(0))
+            {
+                isChoosingAdventurers = false;
+                if (_consideredAdventurerGroup != null)
+                {
+                    _selectedAdventurerGroup = _consideredAdventurerGroup;
+                }
+                else
+                {
+                    CursorSetter.ResetPriorityCursor();
+                    ToggleMap();
+                }
+                return;
+            }
+
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            float maxDistance = 100.0f;
+            if (Physics.Raycast(ray, out hit, maxDistance, adventurerRaycastLayerMask))
+            {
+                AdventurerGroup adventurerGroup = hit.transform.gameObject.GetComponent<AdventurerGroup>();
+                GameObject potentialNewSelection = adventurerGroup.gameObject;
+                if (potentialNewSelection != _consideredAdventurerGroup)
+                {
+                    if (_consideredAdventurerGroup != null)
+                        _consideredAdventurerGroup.GetComponent<AdventurerGroup>().LightDownAdventurerTable();
+                    _consideredAdventurerGroup = potentialNewSelection;
+                    adventurerGroup.LightUpAdventurerTable();
+                }
+            }
+            else if (_consideredAdventurerGroup != null)
+            {
+                _consideredAdventurerGroup.GetComponent<AdventurerGroup>().LightDownAdventurerTable();
+                _consideredAdventurerGroup = null;
+            }
         }
     }
 
@@ -83,10 +139,10 @@ public class GameMode : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
     }
 
-    public void ChooseAdventurers()
+    public void StartChoosingAdventurers()
     {
         ToggleMap();
-        CursorSetter.SetBribeCursor(true);
+        CursorSetter.SetHoverCursor(true);
         isChoosingAdventurers = true;
     }
 
