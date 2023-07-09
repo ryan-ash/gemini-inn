@@ -20,12 +20,14 @@ public class Quest
     public List<AbilityModifier> AbilityModifiers;
     public List<StatModifier> StatModifiers;
     public Vector3 questPosition;
+    public List<string> Biomes;
     public QuestState questState = QuestState.NotStarted;
 
     public Quest()
     {
         AbilityModifiers = new List<AbilityModifier>();
         StatModifiers = new List<StatModifier>();
+        Biomes = new List<string>();
     }
 
     public static float CalculateModifier(Quest InQuest, Ability InAbility)
