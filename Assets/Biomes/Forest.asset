@@ -17,6 +17,6 @@ MonoBehaviour:
   - {fileID: -659056162, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
   - {fileID: 1997766533, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
   - {fileID: 850810283, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  minHeight: 0.2
+  minHeight: 0.3
   minMoisture: 0.4
-  minHeat: 0.4
+  minHeat: 0.5

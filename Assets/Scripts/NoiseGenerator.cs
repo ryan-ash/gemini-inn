@@ -30,8 +30,11 @@ public class NoiseGenerator : MonoBehaviour
                 float normalization = 0.0f;
                 foreach(Wave wave in waves)
                 {
-                    noiseMap[x, y] += wave.amplitude * Mathf.PerlinNoise(samplePosX * wave.frequency + wave.seed, samplePosY * wave.frequency + wave.seed);
-                    normalization += wave.amplitude;
+                    float seed = wave.seed + Random.Range(-wave.seedRandomness, wave.seedRandomness);
+                    float frequency = wave.frequency + Random.Range(-wave.frequencyRandomness, wave.frequencyRandomness);
+                    float amplitude = wave.amplitude + Random.Range(-wave.amplitudeRandomness, wave.amplitudeRandomness);
+                    noiseMap[x, y] += amplitude * Mathf.PerlinNoise(samplePosX * frequency + seed, samplePosY * frequency + seed);
+                    normalization += amplitude;
                 }
                 noiseMap[x, y] /= normalization;
             }
@@ -45,6 +48,9 @@ public class NoiseGenerator : MonoBehaviour
 public class Wave
 {
     public float seed;
+    public float seedRandomness;
     public float frequency;
+    public float frequencyRandomness;
     public float amplitude;
+    public float amplitudeRandomness;
 }

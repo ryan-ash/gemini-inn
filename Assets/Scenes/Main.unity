@@ -1018,22 +1018,37 @@ MonoBehaviour:
   offset: {x: 0, y: 0}
   heightWaves:
   - seed: 56
+    seedRandomness: 0
     frequency: 0.05
+    frequencyRandomness: 0
     amplitude: 1
-  - seed: 200
+    amplitudeRandomness: 0
+  - seed: 600
+    seedRandomness: 50
     frequency: 0.1
+    frequencyRandomness: 0.01
     amplitude: 0.5
+    amplitudeRandomness: 0
   moistureWaves:
-  - seed: 100
+  - seed: 500
+    seedRandomness: 200
     frequency: 0.03
-    amplitude: 0.25
+    frequencyRandomness: 0.01
+    amplitude: 0.4
+    amplitudeRandomness: 0
   heatWaves:
   - seed: 318.6
+    seedRandomness: 0
     frequency: 0.04
+    frequencyRandomness: 0
     amplitude: 1
+    amplitudeRandomness: 0
   - seed: 329.7
+    seedRandomness: 0
     frequency: 0.02
+    frequencyRandomness: 0
     amplitude: 0.5
+    amplitudeRandomness: 0
   filterIterations: 2
-  neighbourThreshold: 8
+  neighbourThreshold: 10
   neighbourDepth: 2
