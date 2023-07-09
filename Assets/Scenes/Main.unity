@@ -723,12 +723,13 @@ MonoBehaviour:
   _questCounter: {fileID: 642469482}
   _questGenerationInterval: 10
   _questGenerationChance: 1
-  _questGenerationRange: {x: 70, y: 35}
+  _questGenerationRange: {x: 60, y: 25}
   _questVisualPrefab: {fileID: 8620448564361897051, guid: 9e40f1a99f1307c4d86f5de1eeab24d3, type: 3}
   _questRoot: {fileID: 1387532379}
   raycastLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  Missions: []
 --- !u!4 &85088161
 Transform:
   m_ObjectHideFlags: 0

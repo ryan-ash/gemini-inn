@@ -19,9 +19,13 @@ public class GameMode : MonoBehaviour
     [SerializeField] private GameObject _questVisualPrefab;
     [SerializeField] private GameObject _questRoot;
 
-    public List<Mission> Missions;
+    [Header("Quest Selection")]
+    [SerializeField] private LayerMask raycastLayerMask;
 
     private bool isMapOpen = false;
+    [HideInInspector] public List<Mission> Missions;
+    private GameObject _selectedQuest;
+    private bool scheduledHide = false;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +36,33 @@ public class GameMode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (!isMapOpen)
+            return;
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        float maxDistance = 100.0f;
+        if (Physics.Raycast(ray, out hit, maxDistance, raycastLayerMask))
+        {
+            QuestInfo questInfo = hit.transform.gameObject.GetComponentInParent<QuestInfo>();
+            GameObject potentialNewSelection = questInfo.gameObject;
+            if (potentialNewSelection != _selectedQuest)
+            {
+                _selectedQuest = potentialNewSelection;
+                questInfo.ShowInfo();
+            }
+        }
+        else if (_selectedQuest != null && !scheduledHide)
+        {
+            scheduledHide = true;
+        }
+        else if (_selectedQuest != null && scheduledHide)
+        {
+            scheduledHide = false;
+            QuestInfo questInfo = _selectedQuest.GetComponent<QuestInfo>();
+            questInfo.HideInfo();
+            _selectedQuest = null;
+        }
     }
 
     public void ToggleMap()
