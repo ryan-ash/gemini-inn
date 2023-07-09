@@ -26,6 +26,9 @@ public class Mission
             Quest Quest = new Quest();
             Quest.questName = "Quest " + Random.Range(0, 1000).ToString();
             Quest.questDescription = textMockup;
+            Quest.Biomes.Add("Jungle");
+            Quest.Biomes.Add("Forest");
+            Quest.Biomes.Add("Lake");
             Quest.BaseSuccessRate = Random.Range(0.5f, 1.0f);
             int MaxAbilities = Enum.GetValues(typeof(AbilityType)).Length;
             int MaxStats = Enum.GetValues(typeof(StatType)).Length;
