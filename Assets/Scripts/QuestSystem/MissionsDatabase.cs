@@ -7,6 +7,7 @@ using UnityEngine;
 public class MissionsDatabase : MonoBehaviour
 {
     public List<Mission> Missions;
+    public static MissionsDatabase instance;
 
     public MissionsDatabase()
     {
@@ -15,6 +16,7 @@ public class MissionsDatabase : MonoBehaviour
 
     public void Start()
     {
+        instance = this;
         LoadMissionsFromDirectory();
     }
 

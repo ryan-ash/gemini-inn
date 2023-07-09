@@ -745,6 +745,7 @@ MonoBehaviour:
   _questGenerationRange: {x: 50, y: 25}
   _questVisualPrefab: {fileID: 8620448564361897051, guid: 9e40f1a99f1307c4d86f5de1eeab24d3, type: 3}
   _questRoot: {fileID: 1387532379}
+  useMockQuests: 1
   questRaycastLayerMask:
     serializedVersion: 2
     m_Bits: 64

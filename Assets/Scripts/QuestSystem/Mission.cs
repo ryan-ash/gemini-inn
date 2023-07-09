@@ -57,6 +57,11 @@ public class Mission
         return Generated;
     }
 
+    public static Mission GrabRandomMissionFromDB()
+    {
+        return MissionsDatabase.instance.Missions[Random.Range(0, MissionsDatabase.instance.Missions.Count)];
+    }
+
     public Quest GetAvailableQuest()
     {
         foreach (Quest Quest in Quests)

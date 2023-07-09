@@ -20,6 +20,7 @@ public class GameMode : MonoBehaviour
     [SerializeField] private Vector2 _questGenerationRange = new Vector2(160.0f, 90.0f);
     [SerializeField] private GameObject _questVisualPrefab;
     [SerializeField] private GameObject _questRoot;
+    [SerializeField] private bool useMockQuests = false;
 
     [Header("Quest Selection")]
     [SerializeField] private LayerMask questRaycastLayerMask;
@@ -110,14 +111,14 @@ public class GameMode : MonoBehaviour
                 if (potentialNewSelection != _consideredAdventurerGroup)
                 {
                     if (_consideredAdventurerGroup != null)
-                        _consideredAdventurerGroup.GetComponent<AdventurerGroup>().LightDownAdventurerTable();
+                        _consideredAdventurerGroup.GetComponent<AdventurerGroup>().UnfocusAdventurerTable();
                     _consideredAdventurerGroup = potentialNewSelection;
-                    adventurerGroup.LightUpAdventurerTable();
+                    adventurerGroup.FocusAdventurerTable();
                 }
             }
             else if (_consideredAdventurerGroup != null)
             {
-                _consideredAdventurerGroup.GetComponent<AdventurerGroup>().LightDownAdventurerTable();
+                _consideredAdventurerGroup.GetComponent<AdventurerGroup>().UnfocusAdventurerTable();
                 _consideredAdventurerGroup = null;
             }
         }
@@ -177,7 +178,7 @@ public class GameMode : MonoBehaviour
         {
             if (Random.Range(0.0f, 1.0f) <= _questGenerationChance)
             {
-                Mission mission = Mission.GenerateRandomMission();
+                Mission mission = useMockQuests ? Mission.GenerateRandomMission() : Mission.GrabRandomMissionFromDB();
                 Quest newAvailableQuest = mission.GetAvailableQuest();
 
                 var availableBiomeTiles = Map.GetBiomeTiles(newAvailableQuest.Biomes.ToArray());

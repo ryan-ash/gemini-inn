@@ -26,6 +26,7 @@ public class AdventurerGroup : MonoBehaviour
 
     private bool isAnimatingLight = false;
     private bool isLightUp = false;
+    private bool isFocus = false;
 
     private Dictionary<Light, float> defaultIntensities = new Dictionary<Light, float>();
 
@@ -51,16 +52,23 @@ public class AdventurerGroup : MonoBehaviour
             {
                 Light light = lights[i];
                 float step = Time.deltaTime * (1.0f / fadeDuration);
-                float newIntensity = isLightUp ? Mathf.Clamp01(light.intensity + step) : Mathf.Clamp01(light.intensity - step);
-                light.intensity = newIntensity;
-                if (newIntensity <= 0.0f || newIntensity >= defaultIntensities[light])
-                {
-                    if (AllLightsFinishedAnimating())
-                    {
-                        isAnimatingLight = false;
-                    }
-                    light.intensity = isLightUp ? defaultIntensities[light] : 0.0f;
-                }
+                float defaultIntensity = defaultIntensities[light];
+                float targetIntensity = 
+                    isFocus && isLightUp ? defaultIntensity * 2.0f : 
+                    isFocus ? defaultIntensity * 0.5f : 
+                    isLightUp ? defaultIntensity : 0.0f;
+                light.intensity = targetIntensity;
+                isAnimatingLight = false;
+                // float newIntensity = isLightUp ? Mathf.Clamp01(light.intensity + step) : Mathf.Clamp01(light.intensity - step);
+                // light.intensity = newIntensity;
+                // if (newIntensity <= 0.0f || newIntensity >= targetIntensity)
+                // {
+                //     // if (AllLightsFinishedAnimating(targetIntensity))
+                //     // {
+                //         isAnimatingLight = false;
+                //     // }
+                //     light.intensity = isLightUp ? targetIntensity : 0.0f;
+                // }
             }
         }
     }
@@ -75,13 +83,13 @@ public class AdventurerGroup : MonoBehaviour
         }
     }
 
-    private bool AllLightsFinishedAnimating()
+    private bool AllLightsFinishedAnimating(float targetIntensity)
     {
         Light[] lights = adventurerTableLights.GetComponentsInChildren<Light>();
         for (int i = 0; i < lights.Length; i++)
         {
             Light light = lights[i];
-            if (isLightUp && light.intensity < defaultIntensities[light])
+            if (isLightUp && light.intensity < targetIntensity)
                 return false;
             if (!isLightUp && light.intensity > 0.0f)
                 return false;
@@ -113,5 +121,17 @@ public class AdventurerGroup : MonoBehaviour
     {
         isAnimatingLight = true;
         isLightUp = false;
+    }
+
+    public void FocusAdventurerTable()
+    {
+        isAnimatingLight = true;
+        isFocus = true;
+    }
+
+    public void UnfocusAdventurerTable()
+    {
+        isAnimatingLight = true;
+        isFocus = false;
     }
 }
