@@ -697,6 +697,7 @@ GameObject:
   m_Component:
   - component: {fileID: 85088161}
   - component: {fileID: 85088160}
+  - component: {fileID: 85088162}
   m_Layer: 0
   m_Name: GameMode
   m_TagString: Untagged
@@ -723,7 +724,7 @@ MonoBehaviour:
   _questCounter: {fileID: 642469482}
   _questGenerationInterval: 10
   _questGenerationChance: 1
-  _questGenerationRange: {x: 50, y: 30}
+  _questGenerationRange: {x: 50, y: 25}
   _questVisualPrefab: {fileID: 8620448564361897051, guid: 9e40f1a99f1307c4d86f5de1eeab24d3, type: 3}
   _questRoot: {fileID: 1387532379}
   raycastLayerMask:
@@ -747,6 +748,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &85088162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85088157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea67e248c42e595429c998d5d1dd4a78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursors:
+  - Name: Default
+    cursorTexture: {fileID: 2800000, guid: 42ec8a0e710138343a271d732299cfb6, type: 3}
+    hotspot: {x: 19, y: 6}
+  - Name: Fist
+    cursorTexture: {fileID: 2800000, guid: d0bd63dc4e8d4a845a0f198c39644e18, type: 3}
+    hotspot: {x: 30, y: 4}
 --- !u!4 &85580566 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1149450743610261583, guid: dc02f77b0506f764c9d22c61c681c4af, type: 3}
@@ -7478,6 +7498,56 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7af5921109b94141afd37e9fdd75443, type: 3}
+--- !u!1 &640001493 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4250655089787081364, guid: e147fa57fde0d5946b748fc76b63f42a, type: 3}
+  m_PrefabInstance: {fileID: 4250655089967641883}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &640001499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640001493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 85088162}
+          m_TargetAssemblyTypeName: CursorSetter, Assembly-CSharp
+          m_MethodName: SetFistCursor
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 85088162}
+          m_TargetAssemblyTypeName: CursorSetter, Assembly-CSharp
+          m_MethodName: SetDefaultCursor
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &640156338
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8720,12 +8790,40 @@ PrefabInstance:
       value: 0.36862746
       objectReference: {fileID: 0}
     - target: {fileID: 11408476, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408476, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408476, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 85088160}
     - target: {fileID: 11408476, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 85088162}
+    - target: {fileID: 11408476, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408476, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408476, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetDefaultCursor
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408476, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: CursorSetter, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408476, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 11432666, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
       propertyPath: iconName
@@ -13011,6 +13109,56 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e10be2f5a748844dbd0b2b7e6fafd4a, type: 3}
+--- !u!1 &1202538624 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 167024, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
+  m_PrefabInstance: {fileID: 780145886}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1202538630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202538624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 85088162}
+          m_TargetAssemblyTypeName: CursorSetter, Assembly-CSharp
+          m_MethodName: SetFistCursor
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 85088162}
+          m_TargetAssemblyTypeName: CursorSetter, Assembly-CSharp
+          m_MethodName: SetDefaultCursor
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &1203815609
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20194,6 +20342,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 559f839e0f294cf499731ff6070352ac, type: 3}
+--- !u!1 &1991943983 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 167024, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
+  m_PrefabInstance: {fileID: 4373291094288460560}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1993523100
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22114,9 +22267,37 @@ PrefabInstance:
       value: 0.3679245
       objectReference: {fileID: 0}
     - target: {fileID: 11408476, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408476, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408476, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 85088160}
+    - target: {fileID: 11408476, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 85088162}
+    - target: {fileID: 11408476, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408476, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetDefaultCursor
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408476, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: CursorSetter, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408476, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 22462908, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -22208,3 +22389,48 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 22462908, guid: 9f399514caf4c554a989a8935b09990b, type: 3}
   m_PrefabInstance: {fileID: 4373291094288460560}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4373291094288460567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1991943983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 85088162}
+          m_TargetAssemblyTypeName: CursorSetter, Assembly-CSharp
+          m_MethodName: SetFistCursor
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 85088162}
+          m_TargetAssemblyTypeName: CursorSetter, Assembly-CSharp
+          m_MethodName: SetDefaultCursor
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
