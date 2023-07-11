@@ -116,6 +116,7 @@ public class GameMode : MonoBehaviour
                 {
                     CursorSetter.ResetPriorityCursor();
                     ToggleMap();
+                    UIGod.instance.UpdateQuestTitle("");
                 }
                 return;
             }
@@ -177,6 +178,7 @@ public class GameMode : MonoBehaviour
         ToggleMap();
         CursorSetter.SetHoverCursor(true);
         isChoosingAdventurers = true;
+        UIGod.instance.UpdateQuestTitle(selectedQuest.questName);
     }
 
     public void MoveSelectedAdventurersToNegotiation()
@@ -197,6 +199,7 @@ public class GameMode : MonoBehaviour
     {
         selectedQuest.adventureGroup = selectedAdventurerGroup;
         selectedAdventurerGroup.quest = selectedQuest;
+        UIGod.instance.UpdateQuestTitle("");
         // move group to quest
         // spawn new empty group
         // replace group in inn with new group

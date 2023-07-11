@@ -15,11 +15,17 @@ public class UIGod : MonoBehaviour
     void Start()
     {
         instance = this;
+        topTitle.text = "";
     }
 
     void Update()
     {
         
+    }
+
+    public void UpdateQuestTitle(string text)
+    {
+        topTitle.text = text;
     }
 
     public void UpdateQuestCounter(int newCount)
