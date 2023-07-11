@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class Fader : MonoBehaviour
 {
-    public static Fader instance;
-
     public float fadeDuration = 0.5f;
     public bool isOn = true;
 
@@ -16,8 +14,6 @@ public class Fader : MonoBehaviour
 
     void Start()
     {
-        instance = this;
-
         canvas = GetComponent<CanvasGroup>();
         canvas.alpha = isOn ? 1.0f : 0.0f;
         if (isOn)

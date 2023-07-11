@@ -4742,9 +4742,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3b3b3edad4d441394ff8260773240b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeWindow: {fileID: 0}
   topTitle: {fileID: 425280767}
   questCounter: {fileID: 642469482}
   innHUD: {fileID: 647306250}
+  mainFader: {fileID: 207685000}
 --- !u!1001 &414844167
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9796,9 +9798,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 85088160}
-        m_TargetAssemblyTypeName: GameMode, Assembly-CSharp
-        m_MethodName: QuitGame
+      - m_Target: {fileID: 412931026}
+        m_TargetAssemblyTypeName: UIGod, Assembly-CSharp
+        m_MethodName: StartQuitingGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -6,11 +6,13 @@ using UnityEngine.UI;
 public class UIGod : MonoBehaviour
 {
     public static UIGod instance;
+    public Window activeWindow;
     
     [Header("Mapping")]
     public Text topTitle;
     public Text questCounter;
     public GameObject innHUD;
+    public Fader mainFader;
 
     void Start()
     {
@@ -37,7 +39,7 @@ public class UIGod : MonoBehaviour
     public void BeginStartingGame()
     {
         AudioManager.PlaySound(AudioNames.Click);
-        Fader.instance.FadeIn("EndStartingGame");
+        mainFader.FadeIn("EndStartingGame");
     }
 
     public void EndStartingGame()
@@ -45,12 +47,17 @@ public class UIGod : MonoBehaviour
         Menu.instance.HideMenu();
         innHUD.SetActive(true);
         GameMode.instance.StartGame();
-        Fader.instance.FadeOut();
+        mainFader.FadeOut();
     }
 
-    public void QuitGame()
+    public void StartQuitingGame()
     {
         AudioManager.PlaySound(AudioNames.Click);
+        mainFader.FadeIn("EndQuitingGame");
+    }
+
+    public void EndQuitingGame()
+    {
         Application.Quit();
     }
 }

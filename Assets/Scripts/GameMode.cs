@@ -225,12 +225,6 @@ public class GameMode : MonoBehaviour
         StartCoroutine(SpawnQuest());
     }
 
-    public void QuitGame()
-    {
-        AudioManager.PlaySound(AudioNames.Click);
-        Application.Quit();
-    }
-
     public void OnQuestUpdated(Quest quest)
     {
         var questEventObject = Instantiate(_questEventPrefab, _questEventRoot.transform);
