@@ -5,15 +5,15 @@ using UnityEngine.UI;
 
 public class Fader : MonoBehaviour
 {
-    public Fader instance;
+    public static Fader instance;
 
     public float fadeDuration = 0.5f;
     public bool isOn = true;
 
     private CanvasGroup canvas;
     private bool isFading = false;
+    private string scheduledCallback = "";
 
-    // Start is called before the first frame update
     void Start()
     {
         instance = this;
@@ -24,7 +24,6 @@ public class Fader : MonoBehaviour
             FadeOut();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isFading)
@@ -33,19 +32,28 @@ public class Fader : MonoBehaviour
             float newAlpha = isOn ? Mathf.Clamp01(canvas.alpha + step) : Mathf.Clamp01(canvas.alpha - step);
             canvas.alpha = newAlpha;
             if (isOn && canvas.alpha == 1.0f || !isOn && canvas.alpha == 0.0f)
+            {
                 isFading = false;
-        }        
+                if (scheduledCallback != "")
+                {
+                    gameObject.SendMessageUpwards(scheduledCallback);
+                    scheduledCallback = "";
+                }
+            }
+        }
     }
 
-    public void FadeIn()
+    public void FadeIn(string callbackMessage = "")
     {
         isFading = true;
         isOn = true;
+        scheduledCallback = callbackMessage;
     }
 
-    public void FadeOut()
+    public void FadeOut(string callbackMessage = "")
     {
         isFading = true;
         isOn = false;
+        scheduledCallback = callbackMessage;
     }
 }

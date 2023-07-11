@@ -9,10 +9,6 @@ public class GameMode : MonoBehaviour
 {
     public static GameMode instance;
 
-    [Header("Mapping")]
-    [SerializeField] private GameObject _innHUD;
-    [SerializeField] private Text _questCounter;
-
     [Header("Quest Generation")]
     [SerializeField] private float _questGenerationInterval = 10.0f;
     [SerializeField] private float _questGenerationChance = 0.25f;
@@ -220,12 +216,9 @@ public class GameMode : MonoBehaviour
 
     public void StartGame()
     {
-        AudioManager.PlaySound(AudioNames.Click);
         AudioManager.PlaySound(AudioNames.Crowd);
         AdventurerManager.instance.StartSpawning();
-        Menu.instance.HideMenu();
         Map.instance.GenerateMap();
-        _innHUD.SetActive(true);
         StartCoroutine(SpawnQuest());
     }
 
@@ -241,12 +234,6 @@ public class GameMode : MonoBehaviour
         var questEvent = questEventObject.GetComponent<QuestEvent>();
         questEvent.SetQuest(quest);
         questEvent.ShowEvent();
-    }
-
-    private void UpdateQuestCounter()
-    {
-        AudioManager.PlaySound(AudioNames.PencilWriting);
-        _questCounter.text = Missions.Count.ToString();
     }
 
     private bool CheckIfSafe(Vector3 positionToTest)
@@ -313,8 +300,7 @@ public class GameMode : MonoBehaviour
                 _generatedQuests.Add(questVisual.transform);
 
                 Missions.Add(mission);
-
-                UpdateQuestCounter();
+                UIGod.instance.UpdateQuestCounter(Missions.Count);
             }
 
             yield return new WaitForSeconds(_questGenerationInterval);

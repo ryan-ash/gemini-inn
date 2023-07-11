@@ -734,8 +734,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7957572c22bc51c4297efede4339fdc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _innHUD: {fileID: 647306250}
-  _questCounter: {fileID: 642469482}
   _questGenerationInterval: 10
   _questGenerationChance: 1
   _questSafeDistance: 5
@@ -2016,6 +2014,110 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7214380457549163618, guid: e147fa57fde0d5946b748fc76b63f42a, type: 3}
   m_PrefabInstance: {fileID: 7214380457346303521}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &207684998
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 207684999}
+  - component: {fileID: 207685003}
+  - component: {fileID: 207685002}
+  - component: {fileID: 207685001}
+  - component: {fileID: 207685000}
+  m_Layer: 5
+  m_Name: Fader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &207684999
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207684998}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 412931025}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 10, y: 10}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &207685000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207684998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bfcba85dc0184e7b952e385d81d7f09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeDuration: 0.5
+  isOn: 1
+--- !u!225 &207685001
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207684998}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!114 &207685002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207684998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &207685003
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207684998}
+  m_CullTransparentMesh: 1
 --- !u!1001 &207974348
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4619,6 +4721,7 @@ RectTransform:
   - {fileID: 1942561286}
   - {fileID: 647306251}
   - {fileID: 874912926}
+  - {fileID: 207684999}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4636,9 +4739,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 412931021}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d7287908f5114f73afcb5c86c71f3fd, type: 3}
+  m_Script: {fileID: 11500000, guid: da3b3b3edad4d441394ff8260773240b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  topTitle: {fileID: 425280767}
+  questCounter: {fileID: 642469482}
+  innHUD: {fileID: 647306250}
 --- !u!1001 &414844167
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24393,9 +24499,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 85088160}
-        m_TargetAssemblyTypeName: GameMode, Assembly-CSharp
-        m_MethodName: StartGame
+      - m_Target: {fileID: 412931026}
+        m_TargetAssemblyTypeName: UIGod, Assembly-CSharp
+        m_MethodName: BeginStartingGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
