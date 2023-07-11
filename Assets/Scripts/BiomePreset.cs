@@ -11,13 +11,11 @@ public class BiomePreset : ScriptableObject
     public float minMoisture;
     public float minHeat;
 
-    // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         

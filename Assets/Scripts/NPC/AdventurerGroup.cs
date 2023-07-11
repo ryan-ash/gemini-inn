@@ -31,7 +31,6 @@ public class AdventurerGroup : MonoBehaviour
 
     private Dictionary<Light, float> defaultIntensities = new Dictionary<Light, float>();
 
-    // Start is called before the first frame update
     void Start()
     {
         Light[] lights = adventurerTableLights.GetComponentsInChildren<Light>();
@@ -43,7 +42,6 @@ public class AdventurerGroup : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isAnimatingLight)

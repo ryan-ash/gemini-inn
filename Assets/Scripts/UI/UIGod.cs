@@ -14,11 +14,14 @@ public class UIGod : MonoBehaviour
     public GameObject innHUD;
     public Fader mainFader;
 
+    private Window[] windows;
+
     void Start()
     {
         instance = this;
         topTitle.text = "";
         mainFader.FadeOut();
+        windows = GetComponentsInChildren<Window>();
     }
 
     void Update()
@@ -41,6 +44,7 @@ public class UIGod : MonoBehaviour
     {
         AudioManager.PlaySound(AudioNames.Click);
         mainFader.FadeIn("EndStartingGame");
+        CursorSetter.SetDefaultCursor();
     }
 
     public void EndStartingGame()
@@ -51,14 +55,51 @@ public class UIGod : MonoBehaviour
         mainFader.FadeOut();
     }
 
-    public void StartQuitingGame()
+    public void BeginQuitingGame()
     {
         AudioManager.PlaySound(AudioNames.Click);
         mainFader.FadeIn("EndQuitingGame");
+        CursorSetter.SetDefaultCursor();
     }
 
     public void EndQuitingGame()
     {
         Application.Quit();
+    }
+
+    public void OpenWindow(WindowType windowType)
+    {
+        CloseAllWindows();
+        foreach (Window window in windows)
+        {
+            if (window.windowType == windowType)
+            {
+                window.OpenWindow();
+                break;
+            }
+        }
+        CursorSetter.SetDefaultCursor();
+    }
+
+    public void OpenWindowSettings()
+    {
+        OpenWindow(WindowType.Settings);
+    }
+
+    public void OpenWindowNegotiation()
+    {
+        OpenWindow(WindowType.Negotiation);
+    }
+
+    public void CloseAllWindows()
+    {
+        foreach (Window window in windows)
+        {
+            if (window.isOpen)
+            {
+                window.CloseWindow();
+                break;
+            }
+        }
     }
 }

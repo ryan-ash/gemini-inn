@@ -24,14 +24,12 @@ public class AdventurerManager : MonoBehaviour
     private AdventurerGroup[] adventurerGroups;
     private List<Adventurer> adventurers = new List<Adventurer>();
 
-    // Start is called before the first frame update
     void Start()
     {
         adventurerGroups = FindObjectsOfType<AdventurerGroup>();
         instance = this;
     }
 
-    // Update is called once per frame
     void Update()
     {
         

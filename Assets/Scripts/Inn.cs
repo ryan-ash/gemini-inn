@@ -18,7 +18,6 @@ public class Inn : MonoBehaviour
 
     [HideInInspector] public bool isCameraMoving = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         instance = this;
@@ -27,7 +26,6 @@ public class Inn : MonoBehaviour
         originalCameraRotation = Camera.main.transform.rotation;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!isCameraMoving)

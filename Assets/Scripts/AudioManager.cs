@@ -7,7 +7,6 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
     public Dictionary<string, AudioSource> audioSources = new Dictionary<string, AudioSource>();
 
-    // Start is called before the first frame update
     void Start()
     {
         instance = this;
@@ -22,7 +21,6 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         

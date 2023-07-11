@@ -41,14 +41,12 @@ public class QuestInfo : MonoBehaviour
         questDescription.text = quest.questDescription;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         openCollider = infoCanvas.gameObject.GetComponent<BoxCollider>();
         infoCanvas.alpha = 0.0f;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!isInfoAnimating)
