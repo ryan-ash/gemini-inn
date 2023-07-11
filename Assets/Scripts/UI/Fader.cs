@@ -10,6 +10,7 @@ public class Fader : MonoBehaviour
 
     private CanvasGroup canvas;
     private bool isFading = false;
+    private bool sendScheduledCallback = false;
     private string scheduledCallback = "";
 
     void Start()
@@ -32,10 +33,15 @@ public class Fader : MonoBehaviour
                 isFading = false;
                 if (scheduledCallback != "")
                 {
-                    gameObject.SendMessageUpwards(scheduledCallback);
-                    scheduledCallback = "";
+                    sendScheduledCallback = true;
                 }
             }
+        }
+        else if (sendScheduledCallback)
+        {
+            gameObject.SendMessageUpwards(scheduledCallback);
+            scheduledCallback = "";
+            sendScheduledCallback = false;
         }
     }
 
