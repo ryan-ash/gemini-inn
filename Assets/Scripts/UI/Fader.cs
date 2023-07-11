@@ -16,8 +16,8 @@ public class Fader : MonoBehaviour
     {
         canvas = GetComponent<CanvasGroup>();
         canvas.alpha = isOn ? 1.0f : 0.0f;
-        if (isOn)
-            FadeOut();
+        canvas.interactable = isOn;
+        canvas.blocksRaycasts = isOn;
     }
 
     void Update()
@@ -44,6 +44,8 @@ public class Fader : MonoBehaviour
         isFading = true;
         isOn = true;
         scheduledCallback = callbackMessage;
+        canvas.blocksRaycasts = true;
+        canvas.interactable = true;
     }
 
     public void FadeOut(string callbackMessage = "")
@@ -51,5 +53,7 @@ public class Fader : MonoBehaviour
         isFading = true;
         isOn = false;
         scheduledCallback = callbackMessage;
+        canvas.blocksRaycasts = false;
+        canvas.interactable = false;
     }
 }

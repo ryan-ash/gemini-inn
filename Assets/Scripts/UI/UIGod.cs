@@ -18,6 +18,7 @@ public class UIGod : MonoBehaviour
     {
         instance = this;
         topTitle.text = "";
+        mainFader.FadeOut();
     }
 
     void Update()
