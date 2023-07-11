@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Inn : MonoBehaviour
 {
+    public static Inn instance;
+
     [Header("Camera")]
     public Transform mapOpenedTransform;
     public float cameraMoveSpeed = 1.0f;
@@ -14,11 +16,13 @@ public class Inn : MonoBehaviour
     private Vector3 targetCameraPosition;
     private Quaternion targetCameraRotation;
 
-    private bool isCameraMoving = false;
+    [HideInInspector] public bool isCameraMoving = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
+
         originalCameraPosition = Camera.main.transform.position;
         originalCameraRotation = Camera.main.transform.rotation;
     }

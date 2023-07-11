@@ -8,10 +8,7 @@ using System.Linq;
 public class GameMode : MonoBehaviour
 {
     [Header("Mapping")]
-    [SerializeField] private GameObject _menu;
-    [SerializeField] private GameObject _inn;
     [SerializeField] private GameObject _innHUD;
-    [SerializeField] private GameObject _map;
     [SerializeField] private Text _questCounter;
 
     [Header("Quest Generation")]
@@ -147,18 +144,21 @@ public class GameMode : MonoBehaviour
 
     public void ToggleMap()
     {
+        if (Inn.instance.isCameraMoving)
+            return;
+
         AudioManager.PlaySound(AudioNames.MapSound);
         AudioManager.PlaySound(AudioNames.CameraWoosh);
         isMapOpen = !isMapOpen;
         if (isMapOpen)
         {
-            _inn.SendMessage("ShowMap");
-            _map.SendMessage("ShowMap");
+            Inn.instance.ShowMap();
+            Map.instance.ShowMap();
         }
         else
         {
-            _inn.SendMessage("HideMap");
-            _map.SendMessage("HideMap");
+            Inn.instance.HideMap();
+            Map.instance.HideMap();
         }
 
         EventSystem.current.SetSelectedGameObject(null);
@@ -210,8 +210,8 @@ public class GameMode : MonoBehaviour
         AudioManager.PlaySound(AudioNames.Click);
         AudioManager.PlaySound(AudioNames.Crowd);
         AdventurerManager.instance.StartSpawning();
-        _menu.SendMessage("HideMenu");
-        _map.SendMessage("GenerateMap");
+        Menu.instance.HideMenu();
+        Map.instance.GenerateMap();
         _innHUD.SetActive(true);
         StartCoroutine(SpawnQuest());
     }
