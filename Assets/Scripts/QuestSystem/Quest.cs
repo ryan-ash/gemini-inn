@@ -5,6 +5,7 @@ using UnityEngine;
 public enum QuestState
 {
     NotStarted,
+    OnRoad,
     InProgress,
     Success,
     Failure
@@ -22,6 +23,8 @@ public class Quest
     public Vector3 questPosition;
     public List<string> Biomes;
     public QuestState questState = QuestState.NotStarted;
+
+    public AdventurerGroup adventureGroup;
 
     public Quest()
     {

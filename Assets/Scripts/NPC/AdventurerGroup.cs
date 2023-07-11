@@ -23,6 +23,7 @@ public class AdventurerGroup : MonoBehaviour
 
     [HideInInspector] public GroupState groupState = GroupState.Empty;
     [HideInInspector] public List<Adventurer> adventurers;
+    [HideInInspector] public Quest quest;
 
     private bool isAnimatingLight = false;
     private bool isLightUp = false;
@@ -104,6 +105,12 @@ public class AdventurerGroup : MonoBehaviour
         {
             LightUpAdventurerTable();
         }
+
+        if (groupState == GroupState.OnRoadToQuest)
+        {
+            quest.questState = QuestState.OnRoad;
+            GameMode.instance.OnQuestUpdated(quest);
+        }
     }
 
     private void RecalculateGroupStats()
@@ -133,5 +140,12 @@ public class AdventurerGroup : MonoBehaviour
     {
         isAnimatingLight = true;
         isFocus = false;
+    }
+
+    public void AcceptQuest()
+    {
+        groupState = GroupState.OnRoadToQuest;
+        var quest = GameMode.instance.selectedQuest;
+        OnGroupStateUpdated();
     }
 }

@@ -67,7 +67,7 @@ public class Mission
     {
         foreach (Quest Quest in Quests)
         {
-            if (Quest.questState == QuestState.InProgress)
+            if (Quest.questState == QuestState.InProgress || Quest.questState == QuestState.OnRoad)
             {
                 return null;
             }

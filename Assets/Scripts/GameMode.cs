@@ -7,6 +7,8 @@ using System.Linq;
 
 public class GameMode : MonoBehaviour
 {
+    public static GameMode instance;
+
     [Header("Mapping")]
     [SerializeField] private GameObject _innHUD;
     [SerializeField] private Text _questCounter;
@@ -29,6 +31,10 @@ public class GameMode : MonoBehaviour
     [SerializeField] private float distanceDuringNegotiation = 1.5f;
     [SerializeField] private float distanceRandomizationDuringNegotiation = 1.5f;
 
+    [Header("Quest Reporting")]
+    [SerializeField] private GameObject _questEventPrefab;
+    [SerializeField] private GameObject _questEventRoot;
+
     private bool isMapOpen = false;
     private bool scheduledHide = false;
     private bool isChoosingAdventurers = false;
@@ -36,15 +42,19 @@ public class GameMode : MonoBehaviour
 
     [HideInInspector] public List<Mission> Missions;
 
-    private GameObject _consideredQuest;
-    private GameObject _selectedQuest;
-    private GameObject _consideredAdventurerGroup;
-    private GameObject _selectedAdventurerGroup;
+    private GameObject _consideredQuestMarker;
+    private Quest _consideredQuest;
+    private AdventurerGroup _consideredAdventurerGroup;
+
+    [HideInInspector] public GameObject selectedQuestMarker;
+    [HideInInspector] public Quest selectedQuest;
+    [HideInInspector] public AdventurerGroup selectedAdventurerGroup;
 
     private List<Transform> _generatedQuests = new List<Transform>();
 
     void Start()
     {
+        instance = this;
         CursorSetter.SetDefaultCursor();
     }
 
@@ -55,9 +65,10 @@ public class GameMode : MonoBehaviour
 
         if (isMapOpen)
         {
-            if (_consideredQuest != null && Input.GetMouseButtonDown(0))
+            if (_consideredQuestMarker != null && Input.GetMouseButtonDown(0))
             {
-                _selectedQuest = _consideredQuest;
+                selectedQuestMarker = _consideredQuestMarker;
+                selectedQuest = _consideredQuest;
                 StartChoosingAdventurers();
                 return;
             }
@@ -69,21 +80,23 @@ public class GameMode : MonoBehaviour
             {
                 QuestInfo questInfo = hit.transform.gameObject.GetComponentInParent<QuestInfo>();
                 GameObject potentialNewSelection = questInfo.gameObject;
-                if (potentialNewSelection != _consideredQuest)
+                if (potentialNewSelection != _consideredQuestMarker)
                 {
-                    _consideredQuest = potentialNewSelection;
+                    _consideredQuestMarker = potentialNewSelection;
+                    _consideredQuest = questInfo.quest;
                     questInfo.ShowInfo();
                 }
             }
-            else if (_consideredQuest != null && !scheduledHide)
+            else if (_consideredQuestMarker != null && !scheduledHide)
             {
                 scheduledHide = true;
             }
-            else if (_consideredQuest != null && scheduledHide)
+            else if (_consideredQuestMarker != null && scheduledHide)
             {
                 scheduledHide = false;
-                QuestInfo questInfo = _consideredQuest.GetComponent<QuestInfo>();
+                QuestInfo questInfo = _consideredQuestMarker.GetComponent<QuestInfo>();
                 questInfo.HideInfo();
+                _consideredQuestMarker = null;
                 _consideredQuest = null;
             }
         }
@@ -95,7 +108,7 @@ public class GameMode : MonoBehaviour
                 isChoosingAdventurers = false;
                 if (_consideredAdventurerGroup != null)
                 {
-                    _selectedAdventurerGroup = _consideredAdventurerGroup;
+                    selectedAdventurerGroup = _consideredAdventurerGroup;
                     bool useFistNotBribe = Random.Range(0.0f, 1.0f) <= 0.5f;
                     if (useFistNotBribe)
                         CursorSetter.SetFistCursor(true);
@@ -117,18 +130,17 @@ public class GameMode : MonoBehaviour
             if (Physics.Raycast(ray, out hit, maxDistance, adventurerRaycastLayerMask))
             {
                 AdventurerGroup adventurerGroup = hit.transform.gameObject.GetComponent<AdventurerGroup>();
-                GameObject potentialNewSelection = adventurerGroup.gameObject;
-                if (potentialNewSelection != _consideredAdventurerGroup)
+                if (adventurerGroup != _consideredAdventurerGroup)
                 {
                     if (_consideredAdventurerGroup != null)
-                        _consideredAdventurerGroup.GetComponent<AdventurerGroup>().UnfocusAdventurerTable();
-                    _consideredAdventurerGroup = potentialNewSelection;
+                        _consideredAdventurerGroup.UnfocusAdventurerTable();
+                    _consideredAdventurerGroup = adventurerGroup;
                     adventurerGroup.FocusAdventurerTable();
                 }
             }
             else if (_consideredAdventurerGroup != null)
             {
-                _consideredAdventurerGroup.GetComponent<AdventurerGroup>().UnfocusAdventurerTable();
+                _consideredAdventurerGroup.UnfocusAdventurerTable();
                 _consideredAdventurerGroup = null;
             }
         }
@@ -174,22 +186,21 @@ public class GameMode : MonoBehaviour
     public void MoveSelectedAdventurersToNegotiation()
     {
         AudioManager.PlaySound(AudioNames.Footsteps);
-        AdventurerGroup adventurerGroup = _selectedAdventurerGroup.GetComponent<AdventurerGroup>();
-        foreach (Adventurer adventurer in adventurerGroup.adventurers)
+        foreach (Adventurer adventurer in selectedAdventurerGroup.adventurers)
         {
             Vector3 directionFromOwner = Vector3.Normalize(adventurer.transform.position - Camera.main.transform.position);
             float actualDistanceDuringNegotiation = distanceDuringNegotiation + Random.Range(-distanceRandomizationDuringNegotiation, distanceRandomizationDuringNegotiation);
             Vector3 newPosition = new Vector3(Camera.main.transform.position.x + directionFromOwner.x * actualDistanceDuringNegotiation, 0.0f, Camera.main.transform.position.z + directionFromOwner.z * actualDistanceDuringNegotiation);
             adventurer.MoveTo(newPosition);
-            adventurerGroup.LightDownAdventurerTable();
+            selectedAdventurerGroup.LightDownAdventurerTable();
         }
         isNegotiating = true;
     }
 
     public void AgreeToQuest()
     {
-        // generate result
-        // show result
+        selectedQuest.adventureGroup = selectedAdventurerGroup;
+        selectedAdventurerGroup.quest = selectedQuest;
     }
 
     public void DisagreeToQuest()
@@ -197,12 +208,11 @@ public class GameMode : MonoBehaviour
         isNegotiating = false;
         isChoosingAdventurers = true;
         CursorSetter.SetHoverCursor(true);
-        AdventurerGroup adventurerGroup = _selectedAdventurerGroup.GetComponent<AdventurerGroup>();
-        foreach (Adventurer adventurer in adventurerGroup.adventurers)
+        foreach (Adventurer adventurer in selectedAdventurerGroup.adventurers)
         {
             adventurer.MoveBack();
         }
-        adventurerGroup.LightUpAdventurerTable();
+        selectedAdventurerGroup.LightUpAdventurerTable();
     }
 
     public void StartGame()
@@ -220,6 +230,14 @@ public class GameMode : MonoBehaviour
     {
         AudioManager.PlaySound(AudioNames.Click);
         Application.Quit();
+    }
+
+    public void OnQuestUpdated(Quest quest)
+    {
+        var questEventObject = Instantiate(_questEventPrefab, _questEventRoot.transform);
+        var questEvent = questEventObject.GetComponent<QuestEvent>();
+        questEvent.SetQuest(quest);
+        questEvent.ShowEvent();
     }
 
     private void UpdateQuestCounter()
