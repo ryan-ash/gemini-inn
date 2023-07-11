@@ -201,6 +201,9 @@ public class GameMode : MonoBehaviour
     {
         selectedQuest.adventureGroup = selectedAdventurerGroup;
         selectedAdventurerGroup.quest = selectedQuest;
+        // move group to quest
+        // spawn new empty group
+        // replace group in inn with new group
     }
 
     public void DisagreeToQuest()
