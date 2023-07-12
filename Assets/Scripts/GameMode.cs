@@ -220,9 +220,11 @@ public class GameMode : MonoBehaviour
     public void StartGame()
     {
         AudioManager.PlaySound(AudioNames.Crowd);
-        AdventurerManager.instance.StartSpawning();
-        Map.instance.GenerateMap();
-        StartCoroutine(SpawnQuest());
+        Wait.Run(1.0f, () => { 
+            AdventurerManager.instance.StartSpawning();
+            Map.instance.GenerateMap();
+            StartCoroutine(SpawnQuest());
+        });
     }
 
     public void OnQuestUpdated(Quest quest)

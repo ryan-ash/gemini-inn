@@ -20,7 +20,10 @@ public class UIGod : MonoBehaviour
     {
         instance = this;
         topTitle.text = "";
-        mainFader.FadeOut();
+        Wait.Run(0.5f, () => { 
+            mainFader.FadeOut();
+            UpdateQuestTitle("Welcome to the Inn!");
+        });
         windows = GetComponentsInChildren<Window>();
     }
 
