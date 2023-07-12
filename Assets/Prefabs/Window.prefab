@@ -79,7 +79,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 276718028673573608}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -345,6 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   windowType: 0
+  windowTitle: {fileID: 619457576728541749}
   isOpen: 0
 --- !u!1 &9143218549508387223
 GameObject:

@@ -91,6 +91,16 @@ public class UIGod : MonoBehaviour
         OpenWindow(WindowType.Negotiation);
     }
 
+    public void OpenWindowQuests()
+    {
+        OpenWindow(WindowType.Quests);
+    }
+
+    public void OpenWindowHistory()
+    {
+        OpenWindow(WindowType.History);
+    }
+
     public void CloseAllWindows()
     {
         foreach (Window window in windows)

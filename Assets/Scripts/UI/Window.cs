@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Window : MonoBehaviour
 {
     public WindowType windowType;
+    public Text windowTitle;
+
     [HideInInspector] public bool isOpen = false;
     
     private Fader fader;
@@ -12,6 +15,7 @@ public class Window : MonoBehaviour
     void Start()
     {
         fader = GetComponent<Fader>();
+        windowTitle.text = windowType.ToString();
     }
 
     void Update()
@@ -37,5 +41,7 @@ public enum WindowType
 {
     None,
     Settings,
-    Negotiation
+    Negotiation,
+    Quests,
+    History
 }
