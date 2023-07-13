@@ -18,6 +18,8 @@ public class Inn : MonoBehaviour
 
     [HideInInspector] public bool isCameraMoving = false;
 
+    private bool isMapOpened = false;
+
     void Start()
     {
         instance = this;
@@ -48,6 +50,7 @@ public class Inn : MonoBehaviour
         targetCameraPosition = mapOpenedTransform.position;
         isCameraMoving = true;
         AudioRevolver.Fire(AudioNames.BirdsSound);
+        isMapOpened = true;
     }
 
     public void HideMap()
@@ -56,5 +59,13 @@ public class Inn : MonoBehaviour
         targetCameraPosition = originalCameraPosition;
         isCameraMoving = true;
         AudioRevolver.Fire(AudioNames.BirdsSound + "/Stop");
+        isMapOpened = false;
+    }
+
+    public bool IsCloserToTarget()
+    {
+        Vector3 targetPosition = isMapOpened ? mapOpenedTransform.position : originalCameraPosition;
+        Vector3 originalPosition = isMapOpened ? originalCameraPosition : mapOpenedTransform.position;
+        return Vector3.Distance(Camera.main.transform.position, targetPosition) < Vector3.Distance(Camera.main.transform.position, originalPosition);
     }
 }

@@ -153,7 +153,7 @@ public class GameMode : MonoBehaviour
 
     public void ToggleMap()
     {
-        if (Inn.instance.isCameraMoving)
+        if (Inn.instance.isCameraMoving && !Inn.instance.IsCloserToTarget())
             return;
 
         AudioRevolver.Fire(AudioNames.MapSound);
