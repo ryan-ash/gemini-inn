@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Linq;
 
@@ -183,6 +182,7 @@ public class GameMode : MonoBehaviour
 
     public void MoveSelectedAdventurersToNegotiation()
     {
+        UIGod.instance.SpawnOwnerReplic();
         AudioRevolver.Fire(AudioNames.Footsteps);
         foreach (Adventurer adventurer in selectedAdventurerGroup.adventurers)
         {

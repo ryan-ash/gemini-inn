@@ -9,6 +9,10 @@ public class TextBuilder : MonoBehaviour
 
     public string BuildText()
     {
+        if (textPresets.Count == 0)
+        {
+            return "";
+        }
         var textPreset = textPresets[Random.Range(0, textPresets.Count)];
 
         for (int i = 0; i < textPreset.pieces.Count; i++)
@@ -58,29 +62,33 @@ public class TextBuilder : MonoBehaviour
 [System.Serializable]
 public class TextPreset
 {
-    public List<TextPiece> pieces;
+    public string name;
+    public List<TextPiece> pieces = new List<TextPiece>();
 }
 
 [System.Serializable]
 public class TextPiece
 {
-    public List<TextOption> options;
-    public string name { 
-        get 
-        {
-            var optionsString = "";
-            if (options.Count == 0)
-            {
-                return "";
-            }
-            foreach (var option in options)
-            {
-                optionsString += option.text + " | ";
-            }
-            optionsString = optionsString.Substring(0, optionsString.Length - 3);
-            return optionsString;
-        }
-    }
+    public string name;
+    public List<TextOption> options = new List<TextOption>();
+
+    // todo: make this work or find another way to display name in inspector
+    // public string name { 
+    //     get 
+    //     {
+    //         var optionsString = "";
+    //         if (options.Count == 0)
+    //         {
+    //             return "";
+    //         }
+    //         foreach (var option in options)
+    //         {
+    //             optionsString += option.text + " | ";
+    //         }
+    //         optionsString = optionsString.Substring(0, optionsString.Length - 3);
+    //         return optionsString;
+    //     }
+    // }
 }
 
 [System.Serializable]

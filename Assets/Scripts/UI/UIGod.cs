@@ -13,6 +13,10 @@ public class UIGod : MonoBehaviour
     public Text questCounter;
     public GameObject innHUD;
     public Fader mainFader;
+    public Transform ownerReplicsRoot;
+
+    [Header("Prefabs")]
+    public GameObject replicPrefab;
 
     private Window[] windows;
 
@@ -114,5 +118,10 @@ public class UIGod : MonoBehaviour
                 break;
             }
         }
+    }
+
+    public void SpawnOwnerReplic()
+    {
+        GameObject replic = Instantiate(replicPrefab, ownerReplicsRoot);
     }
 }

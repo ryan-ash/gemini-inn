@@ -11,6 +11,7 @@ public class Fader : MonoBehaviour
     private CanvasGroup canvas;
     private bool isFading = false;
     private bool sendScheduledCallback = false;
+    private bool sendScheduledCallbackToSelf = false;
     private string scheduledCallback = "";
 
     void Start()
@@ -39,26 +40,31 @@ public class Fader : MonoBehaviour
         }
         else if (sendScheduledCallback)
         {
-            gameObject.SendMessageUpwards(scheduledCallback);
+            if (sendScheduledCallbackToSelf)
+                gameObject.SendMessage(scheduledCallback);
+            else
+                gameObject.SendMessageUpwards(scheduledCallback);
             scheduledCallback = "";
             sendScheduledCallback = false;
         }
     }
 
-    public void FadeIn(string callbackMessage = "")
+    public void FadeIn(string callbackMessage = "", bool sendToSelf = false)
     {
         isFading = true;
         isOn = true;
         scheduledCallback = callbackMessage;
+        sendScheduledCallbackToSelf = sendToSelf;
         canvas.blocksRaycasts = true;
         canvas.interactable = true;
     }
 
-    public void FadeOut(string callbackMessage = "")
+    public void FadeOut(string callbackMessage = "", bool sendToSelf = false)
     {
         isFading = true;
         isOn = false;
         scheduledCallback = callbackMessage;
+        sendScheduledCallbackToSelf = sendToSelf;
         canvas.blocksRaycasts = false;
         canvas.interactable = false;
     }

@@ -22,17 +22,17 @@ nicknames for rats:
 - PLUG RATS
 - WORTHLESS BASTARDS
 - CLOWNS
-- SONs OF AN UNSUCCESSFUL NIGHT
-- A WASTE OF A LIFE
+- SONS OF SHITTY NIGHT
+- WASTE OF LIFE
 - DARWINSHOPPED - The manipulation of scientific data to prove we used to be monkeys.
 - 
 
 1
 1. -HEY, YOU, ~THE NAME~!!! I have some propositions for ya beside the alcohol. Get your drunk asses over here!
-2. ~THE NAME~! Yes, you! I’ve got a deal, wanna take a look or I have to throw it right into your filfthy faces?!
-3. You, young ~the name~! You’re coming or what?! I haven’t got so much time as ya’ll .
-4. ~the name~! Move faster!
-5. Don’t rush yourselves, ~the name~! I could press the life pause anytime , couldn’t I?
+2. GET YOUR ASS HERE, ~THE NAME~! Yes, you! I’ve got a deal, wanna take a look or I have to throw it right into your filfthy faces?!
+3. You, young ~the name~! You’re coming or what?! I haven’t got so much time as ya’ll.
+4. Hey, ~the name~! Move faster!
+5. Don’t rush yourselves, ~the name~! I could press the life pause anytime, couldn’t I?
 
 
 

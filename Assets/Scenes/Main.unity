@@ -4722,6 +4722,7 @@ RectTransform:
   - {fileID: 647306251}
   - {fileID: 874912926}
   - {fileID: 207684999}
+  - {fileID: 1726497893}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4747,6 +4748,8 @@ MonoBehaviour:
   questCounter: {fileID: 642469482}
   innHUD: {fileID: 647306250}
   mainFader: {fileID: 207685000}
+  ownerReplicsRoot: {fileID: 1726497893}
+  replicPrefab: {fileID: 8933182795742901920, guid: 01b9dd3b7d37a0144b69801489183cc6, type: 3}
 --- !u!1001 &414844167
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20191,6 +20194,42 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4248573312135336, guid: 92c138d34bedbf94ab1317dae3e407b4, type: 3}
   m_PrefabInstance: {fileID: 1717593383}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1726497892
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1726497893}
+  m_Layer: 5
+  m_Name: OwnerReplics
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1726497893
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726497892}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 412931025}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 100}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!1001 &1728361050
 PrefabInstance:
   m_ObjectHideFlags: 0
