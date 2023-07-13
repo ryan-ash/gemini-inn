@@ -39,13 +39,13 @@ public class UIGod : MonoBehaviour
 
     public void UpdateQuestCounter(int newCount)
     {
-        AudioManager.PlaySound(AudioNames.PencilWriting);
+        AudioRevolver.instance.PlaySound(AudioNames.PencilWriting);
         questCounter.text = newCount.ToString();
     }
 
     public void BeginStartingGame()
     {
-        AudioManager.PlaySound(AudioNames.Click);
+        AudioRevolver.instance.PlaySound(AudioNames.Click);
         mainFader.FadeIn("EndStartingGame");
         CursorSetter.SetDefaultCursor();
     }
@@ -60,7 +60,7 @@ public class UIGod : MonoBehaviour
 
     public void BeginQuitingGame()
     {
-        AudioManager.PlaySound(AudioNames.Click);
+        AudioRevolver.instance.PlaySound(AudioNames.Click);
         mainFader.FadeIn("EndQuitingGame");
         CursorSetter.SetDefaultCursor();
     }

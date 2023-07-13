@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6093869751291748753}
   - component: {fileID: 3229164669447934377}
+  - component: {fileID: 357247308844000940}
   m_Layer: 0
   m_Name: AudioEvent
   m_TagString: Untagged
@@ -128,3 +129,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &357247308844000940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3617234005514252403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad39f7ae991c31d478f7b6a047ee9f14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  letInterrupt: 1
+  noFadeOnStart: 0
+  noFadeOnStop: 0
+  offset: 0
+  volume: 1
+  sequenceType: 0
+  onPlay: {fileID: 0}
+  onStop: {fileID: 0}
