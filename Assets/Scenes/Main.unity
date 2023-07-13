@@ -738,7 +738,6 @@ MonoBehaviour:
   _questGenerationChance: 1
   _questSafeDistance: 5
   _questTileRetryThreshold: 0.5
-  _questGenerationRange: {x: 50, y: 25}
   _questVisualPrefab: {fileID: 8620448564361897051, guid: 9e40f1a99f1307c4d86f5de1eeab24d3, type: 3}
   _questRoot: {fileID: 1387532379}
   useMockQuests: 0
@@ -23348,6 +23347,7 @@ MonoBehaviour:
   height: 90
   scale: 1
   offset: {x: 0, y: 0}
+  questGenerationRange: {x: 120, y: 70}
   heightWaves:
   - seed: 56
     seedRandomness: 0

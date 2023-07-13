@@ -16,6 +16,7 @@ public class Map : MonoBehaviour
     public int height = 50;
     public float scale = 1.0f;
     public Vector2 offset;
+    public Vector2Int questGenerationRange = new Vector2Int(50, 50);
 
     [Header("Height Map")]
     public Wave[] heightWaves;
@@ -94,9 +95,18 @@ public class Map : MonoBehaviour
         for (int i = 0; i < filterIterations; ++i)
             FilterGeneratedMap();
 
+        int halfDesiredWidth = questGenerationRange.x / 2;
+        int halfDesiredHeight = questGenerationRange.y / 2;
         foreach (var tile in tiles)
         {
             var currentTileBiomeName = tile.selectedBiome.name;
+
+            int relativeX = Mathf.Abs(tile.X - halfWidth);
+            int relativeY = Mathf.Abs(tile.Y - halfHeight);
+            if (relativeX >= halfDesiredWidth || relativeY >= halfDesiredHeight)
+            {
+                continue;
+            }
 
             if (biomeTilesCache.ContainsKey(currentTileBiomeName))
             {

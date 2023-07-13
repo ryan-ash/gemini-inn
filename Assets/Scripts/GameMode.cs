@@ -13,7 +13,6 @@ public class GameMode : MonoBehaviour
     [SerializeField] private float _questGenerationChance = 0.25f;
     [SerializeField] private float _questSafeDistance = 5.0f;
     [SerializeField] private float _questTileRetryThreshold = 0.5f;
-    [SerializeField] private Vector2 _questGenerationRange = new Vector2(160.0f, 90.0f);
     [SerializeField] private GameObject _questVisualPrefab;
     [SerializeField] private GameObject _questRoot;
     [SerializeField] private bool useMockQuests = false;
