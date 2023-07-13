@@ -10,6 +10,7 @@ public class Mission
     public string MissionName;
     public List<Quest> Quests;
     public Reward CompletionReward;
+    public MissionRecurrenceType RecurrenceType = MissionRecurrenceType.Simultaneous;
 
     public Mission()
     {
@@ -103,4 +104,12 @@ public class Mission
         }
         return true;
     }
+}
+
+[System.Serializable]
+public enum MissionRecurrenceType
+{
+    Simultaneous,
+    Repeating, // Only one mission of this type can be active at a time
+    Unique // after it's done or failed it will never be available again
 }

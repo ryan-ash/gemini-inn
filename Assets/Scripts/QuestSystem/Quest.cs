@@ -14,17 +14,24 @@ public enum QuestState
 [System.Serializable]
 public class Quest
 {
+    [Header("Quest Info")]
     public string questName;
     public string questDescription;
+    public List<string> Biomes;
+    public int successAttempts = 0;
+    public float timeout = 0.0f;
+    public bool successOnTimeout = false;
+
+    [Header("Quest Difficulty & Traits")]
     [Range(0.0f, 1.0f)]
     public float BaseSuccessRate = 1.0f;
     public List<AbilityModifier> AbilityModifiers;
     public List<StatModifier> StatModifiers;
-    public Vector3 questPosition;
-    public List<string> Biomes;
-    public QuestState questState = QuestState.NotStarted;
 
-    public AdventurerGroup adventureGroup;
+    [HideInInspector] public Vector3 questPosition;
+    [HideInInspector] public QuestState questState = QuestState.NotStarted;
+
+    [HideInInspector] public AdventurerGroup adventureGroup;
 
     public Quest()
     {
