@@ -107,6 +107,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: CallOutResponse
       objectReference: {fileID: 0}
+    - target: {fileID: 1872407941395768503, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1872407941395768503, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1872407941395768503, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1872407941395768503, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2972636920338324110, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -137,11 +153,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2972636920338324110, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 500
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 2972636920338324110, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2972636920338324110, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
       propertyPath: m_LocalScale.x
@@ -203,6 +219,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4229419684435175801, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bf4afe8edfe265a4c9dbd814aec9acd1, type: 3}
     - target: {fileID: 5743285866514653965, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
       propertyPath: m_FontData.m_FontStyle
       value: 2
