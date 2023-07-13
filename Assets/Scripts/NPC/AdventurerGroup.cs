@@ -146,5 +146,13 @@ public class AdventurerGroup : MonoBehaviour
         groupState = GroupState.OnRoadToQuest;
         var quest = GameMode.instance.selectedQuest;
         OnGroupStateUpdated();
+                
+        for (int i = 0; i < adventurers.Count; i++)
+        {
+            var adventurer = adventurers[i];
+            adventurer.gameObject.SetActive(false);
+        }
+
+        GetComponent<Collider>().enabled = false;
     }
 }

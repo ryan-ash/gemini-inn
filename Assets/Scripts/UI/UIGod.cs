@@ -15,6 +15,11 @@ public class UIGod : MonoBehaviour
     public Fader mainFader;
     public Transform ownerReplicsRoot;
 
+    [Header("Negotiation")]
+    public Text questTitle;
+    public Text questDescription;
+    public Text groupName;
+
     [Header("Prefabs")]
     public GameObject replicPrefab;
     public GameObject responsePrefab;
@@ -74,6 +79,18 @@ public class UIGod : MonoBehaviour
         Application.Quit();
     }
 
+    public void BeginAcceptingQuest()
+    {
+        CloseAllWindows();
+        GameMode.instance.AgreeToQuest();
+    }
+
+    public void BeginDecliningQuest()
+    {
+        CloseAllWindows();
+        GameMode.instance.DisagreeToQuest();
+    }
+
     public void OpenWindow(WindowType windowType)
     {
         AudioRevolver.Fire(AudioNames.Click);
@@ -96,6 +113,8 @@ public class UIGod : MonoBehaviour
 
     public void OpenWindowNegotiation()
     {
+        questTitle.text = GameMode.instance.selectedQuest.questName;
+        questDescription.text = GameMode.instance.selectedQuest.questDescription;
         OpenWindow(WindowType.Negotiation);
     }
 

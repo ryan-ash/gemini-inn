@@ -155,10 +155,7 @@ public class GameMode : MonoBehaviour
 
         if (isNegotiating)
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                DisagreeToQuest();
-            }
+            // for now, only control negotiations through UI
         }
     }
 
@@ -215,6 +212,11 @@ public class GameMode : MonoBehaviour
                         Transform adventurerTransform = adventurer.transform;
                         UIGod.instance.SpawnAdventurerReplic(adventurerTransform);
                     });
+
+                    Wait.Run(moveTime, () => {
+                        UIGod.instance.UpdateQuestTitle("");
+                        UIGod.instance.OpenWindowNegotiation();
+                    });
                 });
             });
                         
@@ -233,16 +235,23 @@ public class GameMode : MonoBehaviour
         selectedQuest.adventureGroup = selectedAdventurerGroup;
         selectedAdventurerGroup.quest = selectedQuest;
         UIGod.instance.UpdateQuestTitle("");
-        // move group to quest
-        // spawn new empty group
-        // replace group in inn with new group
+
+        GameObject newAdventurerGroup = Instantiate(selectedAdventurerGroup.gameObject, selectedAdventurerGroup.transform.position, selectedAdventurerGroup.transform.rotation);
+        AdventurerGroup newAdventurerGroupComponent = newAdventurerGroup.GetComponent<AdventurerGroup>();
+        newAdventurerGroupComponent.adventurers = new List<Adventurer>();
+
+        selectedAdventurerGroup.AcceptQuest();
+        selectedQuest = null;
+        isNegotiating = false;
+        isChoosingAdventurers = false;
+        ToggleMap();
     }
 
     public void DisagreeToQuest()
     {
         isNegotiating = false;
         isChoosingAdventurers = true;
-        CursorSetter.SetHoverCursor(true);
+        UIGod.instance.UpdateQuestTitle(selectedQuest.questName);
         foreach (Adventurer adventurer in selectedAdventurerGroup.adventurers)
         {
             float moveTime = CalculateMoveTime();
@@ -266,6 +275,9 @@ public class GameMode : MonoBehaviour
 
     public void OnQuestUpdated(Quest quest)
     {
+        if (_questEventPrefab == null || _questEventRoot == null)
+            return;
+
         var questEventObject = Instantiate(_questEventPrefab, _questEventRoot.transform);
         var questEvent = questEventObject.GetComponent<QuestEvent>();
         questEvent.SetQuest(quest);
