@@ -62,3 +62,16 @@ MonoBehaviour:
   fadeDuration: 0.5
   groupState: 0
   adventurers: []
+  quest:
+    questName: 
+    questDescription: 
+    Biomes: []
+    successAttempts: 0
+    timeout: 0
+    successOnTimeout: 0
+    BaseSuccessRate: 1
+    AbilityModifiers: []
+    StatModifiers: []
+    questPosition: {x: 0, y: 0, z: 0}
+    questState: 0
+    adventureGroup: {fileID: 0}

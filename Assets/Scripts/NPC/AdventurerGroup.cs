@@ -75,6 +75,7 @@ public class AdventurerGroup : MonoBehaviour
     public void AddAdventurer(Adventurer adventurer)
     {
         adventurers.Add(adventurer);
+        adventurer.group = this;
         if (groupState == GroupState.Empty)
         {
             groupState = GroupState.Idle;

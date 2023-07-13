@@ -17,6 +17,7 @@ public class UIGod : MonoBehaviour
 
     [Header("Prefabs")]
     public GameObject replicPrefab;
+    public GameObject responsePrefab;
 
     private Window[] windows;
 
@@ -123,5 +124,11 @@ public class UIGod : MonoBehaviour
     public void SpawnOwnerReplic()
     {
         GameObject replic = Instantiate(replicPrefab, ownerReplicsRoot);
+    }
+
+    public void SpawnAdventurerReplic(Transform adventurerReplicsRoot)
+    {
+        GameObject response = Instantiate(responsePrefab);
+        response.transform.SetParent(adventurerReplicsRoot, false);
     }
 }

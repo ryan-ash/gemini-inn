@@ -24,6 +24,9 @@ public class GameMode : MonoBehaviour
     [SerializeField] private LayerMask adventurerRaycastLayerMask;
     [SerializeField] private float distanceDuringNegotiation = 1.5f;
     [SerializeField] private float distanceRandomizationDuringNegotiation = 1.5f;
+    [SerializeField] private float moveTimeRandomizationDuringNegotiation = 0.5f;
+    [SerializeField] private float moveTimeDuringNegotiation = 1.0f;
+    [SerializeField] private float maxReplicSpawnDelayDuringNegotiation = 0.5f;
 
     [Header("Quest Reporting")]
     [SerializeField] private GameObject _questEventPrefab;
@@ -102,7 +105,7 @@ public class GameMode : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 isChoosingAdventurers = false;
-                if (_consideredAdventurerGroup != null)
+                if (_consideredAdventurerGroup != null && _consideredAdventurerGroup.adventurers.Count > 0)
                 {
                     selectedAdventurerGroup = _consideredAdventurerGroup;
                     bool useFistNotBribe = Random.Range(0.0f, 1.0f) <= 0.5f;
@@ -112,11 +115,16 @@ public class GameMode : MonoBehaviour
                         CursorSetter.SetBribeCursor(true);
                     MoveSelectedAdventurersToNegotiation();
                 }
-                else
+                else if (_consideredAdventurerGroup == null)
                 {
                     CursorSetter.ResetPriorityCursor();
                     ToggleMap();
                     UIGod.instance.UpdateQuestTitle("");
+                }
+                else
+                {
+                    isChoosingAdventurers = true;
+                    // spawn "there's no one there" replic
                 }
                 return;
             }
@@ -190,10 +198,24 @@ public class GameMode : MonoBehaviour
             Vector3 directionFromOwner = Vector3.Normalize(adventurer.transform.position - Camera.main.transform.position);
             float actualDistanceDuringNegotiation = distanceDuringNegotiation + Random.Range(-distanceRandomizationDuringNegotiation, distanceRandomizationDuringNegotiation);
             Vector3 newPosition = new Vector3(Camera.main.transform.position.x + directionFromOwner.x * actualDistanceDuringNegotiation, 0.0f, Camera.main.transform.position.z + directionFromOwner.z * actualDistanceDuringNegotiation);
-            adventurer.MoveTo(newPosition);
+
+            float moveTime = CalculateMoveTime();
+            adventurer.MoveTo(newPosition, moveTime);
+
+            float delayBeforeSpawningReplic = Random.Range(0.0f, maxReplicSpawnDelayDuringNegotiation);
+            Wait.Run(delayBeforeSpawningReplic, () => {
+                Transform adventurerCanvasTransform = adventurer.GetComponentInChildren<Canvas>().transform;
+                UIGod.instance.SpawnAdventurerReplic(adventurerCanvasTransform);
+            });
+            
             selectedAdventurerGroup.LightDownAdventurerTable();
         }
         isNegotiating = true;
+    }
+
+    private float CalculateMoveTime()
+    {
+        return moveTimeDuringNegotiation + Random.Range(-moveTimeRandomizationDuringNegotiation, moveTimeRandomizationDuringNegotiation);
     }
 
     public void AgreeToQuest()
@@ -213,7 +235,8 @@ public class GameMode : MonoBehaviour
         CursorSetter.SetHoverCursor(true);
         foreach (Adventurer adventurer in selectedAdventurerGroup.adventurers)
         {
-            adventurer.MoveBack();
+            float moveTime = CalculateMoveTime();
+            adventurer.MoveBack(moveTime);
         }
         selectedAdventurerGroup.LightUpAdventurerTable();
     }

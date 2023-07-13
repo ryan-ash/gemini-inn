@@ -4754,6 +4754,7 @@ MonoBehaviour:
   mainFader: {fileID: 207685000}
   ownerReplicsRoot: {fileID: 1726497893}
   replicPrefab: {fileID: 8933182795742901920, guid: 01b9dd3b7d37a0144b69801489183cc6, type: 3}
+  responsePrefab: {fileID: 1101543771916562568, guid: 7c1e703194d124f408df87bdc1c1fdf4, type: 3}
 --- !u!1001 &414844167
 PrefabInstance:
   m_ObjectHideFlags: 0
