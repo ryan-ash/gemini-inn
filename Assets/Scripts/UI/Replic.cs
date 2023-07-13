@@ -7,6 +7,7 @@ public class Replic : MonoBehaviour
 {
     [Header("Settings")]
     public float lifetime = 5.0f;
+    public List<Color> possibleColors = new List<Color>();
 
     private Fader fader;
     private Mover mover;
@@ -23,6 +24,10 @@ public class Replic : MonoBehaviour
         outline = GetComponent<Outline>();
         text = GetComponentInChildren<Text>();
         textBuilder = GetComponentInChildren<TextBuilder>();
+        if (possibleColors.Count > 0)
+        {
+            UpdateColor();
+        }
         BuildText();
         Wait.Run(0.2f, () => { 
             fader.FadeIn();
@@ -41,6 +46,12 @@ public class Replic : MonoBehaviour
     {
         var newReplic = textBuilder.BuildText();
         text.text = newReplic;
+    }
+
+    public void UpdateColor()
+    {
+        var newColor = possibleColors[Random.Range(0, possibleColors.Count)];
+        outline.effectColor = newColor;
     }
 
     public void Destroy()

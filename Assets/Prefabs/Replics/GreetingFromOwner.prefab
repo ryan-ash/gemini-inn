@@ -7,9 +7,57 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 162280093, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
+      propertyPath: moveSpeed
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 162280095, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
+      propertyPath: possibleColors.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 162280095, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
+      propertyPath: possibleColors.Array.data[0].a
+      value: 0.043137256
+      objectReference: {fileID: 0}
+    - target: {fileID: 162280095, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
+      propertyPath: possibleColors.Array.data[0].b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 162280095, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
+      propertyPath: possibleColors.Array.data[0].g
+      value: 0.44313726
+      objectReference: {fileID: 0}
+    - target: {fileID: 162280095, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
+      propertyPath: possibleColors.Array.data[1].a
+      value: 0.043137256
+      objectReference: {fileID: 0}
+    - target: {fileID: 162280095, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
+      propertyPath: possibleColors.Array.data[1].b
+      value: 0.8045616
+      objectReference: {fileID: 0}
+    - target: {fileID: 162280095, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
+      propertyPath: possibleColors.Array.data[1].g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 162280095, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
+      propertyPath: possibleColors.Array.data[1].r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 162280095, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
+      propertyPath: possibleColors.Array.data[2].a
+      value: 0.043137256
+      objectReference: {fileID: 0}
+    - target: {fileID: 162280095, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
+      propertyPath: possibleColors.Array.data[2].b
+      value: 0.749012
+      objectReference: {fileID: 0}
+    - target: {fileID: 162280095, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
+      propertyPath: possibleColors.Array.data[2].g
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 555825392611093036, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
       propertyPath: m_Name
-      value: Replic
+      value: GreetingFromOwner
       objectReference: {fileID: 0}
     - target: {fileID: 2972636920338324110, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
       propertyPath: m_Pivot.x
