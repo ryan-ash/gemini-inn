@@ -258,7 +258,7 @@ public class GameMode : MonoBehaviour
                 var availableBiomeTiles = Map.GetBiomeTiles(newAvailableQuest.Biomes.ToArray());
                 if (availableBiomeTiles.Count == 0)
                 {
-                    Debug.LogError("No available tiles for quest: " + newAvailableQuest.questName);
+                    Debug.LogWarning("No available tiles for quest: " + newAvailableQuest.questName);
                     continue;
                 }
 
