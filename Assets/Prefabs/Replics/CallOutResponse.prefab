@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 162280093, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
       propertyPath: moveSpeed
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 162280095, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
       propertyPath: possibleColors.Array.size
@@ -202,6 +202,10 @@ PrefabInstance:
     - target: {fileID: 2972636920338324110, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743285866514653965, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
+      propertyPath: m_FontData.m_FontStyle
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6453500211292193788, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
       propertyPath: textPresets.Array.size
@@ -405,3 +409,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
+--- !u!1 &1101543771916562568 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 555825392611093036, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
+  m_PrefabInstance: {fileID: 648456801709759140}
+  m_PrefabAsset: {fileID: 0}
+--- !u!223 &2706926173725511488
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101543771916562568}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 22
+  m_TargetDisplay: 0

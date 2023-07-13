@@ -129,6 +129,8 @@ public class UIGod : MonoBehaviour
     public void SpawnAdventurerReplic(Transform adventurerReplicsRoot)
     {
         GameObject response = Instantiate(responsePrefab);
-        response.transform.SetParent(adventurerReplicsRoot, false);
+        response.transform.position = adventurerReplicsRoot.position;
+        response.transform.LookAt(Camera.main.transform);
+        response.transform.Rotate(0.0f, 180.0f, 0.0f);
     }
 }

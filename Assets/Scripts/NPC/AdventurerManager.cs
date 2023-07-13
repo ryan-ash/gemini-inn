@@ -81,8 +81,7 @@ public class AdventurerManager : MonoBehaviour
         GameObject groupLight = adventurerGroup.adventurerTableLights;
 
         Vector3 targetDirection = groupLight.transform.position - adventurerObject.transform.position;
-        Vector3 newDirection = Vector3.RotateTowards(adventurerObject.transform.forward, targetDirection, Mathf.PI, 0.0f);
-        adventurerObject.transform.rotation = Quaternion.LookRotation(newDirection);
+        adventurerObject.transform.rotation = Quaternion.LookRotation(targetDirection);
         float adventurerInitialYRotation = adventurerObject.transform.localEulerAngles.y + 90.0f;
         adventurerInitialYRotation = adventurerInitialYRotation % 360.0f;
         if (adventurerInitialYRotation < 0.0f)

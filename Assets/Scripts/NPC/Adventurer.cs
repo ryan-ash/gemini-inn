@@ -33,14 +33,10 @@ public class Adventurer : MonoBehaviour
     [SerializeField]
     private List<Mesh> FeetVariations;
 
-    private Transform adventurerHUD;
-
     [HideInInspector] public AdventurerGroup group;
 
     private Vector3 initialPosition;
     private Quaternion initialRotation;
-    private Vector3 initialHUDPosition;
-    private Quaternion initialHUDRotation;
 
     public void RandomizeCharacter()
     {
@@ -95,13 +91,6 @@ public class Adventurer : MonoBehaviour
     {
         LeanTween.moveLocal(gameObject, position, moveTime).setEase(LeanTweenType.easeInOutQuad).setOnUpdate((float val) => {
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(Camera.main.transform.position - transform.position), val);
-            // adventurerHUD.position = initialHUDPosition;
-            adventurerHUD.rotation = initialHUDRotation;
-            Transform child = transform.GetChild(0);
-            if (child != null)
-            {
-                child.rotation = Quaternion.Lerp(child.rotation, Quaternion.LookRotation(Camera.main.transform.position - child.position), val);
-            }
         });
     }
 
@@ -109,13 +98,6 @@ public class Adventurer : MonoBehaviour
     {
         LeanTween.moveLocal(gameObject, initialPosition, moveTime).setEase(LeanTweenType.easeInOutQuad).setOnUpdate((float val) => {
             transform.rotation = Quaternion.Lerp(transform.rotation, initialRotation, val);
-            // adventurerHUD.position = initialHUDPosition;
-            adventurerHUD.rotation = initialHUDRotation;
-            Transform child = transform.GetChild(0);
-            if (child != null)
-            {
-                child.rotation = Quaternion.Lerp(child.rotation, initialHUDRotation, val);
-            }
         });
     }
 
@@ -124,9 +106,5 @@ public class Adventurer : MonoBehaviour
         RandomizeCharacter();
         initialPosition = transform.position;
         initialRotation = transform.rotation;
-
-        adventurerHUD = transform.GetComponentInChildren<Canvas>().transform;
-        initialHUDPosition = adventurerHUD.position;
-        initialHUDRotation = Quaternion.LookRotation(Camera.main.transform.position - transform.position);
     }
 }

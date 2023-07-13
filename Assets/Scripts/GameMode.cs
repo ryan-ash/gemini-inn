@@ -24,9 +24,12 @@ public class GameMode : MonoBehaviour
     [SerializeField] private LayerMask adventurerRaycastLayerMask;
     [SerializeField] private float distanceDuringNegotiation = 1.5f;
     [SerializeField] private float distanceRandomizationDuringNegotiation = 1.5f;
+    [SerializeField] private float rotationLengthBeforeMovingDuringNegotiation = 1.0f;
+    [SerializeField] private float delayBeforeMovingDuringNegotiation = 1.0f;
     [SerializeField] private float moveTimeRandomizationDuringNegotiation = 0.5f;
     [SerializeField] private float moveTimeDuringNegotiation = 1.0f;
-    [SerializeField] private float maxReplicSpawnDelayDuringNegotiation = 0.5f;
+    [SerializeField] private float mandatoryReplicSpawnDelayDuringNegotiation = 0.5f;
+    [SerializeField] private float randomReplicSpawnDelayDuringNegotiation = 0.5f;
 
     [Header("Quest Reporting")]
     [SerializeField] private GameObject _questEventPrefab;
@@ -196,18 +199,25 @@ public class GameMode : MonoBehaviour
         foreach (Adventurer adventurer in selectedAdventurerGroup.adventurers)
         {
             Vector3 directionFromOwner = Vector3.Normalize(adventurer.transform.position - Camera.main.transform.position);
+            Vector3 directionToOwner = Vector3.Normalize(Camera.main.transform.position - adventurer.transform.position);
             float actualDistanceDuringNegotiation = distanceDuringNegotiation + Random.Range(-distanceRandomizationDuringNegotiation, distanceRandomizationDuringNegotiation);
             Vector3 newPosition = new Vector3(Camera.main.transform.position.x + directionFromOwner.x * actualDistanceDuringNegotiation, 0.0f, Camera.main.transform.position.z + directionFromOwner.z * actualDistanceDuringNegotiation);
 
-            float moveTime = CalculateMoveTime();
-            adventurer.MoveTo(newPosition, moveTime);
+            LeanTween.value(gameObject, 0.0f, 1.0f, rotationLengthBeforeMovingDuringNegotiation).setEase(LeanTweenType.easeInOutQuad).setOnUpdate((float value) => {
+                adventurer.transform.rotation = Quaternion.Lerp(adventurer.transform.rotation, Quaternion.LookRotation(directionToOwner), value);
+            }).setOnComplete(() => {
+                Wait.Run(delayBeforeMovingDuringNegotiation, () => {
+                    float moveTime = CalculateMoveTime();
+                    adventurer.MoveTo(newPosition, moveTime);
 
-            float delayBeforeSpawningReplic = Random.Range(0.0f, maxReplicSpawnDelayDuringNegotiation);
-            Wait.Run(delayBeforeSpawningReplic, () => {
-                Transform adventurerCanvasTransform = adventurer.GetComponentInChildren<Canvas>().transform;
-                UIGod.instance.SpawnAdventurerReplic(adventurerCanvasTransform);
+                    float delayBeforeSpawningReplic = Random.Range(0.0f, randomReplicSpawnDelayDuringNegotiation) + mandatoryReplicSpawnDelayDuringNegotiation;
+                    Wait.Run(delayBeforeSpawningReplic, () => {
+                        Transform adventurerTransform = adventurer.transform;
+                        UIGod.instance.SpawnAdventurerReplic(adventurerTransform);
+                    });
+                });
             });
-            
+                        
             selectedAdventurerGroup.LightDownAdventurerTable();
         }
         isNegotiating = true;
