@@ -156,8 +156,8 @@ public class GameMode : MonoBehaviour
         if (Inn.instance.isCameraMoving)
             return;
 
-        AudioRevolver.instance.PlaySound(AudioNames.MapSound);
-        AudioRevolver.instance.PlaySound(AudioNames.CameraWoosh);
+        AudioRevolver.Fire(AudioNames.MapSound);
+        AudioRevolver.Fire(AudioNames.CameraWoosh);
         isMapOpen = !isMapOpen;
         if (isMapOpen)
         {
@@ -183,7 +183,7 @@ public class GameMode : MonoBehaviour
 
     public void MoveSelectedAdventurersToNegotiation()
     {
-        AudioRevolver.instance.PlaySound(AudioNames.Footsteps);
+        AudioRevolver.Fire(AudioNames.Footsteps);
         foreach (Adventurer adventurer in selectedAdventurerGroup.adventurers)
         {
             Vector3 directionFromOwner = Vector3.Normalize(adventurer.transform.position - Camera.main.transform.position);
@@ -219,7 +219,7 @@ public class GameMode : MonoBehaviour
 
     public void StartGame()
     {
-        AudioRevolver.instance.PlaySound(AudioNames.Crowd);
+        AudioRevolver.Fire(AudioNames.Crowd);
         Wait.Run(1.0f, () => { 
             AdventurerManager.instance.StartSpawning();
             Map.instance.GenerateMap();

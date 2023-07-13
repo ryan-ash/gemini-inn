@@ -97,9 +97,9 @@ public class AdventurerManager : MonoBehaviour
 
         if (!ignoreChance)
         {
-            AudioRevolver.instance.PlaySound(AudioNames.DoorSquek);
-            AudioRevolver.instance.PlaySound(AudioNames.DoorClosing);
-            AudioRevolver.instance.PlaySound(AudioNames.Footsteps);
+            AudioRevolver.Fire(AudioNames.DoorSquek);
+            AudioRevolver.Fire(AudioNames.DoorClosing);
+            AudioRevolver.Fire(AudioNames.Footsteps);
         }
     }
 
