@@ -8,26 +8,23 @@
         "type": "tabs",
         "children": [
           {
-            "id": "769f04e662982aa9",
+            "id": "645e722794d3ee3f",
             "type": "leaf",
             "state": {
-              "type": "canvas",
-              "state": {
-                "file": "Think Board.canvas",
-                "viewState": {
-                  "x": 377.5,
-                  "y": 445.3863134657837,
-                  "zoom": -0.18038489481487274
-                }
-              }
+              "type": "graph",
+              "state": {}
             }
           },
           {
             "id": "4fcce49dde905474",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "Texts/Dialog strings/Call for a quest.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -96,7 +93,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Think Board.canvas",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -113,7 +109,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Think Board.canvas",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -135,9 +130,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Think Board.canvas"
-              }
+              "state": {}
             }
           }
         ]
@@ -157,13 +150,23 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "769f04e662982aa9",
+  "active": "3553b92af6563513",
   "lastOpenFiles": [
-    "Task List.md",
-    "Think Board.canvas",
-    "gemini inn.md",
-    "Texts/DialogStrings.md",
     "Texts/Missions.md",
+    "Texts/Dialog strings/Dialog Strings.md",
+    "Texts/Dialog strings/Call for a quest.md",
+    "gemini inn.md",
+    "Task List.md",
+    "Traveler’s reaction.md",
+    "Texts/Dialog strings/Traveler's reaction for name calling.md",
+    "Texts/Dialog strings/Not accepting.md",
+    "Texts/Dialog strings/Quest accepting.md",
+    "Texts/Dialog strings/Traveler’s doubts.md",
+    "Texts/Dialog strings/Statuses.md",
+    "Texts/Dialog strings/The quest is done.md",
+    "Texts/Dialog strings/Characters.md",
+    "Texts/Dialog strings",
+    "Think Board.canvas",
     "Texts"
   ]
 }
