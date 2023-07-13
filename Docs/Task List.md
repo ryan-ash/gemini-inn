@@ -4,22 +4,26 @@ kanban-plugin: basic
 
 ---
 
-## Backlog
+## Polish
+
+- [ ] Music
 
 
-
-## To Do
+## MVP
 
 - [ ] Intro Replics
-- [ ] Music
-- [ ] Negotiation Window
 - [ ] Embarking On Quest
 - [ ] Simulating Quest Result
 - [ ] Applying Quest Result
 
 
-## Current
+## UI
 
+- [ ] Negotiation Window
+- [ ] Active Quests
+- [ ] History
+- [ ] Settings
+- [x] Quest Title on Choosing Party
 
 
 
