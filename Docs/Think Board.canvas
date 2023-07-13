@@ -2,10 +2,12 @@
 	"nodes":[
 		{"type":"file","file":"gemini inn.md","id":"a3df841b02aacea4","x":120,"y":-360,"width":1335,"height":600,"color":"#ff5a47"},
 		{"type":"file","file":"Task List.md","id":"324d3b770d169fd9","x":120,"y":340,"width":1335,"height":700,"color":"5"},
-		{"type":"text","text":"What is this?..\n\nOk, it's Miro, nice\n\nMore over, it's Miro with hyperlinking and embedding, awesome","id":"6661f5a89b0b1f10","x":-700,"y":-142,"width":430,"height":165}
+		{"type":"text","text":"What is this?..\n\nOk, it's Miro, nice\n\nMore over, it's Miro with hyperlinking and embedding, awesome","id":"6661f5a89b0b1f10","x":-700,"y":-142,"width":430,"height":165},
+		{"type":"file","file":"Texts/Dialog strings/Dialog Strings.md","id":"26f673fda1d43d14","x":588,"y":-980,"width":400,"height":400}
 	],
 	"edges":[
 		{"id":"00d7d49befeca8c0","fromNode":"6661f5a89b0b1f10","fromSide":"right","toNode":"a3df841b02aacea4","toSide":"left"},
-		{"id":"4237fb1f0d0e340e","fromNode":"6661f5a89b0b1f10","fromSide":"right","toNode":"324d3b770d169fd9","toSide":"left"}
+		{"id":"4237fb1f0d0e340e","fromNode":"6661f5a89b0b1f10","fromSide":"right","toNode":"324d3b770d169fd9","toSide":"left"},
+		{"id":"7973ef309200c31f","fromNode":"a3df841b02aacea4","fromSide":"top","toNode":"26f673fda1d43d14","toSide":"bottom"}
 	]
 }
