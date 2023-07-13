@@ -752,16 +752,21 @@ MonoBehaviour:
   distanceRandomizationDuringNegotiation: 0.25
   _questEventPrefab: {fileID: 0}
   _questEventRoot: {fileID: 0}
-  Missions: []
+  activeMissions: []
+  failedMissions: []
+  successfulMissions: []
   selectedQuestMarker: {fileID: 0}
   selectedQuest:
     questName: 
     questDescription: 
+    Biomes: []
+    successAttempts: 0
+    timeout: 0
+    successOnTimeout: 0
     BaseSuccessRate: 1
     AbilityModifiers: []
     StatModifiers: []
     questPosition: {x: 0, y: 0, z: 0}
-    Biomes: []
     questState: 0
     adventureGroup: {fileID: 0}
   selectedAdventurerGroup: {fileID: 0}

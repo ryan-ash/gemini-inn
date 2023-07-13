@@ -35,7 +35,9 @@ public class GameMode : MonoBehaviour
     private bool isChoosingAdventurers = false;
     private bool isNegotiating = false;
 
-    [HideInInspector] public List<Mission> Missions;
+    [HideInInspector] public List<Mission> activeMissions;
+    [HideInInspector] public List<Mission> failedMissions;
+    [HideInInspector] public List<Mission> successfulMissions;
 
     private GameObject _consideredQuestMarker;
     private Quest _consideredQuest;
@@ -253,9 +255,48 @@ public class GameMode : MonoBehaviour
     {
         while (true)
         {
+            List<Mission> bannedMissions = new List<Mission>();
             if (Random.Range(0.0f, 1.0f) <= _questGenerationChance)
             {
                 Mission mission = useMockQuests ? Mission.GenerateRandomMission() : Mission.GrabRandomMissionFromDB();
+
+                if (!useMockQuests && bannedMissions.Count == MissionsDatabase.instance.Missions.Count)
+                {
+                    Debug.LogWarning("No available missions for now...");
+                    yield return new WaitForSeconds(_questGenerationInterval);
+                    continue;
+                }
+
+                if (!useMockQuests && bannedMissions.Find(m => m.MissionName == mission.MissionName) != null)
+                    continue;
+
+                if (mission.RecurrenceType == MissionRecurrenceType.Repeating)
+                {
+                    if (activeMissions.Find(m => m.MissionName == mission.MissionName) != null)
+                    {
+                        bannedMissions.Add(mission);
+                        continue;
+                    }
+                }
+                else if (mission.RecurrenceType == MissionRecurrenceType.Unique)
+                {
+                    if (activeMissions.Find(m => m.MissionName == mission.MissionName) != null)
+                    {
+                        bannedMissions.Add(mission);
+                        continue;
+                    }
+                    if (failedMissions.Find(m => m.MissionName == mission.MissionName) != null)
+                    {
+                        bannedMissions.Add(mission);
+                        continue;
+                    }
+                    if (successfulMissions.Find(m => m.MissionName == mission.MissionName) != null)
+                    {
+                        bannedMissions.Add(mission);
+                        continue;
+                    }
+                }
+
                 Quest newAvailableQuest = mission.GetAvailableQuest();
 
                 var availableBiomeTiles = Map.GetBiomeTiles(newAvailableQuest.Biomes.ToArray());
@@ -283,7 +324,8 @@ public class GameMode : MonoBehaviour
 
                     availableBiomeTiles.RemoveAt(tileID);
 
-                    Debug.Log(availableBiomeTiles.Count.ToString());
+                    // to debug elimination of available tiles
+                    // Debug.Log(availableBiomeTiles.Count.ToString());
 
                     if (availableBiomeTiles.Count < initialTileCount * _questTileRetryThreshold)
                         break;
@@ -301,8 +343,8 @@ public class GameMode : MonoBehaviour
 
                 _generatedQuests.Add(questVisual.transform);
 
-                Missions.Add(mission);
-                UIGod.instance.UpdateQuestCounter(Missions.Count);
+                activeMissions.Add(mission);
+                UIGod.instance.UpdateQuestCounter(activeMissions.Count);
             }
 
             yield return new WaitForSeconds(_questGenerationInterval);

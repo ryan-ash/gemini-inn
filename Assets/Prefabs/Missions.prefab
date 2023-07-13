@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1466211590309657465}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -45,10 +45,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Missions:
-  - MissionName: 
+  - MissionName: ForestCare
     Quests:
     - questName: No one asked
       questDescription: ' Get rid of especially loud birds '
+      Biomes:
+      - Forest
+      successAttempts: 0
+      timeout: 0
+      successOnTimeout: 0
       BaseSuccessRate: 0.7146497
       AbilityModifiers:
       - Type: 2
@@ -59,11 +64,15 @@ MonoBehaviour:
       - Type: 3
         Modifier: 0.9502914
       questPosition: {x: 0, y: 0, z: 0}
-      Biomes:
-      - Forest
       questState: 0
+      adventureGroup: {fileID: 0}
     - questName: "It\u2019s just another obstacle"
       questDescription: Help the young heroes to move the trees
+      Biomes:
+      - Forest
+      successAttempts: 0
+      timeout: 0
+      successOnTimeout: 0
       BaseSuccessRate: 0.67482877
       AbilityModifiers:
       - Type: 3
@@ -72,11 +81,15 @@ MonoBehaviour:
       - Type: 1
         Modifier: 1.0945842
       questPosition: {x: 0, y: 0, z: 0}
-      Biomes:
-      - Forest
       questState: 0
+      adventureGroup: {fileID: 0}
     - questName: Hellfire
       questDescription: It seems someone making a campfire, should you see?
+      Biomes:
+      - Forest
+      successAttempts: 0
+      timeout: 0
+      successOnTimeout: 0
       BaseSuccessRate: 0.67482877
       AbilityModifiers:
       - Type: 1
@@ -89,12 +102,16 @@ MonoBehaviour:
       - Type: 2
         Modifier: 0.83769155
       questPosition: {x: 0, y: 0, z: 0}
-      Biomes:
-      - Forest
       questState: 0
+      adventureGroup: {fileID: 0}
     - questName: What did the chicken say?
       questDescription: " It seems that the insects go crazy somehow, wanna try fight
         with \u2018em ?"
+      Biomes:
+      - Forest
+      successAttempts: 0
+      timeout: 0
+      successOnTimeout: 0
       BaseSuccessRate: 0.67482877
       AbilityModifiers:
       - Type: 2
@@ -105,11 +122,15 @@ MonoBehaviour:
       - Type: 2
         Modifier: 0.83769155
       questPosition: {x: 0, y: 0, z: 0}
-      Biomes:
-      - Forest
       questState: 0
+      adventureGroup: {fileID: 0}
     - questName: new generation
       questDescription: 'each youngsters how to fight '
+      Biomes:
+      - Forest
+      successAttempts: 0
+      timeout: 0
+      successOnTimeout: 0
       BaseSuccessRate: 0.67482877
       AbilityModifiers:
       - Type: 2
@@ -120,14 +141,19 @@ MonoBehaviour:
       - Type: 3
         Modifier: 0.83769155
       questPosition: {x: 0, y: 0, z: 0}
-      Biomes:
-      - Forest
       questState: 0
-  - MissionName: 
+      adventureGroup: {fileID: 0}
+    RecurrenceType: 1
+  - MissionName: WaterAdventures
     Quests:
     - questName: The frogs are now dancing the ballet
       questDescription: "Go and dance with them (it\u2019s an ancient tradition,
         you won\u2019t understand)"
+      Biomes:
+      - Lake
+      successAttempts: 0
+      timeout: 0
+      successOnTimeout: 0
       BaseSuccessRate: 0.91040885
       AbilityModifiers:
       - Type: 4
@@ -136,11 +162,15 @@ MonoBehaviour:
       - Type: 4
         Modifier: 0.9837458
       questPosition: {x: 0, y: 0, z: 0}
-      Biomes:
-      - Lake
       questState: 0
+      adventureGroup: {fileID: 0}
     - questName: Lake of thieves
       questDescription: Find the treasure Ms Goldman told you to
+      Biomes:
+      - Lake
+      successAttempts: 0
+      timeout: 0
+      successOnTimeout: 0
       BaseSuccessRate: 0.65935695
       AbilityModifiers:
       - Type: 4
@@ -151,12 +181,16 @@ MonoBehaviour:
       - Type: 3
         Modifier: 0.9205047
       questPosition: {x: 0, y: 0, z: 0}
-      Biomes:
-      - Lake
       questState: 0
+      adventureGroup: {fileID: 0}
     - questName: Dancing queen
       questDescription: Go and help the greatest frog queen catching the insects
         on the lake
+      Biomes:
+      - Lake
+      successAttempts: 0
+      timeout: 0
+      successOnTimeout: 0
       BaseSuccessRate: 0.65935695
       AbilityModifiers:
       - Type: 4
@@ -169,12 +203,12 @@ MonoBehaviour:
       - Type: 3
         Modifier: 0.9205047
       questPosition: {x: 0, y: 0, z: 0}
-      Biomes:
-      - Lake
       questState: 0
-  - MissionName: 
+      adventureGroup: {fileID: 0}
+    RecurrenceType: 0
+  - MissionName: JungleQuest
     Quests:
-    - questName: 'The Bane of the Afflicted: A Hero''s Descent'
+    - questName: No masks allowed
       questDescription: "A recent outbreak of some weird disease has caused the townsfolk
         to go insane. Unfortunately we have no cure and their disease will lead to
         \ta painful death. Hero, I know this is a terrible task to ask of you, but
@@ -183,6 +217,11 @@ MonoBehaviour:
         but I doubt I'd be needed anyway. \tTread carefully hero, only a fool would
         underestimate the undead. Kill as many of them as you'd like, just make sure
         you don't forget your \t\tmain goal. "
+      Biomes:
+      - Jungle
+      successAttempts: 0
+      timeout: 0
+      successOnTimeout: 0
       BaseSuccessRate: 0.7214161
       AbilityModifiers:
       - Type: 2
@@ -197,10 +236,10 @@ MonoBehaviour:
       - Type: 3
         Modifier: 1.116034
       questPosition: {x: 0, y: 0, z: 0}
-      Biomes:
-      - Jungle
       questState: 0
-  - MissionName: 
+      adventureGroup: {fileID: 0}
+    RecurrenceType: 0
+  - MissionName: GrassHopping
     Quests:
     - questName: plants or zombies?- it seems some of undeads are navigating to grass
         fields, help citizens to defend themselves.
@@ -210,6 +249,11 @@ MonoBehaviour:
         Please, could you help me with some of my tasks? I''m afraid my farm would
         collapse without your help.  I''m happy to say I''ll be able to reward you
         handsomely for your troubles. '
+      Biomes:
+      - Grassland
+      successAttempts: 0
+      timeout: 0
+      successOnTimeout: 0
       BaseSuccessRate: 0.7214161
       AbilityModifiers:
       - Type: 2
@@ -222,15 +266,19 @@ MonoBehaviour:
       - Type: 4
         Modifier: 1.116034
       questPosition: {x: 0, y: 0, z: 0}
-      Biomes:
-      - Grassland
       questState: 0
+      adventureGroup: {fileID: 0}
     - questName: 'Traveler''s Request: "The Silly Seeker''s Sought-After Squirrel"
         - another weird request from this village, be careful with those crazy men.'
       questDescription: "Dear traveler, I have an utterly preposterous and amusing
         request to make of you. Our whimsical town's most eccentric resident, known
         as the Silly Seeker, has set their heart on capturing a truly peculiar creature\u2014the
         elusive, mischievous, and outrageously comedic tap-dancing squirrel!"
+      Biomes:
+      - Grassland
+      successAttempts: 0
+      timeout: 0
+      successOnTimeout: 0
       BaseSuccessRate: 0.7214161
       AbilityModifiers:
       - Type: 2
@@ -243,16 +291,21 @@ MonoBehaviour:
       - Type: 3
         Modifier: 1.116034
       questPosition: {x: 0, y: 0, z: 0}
-      Biomes:
-      - Grassland
       questState: 0
-  - MissionName: 
+      adventureGroup: {fileID: 0}
+    RecurrenceType: 1
+  - MissionName: JourneyAcross
     Quests:
     - questName: Sand is not sweet
       questDescription: 'In the heart of the scorching desert, rumors whisper of
         a hidden oasis that holds ancient wisdom and untold treasures. Your mission
         is to navigate the blistering dunes, decode enigmatic clues, and unlock the
         secrets of this concealed sanctuary. Find the gold lizard. '
+      Biomes:
+      - Desert
+      successAttempts: 0
+      timeout: 0
+      successOnTimeout: 0
       BaseSuccessRate: 0.60316545
       AbilityModifiers:
       - Type: 1
@@ -263,9 +316,8 @@ MonoBehaviour:
       - Type: 3
         Modifier: 1.1940929
       questPosition: {x: 0, y: 0, z: 0}
-      Biomes:
-      - Desert
       questState: 0
+      adventureGroup: {fileID: 0}
     - questName: "Or they\u2019ll drown in their own tears"
       questDescription: We've been struck by a dry spell, no rain has touched our
         lands for months and we're starting to feel its toll. Many of us are already
@@ -273,6 +325,13 @@ MonoBehaviour:
         a matter of days. Hero, please join me to the water pools, they're our last
         hope. If we bring 4 donkeys who should be able to carry plenty of water to
         at least save us for a while.
+      Biomes:
+      - Jungle
+      - Forest
+      - Lake
+      successAttempts: 0
+      timeout: 0
+      successOnTimeout: 0
       BaseSuccessRate: 0.6709784
       AbilityModifiers:
       - Type: 1
@@ -281,18 +340,27 @@ MonoBehaviour:
       - Type: 3
         Modifier: 1.1034129
       questPosition: {x: 0, y: 0, z: 0}
-      Biomes:
-      - Jungle
-      - Forest
-      - Lake
       questState: 0
-  - MissionName: 
+      adventureGroup: {fileID: 0}
+    RecurrenceType: 2
+  - MissionName: AllOverTheWorld
     Quests:
     - questName: it is not easy to bury a body
       questDescription: My husband has fallen ill, he won't wake up no matter what
         I do. I believe we need to make him drink tea brewed from silverleaf, but
         they only grow higher up the mountain and I cannot leave my husband's side.
         Please, hero, gather a handful of silverleaf as quick as you can.
+      Biomes:
+      - Jungle
+      - Forest
+      - Lake
+      - Desert
+      - Grassland
+      - Mountains
+      - Tundra
+      successAttempts: 0
+      timeout: 0
+      successOnTimeout: 0
       BaseSuccessRate: 0.8795219
       AbilityModifiers:
       - Type: 1
@@ -305,6 +373,15 @@ MonoBehaviour:
       - Type: 3
         Modifier: 0.7878046
       questPosition: {x: 0, y: 0, z: 0}
+      questState: 0
+      adventureGroup: {fileID: 0}
+    - questName: it is not about the size
+      questDescription: We've been under constant harassment, our food has been stolen
+        along with our gold and we're powerless to do anything to stop them. Hero,
+        we need you to get rid of those cruel gnomes. I offer you my assistance,
+        but it's up to you if you want me to join you or not. We're counting on you
+        to deal with those gnomes. Kill as many of them as you'd like, just make
+        sure you don't forget your main goal.
       Biomes:
       - Jungle
       - Forest
@@ -313,14 +390,9 @@ MonoBehaviour:
       - Grassland
       - Mountains
       - Tundra
-      questState: 0
-    - questName: it is not about the size
-      questDescription: We've been under constant harassment, our food has been stolen
-        along with our gold and we're powerless to do anything to stop them. Hero,
-        we need you to get rid of those cruel gnomes. I offer you my assistance,
-        but it's up to you if you want me to join you or not. We're counting on you
-        to deal with those gnomes. Kill as many of them as you'd like, just make
-        sure you don't forget your main goal.
+      successAttempts: 0
+      timeout: 0
+      successOnTimeout: 0
       BaseSuccessRate: 0.8795219
       AbilityModifiers:
       - Type: 2
@@ -333,6 +405,10 @@ MonoBehaviour:
       - Type: 1
         Modifier: 0.922
       questPosition: {x: 0, y: 0, z: 0}
+      questState: 0
+      adventureGroup: {fileID: 0}
+    - questName: "don\u2019t repeat the mistakes of the past generations"
+      questDescription: "kill all the rats in \u201CThe safest village\u201D"
       Biomes:
       - Jungle
       - Forest
@@ -341,9 +417,9 @@ MonoBehaviour:
       - Grassland
       - Mountains
       - Tundra
-      questState: 0
-    - questName: "don\u2019t repeat the mistakes of the past generations"
-      questDescription: "kill all the rats in \u201CThe safest village\u201D"
+      successAttempts: 0
+      timeout: 0
+      successOnTimeout: 0
       BaseSuccessRate: 0.8795219
       AbilityModifiers:
       - Type: 2
@@ -354,15 +430,8 @@ MonoBehaviour:
       - Type: 2
         Modifier: 0.7878046
       questPosition: {x: 0, y: 0, z: 0}
-      Biomes:
-      - Jungle
-      - Forest
-      - Lake
-      - Desert
-      - Grassland
-      - Mountains
-      - Tundra
       questState: 0
+      adventureGroup: {fileID: 0}
     - questName: "crazy? I was crazy once\u2026"
       questDescription: 'A recent outbreak of some weird disease has caused the townsfolk
         to go insane. Unfortunately we have no cure and their disease will lead to
@@ -371,6 +440,17 @@ MonoBehaviour:
         we''ll get those filthy monsters. It''ll be dangerous, but I''m willing to
         come along if you need me to. Be strong and swift when fighting the monsters.
         Make sure they regret the day they ever set foot in our lives. '
+      Biomes:
+      - Jungle
+      - Forest
+      - Lake
+      - Desert
+      - Grassland
+      - Mountains
+      - Tundra
+      successAttempts: 0
+      timeout: 0
+      successOnTimeout: 0
       BaseSuccessRate: 0.8795219
       AbilityModifiers:
       - Type: 2
@@ -381,12 +461,6 @@ MonoBehaviour:
       - Type: 2
         Modifier: 0.7878046
       questPosition: {x: 0, y: 0, z: 0}
-      Biomes:
-      - Jungle
-      - Forest
-      - Lake
-      - Desert
-      - Grassland
-      - Mountains
-      - Tundra
       questState: 0
+      adventureGroup: {fileID: 0}
+    RecurrenceType: 2
