@@ -49,6 +49,9 @@ ExportedObj/
 
 *.dwlt
 
+# Obsidian
+**/.obsidian/workspace.json
+
 # Unity3D generated meta files
 *.pidb.meta
 *.pdb.meta
