@@ -220,9 +220,12 @@ public class GameMode : MonoBehaviour
     public void StartGame()
     {
         AudioRevolver.Fire(AudioNames.Crowd);
-        Wait.Run(1.0f, () => { 
+        Wait.Run(0.1f, () => {
             AdventurerManager.instance.StartSpawning();
             Map.instance.GenerateMap();
+        });
+        Wait.Run(1.0f, () => { 
+            UIGod.instance.mainFader.FadeOut();
             StartCoroutine(SpawnQuest());
         });
     }

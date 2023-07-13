@@ -55,7 +55,6 @@ public class UIGod : MonoBehaviour
         Menu.instance.HideMenu();
         innHUD.SetActive(true);
         GameMode.instance.StartGame();
-        mainFader.FadeOut();
     }
 
     public void BeginQuitingGame()
