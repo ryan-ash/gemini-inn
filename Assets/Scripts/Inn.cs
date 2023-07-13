@@ -47,6 +47,7 @@ public class Inn : MonoBehaviour
         targetCameraRotation = mapOpenedTransform.rotation;
         targetCameraPosition = mapOpenedTransform.position;
         isCameraMoving = true;
+        AudioRevolver.Fire(AudioNames.BirdsSound);
     }
 
     public void HideMap()
@@ -54,5 +55,6 @@ public class Inn : MonoBehaviour
         targetCameraRotation = originalCameraRotation;
         targetCameraPosition = originalCameraPosition;
         isCameraMoving = true;
+        AudioRevolver.Fire(AudioNames.BirdsSound + "/Stop");
     }
 }

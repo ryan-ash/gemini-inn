@@ -72,6 +72,7 @@ public class UIGod : MonoBehaviour
 
     public void OpenWindow(WindowType windowType)
     {
+        AudioRevolver.Fire(AudioNames.Click);
         CloseAllWindows();
         foreach (Window window in windows)
         {
