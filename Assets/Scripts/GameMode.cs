@@ -247,8 +247,11 @@ public class GameMode : MonoBehaviour
         newAdventurerGroupComponent.adventurers = new List<Adventurer>();
 
         selectedAdventurerGroup.AcceptQuest();
-        UpdateQuestCount();
         selectedQuestMarker.GetComponent<QuestInfo>().SetInProgress();
+
+        UpdateQuestCount();
+        UpdateAdventureCount();
+
         selectedQuest = null;
         isNegotiating = false;
         isChoosingAdventurers = false;
@@ -311,6 +314,17 @@ public class GameMode : MonoBehaviour
                 count += 1;
         }
         UIGod.instance.UpdateQuestCounter(count);
+    }
+
+    private void UpdateAdventureCount()
+    {
+        int count = 0;
+        foreach (Mission mission in activeMissions)
+        {
+            if (mission.GetAvailableQuest() == null)
+                count += 1;
+        }
+        UIGod.instance.UpdateAdventureCounter(count);
     }
 
     IEnumerator SpawnQuest()
