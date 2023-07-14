@@ -17,6 +17,12 @@ public class GameMode : MonoBehaviour
     [SerializeField] private GameObject _questRoot;
     [SerializeField] private bool useMockQuests = false;
 
+    [Header("Inn Generation")]
+    [SerializeField] private GameObject innPrefab;
+    [SerializeField] private GameObject innRoot;
+    [SerializeField] private Vector2Int innGenerationRange = new Vector2Int(20, 10);
+    [SerializeField] private Vector2Int innSandFillRange = new Vector2Int(5, 5);
+
     [Header("Quest Selection")]
     [SerializeField] private LayerMask questRaycastLayerMask;
 
@@ -54,6 +60,7 @@ public class GameMode : MonoBehaviour
     [HideInInspector] public AdventurerGroup selectedAdventurerGroup;
 
     private List<Transform> _generatedQuests = new List<Transform>();
+    private GameObject generatedInn;
 
     void Start()
     {
@@ -274,13 +281,37 @@ public class GameMode : MonoBehaviour
     {
         AudioRevolver.Fire(AudioNames.Crowd);
         Wait.Run(0.1f, () => {
-            AdventurerManager.instance.StartSpawning();
-            Map.instance.GenerateMap();
+            InitGame();
         });
         Wait.Run(1.0f, () => { 
             UIGod.instance.mainFader.FadeOut();
             StartCoroutine(SpawnQuest());
         });
+    }
+
+    private void InitGame()
+    {
+        AdventurerManager.instance.StartSpawning();
+        Map.instance.GenerateMap();
+        GenerateInn();
+    }
+
+    private void GenerateInn()
+    {
+        int halfWidth = Map.instance.width / 2;
+        int halfHeight = Map.instance.height / 2;
+
+        int xCoord = halfWidth + Random.Range(-innGenerationRange.x / 2, innGenerationRange.x / 2);
+        int yCoord = halfHeight + Random.Range(-innGenerationRange.y / 2, innGenerationRange.y / 2);
+        
+        Vector3 innPosition = Map.instance.GetTileLocalPosition(xCoord, yCoord);
+        generatedInn = Instantiate(innPrefab, innPosition, Quaternion.identity);
+        generatedInn.transform.SetParent(innRoot.transform, false);
+
+        int fillStartX = xCoord - innSandFillRange.x / 2;
+        int fillStartY = yCoord - innSandFillRange.y / 2;
+
+        // Map.instance.FillAreaWithBiom("Desert", fillStartX, fillStartY, innSandFillRange.x, innSandFillRange.y);
     }
 
     public void OnQuestUpdated(Quest quest)

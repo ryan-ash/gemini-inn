@@ -95,6 +95,14 @@ public class Map : MonoBehaviour
         for (int i = 0; i < filterIterations; ++i)
             FilterGeneratedMap();
 
+        UpdateTileCache();
+    }
+
+    public void UpdateTileCache()
+    {
+        biomeTilesCache.Clear();
+        int halfWidth = width / 2;
+        int halfHeight = height / 2;
         int halfDesiredWidth = questGenerationRange.x / 2;
         int halfDesiredHeight = questGenerationRange.y / 2;
         foreach (var tile in tiles)
@@ -123,6 +131,46 @@ public class Map : MonoBehaviour
                 biomeTilesCache.Add(currentTileBiomeName, cachedTiles);
             }
         }
+    }
+
+    public void FillAreaWithBiom(string biomeName, int x, int y, int width, int height)
+    {
+        BiomePreset biome = null;
+        foreach (BiomePreset biomeToCheck in biomes)
+        {
+            if (biomeToCheck.name == biomeName)
+            {
+                biome = biomeToCheck;
+                break;
+            }
+        }
+
+        if (biome == null)
+        {
+            Debug.LogError($"No biome with name '{biomeName}' found");
+            return;
+        }
+
+        for (int i = x; i < x + width; ++i)
+        {
+            for (int j = y; j < y + height; ++j)
+            {
+                tiles[i, j].selectedBiome = biome;
+                tiles[i, j].GetComponent<SpriteRenderer>().sprite = biome.GetTileSprite();
+            }
+        }
+
+        UpdateTileCache();
+    }
+
+    public Vector3 GetTilePosition(int x, int y)
+    {
+        return tiles[x, y].transform.position;
+    }
+
+    public Vector3 GetTileLocalPosition(int x, int y)
+    {
+        return tiles[x, y].transform.localPosition;
     }
 
     void FilterGeneratedMap()
