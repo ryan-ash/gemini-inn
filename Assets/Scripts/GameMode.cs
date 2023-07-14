@@ -203,25 +203,27 @@ public class GameMode : MonoBehaviour
             LeanTween.value(gameObject, 0.0f, 1.0f, rotationLengthBeforeMovingDuringNegotiation).setEase(LeanTweenType.easeInOutQuad).setOnUpdate((float value) => {
                 adventurer.transform.rotation = Quaternion.Lerp(adventurer.transform.rotation, Quaternion.LookRotation(directionToOwner), value);
             }).setOnComplete(() => {
+                float delayBeforeSpawningReplic = Random.Range(0.0f, randomReplicSpawnDelayDuringNegotiation) + mandatoryReplicSpawnDelayDuringNegotiation;
+                Wait.Run(delayBeforeSpawningReplic, () => {
+                    Transform adventurerTransform = adventurer.transform;
+                    UIGod.instance.SpawnAdventurerReplic(adventurerTransform);
+                });
+
                 Wait.Run(delayBeforeMovingDuringNegotiation, () => {
                     float moveTime = CalculateMoveTime();
                     adventurer.MoveTo(newPosition, moveTime);
-
-                    float delayBeforeSpawningReplic = Random.Range(0.0f, randomReplicSpawnDelayDuringNegotiation) + mandatoryReplicSpawnDelayDuringNegotiation;
-                    Wait.Run(delayBeforeSpawningReplic, () => {
-                        Transform adventurerTransform = adventurer.transform;
-                        UIGod.instance.SpawnAdventurerReplic(adventurerTransform);
-                    });
-
-                    Wait.Run(moveTime, () => {
-                        UIGod.instance.UpdateQuestTitle("");
-                        UIGod.instance.OpenWindowNegotiation();
-                    });
+                    UIGod.instance.UpdateQuestTitle("");
                 });
             });
                         
             selectedAdventurerGroup.LightDownAdventurerTable();
         }
+
+        float OpenWindowTime = rotationLengthBeforeMovingDuringNegotiation + CalculateMoveTime() + delayBeforeMovingDuringNegotiation;
+        Wait.Run(OpenWindowTime, () => {
+            UIGod.instance.OpenWindowNegotiation();
+        });
+
         isNegotiating = true;
     }
 

@@ -9,7 +9,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 162280093, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
       propertyPath: moveSpeed
-      value: 3
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 162280095, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
+      propertyPath: lifetime
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 162280095, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
       propertyPath: possibleColors.Array.size
@@ -102,6 +106,10 @@ PrefabInstance:
     - target: {fileID: 162280095, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
       propertyPath: possibleColors.Array.data[5].r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 162280099, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
+      propertyPath: fadeDuration
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 555825392611093036, guid: 4854c3becd44e0f4082bd920158faa4a, type: 3}
       propertyPath: m_Name

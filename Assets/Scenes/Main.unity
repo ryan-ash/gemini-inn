@@ -805,7 +805,7 @@ MonoBehaviour:
   delayBeforeMovingDuringNegotiation: 1
   moveTimeRandomizationDuringNegotiation: 0.5
   moveTimeDuringNegotiation: 1
-  mandatoryReplicSpawnDelayDuringNegotiation: 0.5
+  mandatoryReplicSpawnDelayDuringNegotiation: 0.1
   randomReplicSpawnDelayDuringNegotiation: 0.5
   _questEventPrefab: {fileID: 0}
   _questEventRoot: {fileID: 0}

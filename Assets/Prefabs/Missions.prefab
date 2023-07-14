@@ -48,7 +48,7 @@ MonoBehaviour:
   - MissionName: ForestCare
     Quests:
     - questName: No one asked
-      questDescription: ' Get rid of especially loud birds '
+      questDescription: 'Get rid of especially loud birds '
       Biomes:
       - Forest
       successAttempts: 0
@@ -124,8 +124,8 @@ MonoBehaviour:
       questPosition: {x: 0, y: 0, z: 0}
       questState: 0
       adventureGroup: {fileID: 0}
-    - questName: new generation
-      questDescription: 'each youngsters how to fight '
+    - questName: New generation
+      questDescription: 'Teach youngsters how to fight '
       Biomes:
       - Forest
       successAttempts: 0
@@ -241,14 +241,9 @@ MonoBehaviour:
     RecurrenceType: 0
   - MissionName: GrassHopping
     Quests:
-    - questName: plants or zombies?- it seems some of undeads are navigating to grass
-        fields, help citizens to defend themselves.
-      questDescription: 'Forgive me, hero. I need a favor of you.  There is so much
-        left to do, but so little time to do it in. I need to clean the stables,
-        I need to sow the fields, feed my livestock, hunt for food and so much more.
-        Please, could you help me with some of my tasks? I''m afraid my farm would
-        collapse without your help.  I''m happy to say I''ll be able to reward you
-        handsomely for your troubles. '
+    - questName: Plants or zombies?
+      questDescription: It seems some of the undeads are navigating to grass fields,
+        help citizens to defend themselves.
       Biomes:
       - Grassland
       successAttempts: 0
@@ -345,7 +340,7 @@ MonoBehaviour:
     RecurrenceType: 2
   - MissionName: AllOverTheWorld
     Quests:
-    - questName: it is not easy to bury a body
+    - questName: It is not easy to bury a body
       questDescription: My husband has fallen ill, he won't wake up no matter what
         I do. I believe we need to make him drink tea brewed from silverleaf, but
         they only grow higher up the mountain and I cannot leave my husband's side.
@@ -407,8 +402,8 @@ MonoBehaviour:
       questPosition: {x: 0, y: 0, z: 0}
       questState: 0
       adventureGroup: {fileID: 0}
-    - questName: "don\u2019t repeat the mistakes of the past generations"
-      questDescription: "kill all the rats in \u201CThe safest village\u201D"
+    - questName: "Don\u2019t repeat the mistakes of the past generations"
+      questDescription: "Kill all the rats in \u201CThe safest village\u201D"
       Biomes:
       - Jungle
       - Forest
@@ -432,7 +427,7 @@ MonoBehaviour:
       questPosition: {x: 0, y: 0, z: 0}
       questState: 0
       adventureGroup: {fileID: 0}
-    - questName: "crazy? I was crazy once\u2026"
+    - questName: "Crazy? I was crazy once\u2026"
       questDescription: 'A recent outbreak of some weird disease has caused the townsfolk
         to go insane. Unfortunately we have no cure and their disease will lead to
         a painful death. Hero, I know this is a terrible task to ask of you, but
