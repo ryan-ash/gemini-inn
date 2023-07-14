@@ -601,9 +601,7 @@ MonoBehaviour:
     BaseSuccessRate: 1
     AbilityModifiers: []
     StatModifiers: []
-    questPosition: {x: 0, y: 0, z: 0}
     questState: 0
-    adventureGroup: {fileID: 0}
 --- !u!65 &4916957017600819496
 BoxCollider:
   m_ObjectHideFlags: 0
