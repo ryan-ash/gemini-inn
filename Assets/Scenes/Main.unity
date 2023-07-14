@@ -824,9 +824,7 @@ MonoBehaviour:
     BaseSuccessRate: 1
     AbilityModifiers: []
     StatModifiers: []
-    questPosition: {x: 0, y: 0, z: 0}
     questState: 0
-    adventureGroup: {fileID: 0}
   selectedAdventurerGroup: {fileID: 0}
 --- !u!4 &85088161
 Transform:
@@ -861,6 +859,9 @@ MonoBehaviour:
     hotspot: {x: 20, y: 4}
   - Name: Hover
     cursorTexture: {fileID: 2800000, guid: 42ec8a0e710138343a271d732299cfb6, type: 3}
+    hotspot: {x: 19, y: 6}
+  - Name: HoverSpecial
+    cursorTexture: {fileID: 2800000, guid: b3c4e51cb7664a046a1e71b891a91296, type: 3}
     hotspot: {x: 19, y: 6}
   - Name: Fist
     cursorTexture: {fileID: 2800000, guid: d0bd63dc4e8d4a845a0f198c39644e18, type: 3}

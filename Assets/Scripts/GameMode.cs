@@ -320,7 +320,7 @@ public class GameMode : MonoBehaviour
             List<Mission> bannedMissions = new List<Mission>();
             if (Random.Range(0.0f, 1.0f) <= _questGenerationChance)
             {
-                Mission mission = useMockQuests ? Mission.GenerateRandomMission() : Mission.GrabRandomMissionFromDB();
+                Mission mission = useMockQuests ? Mission.GenerateRandomMission() : Deep.Clone(Mission.GrabRandomMissionFromDB());
 
                 if (!useMockQuests && bannedMissions.Count == MissionsDatabase.instance.Missions.Count)
                 {

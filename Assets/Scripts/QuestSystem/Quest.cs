@@ -28,10 +28,10 @@ public class Quest
     public List<AbilityModifier> AbilityModifiers;
     public List<StatModifier> StatModifiers;
 
-    [HideInInspector] public Vector3 questPosition;
+    [System.NonSerialized] [HideInInspector] public Vector3 questPosition;
     [HideInInspector] public QuestState questState = QuestState.NotStarted;
 
-    [HideInInspector] public AdventurerGroup adventureGroup;
+    [System.NonSerialized] [HideInInspector] public AdventurerGroup adventureGroup;
 
     public Quest()
     {
