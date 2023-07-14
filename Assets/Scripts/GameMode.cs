@@ -84,7 +84,7 @@ public class GameMode : MonoBehaviour
             {
                 QuestInfo questInfo = hit.transform.gameObject.GetComponentInParent<QuestInfo>();
                 GameObject potentialNewSelection = questInfo.gameObject;
-                if (potentialNewSelection != _consideredQuestMarker)
+                if (potentialNewSelection != _consideredQuestMarker && questInfo.quest.questState == QuestState.NotStarted)
                 {
                     _consideredQuestMarker = potentialNewSelection;
                     _consideredQuest = questInfo.quest;
@@ -246,6 +246,8 @@ public class GameMode : MonoBehaviour
         newAdventurerGroupComponent.adventurers = new List<Adventurer>();
 
         selectedAdventurerGroup.AcceptQuest();
+        UpdateQuestCount();
+        selectedQuestMarker.GetComponent<QuestInfo>().SetInProgress();
         selectedQuest = null;
         isNegotiating = false;
         isChoosingAdventurers = false;
@@ -297,6 +299,17 @@ public class GameMode : MonoBehaviour
         }
 
         return true;
+    }
+
+    private void UpdateQuestCount()
+    {
+        int count = 0;
+        foreach (Mission mission in activeMissions)
+        {
+            if (mission.GetAvailableQuest() != null)
+                count += 1;
+        }
+        UIGod.instance.UpdateQuestCounter(count);
     }
 
     IEnumerator SpawnQuest()
@@ -392,7 +405,7 @@ public class GameMode : MonoBehaviour
                 _generatedQuests.Add(questVisual.transform);
 
                 activeMissions.Add(mission);
-                UIGod.instance.UpdateQuestCounter(activeMissions.Count);
+                UpdateQuestCount();
             }
 
             yield return new WaitForSeconds(_questGenerationInterval);

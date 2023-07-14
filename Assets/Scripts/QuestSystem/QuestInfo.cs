@@ -18,6 +18,7 @@ public class QuestInfo : MonoBehaviour
     private bool isInfoAnimating = false;
     private BoxCollider openCollider;
     private BoxCollider closeCollider;
+    private Animator animator;
 
     public void ShowInfo()
     {
@@ -35,6 +36,18 @@ public class QuestInfo : MonoBehaviour
         CursorSetter.SetDefaultCursor();
     }
 
+    public void SetInProgress()
+    {
+        animator.SetBool("QuestInProgress", true);
+        questName.color = Color.yellow;
+    }
+
+    public void SetOver()
+    {
+        animator.SetBool("QuestOver", true);
+        questName.color = Color.gray;
+    }
+
     void FillData()
     {
         questName.text = quest.questName;
@@ -44,6 +57,7 @@ public class QuestInfo : MonoBehaviour
     void Start()
     {
         openCollider = infoCanvas.gameObject.GetComponent<BoxCollider>();
+        animator = GetComponent<Animator>();
         infoCanvas.alpha = 0.0f;
     }
 

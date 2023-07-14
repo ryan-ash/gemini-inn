@@ -144,7 +144,7 @@ public class AdventurerGroup : MonoBehaviour
     public void AcceptQuest()
     {
         groupState = GroupState.OnRoadToQuest;
-        var quest = GameMode.instance.selectedQuest;
+        quest = GameMode.instance.selectedQuest;
         OnGroupStateUpdated();
                 
         for (int i = 0; i < adventurers.Count; i++)
