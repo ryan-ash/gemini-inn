@@ -172,6 +172,7 @@ public class GameMode : MonoBehaviour
         isMapOpen = !isMapOpen;
         if (isMapOpen)
         {
+            UIGod.instance.UpdateQuestTitle("");
             Inn.instance.ShowMap();
             Map.instance.ShowMap();
         }

@@ -56,6 +56,15 @@ public class CursorSetter : MonoBehaviour
         }
     }
 
+    public static void SetHoverSpecialCursor(bool isPriority = false)
+    {
+        if (isPriority || !instance.isPriorityCursor)
+        {
+            SetCursor("HoverSpecial");
+            instance.isPriorityCursor = isPriority;
+        }
+    }
+
     public static void SetFistCursor(bool isPriority = false)
     {
         if (isPriority || !instance.isPriorityCursor)
