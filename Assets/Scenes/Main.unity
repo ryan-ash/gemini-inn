@@ -807,6 +807,7 @@ MonoBehaviour:
   moveTimeDuringNegotiation: 1
   mandatoryReplicSpawnDelayDuringNegotiation: 0.1
   randomReplicSpawnDelayDuringNegotiation: 0.5
+  callbackReplicOffset: {x: 0, y: 2, z: -1}
   _questEventPrefab: {fileID: 0}
   _questEventRoot: {fileID: 0}
   activeMissions: []

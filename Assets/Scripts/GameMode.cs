@@ -30,6 +30,7 @@ public class GameMode : MonoBehaviour
     [SerializeField] private float moveTimeDuringNegotiation = 1.0f;
     [SerializeField] private float mandatoryReplicSpawnDelayDuringNegotiation = 0.5f;
     [SerializeField] private float randomReplicSpawnDelayDuringNegotiation = 0.5f;
+    [SerializeField] private Vector3 callbackReplicOffset = new Vector3(0.0f, 0.0f, 0.0f);
 
     [Header("Quest Reporting")]
     [SerializeField] private GameObject _questEventPrefab;
@@ -71,6 +72,7 @@ public class GameMode : MonoBehaviour
             {
                 selectedQuestMarker = _consideredQuestMarker;
                 selectedQuest = _consideredQuest;
+                ToggleMap();
                 StartChoosingAdventurers();
                 return;
             }
@@ -111,11 +113,12 @@ public class GameMode : MonoBehaviour
                 if (_consideredAdventurerGroup != null && _consideredAdventurerGroup.adventurers.Count > 0)
                 {
                     selectedAdventurerGroup = _consideredAdventurerGroup;
-                    bool useFistNotBribe = Random.Range(0.0f, 1.0f) <= 0.5f;
-                    if (useFistNotBribe)
-                        CursorSetter.SetFistCursor(true);
-                    else
-                        CursorSetter.SetBribeCursor(true);
+                    // bool useFistNotBribe = Random.Range(0.0f, 1.0f) <= 0.5f;
+                    // if (useFistNotBribe)
+                    //     CursorSetter.SetFistCursor(true);
+                    // else
+                    //     CursorSetter.SetBribeCursor(true);
+                    CursorSetter.ResetPriorityCursor();
                     MoveSelectedAdventurersToNegotiation();
                 }
                 else if (_consideredAdventurerGroup == null)
@@ -183,7 +186,6 @@ public class GameMode : MonoBehaviour
 
     public void StartChoosingAdventurers()
     {
-        ToggleMap();
         CursorSetter.SetHoverCursor(true);
         isChoosingAdventurers = true;
         UIGod.instance.UpdateQuestTitle(selectedQuest.questName);
@@ -206,7 +208,8 @@ public class GameMode : MonoBehaviour
                 float delayBeforeSpawningReplic = Random.Range(0.0f, randomReplicSpawnDelayDuringNegotiation) + mandatoryReplicSpawnDelayDuringNegotiation;
                 Wait.Run(delayBeforeSpawningReplic, () => {
                     Transform adventurerTransform = adventurer.transform;
-                    UIGod.instance.SpawnAdventurerReplic(adventurerTransform);
+                    Vector3 spawnPosition = adventurerTransform.position + callbackReplicOffset;
+                    UIGod.instance.SpawnAdventurerReplic(spawnPosition);
                 });
 
                 Wait.Run(delayBeforeMovingDuringNegotiation, () => {
@@ -252,8 +255,7 @@ public class GameMode : MonoBehaviour
     public void DisagreeToQuest()
     {
         isNegotiating = false;
-        isChoosingAdventurers = true;
-        UIGod.instance.UpdateQuestTitle(selectedQuest.questName);
+        StartChoosingAdventurers();
         foreach (Adventurer adventurer in selectedAdventurerGroup.adventurers)
         {
             float moveTime = CalculateMoveTime();
