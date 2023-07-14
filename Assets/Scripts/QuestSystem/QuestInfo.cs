@@ -9,6 +9,7 @@ public class QuestInfo : MonoBehaviour
     public CanvasGroup infoCanvas;
     public Text questName;
     public Text questDescription;
+    public GameObject questInProgress;
 
     [Header("Settings")]
     public float fadeDuration = 0.5f;
@@ -40,12 +41,14 @@ public class QuestInfo : MonoBehaviour
     {
         animator.SetBool("QuestInProgress", true);
         questName.color = Color.yellow;
+        questInProgress.SetActive(true);
     }
 
     public void SetOver()
     {
         animator.SetBool("QuestOver", true);
         questName.color = Color.gray;
+        questInProgress.SetActive(false);
     }
 
     void FillData()

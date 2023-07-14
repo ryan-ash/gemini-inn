@@ -359,6 +359,11 @@ public class GameMode : MonoBehaviour
                 }
 
                 Quest newAvailableQuest = mission.GetAvailableQuest();
+                if (newAvailableQuest == null)
+                {
+                    Debug.LogWarning("No available quests for mission: " + mission.MissionName);
+                    continue;
+                }
 
                 var availableBiomeTiles = Map.GetBiomeTiles(newAvailableQuest.Biomes.ToArray());
                 if (availableBiomeTiles.Count == 0)
