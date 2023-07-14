@@ -11,6 +11,7 @@ public class UIGod : MonoBehaviour
     [Header("Mapping")]
     public Text topTitle;
     public Text questCounter;
+    public Text adventureCounter;
     public GameObject innHUD;
     public Fader mainFader;
     public Transform ownerReplicsRoot;
@@ -51,6 +52,12 @@ public class UIGod : MonoBehaviour
     {
         AudioRevolver.Fire(AudioNames.PencilWriting);
         questCounter.text = newCount.ToString();
+    }
+
+    public void UpdateAdventureCounter(int newCount)
+    {
+        // AudioRevolver.Fire(AudioNames.PencilWriting);
+        adventureCounter.text = newCount.ToString();
     }
 
     public void BeginStartingGame()
