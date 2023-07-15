@@ -15,6 +15,7 @@ public class Replic : MonoBehaviour
     private Outline outline;
     private Text text;
     private TextBuilder textBuilder;
+    private TextWriter textWriter;
 
     void Start()
     {
@@ -24,6 +25,7 @@ public class Replic : MonoBehaviour
         outline = GetComponent<Outline>();
         text = GetComponentInChildren<Text>();
         textBuilder = GetComponentInChildren<TextBuilder>();
+        textWriter = GetComponentInChildren<TextWriter>();
         if (possibleColors.Count > 0)
         {
             UpdateColor();
@@ -45,7 +47,14 @@ public class Replic : MonoBehaviour
     public void BuildText()
     {
         var newReplic = textBuilder.BuildText();
-        text.text = newReplic;
+        if (textWriter != null)
+        {
+            textWriter.Write(newReplic);
+        }
+        else
+        {
+            text.text = newReplic;
+        }
     }
 
     public void UpdateColor()

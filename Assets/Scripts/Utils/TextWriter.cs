@@ -8,6 +8,7 @@ public class TextWriter : MonoBehaviour
 {
     public float letterTime = 0.1f;
     public bool wipeOnChange = false;
+    public bool fillWithSpaces = false;
 
     private Text MyText {
         get {
@@ -23,34 +24,46 @@ public class TextWriter : MonoBehaviour
     private Text myText;
 
     private string targetText = "";
+    private string currentText = "";
 
     public void Write(string text, bool instantUpdate = false)
     {
         if (wipeOnChange)
         {
-            MyText.text = "";
+            UpdateText("");
         }
         targetText = text;
         if (instantUpdate)
         {
-            MyText.text = targetText;
+            UpdateText(targetText);
             return;
         }
         StopAllCoroutines();
         StartCoroutine("WriteText");
     }
 
+    private void UpdateText(string newText)
+    {
+        currentText = newText;
+        string paddedText = currentText;
+        if (fillWithSpaces)
+        {
+            paddedText = currentText.PadRight(targetText.Length, ' ');
+        }
+        MyText.text = paddedText;
+    }
+
     IEnumerator WriteText()
     {
         while (MyText.text != targetText)
         {
-            if (targetText.Contains(MyText.text) || MyText.text == "")
+            if (targetText.Contains(currentText) || currentText == "")
             {
-                MyText.text += targetText[MyText.text.Length];
+                UpdateText(currentText + targetText[currentText.Length]);
             }
             else
             {
-                MyText.text = MyText.text.Substring(0, MyText.text.Length - 1);
+                UpdateText(currentText.Substring(0, currentText.Length - 1));
             }
             yield return new WaitForSeconds(letterTime);
         }
