@@ -21,8 +21,8 @@ public class UIGod : MonoBehaviour
     public Transform historyRoot;
 
     [Header("Negotiation")]
-    public Text questTitle;
-    public Text questDescription;
+    public TextWriter questTitle;
+    public TextWriter questDescription;
     public Text groupName;
 
     [Header("Prefabs")]
@@ -145,8 +145,8 @@ public class UIGod : MonoBehaviour
 
     public void OpenWindowNegotiation()
     {
-        questTitle.text = GameMode.instance.selectedQuest.questName;
-        questDescription.text = GameMode.instance.selectedQuest.questDescription;
+        questTitle.Write(GameMode.instance.selectedQuest.questName);
+        questDescription.Write(GameMode.instance.selectedQuest.questDescription);
         OpenWindow(WindowType.Negotiation);
     }
 

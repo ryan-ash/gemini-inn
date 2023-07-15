@@ -380,10 +380,12 @@ public class GameMode : MonoBehaviour
     public void StartGame()
     {
         AudioRevolver.Fire(AudioNames.Crowd);
+        UIGod.instance.topTitleWriter.Write("", true);
         Wait.Run(0.1f, () => {
             InitGame();
         });
         Wait.Run(1.0f, () => { 
+            UIGod.instance.topTitleWriter.Write("Send adventurers on quests!");
             UIGod.instance.mainFader.FadeOut();
             StartCoroutine(SpawnQuest());
         });

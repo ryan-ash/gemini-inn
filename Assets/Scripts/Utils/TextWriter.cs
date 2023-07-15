@@ -10,7 +10,7 @@ public class TextWriter : MonoBehaviour
     public bool wipeOnChange = false;
     public bool fillWithSpaces = false;
 
-    private Text MyText {
+    public Text MyText {
         get {
             if (myText == null) {
                 myText = GetComponent<Text>();
