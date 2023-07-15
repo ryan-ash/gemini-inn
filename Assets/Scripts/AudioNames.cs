@@ -1,4 +1,5 @@
 public class AudioNames {
+    public static string QuestGoing = "QuestGoing";
     public static string QuestFailed = "QuestFailed";
     public static string QuestCompleted = "QuestCompleted";
     public static string Footsteps = "Footsteps";

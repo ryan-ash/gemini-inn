@@ -273,6 +273,12 @@ public class GameMode : MonoBehaviour
         UpdateQuestCount();
         UpdateAdventureCount();
 
+        AudioRevolver.Fire(AudioNames.QuestGoing);
+        Wait.Run(2.0f, () => {
+            AudioRevolver.Fire(AudioNames.DoorSquek);
+            AudioRevolver.Fire(AudioNames.DoorClosing);
+        });
+
         selectedQuest = null;
         isNegotiating = false;
         isChoosingAdventurers = false;
