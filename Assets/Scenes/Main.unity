@@ -23814,7 +23814,7 @@ MonoBehaviour:
   height: 90
   scale: 1
   offset: {x: 0, y: 0}
-  questGenerationRange: {x: 100, y: 60}
+  questGenerationRange: {x: 80, y: 45}
   heightWaves:
   - seed: 56
     seedRandomness: 0
