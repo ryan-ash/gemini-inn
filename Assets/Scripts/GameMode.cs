@@ -80,6 +80,7 @@ public class GameMode : MonoBehaviour
             {
                 selectedQuestMarker = _consideredQuestMarker;
                 selectedQuest = _consideredQuest;
+                selectedQuestMarker.GetComponent<QuestInfo>().HideInfo();
 
                 switch (selectedQuest.questState)
                 {

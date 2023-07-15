@@ -9,12 +9,15 @@ public class Inn : MonoBehaviour
     [Header("Camera")]
     public Transform mapOpenedTransform;
     public float cameraMoveSpeed = 1.0f;
+    public bool trackMouse = false;
+    public Vector2 trackMouseAngleRange = new Vector2(20.0f, 10.0f);
 
     private Vector3 originalCameraPosition;
     private Quaternion originalCameraRotation;
 
     private Vector3 targetCameraPosition;
     private Quaternion targetCameraRotation;
+    private Quaternion modifiedCameraRotation;
 
     [HideInInspector] public bool isCameraMoving = false;
 
@@ -26,27 +29,34 @@ public class Inn : MonoBehaviour
 
         originalCameraPosition = Camera.main.transform.position;
         originalCameraRotation = Camera.main.transform.rotation;
+        targetCameraPosition = originalCameraPosition;
+        targetCameraRotation = originalCameraRotation;
     }
 
     void Update()
     {
-        if (!isCameraMoving)
+        if (!isCameraMoving && !trackMouse)
             return;
 
         Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, targetCameraPosition, Time.deltaTime * cameraMoveSpeed);
-        Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, targetCameraRotation, Time.deltaTime * cameraMoveSpeed);
+        Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, modifiedCameraRotation, Time.deltaTime * cameraMoveSpeed);
 
-        if (Vector3.Distance(Camera.main.transform.position, targetCameraPosition) < 0.01f && Quaternion.Angle(Camera.main.transform.rotation, targetCameraRotation) < 0.01f)
+        if (Vector3.Distance(Camera.main.transform.position, targetCameraPosition) < 0.01f && (Quaternion.Angle(Camera.main.transform.rotation, modifiedCameraRotation) < 0.01f && !trackMouse))
         {
             Camera.main.transform.position = targetCameraPosition;
-            Camera.main.transform.rotation = targetCameraRotation;
+            Camera.main.transform.rotation = modifiedCameraRotation;
             isCameraMoving = false;
+        }
+
+        if (trackMouse && !isMapOpened)
+        {
+            UpdateCameraRotation(originalCameraRotation);
         }
     }
 
     public void ShowMap()
     {
-        targetCameraRotation = mapOpenedTransform.rotation;
+        UpdateCameraRotation(mapOpenedTransform.rotation, true);
         targetCameraPosition = mapOpenedTransform.position;
         isCameraMoving = true;
         AudioRevolver.Fire(AudioNames.BirdsSound);
@@ -55,11 +65,27 @@ public class Inn : MonoBehaviour
 
     public void HideMap()
     {
-        targetCameraRotation = originalCameraRotation;
+        UpdateCameraRotation(originalCameraRotation);
         targetCameraPosition = originalCameraPosition;
         isCameraMoving = true;
         AudioRevolver.Fire(AudioNames.BirdsSound + "/Stop");
         isMapOpened = false;
+    }
+
+    private void UpdateCameraRotation(Quaternion targetRotation, bool ignoreMouse = false)
+    {
+        targetCameraRotation = targetRotation;
+        modifiedCameraRotation = targetRotation;
+        if (trackMouse && !ignoreMouse)
+        {
+            Vector3 mousePosition = Input.mousePosition;
+            float x = mousePosition.x / Screen.width;
+            float y = 1.0f - mousePosition.y / Screen.height;
+            float xAngle = Mathf.Lerp(-trackMouseAngleRange.x, trackMouseAngleRange.x, x);
+            float yAngle = Mathf.Lerp(-trackMouseAngleRange.y, trackMouseAngleRange.y, y);
+            modifiedCameraRotation = Quaternion.Euler(yAngle, xAngle, 0.0f);
+        }
+        // isCameraMoving = true;
     }
 
     public bool IsCloserToTarget()
