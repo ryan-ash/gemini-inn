@@ -97,6 +97,16 @@ public class QuestInfo : MonoBehaviour
         questSlider.value = 1.0f;
     }
 
+    public void UpdateQuestSlider()
+    {
+        // update quest slider
+        questSlider.value = 
+            isQuestInProgress ? questTimer / questDuration : 
+            isQuestOver ? 1.0f :
+            isQuestTimeoutActive ? 1.0f - questTimer / questTimeout :
+            0.0f;
+    }
+
     void FillData()
     {
         questName.text = quest.questName;
@@ -112,6 +122,13 @@ public class QuestInfo : MonoBehaviour
 
     void Update()
     {
+        // move timer logic to game mode
+        if (GameMode.IsTimersRunning() && !isQuestOver)
+        {
+            questTimer += Time.deltaTime;
+            UpdateQuestSlider();
+        }
+
         if (!isInfoAnimating)
             return;
 
@@ -127,30 +144,6 @@ public class QuestInfo : MonoBehaviour
             if (!isInfoOpen)
             {
                 openCollider.gameObject.SetActive(false);
-            }
-        }
-
-        // move timer logic to game mode
-
-        if (!GameMode.IsTimersRunning() || isQuestOver)
-            return;
-
-        questTimer += Time.deltaTime;
-
-        if (isQuestTimeoutActive)
-        {
-            questSlider.value = 1.0f - (questTimer / questTimeout);
-            if (questTimer >= questTimeout)
-            {
-                SetOver();
-            }
-        }
-        else if (isQuestInProgress)
-        {
-            questSlider.value = questTimer / questDuration;
-            if (questTimer >= questDuration)
-            {
-                // SetOver(true);
             }
         }
     }

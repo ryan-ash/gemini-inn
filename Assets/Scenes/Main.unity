@@ -787,7 +787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _questGenerationInterval: 10
-  _questGenerationChance: 0.33
+  _questGenerationChance: 0.5
   _questSafeDistance: 5
   _questTileRetryThreshold: 0.5
   _questVisualPrefab: {fileID: 8620448564361897051, guid: 9e40f1a99f1307c4d86f5de1eeab24d3, type: 3}
