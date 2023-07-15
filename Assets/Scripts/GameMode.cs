@@ -43,7 +43,6 @@ public class GameMode : MonoBehaviour
     [SerializeField] private GameObject _questEventRoot;
 
     private bool isMapOpen = false;
-    private bool scheduledHide = false;
     private bool isChoosingAdventurers = false;
     private bool isNegotiating = false;
 
@@ -80,36 +79,18 @@ public class GameMode : MonoBehaviour
                 selectedQuestMarker = _consideredQuestMarker;
                 selectedQuest = _consideredQuest;
                 ToggleMap();
-                StartChoosingAdventurers();
+                if (selectedQuest.questState == QuestState.NotStarted)
+                {
+                    StartChoosingAdventurers();
+                }
+                else
+                {
+                    UIGod.instance.OpenWindowQuests();
+                }
                 return;
             }
 
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            float maxDistance = 100.0f;
-            if (Physics.Raycast(ray, out hit, maxDistance, questRaycastLayerMask))
-            {
-                QuestInfo questInfo = hit.transform.gameObject.GetComponentInParent<QuestInfo>();
-                GameObject potentialNewSelection = questInfo.gameObject;
-                if (potentialNewSelection != _consideredQuestMarker && questInfo.quest.questState == QuestState.NotStarted)
-                {
-                    _consideredQuestMarker = potentialNewSelection;
-                    _consideredQuest = questInfo.quest;
-                    questInfo.ShowInfo();
-                }
-            }
-            else if (_consideredQuestMarker != null && !scheduledHide)
-            {
-                scheduledHide = true;
-            }
-            else if (_consideredQuestMarker != null && scheduledHide)
-            {
-                scheduledHide = false;
-                QuestInfo questInfo = _consideredQuestMarker.GetComponent<QuestInfo>();
-                questInfo.HideInfo();
-                _consideredQuestMarker = null;
-                _consideredQuest = null;
-            }
+            TrackQuestUnderMouse();
         }
 
         if (isChoosingAdventurers)
@@ -120,11 +101,6 @@ public class GameMode : MonoBehaviour
                 if (_consideredAdventurerGroup != null && _consideredAdventurerGroup.adventurers.Count > 0)
                 {
                     selectedAdventurerGroup = _consideredAdventurerGroup;
-                    // bool useFistNotBribe = Random.Range(0.0f, 1.0f) <= 0.5f;
-                    // if (useFistNotBribe)
-                    //     CursorSetter.SetFistCursor(true);
-                    // else
-                    //     CursorSetter.SetBribeCursor(true);
                     CursorSetter.ResetPriorityCursor();
                     MoveSelectedAdventurersToNegotiation();
                 }
@@ -142,30 +118,60 @@ public class GameMode : MonoBehaviour
                 return;
             }
 
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            float maxDistance = 100.0f;
-            if (Physics.Raycast(ray, out hit, maxDistance, adventurerRaycastLayerMask))
-            {
-                AdventurerGroup adventurerGroup = hit.transform.gameObject.GetComponent<AdventurerGroup>();
-                if (adventurerGroup != _consideredAdventurerGroup)
-                {
-                    if (_consideredAdventurerGroup != null)
-                        _consideredAdventurerGroup.UnfocusAdventurerTable();
-                    _consideredAdventurerGroup = adventurerGroup;
-                    adventurerGroup.FocusAdventurerTable();
-                }
-            }
-            else if (_consideredAdventurerGroup != null)
-            {
-                _consideredAdventurerGroup.UnfocusAdventurerTable();
-                _consideredAdventurerGroup = null;
-            }
+            TrackAdventureGroupUnderMouse();
         }
 
         if (isNegotiating)
         {
             // for now, only control negotiations through UI
+        }
+    }
+
+    private void TrackQuestUnderMouse()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        float maxDistance = 100.0f;
+        if (Physics.Raycast(ray, out hit, maxDistance, questRaycastLayerMask))
+        {
+            QuestInfo questInfo = hit.transform.gameObject.GetComponentInParent<QuestInfo>();
+            GameObject potentialNewSelection = questInfo.gameObject;
+            if (potentialNewSelection != _consideredQuestMarker)
+            {
+                _consideredQuestMarker = potentialNewSelection;
+                _consideredQuest = questInfo.GetQuest();
+                questInfo.ShowInfo();
+            }
+        }
+        else if (_consideredQuestMarker != null)
+        {
+            QuestInfo questInfo = _consideredQuestMarker.GetComponent<QuestInfo>();
+            questInfo.HideInfo();
+            _consideredQuestMarker = null;
+            _consideredQuest = null;
+        }
+    }
+
+    private void TrackAdventureGroupUnderMouse()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        float maxDistance = 100.0f;
+        if (Physics.Raycast(ray, out hit, maxDistance, adventurerRaycastLayerMask))
+        {
+            AdventurerGroup adventurerGroup = hit.transform.gameObject.GetComponent<AdventurerGroup>();
+            if (adventurerGroup != _consideredAdventurerGroup)
+            {
+                if (_consideredAdventurerGroup != null)
+                    _consideredAdventurerGroup.UnfocusAdventurerTable();
+                _consideredAdventurerGroup = adventurerGroup;
+                adventurerGroup.FocusAdventurerTable();
+            }
+        }
+        else if (_consideredAdventurerGroup != null)
+        {
+            _consideredAdventurerGroup.UnfocusAdventurerTable();
+            _consideredAdventurerGroup = null;
         }
     }
 
@@ -358,6 +364,12 @@ public class GameMode : MonoBehaviour
         UIGod.instance.UpdateAdventureCounter(count);
     }
 
+    public static bool IsTimersRunning()
+    {
+        // add conditions for timers if necessary (game pause? negotiation maybe?..)
+        return true;
+    }
+
     IEnumerator SpawnQuest()
     {
         while (true)
@@ -451,7 +463,7 @@ public class GameMode : MonoBehaviour
                 questVisual.transform.SetParent(_questRoot.transform, false);
 
                 QuestInfo questInfo = questVisual.GetComponent<QuestInfo>();
-                questInfo.quest = newAvailableQuest;
+                questInfo.SetQuest(newAvailableQuest);
 
                 _generatedQuests.Add(questVisual.transform);
 

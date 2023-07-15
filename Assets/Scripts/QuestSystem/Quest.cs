@@ -20,6 +20,7 @@ public class Quest
     public List<string> Biomes;
     public int successAttempts = 0;
     public float timeout = 0.0f;
+    public float baseDuration = 15.0f;
     public bool successOnTimeout = false;
 
     [Header("Quest Difficulty & Traits")]

@@ -787,7 +787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _questGenerationInterval: 10
-  _questGenerationChance: 1
+  _questGenerationChance: 0.33
   _questSafeDistance: 5
   _questTileRetryThreshold: 0.5
   _questVisualPrefab: {fileID: 8620448564361897051, guid: 9e40f1a99f1307c4d86f5de1eeab24d3, type: 3}
@@ -824,6 +824,7 @@ MonoBehaviour:
     Biomes: []
     successAttempts: 0
     timeout: 0
+    baseDuration: 15
     successOnTimeout: 0
     BaseSuccessRate: 1
     AbilityModifiers: []
@@ -26498,6 +26499,18 @@ PrefabInstance:
     - target: {fileID: 1466211590309657463, guid: 95601369d3b8d6746ad4c3e05b03f399, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1466211590309657464, guid: 95601369d3b8d6746ad4c3e05b03f399, type: 3}
+      propertyPath: Missions.Array.data[0].Quests.Array.data[0].timeout
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1466211590309657464, guid: 95601369d3b8d6746ad4c3e05b03f399, type: 3}
+      propertyPath: Missions.Array.data[1].Quests.Array.data[0].timeout
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1466211590309657464, guid: 95601369d3b8d6746ad4c3e05b03f399, type: 3}
+      propertyPath: Missions.Array.data[2].Quests.Array.data[0].timeout
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1466211590309657465, guid: 95601369d3b8d6746ad4c3e05b03f399, type: 3}
       propertyPath: m_Name
