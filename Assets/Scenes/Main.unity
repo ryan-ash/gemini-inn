@@ -745,7 +745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7957572c22bc51c4297efede4339fdc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _questGenerationInterval: 10
+  _questGenerationInterval: 5
   _questGenerationChance: 0.5
   _questSafeDistance: 5
   _questTileRetryThreshold: 0.5
@@ -23814,7 +23814,7 @@ MonoBehaviour:
   height: 90
   scale: 1
   offset: {x: 0, y: 0}
-  questGenerationRange: {x: 120, y: 70}
+  questGenerationRange: {x: 100, y: 60}
   heightWaves:
   - seed: 56
     seedRandomness: 0

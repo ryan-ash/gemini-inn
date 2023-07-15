@@ -602,7 +602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ae0aebf8e07d54394e44b7397998c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notStartedIcon: fa-exclamation
+  notStartedIcon: fa-caret-down
   notStartedColor: {r: 1, g: 1, b: 1, a: 1}
   onRoadIcon: fa-ellipsis-h
   onRoadColor: {r: 0.5019608, g: 1, b: 0.5019608, a: 1}
