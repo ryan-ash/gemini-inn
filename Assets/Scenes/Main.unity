@@ -1016,6 +1016,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapOpenedTransform: {fileID: 614014134}
   cameraMoveSpeed: 3
+  trackMouse: 1
+  trackMouseAngleRange: {x: 20, y: 10}
   isCameraMoving: 0
 --- !u!1001 &99812968
 PrefabInstance:
@@ -5128,6 +5130,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeWindow: {fileID: 0}
+  menuInitialTitle: Welcome to Gemini Inn!
+  innInitialTitle: Send adventurers to quests!
   topTitleWriter: {fileID: 425280769}
   questCounter: {fileID: 1285588429}
   adventureCounter: {fileID: 1990753914}

@@ -8,6 +8,10 @@ public class UIGod : MonoBehaviour
     public static UIGod instance;
     public Window activeWindow;
     
+    [Header("Texts")]
+    public string menuInitialTitle = "Welcome to Gemini Inn!";
+    public string innInitialTitle = "Send adventurers on quests!";
+
     [Header("Mapping")]
     public TextWriter topTitleWriter;
     public Counter questCounter;
@@ -39,7 +43,7 @@ public class UIGod : MonoBehaviour
         topTitleWriter.Write("", true);
         Wait.Run(0.5f, () => { 
             mainFader.FadeOut();
-            UpdateQuestTitle("Welcome to the Inn!");
+            UpdateQuestTitle(menuInitialTitle);
         });
         windows = GetComponentsInChildren<Window>();
     }
@@ -47,6 +51,11 @@ public class UIGod : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SetInitialQuestTitle()
+    {
+        UpdateQuestTitle(innInitialTitle);
     }
 
     public void UpdateQuestTitle(string text)
