@@ -79,14 +79,22 @@ public class GameMode : MonoBehaviour
                 selectedQuestMarker = _consideredQuestMarker;
                 selectedQuest = _consideredQuest;
                 ToggleMap();
-                if (selectedQuest.questState == QuestState.NotStarted)
+
+                switch (selectedQuest.questState)
                 {
-                    StartChoosingAdventurers();
+                    case QuestState.NotStarted:
+                        StartChoosingAdventurers();
+                        break;
+                    case QuestState.OnRoad:
+                    case QuestState.InProgress:
+                        UIGod.instance.OpenWindowQuests();
+                        break;
+                    case QuestState.Success:
+                    case QuestState.Failure:
+                        UIGod.instance.OpenWindowHistory();
+                        break;
                 }
-                else
-                {
-                    UIGod.instance.OpenWindowQuests();
-                }
+
                 return;
             }
 
@@ -283,6 +291,25 @@ public class GameMode : MonoBehaviour
         selectedAdventurerGroup.LightUpAdventurerTable();
     }
 
+    public void UpdateQuestState(Mission mission, Quest quest, QuestState newState)
+    {
+        quest.questState = newState;
+        if (newState == QuestState.Success)
+        {
+            successfulMissions.Add(mission);
+            activeMissions.Remove(mission);
+            UpdateQuestCount();
+            UpdateAdventureCount();
+        }
+        else if (newState == QuestState.Failure)
+        {
+            failedMissions.Add(mission);
+            activeMissions.Remove(mission);
+            UpdateQuestCount();
+            UpdateAdventureCount();
+        }
+    }
+
     public void StartGame()
     {
         AudioRevolver.Fire(AudioNames.Crowd);
@@ -344,30 +371,30 @@ public class GameMode : MonoBehaviour
 
     private void UpdateQuestCount()
     {
-        int count = 0;
-        foreach (Mission mission in activeMissions)
-        {
-            if (mission.GetAvailableQuest() != null)
-                count += 1;
-        }
+        List<Mission> activeMissionsWithQuests = activeMissions.FindAll(m => m.GetAvailableQuest() != null);
+        int count = activeMissionsWithQuests.Count;
         UIGod.instance.UpdateQuestCounter(count);
+        UpdateHistoryCount();
     }
 
     private void UpdateAdventureCount()
     {
-        int count = 0;
-        foreach (Mission mission in activeMissions)
-        {
-            if (mission.GetAvailableQuest() == null)
-                count += 1;
-        }
+        List<Mission> activeMissionsWithNoQuests = activeMissions.FindAll(m => m.GetAvailableQuest() == null);
+        int count = activeMissionsWithNoQuests.Count;
         UIGod.instance.UpdateAdventureCounter(count);
+        UpdateHistoryCount();
+    }
+
+    private void UpdateHistoryCount()
+    {
+        int count = failedMissions.Count + successfulMissions.Count;
+        UIGod.instance.UpdateHistoryCounter(count);
     }
 
     public static bool IsTimersRunning()
     {
         // add conditions for timers if necessary (game pause? negotiation maybe?..)
-        return true;
+        return !instance.isNegotiating;
     }
 
     IEnumerator SpawnQuest()
@@ -375,7 +402,7 @@ public class GameMode : MonoBehaviour
         while (true)
         {
             List<Mission> bannedMissions = new List<Mission>();
-            if (Random.Range(0.0f, 1.0f) <= _questGenerationChance)
+            if (Random.Range(0.0f, 1.0f) <= _questGenerationChance || activeMissions.Count == 0 /*for now...*/)
             {
                 Mission mission = useMockQuests ? Mission.GenerateRandomMission() : Deep.Clone(Mission.GrabRandomMissionFromDB());
 
@@ -431,7 +458,7 @@ public class GameMode : MonoBehaviour
                 }
 
                 int initialTileCount = availableBiomeTiles.Count;
-
+                newAvailableQuest.mission = mission;
 
                 Vector3 questPosition = Vector3.zero;
                 bool isSafe = false;

@@ -33,6 +33,7 @@ public class Quest
     [HideInInspector] public QuestState questState = QuestState.NotStarted;
 
     [System.NonSerialized] [HideInInspector] public AdventurerGroup adventureGroup;
+    [System.NonSerialized] [HideInInspector] public Mission mission;
 
     public Quest()
     {

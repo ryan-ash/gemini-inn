@@ -10,8 +10,9 @@ public class UIGod : MonoBehaviour
     
     [Header("Mapping")]
     public Text topTitle;
-    public Text questCounter;
-    public Text adventureCounter;
+    public Counter questCounter;
+    public Counter adventureCounter;
+    public Counter historyCounter;
     public GameObject innHUD;
     public Fader mainFader;
     public Transform ownerReplicsRoot;
@@ -50,14 +51,20 @@ public class UIGod : MonoBehaviour
 
     public void UpdateQuestCounter(int newCount)
     {
-        AudioRevolver.Fire(AudioNames.PencilWriting);
-        questCounter.text = newCount.ToString();
+        // AudioRevolver.Fire(AudioNames.PencilWriting);
+        questCounter.UpdateCounter(newCount);
     }
 
     public void UpdateAdventureCounter(int newCount)
     {
         // AudioRevolver.Fire(AudioNames.PencilWriting);
-        adventureCounter.text = newCount.ToString();
+        adventureCounter.UpdateCounter(newCount);
+    }
+
+    public void UpdateHistoryCounter(int newCount)
+    {
+        // AudioRevolver.Fire(AudioNames.PencilWriting);
+        historyCounter.UpdateCounter(newCount);
     }
 
     public void BeginStartingGame()

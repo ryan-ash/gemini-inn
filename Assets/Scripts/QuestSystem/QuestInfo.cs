@@ -95,9 +95,12 @@ public class QuestInfo : MonoBehaviour
         isQuestSuccess = isSuccess;
         questSliderFill.color = isSuccess ? successColor : failureColor;
         questSlider.value = 1.0f;
+
+        GameMode.instance.UpdateQuestState(quest.mission, quest, isSuccess ? QuestState.Success : QuestState.Failure);
+        AudioRevolver.Fire(isSuccess ? AudioNames.QuestCompleted : AudioNames.QuestFailed);
     }
 
-    public void UpdateQuestSlider()
+    void UpdateQuestSlider()
     {
         // update quest slider
         questSlider.value = 
@@ -105,6 +108,19 @@ public class QuestInfo : MonoBehaviour
             isQuestOver ? 1.0f :
             isQuestTimeoutActive ? 1.0f - questTimer / questTimeout :
             0.0f;
+    }
+
+    void UpdateQuestState()
+    {
+        if (isQuestInProgress && questTimer >= questDuration)
+        {
+            // apply quest success rate logic & all
+            SetOver(true);
+        }
+        else if (isQuestTimeoutActive && questTimer >= questTimeout)
+        {
+            SetOver(quest.successOnTimeout);
+        }
     }
 
     void FillData()
@@ -127,6 +143,7 @@ public class QuestInfo : MonoBehaviour
         {
             questTimer += Time.deltaTime;
             UpdateQuestSlider();
+            UpdateQuestState();
         }
 
         if (!isInfoAnimating)
