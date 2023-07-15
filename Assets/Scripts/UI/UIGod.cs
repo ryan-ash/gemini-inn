@@ -9,7 +9,7 @@ public class UIGod : MonoBehaviour
     public Window activeWindow;
     
     [Header("Mapping")]
-    public Text topTitle;
+    public TextWriter topTitleWriter;
     public Counter questCounter;
     public Counter adventureCounter;
     public Counter historyCounter;
@@ -36,7 +36,7 @@ public class UIGod : MonoBehaviour
     void Start()
     {
         instance = this;
-        topTitle.text = "";
+        topTitleWriter.Write("", true);
         Wait.Run(0.5f, () => { 
             mainFader.FadeOut();
             UpdateQuestTitle("Welcome to the Inn!");
@@ -51,7 +51,7 @@ public class UIGod : MonoBehaviour
 
     public void UpdateQuestTitle(string text)
     {
-        topTitle.text = text;
+        topTitleWriter.Write(text);
     }
 
     public void UpdateQuestCounter(int newCount)

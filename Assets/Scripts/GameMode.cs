@@ -80,11 +80,11 @@ public class GameMode : MonoBehaviour
             {
                 selectedQuestMarker = _consideredQuestMarker;
                 selectedQuest = _consideredQuest;
-                ToggleMap();
 
                 switch (selectedQuest.questState)
                 {
                     case QuestState.NotStarted:
+                        ToggleMap();
                         StartChoosingAdventurers();
                         break;
                     case QuestState.OnRoad:
