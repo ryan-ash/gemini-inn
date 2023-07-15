@@ -85,7 +85,7 @@ public class QuestInfo : MonoBehaviour
         questTimer = 0.0f;
     }
 
-    public void SetOver(bool isSuccess = false)
+    public void SetOver(bool isSuccess = false, bool isTimeout = false)
     {
         animator.SetBool("QuestOver", true);
         questName.color = Color.gray;
@@ -97,7 +97,8 @@ public class QuestInfo : MonoBehaviour
         questSlider.value = 1.0f;
 
         GameMode.instance.UpdateQuestState(quest.mission, quest, isSuccess ? QuestState.Success : QuestState.Failure);
-        AudioRevolver.Fire(isSuccess ? AudioNames.QuestCompleted : AudioNames.QuestFailed);
+        // update audio logic later
+        AudioRevolver.Fire(isTimeout ? AudioNames.MugOnTable : isSuccess ? AudioNames.QuestCompleted : AudioNames.QuestFailed);
     }
 
     void UpdateQuestSlider()
@@ -119,7 +120,7 @@ public class QuestInfo : MonoBehaviour
         }
         else if (isQuestTimeoutActive && questTimer >= questTimeout)
         {
-            SetOver(quest.successOnTimeout);
+            SetOver(quest.successOnTimeout, true);
         }
     }
 

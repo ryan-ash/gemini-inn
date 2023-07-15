@@ -151,6 +151,7 @@ public class AdventurerGroup : MonoBehaviour
         {
             var adventurer = adventurers[i];
             adventurer.gameObject.SetActive(false);
+            AdventurerManager.instance.ReleaseAdventurer(adventurer);
         }
 
         GetComponent<Collider>().enabled = false;

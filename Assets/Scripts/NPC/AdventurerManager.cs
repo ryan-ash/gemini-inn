@@ -46,6 +46,12 @@ public class AdventurerManager : MonoBehaviour
         StartCoroutine(TryToSpawnAdventurer());
     }
 
+    public void ReleaseAdventurer(Adventurer adventurer)
+    {
+        adventurers.Remove(adventurer);
+        UIGod.instance.UpdateAdventurersCounter(adventurers.Count);
+    }
+
     private void SpawnAdventurer(bool ignoreChance = false)
     {
         if (adventurers.Count >= maxAdventurers)
@@ -93,6 +99,8 @@ public class AdventurerManager : MonoBehaviour
         Adventurer adventurer = adventurerObject.GetComponent<Adventurer>();
         adventurerGroups[adventurerGroupIndex].AddAdventurer(adventurer);
         adventurers.Add(adventurer);
+
+        UIGod.instance.UpdateAdventurersCounter(adventurers.Count);
 
         if (!ignoreChance)
         {

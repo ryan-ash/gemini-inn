@@ -13,6 +13,7 @@ public class UIGod : MonoBehaviour
     public Counter questCounter;
     public Counter adventureCounter;
     public Counter historyCounter;
+    public Counter adventurersCounter;
     public GameObject innHUD;
     public Fader mainFader;
     public Transform ownerReplicsRoot;
@@ -65,6 +66,12 @@ public class UIGod : MonoBehaviour
     {
         // AudioRevolver.Fire(AudioNames.PencilWriting);
         historyCounter.UpdateCounter(newCount);
+    }
+
+    public void UpdateAdventurersCounter(int newCount)
+    {
+        // AudioRevolver.Fire(AudioNames.PencilWriting);
+        adventurersCounter.UpdateCounter(newCount);
     }
 
     public void BeginStartingGame()
