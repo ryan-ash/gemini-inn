@@ -69,6 +69,8 @@ public class GameMode : MonoBehaviour
 
     void Update()
     {
+        UpdateQuestTimers();
+
         if (!isMapOpen && !isChoosingAdventurers && !isNegotiating)
             return;
 
@@ -132,6 +134,63 @@ public class GameMode : MonoBehaviour
         if (isNegotiating)
         {
             // for now, only control negotiations through UI
+        }
+    }
+
+    private class QuestToStop
+    {
+        public Mission mission;
+        public Quest quest;
+        public QuestState questResult;
+        public bool isTimeout;
+
+        public QuestToStop(Mission mission, Quest quest, QuestState questResult, bool isTimeout)
+        {
+            this.mission = mission;
+            this.quest = quest;
+            this.questResult = questResult;
+            this.isTimeout = isTimeout;
+        }
+    }
+
+    private void UpdateQuestTimers()
+    {
+        if (!IsTimersRunning())
+            return;
+
+        List<QuestToStop> questsToStop = new List<QuestToStop>();
+
+        foreach (Mission mission in activeMissions)
+        {
+            Quest quest = mission.GetCurrentQuest();
+            if (quest == null)
+                continue;
+
+            quest.questTimer += Time.deltaTime;
+
+            if (quest.questState == QuestState.NotStarted)
+            {
+                if (quest.questTimer >= quest.timeout && quest.timeout > 0.0f)
+                {
+                    QuestToStop questToStop = new QuestToStop(mission, quest, QuestState.Failure, true);
+                    questsToStop.Add(questToStop);
+                }
+            }
+            else if (quest.questState == QuestState.InProgress || quest.questState == QuestState.OnRoad)
+            {
+                quest.questTimer += Time.deltaTime;
+                if (quest.questTimer >= quest.baseDuration)
+                {
+                    QuestState questResult = QuestState.Success;
+                    QuestToStop questToStop = new QuestToStop(mission, quest, questResult, false);
+                    questsToStop.Add(questToStop);
+                }
+            }
+        }
+
+        foreach (QuestToStop questToStop in questsToStop)
+        {
+            UpdateQuestState(questToStop.mission, questToStop.quest, questToStop.questResult, questToStop.isTimeout);
         }
     }
 
@@ -272,6 +331,7 @@ public class GameMode : MonoBehaviour
 
         UpdateQuestCount();
         UpdateAdventureCount();
+        selectedQuest.questTimer = 0.0f;
 
         AudioRevolver.Fire(AudioNames.QuestGoing);
         Wait.Run(2.0f, () => {
@@ -297,23 +357,24 @@ public class GameMode : MonoBehaviour
         selectedAdventurerGroup.LightUpAdventurerTable();
     }
 
-    public void UpdateQuestState(Mission mission, Quest quest, QuestState newState)
+    public void UpdateQuestState(Mission mission, Quest quest, QuestState newState, bool isTimeout = false)
     {
         quest.questState = newState;
+        if (newState == QuestState.Success || newState == QuestState.Failure)
+        {
+            activeMissions.Remove(mission);
+            quest.questInfo.SetOver(newState == QuestState.Success, isTimeout);
+            quest.questLine.transform.SetParent(UIGod.instance.historyRoot, false);
+        }
         if (newState == QuestState.Success)
         {
             successfulMissions.Add(mission);
-            activeMissions.Remove(mission);
-            UpdateQuestCount();
-            UpdateAdventureCount();
         }
         else if (newState == QuestState.Failure)
         {
             failedMissions.Add(mission);
-            activeMissions.Remove(mission);
-            UpdateQuestCount();
-            UpdateAdventureCount();
         }
+        UpdateQuestCount();
     }
 
     public void StartGame()
@@ -380,13 +441,13 @@ public class GameMode : MonoBehaviour
         List<Mission> activeMissionsWithQuests = activeMissions.FindAll(m => m.GetAvailableQuest() != null);
         int count = activeMissionsWithQuests.Count;
         UIGod.instance.UpdateQuestCounter(count);
-        UpdateHistoryCount();
+        UpdateAdventureCount();
     }
 
     private void UpdateAdventureCount()
     {
-        List<Mission> activeMissionsWithNoQuests = activeMissions.FindAll(m => m.GetAvailableQuest() == null);
-        int count = activeMissionsWithNoQuests.Count;
+        // List<Mission> activeMissionsWithNoQuests = activeMissions.FindAll(m => m.GetAvailableQuest() == null);
+        int count = activeMissions.Count;
         UIGod.instance.UpdateAdventureCounter(count);
         UpdateHistoryCount();
     }
@@ -497,6 +558,10 @@ public class GameMode : MonoBehaviour
 
                 QuestInfo questInfo = questVisual.GetComponent<QuestInfo>();
                 questInfo.SetQuest(newAvailableQuest);
+
+                newAvailableQuest.questInfo = questInfo;
+                newAvailableQuest.questTimer = 0.0f;
+                UIGod.instance.SpawnActiveQuest(newAvailableQuest);
 
                 _generatedQuests.Add(questVisual.transform);
 

@@ -31,9 +31,12 @@ public class Quest
 
     [System.NonSerialized] [HideInInspector] public Vector3 questPosition;
     [HideInInspector] public QuestState questState = QuestState.NotStarted;
+    [System.NonSerialized] [HideInInspector] public float questTimer = 0.0f;
 
     [System.NonSerialized] [HideInInspector] public AdventurerGroup adventureGroup;
     [System.NonSerialized] [HideInInspector] public Mission mission;
+    [System.NonSerialized] [HideInInspector] public QuestInfo questInfo;
+    [System.NonSerialized] [HideInInspector] public QuestLine questLine;
 
     public Quest()
     {

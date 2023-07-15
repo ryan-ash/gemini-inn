@@ -81,6 +81,18 @@ public class Mission
         return null;
     }
 
+    public Quest GetCurrentQuest()
+    {
+        foreach (Quest Quest in Quests)
+        {
+            if (Quest.questState == QuestState.InProgress || Quest.questState == QuestState.OnRoad || Quest.questState == QuestState.NotStarted)
+            {
+                return Quest;
+            }
+        }
+        return null;
+    }
+
     public bool IsMissionOver()
     {
         foreach (Quest quest in Quests)

@@ -17,6 +17,8 @@ public class UIGod : MonoBehaviour
     public GameObject innHUD;
     public Fader mainFader;
     public Transform ownerReplicsRoot;
+    public Transform questsRoot;
+    public Transform historyRoot;
 
     [Header("Negotiation")]
     public Text questTitle;
@@ -26,8 +28,10 @@ public class UIGod : MonoBehaviour
     [Header("Prefabs")]
     public GameObject replicPrefab;
     public GameObject responsePrefab;
+    public GameObject questPrefab;
 
     private Window[] windows;
+    private GameObject spawnedQuests;
 
     void Start()
     {
@@ -72,6 +76,13 @@ public class UIGod : MonoBehaviour
     {
         // AudioRevolver.Fire(AudioNames.PencilWriting);
         adventurersCounter.UpdateCounter(newCount);
+    }
+
+    public void SpawnActiveQuest(Quest quest)
+    {
+        GameObject spawnedQuest = Instantiate(questPrefab, questsRoot);
+        spawnedQuest.GetComponent<QuestLine>().SetQuest(quest);
+        quest.questLine = spawnedQuest.GetComponent<QuestLine>();
     }
 
     public void BeginStartingGame()

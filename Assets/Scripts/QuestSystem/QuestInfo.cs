@@ -29,7 +29,6 @@ public class QuestInfo : MonoBehaviour
     private bool isQuestInProgress = false;
     private bool isQuestOver = false;
     private bool isQuestSuccess = false;
-    private float questTimer = 0.0f;
     private float questTimeout = 0.0f;
     private float questDuration = 0.0f;
     private Quest quest;
@@ -39,7 +38,6 @@ public class QuestInfo : MonoBehaviour
         quest = InQuest;
         questTimeout = quest.timeout;
         questDuration = quest.baseDuration;
-        questTimer = 0.0f;
         isQuestTimeoutActive = questTimeout > 0.0f;
         if (isQuestTimeoutActive)
         {
@@ -82,7 +80,6 @@ public class QuestInfo : MonoBehaviour
         isQuestInProgress = true;
         questSliderFill.color = progressColor;
         questSlider.value = 0.0f;
-        questTimer = 0.0f;
     }
 
     public void SetOver(bool isSuccess = false, bool isTimeout = false)
@@ -95,33 +92,20 @@ public class QuestInfo : MonoBehaviour
         isQuestSuccess = isSuccess;
         questSliderFill.color = isSuccess ? successColor : failureColor;
         questSlider.value = 1.0f;
-
-        GameMode.instance.UpdateQuestState(quest.mission, quest, isSuccess ? QuestState.Success : QuestState.Failure);
-        // update audio logic later
         AudioRevolver.Fire(isTimeout ? AudioNames.MugOnTable : isSuccess ? AudioNames.QuestCompleted : AudioNames.QuestFailed);
+
+        // GameMode.instance.UpdateQuestState(quest.mission, quest, isSuccess ? QuestState.Success : QuestState.Failure);
+        // update audio logic later
     }
 
     void UpdateQuestSlider()
     {
         // update quest slider
         questSlider.value = 
-            isQuestInProgress ? questTimer / questDuration : 
+            isQuestInProgress ? quest.questTimer / questDuration : 
             isQuestOver ? 1.0f :
-            isQuestTimeoutActive ? 1.0f - questTimer / questTimeout :
+            isQuestTimeoutActive ? 1.0f - quest.questTimer / questTimeout :
             0.0f;
-    }
-
-    void UpdateQuestState()
-    {
-        if (isQuestInProgress && questTimer >= questDuration)
-        {
-            // apply quest success rate logic & all
-            SetOver(true);
-        }
-        else if (isQuestTimeoutActive && questTimer >= questTimeout)
-        {
-            SetOver(quest.successOnTimeout, true);
-        }
     }
 
     void FillData()
@@ -139,12 +123,9 @@ public class QuestInfo : MonoBehaviour
 
     void Update()
     {
-        // move timer logic to game mode
         if (GameMode.IsTimersRunning() && !isQuestOver)
         {
-            questTimer += Time.deltaTime;
             UpdateQuestSlider();
-            UpdateQuestState();
         }
 
         if (!isInfoAnimating)
