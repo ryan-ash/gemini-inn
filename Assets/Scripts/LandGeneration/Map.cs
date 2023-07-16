@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -322,7 +323,7 @@ public class Map : MonoBehaviour
         }
     }
 
-    public void ChangeRegionShade(int x, int y, int radius = 2, ShadeType shadeType = ShadeType.Neutral)
+    public void ChangeRegionShade(int x, int y, int radius = 5, ShadeType shadeType = ShadeType.Neutral)
     {
         if(x < 0 || y < 0 || radius < 0)
         {
@@ -332,17 +333,17 @@ public class Map : MonoBehaviour
         var centerTile = tiles[x, y];
         SetTileShade(centerTile, shadeType);
 
-        for (int i = -radius; i <= radius; i++)
+        const double threshold = 0.8;
+
+        for (int i = Math.Max(0, x - radius - 1); i <= Math.Min(width - 1, x + radius + 1); i++)
         {
-            for (int j = -radius; j <= radius; j++)
+            for (int j = Math.Max(0, y - radius - 1); j <= Math.Min(height - 1, y + radius + 1); j++)
             {
-                if (i == 0 && j == 0)
-                    continue;
-                int newX = x + i;
-                int newY = y + j;
-                if (newX >= 0 && newX < width && newY >= 0 && newY < height)
+                var distance = Math.Sqrt(Math.Pow(i - x, 2) + Math.Pow(j - y, 2));
+                var coverage = Math.Min(1, Math.Max(0, radius + threshold - distance));
+                if (coverage > 0)
                 {
-                    var selectedTile = tiles[newX, newY];
+                    var selectedTile = tiles[i, j];
                     SetTileShade(selectedTile, shadeType);
                 }
             }

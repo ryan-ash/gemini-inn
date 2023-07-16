@@ -384,7 +384,7 @@ public class GameMode : MonoBehaviour
         if (newState == QuestState.Success)
         {
             //temp shading
-            Map.instance.ChangeRegionShade(tile.X, tile.Y, 2, ShadeType.Light);
+            Map.instance.ChangeRegionShade(tile.X, tile.Y, 5, ShadeType.Light);
 
             Quest newAvailableQuest = mission.GetAvailableQuest();
             bool newQuestSuccess = newAvailableQuest != null;
@@ -404,7 +404,7 @@ public class GameMode : MonoBehaviour
         else if (newState == QuestState.Failure)
         {
             //temp shading
-            Map.instance.ChangeRegionShade(tile.X, tile.Y, 2, ShadeType.Dark);
+            Map.instance.ChangeRegionShade(tile.X, tile.Y, 5, ShadeType.Dark);
 
             failedMissions.Add(mission);
         }
