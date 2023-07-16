@@ -248,6 +248,7 @@ public class GameMode : MonoBehaviour
         {
             _consideredAdventurerGroup.UnfocusAdventurerTable();
             _consideredAdventurerGroup = null;
+            UIGod.instance.CloseAllWindows();
         }
     }
 
@@ -284,6 +285,7 @@ public class GameMode : MonoBehaviour
     public void MoveSelectedAdventurersToNegotiation()
     {
         UIGod.instance.SpawnOwnerReplic();
+        UIGod.instance.CloseAllWindows();
         AudioRevolver.Fire(AudioNames.Footsteps);
         foreach (Adventurer adventurer in selectedAdventurerGroup.adventurers)
         {

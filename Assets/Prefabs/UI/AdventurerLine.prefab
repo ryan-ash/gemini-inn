@@ -129,6 +129,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adventurer: {fileID: 0}
+  maleIcon: fa-male
+  femaleIcon: fa-female
   nameWriter: {fileID: 8950780839350703920}
   statusIcon: {fileID: 1699857668383751027}
 --- !u!1 &7294475320749344493
@@ -224,7 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 776c93c88af060f4593ff9fbaadbd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  letterTime: 0.01
+  letterTime: 0.02
   wipeOnChange: 1
   fillWithSpaces: 0
 --- !u!1001 &2323033820440379730
