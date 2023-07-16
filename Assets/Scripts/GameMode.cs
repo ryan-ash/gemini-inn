@@ -118,7 +118,7 @@ public class GameMode : MonoBehaviour
                 else if (_consideredAdventurerGroup == null)
                 {
                     CursorSetter.ResetPriorityCursor();
-                    ToggleMap();
+                    // ToggleMap();
                     UIGod.instance.UpdateQuestTitle("");
                 }
                 else
