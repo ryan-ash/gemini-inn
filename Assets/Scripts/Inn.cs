@@ -61,6 +61,7 @@ public class Inn : MonoBehaviour
         isCameraMoving = true;
         AudioRevolver.Fire(AudioNames.BirdsSound);
         isMapOpened = true;
+        MapObject.ShowAll();
     }
 
     public void HideMap()
@@ -71,6 +72,7 @@ public class Inn : MonoBehaviour
         AudioRevolver.Fire(AudioNames.BirdsSound + "/Stop");
         isMapOpened = false;
         QuestInfo.HideAll();
+        MapObject.HideAll();
     }
 
     private void UpdateCameraRotation(Quaternion targetRotation, bool ignoreMouse = false)

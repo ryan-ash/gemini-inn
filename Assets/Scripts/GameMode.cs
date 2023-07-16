@@ -58,6 +58,7 @@ public class GameMode : MonoBehaviour
     [HideInInspector] public Quest selectedQuest;
     [HideInInspector] public AdventurerGroup selectedAdventurerGroup;
     [HideInInspector] public List<QuestInfo> generatedQuestInfos = new List<QuestInfo>();
+    [HideInInspector] public List<MapObject> generatedMapObjects = new List<MapObject>();
 
     private List<Transform> generatedQuests = new List<Transform>();
     private GameObject generatedInn;
@@ -434,6 +435,7 @@ public class GameMode : MonoBehaviour
         Vector3 innPosition = Map.instance.GetTileLocalPosition(xCoord, yCoord);
         generatedInn = Instantiate(innPrefab, innPosition, Quaternion.identity);
         generatedInn.transform.SetParent(innRoot.transform, false);
+        generatedMapObjects.Add(generatedInn.GetComponent<MapObject>());
 
         int fillStartX = xCoord - innSandFillRange.x / 2;
         int fillStartY = yCoord - innSandFillRange.y / 2;
@@ -532,6 +534,7 @@ public class GameMode : MonoBehaviour
         QuestInfo questInfo = questVisual.GetComponent<QuestInfo>();
         questInfo.SetQuest(quest);
         generatedQuestInfos.Add(questInfo);
+        generatedMapObjects.Add(questInfo.GetComponent<MapObject>());
 
         quest.questInfo = questInfo;
         quest.questTimer = 0.0f;
