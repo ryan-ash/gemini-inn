@@ -15,7 +15,6 @@ public class Adventurer : MonoBehaviour
     [SerializeField]
     private SkinnedMeshRenderer FeetRenderer;
     
-
     [SerializeField]
     private List<Color> SkinViableColors;
     [SerializeField]
@@ -37,6 +36,11 @@ public class Adventurer : MonoBehaviour
 
     private Vector3 initialPosition;
     private Quaternion initialRotation;
+
+    [HideInInspector] public string adventurerName;
+    [HideInInspector] public bool femaleGender = false;
+
+    private TextBuilder nameBuilder;
 
     public void RandomizeCharacter()
     {
@@ -99,6 +103,17 @@ public class Adventurer : MonoBehaviour
         LeanTween.moveLocal(gameObject, initialPosition, moveTime).setEase(LeanTweenType.easeInOutQuad).setOnUpdate((float val) => {
             transform.rotation = Quaternion.Lerp(transform.rotation, initialRotation, val);
         });
+    }
+
+    public void SetRandomGender()
+    {
+        femaleGender = Random.Range(0, 2) == 0;
+    }
+
+    public void RunNameGenerator()
+    {
+        nameBuilder = GetComponent<TextBuilder>();
+        adventurerName = nameBuilder.BuildText();
     }
 
     void Start()

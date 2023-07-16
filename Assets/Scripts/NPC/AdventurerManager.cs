@@ -22,7 +22,7 @@ public class AdventurerManager : MonoBehaviour
     public GameObject adventurerParent;
 
     private AdventurerGroup[] adventurerGroups;
-    private List<Adventurer> adventurers = new List<Adventurer>();
+    [HideInInspector] public List<Adventurer> adventurers = new List<Adventurer>();
 
     void Start()
     {
@@ -49,7 +49,7 @@ public class AdventurerManager : MonoBehaviour
     public void ReleaseAdventurer(Adventurer adventurer)
     {
         adventurers.Remove(adventurer);
-        UIGod.instance.UpdateAdventurersCounter(adventurers.Count);
+        UIGod.instance.ReleaseRemovedAdventurers();
     }
 
     private void SpawnAdventurer(bool ignoreChance = false)
@@ -97,10 +97,12 @@ public class AdventurerManager : MonoBehaviour
         adventurerObject.transform.localEulerAngles = new Vector3(0.0f, adventurerInitialYRotation, 0.0f);
 
         Adventurer adventurer = adventurerObject.GetComponent<Adventurer>();
+        adventurer.SetRandomGender();
+        adventurer.RunNameGenerator();
+
         adventurerGroups[adventurerGroupIndex].AddAdventurer(adventurer);
         adventurers.Add(adventurer);
-
-        UIGod.instance.UpdateAdventurersCounter(adventurers.Count);
+        UIGod.instance.AppendDrawerWithAdventurer(adventurer);
 
         if (!ignoreChance)
         {

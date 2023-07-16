@@ -68,10 +68,9 @@ MonoBehaviour:
     Biomes: []
     successAttempts: 0
     timeout: 0
+    baseDuration: 15
     successOnTimeout: 0
     BaseSuccessRate: 1
     AbilityModifiers: []
     StatModifiers: []
-    questPosition: {x: 0, y: 0, z: 0}
     questState: 0
-    adventureGroup: {fileID: 0}

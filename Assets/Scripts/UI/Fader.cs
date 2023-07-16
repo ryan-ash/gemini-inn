@@ -17,9 +17,7 @@ public class Fader : MonoBehaviour
     void Start()
     {
         canvas = GetComponent<CanvasGroup>();
-        canvas.alpha = isOn ? 1.0f : 0.0f;
-        canvas.interactable = isOn;
-        canvas.blocksRaycasts = isOn;
+        Switch(isOn);
     }
 
     void Update()
@@ -47,6 +45,14 @@ public class Fader : MonoBehaviour
             scheduledCallback = "";
             sendScheduledCallback = false;
         }
+    }
+
+    public void Switch(bool isOn)
+    {
+        this.isOn = isOn;
+        canvas.alpha = isOn ? 1.0f : 0.0f;
+        canvas.interactable = isOn;
+        canvas.blocksRaycasts = isOn;
     }
 
     public void FadeIn(string callbackMessage = "", bool sendToSelf = false)

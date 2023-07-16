@@ -44,5 +44,6 @@ public enum WindowType
     Negotiation,
     Quests,
     History,
-    Adventurers
+    Adventurers,
+    AdventurerPreview,
 }

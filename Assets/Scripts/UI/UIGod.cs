@@ -23,6 +23,8 @@ public class UIGod : MonoBehaviour
     public Transform ownerReplicsRoot;
     public Transform questsRoot;
     public Transform historyRoot;
+    public Transform adventurersRoot;
+    public Transform adventurersPreviewRoot;
 
     [Header("Negotiation")]
     public TextWriter questTitle;
@@ -33,6 +35,7 @@ public class UIGod : MonoBehaviour
     public GameObject replicPrefab;
     public GameObject responsePrefab;
     public GameObject questPrefab;
+    public GameObject adventurerPrefab;
 
     private Window[] windows;
     private GameObject spawnedQuests;
@@ -94,6 +97,48 @@ public class UIGod : MonoBehaviour
         quest.questLine = spawnedQuest.GetComponent<QuestLine>();
     }
 
+    public void FillDrawerWithAdventurers(List<Adventurer> adventurers, bool usePreviewRoot = false)
+    {
+        Transform root = usePreviewRoot ? adventurersPreviewRoot : adventurersRoot;
+        for (int i = 0; i < root.childCount; i++)
+        {
+            Destroy(root.GetChild(i).gameObject);
+        }
+        foreach (Adventurer adventurer in adventurers)
+        {
+            GameObject spawnedAdventurer = Instantiate(adventurerPrefab, root);
+            spawnedAdventurer.GetComponent<AdventurerLine>().SetAdventurer(adventurer);
+        }
+        UpdateAdventurersCounter(AdventurerManager.instance.adventurers.Count);
+    }
+
+    public void AppendDrawerWithAdventurer(Adventurer adventurer, bool usePreviewRoot = false)
+    {
+        Transform root = usePreviewRoot ? adventurersPreviewRoot : adventurersRoot;
+        GameObject spawnedAdventurer = Instantiate(adventurerPrefab, root);
+        spawnedAdventurer.GetComponent<AdventurerLine>().SetAdventurer(adventurer);
+        UpdateAdventurersCounter(AdventurerManager.instance.adventurers.Count);
+    }
+
+    public void ReleaseRemovedAdventurers()
+    {
+        List<AdventurerLine> adventurerLines = new List<AdventurerLine>();
+        for (int i = 0; i < adventurersRoot.childCount; i++)
+        {
+            adventurerLines.Add(adventurersRoot.GetChild(i).GetComponent<AdventurerLine>());
+        }
+
+        var adventurerList = AdventurerManager.instance.adventurers;
+        foreach (AdventurerLine adventurerLine in adventurerLines)
+        {
+            if (!adventurerList.Contains(adventurerLine.adventurer))
+            {
+                Destroy(adventurerLine.gameObject);
+            }
+        }
+        UpdateAdventurersCounter(AdventurerManager.instance.adventurers.Count);
+    }
+
     public void BeginStartingGame()
     {
         AudioRevolver.Fire(AudioNames.Click);
@@ -147,6 +192,18 @@ public class UIGod : MonoBehaviour
         CursorSetter.SetDefaultCursor();
     }
 
+    public Window GetWindow(WindowType windowType)
+    {
+        foreach (Window window in windows)
+        {
+            if (window.windowType == windowType)
+            {
+                return window;
+            }
+        }
+        return null;
+    }
+
     public void OpenWindowSettings()
     {
         OpenWindow(WindowType.Settings);
@@ -167,6 +224,11 @@ public class UIGod : MonoBehaviour
     public void OpenWindowHistory()
     {
         OpenWindow(WindowType.History);
+    }
+
+    public void OpenWindowAdventurers()
+    {
+        OpenWindow(WindowType.Adventurers);
     }
 
     public void CloseAllWindows()

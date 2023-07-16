@@ -366,6 +366,7 @@ GameObject:
   - component: {fileID: 1920778428102210758}
   - component: {fileID: 2102407728581588669}
   - component: {fileID: -7406802043367294776}
+  - component: {fileID: 2906158649597521294}
   m_Layer: 9
   m_Name: Adventurer
   m_TagString: Untagged
@@ -465,6 +466,7 @@ MonoBehaviour:
   - {fileID: -4890970860640443847, guid: ca482cae051eb43ec8d791417efebae0, type: 3}
   - {fileID: -2328052104320187592, guid: 8f5e556b87c8b4d9fbabcac848d256e5, type: 3}
   group: {fileID: 0}
+  adventurerName: 
 --- !u!136 &-7406802043367294776
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -479,6 +481,38 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.8, z: 0}
+--- !u!114 &2906158649597521294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291452690306674300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 927060b195d1b474da8cb1a21d0c040b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPresets:
+  - name: name
+    pieces:
+    - name: first name
+      options:
+      - text: John
+        weight: 1
+      - text: Jane
+        weight: 1
+      - text: Alex
+        weight: 1
+    - name: last name
+      options:
+      - text: Doe
+        weight: 1
+      - text: Black
+        weight: 1
+      - text: White
+        weight: 1
+  lastGeneratedText: 
 --- !u!1 &1501590728559065913
 GameObject:
   m_ObjectHideFlags: 0

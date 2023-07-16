@@ -231,8 +231,16 @@ public class GameMode : MonoBehaviour
             if (adventurerGroup != _consideredAdventurerGroup)
             {
                 if (_consideredAdventurerGroup != null)
+                {
                     _consideredAdventurerGroup.UnfocusAdventurerTable();
+                    var adventurerPreviewWindow = UIGod.instance.GetWindow(WindowType.AdventurerPreview);
+                    var adventurerPreviewFader = adventurerPreviewWindow.GetComponent<Fader>();
+                    adventurerPreviewFader.Switch(false);
+                    adventurerPreviewWindow.isOpen = false;
+                }
                 _consideredAdventurerGroup = adventurerGroup;
+                UIGod.instance.FillDrawerWithAdventurers(adventurerGroup.adventurers, true);
+                UIGod.instance.OpenWindow(WindowType.AdventurerPreview);
                 adventurerGroup.FocusAdventurerTable();
             }
         }
