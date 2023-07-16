@@ -58,6 +58,7 @@ public class QuestInfo : MonoBehaviour
 
     public void ShowInfo()
     {
+        HideAll();
         FillData();
         isInfoOpen = true;
         isInfoAnimating = true;
@@ -70,6 +71,14 @@ public class QuestInfo : MonoBehaviour
         isInfoOpen = false;
         isInfoAnimating = true;
         CursorSetter.SetDefaultCursor();
+    }
+
+    public static void HideAll()
+    {
+        foreach (QuestInfo questInfo in GameMode.instance.generatedQuestInfos)
+        {
+            questInfo.HideInfo();
+        }
     }
 
     public void SetInProgress()

@@ -70,6 +70,7 @@ public class Inn : MonoBehaviour
         isCameraMoving = true;
         AudioRevolver.Fire(AudioNames.BirdsSound + "/Stop");
         isMapOpened = false;
+        QuestInfo.HideAll();
     }
 
     private void UpdateCameraRotation(Quaternion targetRotation, bool ignoreMouse = false)

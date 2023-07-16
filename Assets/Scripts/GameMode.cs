@@ -50,15 +50,16 @@ public class GameMode : MonoBehaviour
     [HideInInspector] public List<Mission> failedMissions;
     [HideInInspector] public List<Mission> successfulMissions;
 
-    private GameObject _consideredQuestMarker;
-    private Quest _consideredQuest;
-    private AdventurerGroup _consideredAdventurerGroup;
+    private GameObject consideredQuestMarker;
+    private Quest consideredQuest;
+    private AdventurerGroup consideredAdventurerGroup;
 
     [HideInInspector] public GameObject selectedQuestMarker;
     [HideInInspector] public Quest selectedQuest;
     [HideInInspector] public AdventurerGroup selectedAdventurerGroup;
+    [HideInInspector] public List<QuestInfo> generatedQuestInfos = new List<QuestInfo>();
 
-    private List<Transform> _generatedQuests = new List<Transform>();
+    private List<Transform> generatedQuests = new List<Transform>();
     private GameObject generatedInn;
 
     void Start()
@@ -76,10 +77,10 @@ public class GameMode : MonoBehaviour
 
         if (isMapOpen)
         {
-            if (_consideredQuestMarker != null && Input.GetMouseButtonDown(0))
+            if (consideredQuestMarker != null && Input.GetMouseButtonDown(0))
             {
-                selectedQuestMarker = _consideredQuestMarker;
-                selectedQuest = _consideredQuest;
+                selectedQuestMarker = consideredQuestMarker;
+                selectedQuest = consideredQuest;
                 selectedQuestMarker.GetComponent<QuestInfo>().HideInfo();
 
                 switch (selectedQuest.questState)
@@ -109,13 +110,13 @@ public class GameMode : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 isChoosingAdventurers = false;
-                if (_consideredAdventurerGroup != null && _consideredAdventurerGroup.adventurers.Count > 0)
+                if (consideredAdventurerGroup != null && consideredAdventurerGroup.adventurers.Count > 0)
                 {
-                    selectedAdventurerGroup = _consideredAdventurerGroup;
+                    selectedAdventurerGroup = consideredAdventurerGroup;
                     CursorSetter.ResetPriorityCursor();
                     MoveSelectedAdventurersToNegotiation();
                 }
-                else if (_consideredAdventurerGroup == null)
+                else if (consideredAdventurerGroup == null)
                 {
                     CursorSetter.ResetPriorityCursor();
                     // ToggleMap();
@@ -204,19 +205,19 @@ public class GameMode : MonoBehaviour
         {
             QuestInfo questInfo = hit.transform.gameObject.GetComponentInParent<QuestInfo>();
             GameObject potentialNewSelection = questInfo.gameObject;
-            if (potentialNewSelection != _consideredQuestMarker)
+            if (potentialNewSelection != consideredQuestMarker)
             {
-                _consideredQuestMarker = potentialNewSelection;
-                _consideredQuest = questInfo.GetQuest();
+                consideredQuestMarker = potentialNewSelection;
+                consideredQuest = questInfo.GetQuest();
                 questInfo.ShowInfo();
             }
         }
-        else if (_consideredQuestMarker != null)
+        else if (consideredQuestMarker != null)
         {
-            QuestInfo questInfo = _consideredQuestMarker.GetComponent<QuestInfo>();
+            QuestInfo questInfo = consideredQuestMarker.GetComponent<QuestInfo>();
             questInfo.HideInfo();
-            _consideredQuestMarker = null;
-            _consideredQuest = null;
+            consideredQuestMarker = null;
+            consideredQuest = null;
         }
     }
 
@@ -228,26 +229,26 @@ public class GameMode : MonoBehaviour
         if (Physics.Raycast(ray, out hit, maxDistance, adventurerRaycastLayerMask))
         {
             AdventurerGroup adventurerGroup = hit.transform.gameObject.GetComponent<AdventurerGroup>();
-            if (adventurerGroup != _consideredAdventurerGroup)
+            if (adventurerGroup != consideredAdventurerGroup)
             {
-                if (_consideredAdventurerGroup != null)
+                if (consideredAdventurerGroup != null)
                 {
-                    _consideredAdventurerGroup.UnfocusAdventurerTable();
+                    consideredAdventurerGroup.UnfocusAdventurerTable();
                     var adventurerPreviewWindow = UIGod.instance.GetWindow(WindowType.AdventurerPreview);
                     var adventurerPreviewFader = adventurerPreviewWindow.GetComponent<Fader>();
                     adventurerPreviewFader.Switch(false);
                     adventurerPreviewWindow.isOpen = false;
                 }
-                _consideredAdventurerGroup = adventurerGroup;
+                consideredAdventurerGroup = adventurerGroup;
                 UIGod.instance.FillDrawerWithAdventurers(adventurerGroup.adventurers, true);
                 UIGod.instance.OpenWindow(WindowType.AdventurerPreview);
                 adventurerGroup.FocusAdventurerTable();
             }
         }
-        else if (_consideredAdventurerGroup != null)
+        else if (consideredAdventurerGroup != null)
         {
-            _consideredAdventurerGroup.UnfocusAdventurerTable();
-            _consideredAdventurerGroup = null;
+            consideredAdventurerGroup.UnfocusAdventurerTable();
+            consideredAdventurerGroup = null;
             UIGod.instance.CloseAllWindows();
         }
     }
@@ -453,7 +454,7 @@ public class GameMode : MonoBehaviour
 
     private bool CheckIfSafe(Vector3 positionToTest)
     {
-        foreach (Transform questPosition in _generatedQuests)
+        foreach (Transform questPosition in generatedQuests)
         {
             if (Vector3.Distance(positionToTest, questPosition.localPosition) < _questSafeDistance)
                 return false;
@@ -530,12 +531,13 @@ public class GameMode : MonoBehaviour
 
         QuestInfo questInfo = questVisual.GetComponent<QuestInfo>();
         questInfo.SetQuest(quest);
+        generatedQuestInfos.Add(questInfo);
 
         quest.questInfo = questInfo;
         quest.questTimer = 0.0f;
         UIGod.instance.SpawnActiveQuest(quest);
 
-        _generatedQuests.Add(questVisual.transform);
+        generatedQuests.Add(questVisual.transform);
 
         activeMissions.Add(mission);
         UpdateQuestCount();
