@@ -379,7 +379,20 @@ public class GameMode : MonoBehaviour
         }
         if (newState == QuestState.Success)
         {
-            successfulMissions.Add(mission);
+            Quest newAvailableQuest = mission.GetAvailableQuest();
+            bool newQuestSuccess = newAvailableQuest != null;
+            if (newQuestSuccess)
+            {
+                newQuestSuccess = ProcessSpawnedQuest(mission, newAvailableQuest);
+            }
+            if (newQuestSuccess)
+            {
+                activeMissions.Add(mission);
+            }
+            else
+            {
+                successfulMissions.Add(mission);
+            }
         }
         else if (newState == QuestState.Failure)
         {
@@ -477,6 +490,59 @@ public class GameMode : MonoBehaviour
         return !instance.isNegotiating;
     }
 
+    private bool ProcessSpawnedQuest(Mission mission, Quest quest)
+    {
+        var availableBiomeTiles = Map.GetBiomeTiles(quest.Biomes.ToArray());
+        if (availableBiomeTiles.Count == 0)
+        {
+            Debug.LogWarning("No available tiles for quest: " + quest.questName);
+            return false;
+        }
+
+        int initialTileCount = availableBiomeTiles.Count;
+        quest.mission = mission;
+
+        Vector3 questPosition = Vector3.zero;
+        bool isSafe = false;
+        while (!isSafe)
+        {
+            int tileID = Random.Range(0, availableBiomeTiles.Count);
+            questPosition = availableBiomeTiles[tileID].transform.localPosition;
+            questPosition.z = 0.0f;
+
+            isSafe = CheckIfSafe(questPosition);
+
+            if (isSafe)
+                break;                        
+
+            availableBiomeTiles.RemoveAt(tileID);
+
+            if (availableBiomeTiles.Count < initialTileCount * _questTileRetryThreshold)
+                break;
+        }
+        if (!isSafe)
+            return false;
+
+        quest.SetPosition(questPosition);
+
+        GameObject questVisual = Instantiate(_questVisualPrefab, questPosition, Quaternion.identity);
+        questVisual.transform.SetParent(_questRoot.transform, false);
+
+        QuestInfo questInfo = questVisual.GetComponent<QuestInfo>();
+        questInfo.SetQuest(quest);
+
+        quest.questInfo = questInfo;
+        quest.questTimer = 0.0f;
+        UIGod.instance.SpawnActiveQuest(quest);
+
+        _generatedQuests.Add(questVisual.transform);
+
+        activeMissions.Add(mission);
+        UpdateQuestCount();
+
+        return true;
+    }
+
     IEnumerator SpawnQuest()
     {
         while (true)
@@ -530,56 +596,18 @@ public class GameMode : MonoBehaviour
                     continue;
                 }
 
-                var availableBiomeTiles = Map.GetBiomeTiles(newAvailableQuest.Biomes.ToArray());
-                if (availableBiomeTiles.Count == 0)
+                bool questProcessSuccess = ProcessSpawnedQuest(mission, newAvailableQuest);
+                if (Map.GetBiomeTiles(newAvailableQuest.Biomes.ToArray()).Count == 0)
                 {
                     Debug.LogWarning("No available tiles for quest: " + newAvailableQuest.questName);
                     continue;
                 }
 
-                int initialTileCount = availableBiomeTiles.Count;
-                newAvailableQuest.mission = mission;
-
-                Vector3 questPosition = Vector3.zero;
-                bool isSafe = false;
-                while (!isSafe)
+                if (!questProcessSuccess)
                 {
-                    int tileID = Random.Range(0, availableBiomeTiles.Count);
-                    questPosition = availableBiomeTiles[tileID].transform.localPosition;
-                    questPosition.z = 0.0f;
-
-                    isSafe = CheckIfSafe(questPosition);
-
-                    if (isSafe)
-                        break;                        
-
-                    availableBiomeTiles.RemoveAt(tileID);
-
-                    // to debug elimination of available tiles
-                    // Debug.Log(availableBiomeTiles.Count.ToString());
-
-                    if (availableBiomeTiles.Count < initialTileCount * _questTileRetryThreshold)
-                        break;
-                }
-                if (!isSafe)
                     yield return new WaitForSeconds(_questGenerationInterval);
-
-                newAvailableQuest.SetPosition(questPosition);
-
-                GameObject questVisual = Instantiate(_questVisualPrefab, questPosition, Quaternion.identity);
-                questVisual.transform.SetParent(_questRoot.transform, false);
-
-                QuestInfo questInfo = questVisual.GetComponent<QuestInfo>();
-                questInfo.SetQuest(newAvailableQuest);
-
-                newAvailableQuest.questInfo = questInfo;
-                newAvailableQuest.questTimer = 0.0f;
-                UIGod.instance.SpawnActiveQuest(newAvailableQuest);
-
-                _generatedQuests.Add(questVisual.transform);
-
-                activeMissions.Add(mission);
-                UpdateQuestCount();
+                    continue;
+                }
             }
 
             yield return new WaitForSeconds(_questGenerationInterval);
