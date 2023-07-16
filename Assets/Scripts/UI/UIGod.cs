@@ -78,10 +78,10 @@ public class UIGod : MonoBehaviour
         adventureCounter.UpdateCounter(newCount);
     }
 
-    public void UpdateHistoryCounter(int newCount)
+    public void UpdateHistoryCounter()
     {
         // AudioRevolver.Fire(AudioNames.PencilWriting);
-        historyCounter.UpdateCounter(newCount);
+        historyCounter.UpdateCounter(historyRoot.childCount);
     }
 
     public void UpdateAdventurersCounter(int newCount)

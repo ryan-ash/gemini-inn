@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedBiome: {fileID: 0}
-  controlRotation: 0
+  controlRotation: 1
   waitBeforeRotating: 0.01
   rotationSpeed: 100
   fadeSpeed: 5

@@ -754,7 +754,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7957572c22bc51c4297efede4339fdc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _questGenerationInterval: 5
+  _questGenerationInterval: 10
   _questGenerationChance: 0.5
   _questSafeDistance: 5
   _questTileRetryThreshold: 0.5
@@ -799,6 +799,8 @@ MonoBehaviour:
     StatModifiers: []
     questState: 0
   selectedAdventurerGroup: {fileID: 0}
+  generatedQuestInfos: []
+  generatedMapObjects: []
 --- !u!4 &85088161
 Transform:
   m_ObjectHideFlags: 0

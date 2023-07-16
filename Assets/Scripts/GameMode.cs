@@ -483,8 +483,7 @@ public class GameMode : MonoBehaviour
 
     private void UpdateHistoryCount()
     {
-        int count = failedMissions.Count + successfulMissions.Count;
-        UIGod.instance.UpdateHistoryCounter(count);
+        UIGod.instance.UpdateHistoryCounter();
     }
 
     public static bool IsTimersRunning()
