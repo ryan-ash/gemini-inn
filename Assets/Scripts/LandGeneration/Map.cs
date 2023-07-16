@@ -321,6 +321,49 @@ public class Map : MonoBehaviour
             }
         }
     }
+
+    public void ChangeRegionShade(int x, int y, int radius = 2, ShadeType shadeType = ShadeType.Neutral)
+    {
+        if(x < 0 || y < 0 || radius < 0)
+        {
+            throw new System.Exception($"Invalid x or y or radius data provided: x={x},y={y},radius={radius}");
+        }
+
+        var centerTile = tiles[x, y];
+        SetTileShade(centerTile, shadeType);
+
+        for (int i = -radius; i <= radius; i++)
+        {
+            for (int j = -radius; j <= radius; j++)
+            {
+                if (i == 0 && j == 0)
+                    continue;
+                int newX = x + i;
+                int newY = y + j;
+                if (newX >= 0 && newX < width && newY >= 0 && newY < height)
+                {
+                    var selectedTile = tiles[newX, newY];
+                    SetTileShade(selectedTile, shadeType);
+                }
+            }
+        }
+    }
+
+    private void SetTileShade(Tile tile, ShadeType shadeType)
+    {
+        switch (shadeType)
+        {
+            case ShadeType.Dark:
+                tile.AddDarkShade();
+                break;
+            case ShadeType.Light:
+                tile.AddLightShade();
+                break;
+            case ShadeType.Neutral:
+                tile.ResetShade();
+                break;
+        }
+    }
 }
 
 public class BiomeTempData
@@ -335,4 +378,12 @@ public class BiomeTempData
     {
         return (height - biome.minHeight) + (moisture - biome.minMoisture) + (heat - biome.minHeat);
     }
+}
+
+[System.Serializable]
+public enum ShadeType
+{
+    Dark,
+    Light,
+    Neutral
 }

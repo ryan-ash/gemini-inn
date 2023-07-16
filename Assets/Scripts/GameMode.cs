@@ -373,6 +373,8 @@ public class GameMode : MonoBehaviour
     public void UpdateQuestState(Mission mission, Quest quest, QuestState newState, bool isTimeout = false)
     {
         quest.questState = newState;
+        var tile = quest.tile;
+
         if (newState == QuestState.Success || newState == QuestState.Failure)
         {
             activeMissions.Remove(mission);
@@ -381,6 +383,9 @@ public class GameMode : MonoBehaviour
         }
         if (newState == QuestState.Success)
         {
+            //temp shading
+            Map.instance.ChangeRegionShade(tile.X, tile.Y, 2, ShadeType.Light);
+
             Quest newAvailableQuest = mission.GetAvailableQuest();
             bool newQuestSuccess = newAvailableQuest != null;
             if (newQuestSuccess)
@@ -398,6 +403,9 @@ public class GameMode : MonoBehaviour
         }
         else if (newState == QuestState.Failure)
         {
+            //temp shading
+            Map.instance.ChangeRegionShade(tile.X, tile.Y, 2, ShadeType.Dark);
+
             failedMissions.Add(mission);
         }
         UpdateQuestCount();
@@ -505,17 +513,19 @@ public class GameMode : MonoBehaviour
         quest.mission = mission;
 
         Vector3 questPosition = Vector3.zero;
+        Tile questTile = null;
         bool isSafe = false;
         while (!isSafe)
         {
             int tileID = Random.Range(0, availableBiomeTiles.Count);
-            questPosition = availableBiomeTiles[tileID].transform.localPosition;
+            questTile = availableBiomeTiles[tileID];
+            questPosition = questTile.transform.localPosition;
             questPosition.z = 0.0f;
 
             isSafe = CheckIfSafe(questPosition);
 
             if (isSafe)
-                break;                        
+                break;
 
             availableBiomeTiles.RemoveAt(tileID);
 
@@ -525,6 +535,7 @@ public class GameMode : MonoBehaviour
         if (!isSafe)
             return false;
 
+        quest.SetTile(questTile);
         quest.SetPosition(questPosition);
 
         GameObject questVisual = Instantiate(_questVisualPrefab, questPosition, Quaternion.identity);

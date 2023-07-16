@@ -25,6 +25,9 @@ public class Tile : MonoBehaviour
 
     private Color targetColor = Color.white;
     private Color initialColor = Color.white;
+    public Color darkColor = Color.red;
+    public Color lightColor = Color.blue;
+    public const float stepForce = 0.5f;
     private SpriteRenderer spriteRenderer;
 
     void Update()
@@ -105,6 +108,34 @@ public class Tile : MonoBehaviour
         targetColor = color;
         if (controlColor)
             isFading = true;
+    }
+
+    public void AddDarkShade()
+    {
+        var currentColor = spriteRenderer.color;
+        var lerpedColor = GetLerpedColor(currentColor, darkColor);
+        spriteRenderer.color = lerpedColor;
+        //Temp?
+        initialColor = lerpedColor;
+    }
+
+    public void AddLightShade()
+    {
+        var currentColor = spriteRenderer.color;
+        var lerpedColor = GetLerpedColor(currentColor, lightColor);
+        spriteRenderer.color = lerpedColor;
+        //Temp?
+        initialColor = lerpedColor;
+    }
+
+    public void ResetShade()
+    {
+        spriteRenderer.color = initialColor;
+    }
+
+    private Color GetLerpedColor(Color start, Color finish)
+    {
+        return Color.Lerp(start, finish, stepForce);
     }
 
     IEnumerator StartRotation()

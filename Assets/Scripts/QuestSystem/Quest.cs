@@ -38,6 +38,8 @@ public class Quest
     [System.NonSerialized] [HideInInspector] public QuestInfo questInfo;
     [System.NonSerialized] [HideInInspector] public QuestLine questLine;
 
+    [System.NonSerialized][HideInInspector] public Tile tile;
+
     public Quest()
     {
         AbilityModifiers = new List<AbilityModifier>();
@@ -75,5 +77,10 @@ public class Quest
     public void SetPosition(Vector3 inPosition)
     {
         questPosition = inPosition;
+    }
+
+    public void SetTile(Tile tile)
+    {
+        this.tile = tile;
     }
 }
