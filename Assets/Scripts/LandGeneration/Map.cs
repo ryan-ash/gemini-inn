@@ -323,12 +323,15 @@ public class Map : MonoBehaviour
         }
     }
 
-    public void ChangeRegionShade(int x, int y, int radius = 5, ShadeType shadeType = ShadeType.Neutral)
+    public void ChangeRegionShade(int x, int y, int radius, ShadeType shadeType = ShadeType.Neutral)
     {
         if(x < 0 || y < 0 || radius < 0)
         {
             throw new System.Exception($"Invalid x or y or radius data provided: x={x},y={y},radius={radius}");
         }
+
+        // due to the quest item size we need to center the whole zone
+        y--;
 
         var centerTile = tiles[x, y];
         SetTileShade(centerTile, shadeType);

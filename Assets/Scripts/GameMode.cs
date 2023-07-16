@@ -16,12 +16,14 @@ public class GameMode : MonoBehaviour
     [SerializeField] private GameObject _questVisualPrefab;
     [SerializeField] private GameObject _questRoot;
     [SerializeField] private bool useMockQuests = false;
+    public int QuestShadeSize = 5;
 
     [Header("Inn Generation")]
     [SerializeField] private GameObject innPrefab;
     [SerializeField] private GameObject innRoot;
     [SerializeField] private Vector2Int innGenerationRange = new Vector2Int(20, 10);
     [SerializeField] private Vector2Int innSandFillRange = new Vector2Int(5, 5);
+    public int GeminiInnShadeSize = 8;
 
     [Header("Quest Selection")]
     [SerializeField] private LayerMask questRaycastLayerMask;
@@ -448,6 +450,8 @@ public class GameMode : MonoBehaviour
         int fillStartX = xCoord - innSandFillRange.x / 2;
         int fillStartY = yCoord - innSandFillRange.y / 2;
 
+        Wait.Run(0.1f, () => Map.instance.ChangeRegionShade(xCoord, yCoord + 2 /*diff to compensate Inn size*/, GeminiInnShadeSize, ShadeType.Light));
+       
         // Map.instance.FillAreaWithBiom("Desert", fillStartX, fillStartY, innSandFillRange.x, innSandFillRange.y);
     }
 
