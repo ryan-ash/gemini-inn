@@ -19,21 +19,18 @@ public class Tile : MonoBehaviour
 
     void Update()
     {
-        if (isRotating)
+        if (!isRotating)
+            return;
+
+        float step = Time.deltaTime * rotationSpeed;
+        float newY = isOn ? (transform.localEulerAngles.y % 180) - step : (transform.localEulerAngles.y % 180) + step;
+
+        transform.localEulerAngles = new Vector3(0.0f, newY, 0.0f);
+        float currentEdge = isOn ? Mathf.Abs(transform.localEulerAngles.y) : Mathf.Abs(transform.localEulerAngles.y - initialY);
+        if (currentEdge < step * 2)
         {
-            float step = Time.deltaTime * rotationSpeed;
-            float newY = isOn ? (transform.localEulerAngles.y % 180) - step : (transform.localEulerAngles.y % 180) + step;
-
-            // Debug.Log("Tile #" + N.ToString() + ": " + newY.ToString());
-
-            transform.localEulerAngles = new Vector3(0.0f, newY, 0.0f);
-
-            float currentEdge = isOn ? Mathf.Abs(transform.localEulerAngles.y) : Mathf.Abs(transform.localEulerAngles.y - initialY);
-            if (currentEdge < step * 2)
-            {
-                transform.localEulerAngles = isOn ? Vector3.zero : new Vector3(0.0f, initialY, 0.0f);
-                isRotating = false;
-            }
+            transform.localEulerAngles = isOn ? Vector3.zero : new Vector3(0.0f, initialY, 0.0f);
+            isRotating = false;
         }
     }
 

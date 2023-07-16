@@ -106,8 +106,9 @@ public class UIGod : MonoBehaviour
         }
         foreach (Adventurer adventurer in adventurers)
         {
-            GameObject spawnedAdventurer = Instantiate(adventurerPrefab, root);
+            GameObject spawnedAdventurer = Instantiate(adventurerPrefab);
             spawnedAdventurer.GetComponent<AdventurerLine>().SetAdventurer(adventurer);
+            spawnedAdventurer.transform.SetParent(root, false);
         }
         UpdateAdventurersCounter(AdventurerManager.instance.adventurers.Count);
     }

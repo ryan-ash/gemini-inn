@@ -1018,7 +1018,7 @@ MonoBehaviour:
   mapOpenedTransform: {fileID: 614014134}
   cameraMoveSpeed: 3
   trackMouse: 1
-  trackMouseAngleRange: {x: 20, y: 10}
+  trackMouseAngleRange: {x: 10, y: 5}
   isCameraMoving: 0
 --- !u!1001 &99812968
 PrefabInstance:
@@ -2216,7 +2216,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1009924993852143553, guid: 403e1302fc369734bbef782f3908119e, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 350
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1009924993852143553, guid: 403e1302fc369734bbef782f3908119e, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2440,7 +2440,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3417795199324379709, guid: 403e1302fc369734bbef782f3908119e, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 350
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3518382362473079936, guid: 403e1302fc369734bbef782f3908119e, type: 3}
       propertyPath: m_IsActive
@@ -2452,11 +2452,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4851153436130736701, guid: 403e1302fc369734bbef782f3908119e, type: 3}
       propertyPath: m_Padding.m_Top
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4851153436130736701, guid: 403e1302fc369734bbef782f3908119e, type: 3}
       propertyPath: m_Padding.m_Bottom
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6198477914945619905, guid: 403e1302fc369734bbef782f3908119e, type: 3}
       propertyPath: m_AnchorMax.x
@@ -5772,6 +5772,7 @@ MonoBehaviour:
   historyRoot: {fileID: 118836850}
   adventurersRoot: {fileID: 1505941710}
   adventurersPreviewRoot: {fileID: 1170922707}
+  adventurersWrapperLayoutGroup: {fileID: 162746750}
   questTitle: {fileID: 2108630756}
   questDescription: {fileID: 64051059}
   groupName: {fileID: 0}
