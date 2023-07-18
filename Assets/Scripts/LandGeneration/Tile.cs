@@ -21,6 +21,7 @@ public class Tile : MonoBehaviour
     private bool isFading = false;
     private bool isOn = false;
     private float initialY = 0.0f;
+    private float initialZ = 0.0f;
     private int startOffset = 0;
 
     private Color targetColor = Color.white;
@@ -39,12 +40,13 @@ public class Tile : MonoBehaviour
         {
             float step = Time.deltaTime * rotationSpeed;
             float newY = isOn ? (transform.localEulerAngles.y % 180) - step : (transform.localEulerAngles.y % 180) + step;
+            float newZ = isOn ? (transform.localEulerAngles.z % 180) - step : (transform.localEulerAngles.z % 180) + step;
 
-            transform.localEulerAngles = new Vector3(0.0f, newY, 0.0f);
+            transform.localEulerAngles = new Vector3(0.0f, newY, newZ);
             float currentEdge = isOn ? Mathf.Abs(transform.localEulerAngles.y) : Mathf.Abs(transform.localEulerAngles.y - initialY);
             if (currentEdge < step * 2)
             {
-                transform.localEulerAngles = isOn ? Vector3.zero : new Vector3(0.0f, initialY, 0.0f);
+                transform.localEulerAngles = isOn ? Vector3.zero : new Vector3(0.0f, initialY, initialZ);
                 isRotating = false;
             }
         }
@@ -79,12 +81,18 @@ public class Tile : MonoBehaviour
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, Mathf.PI, 0.0f);
         transform.rotation = Quaternion.LookRotation(newDirection);
         initialY = transform.localEulerAngles.y + 90.0f;
+        initialZ = transform.localEulerAngles.z + 90.0f;
         initialY = initialY % 360.0f;
+        initialZ = initialZ % 360.0f;
         if (initialY < 0.0f)
             initialY += 180.0f;
         if (initialY > 180.0f)
             initialY -= 180.0f;
-        transform.localEulerAngles = new Vector3(0.0f, initialY, 0.0f);
+        if (initialZ < 0.0f)
+            initialZ += 180.0f;
+        if (initialZ > 180.0f)
+            initialZ -= 180.0f;
+        transform.localEulerAngles = new Vector3(0.0f, initialY, initialZ);
     }
 
     public void Show()

@@ -100,4 +100,4 @@ MonoBehaviour:
   fadeSpeed: 5
   setValueOnStart: 1
   setOn: 0
-  hideColor: {r: 1, g: 1, b: 1, a: 0.5019608}
+  hideColor: {r: 1, g: 1, b: 1, a: 0}
