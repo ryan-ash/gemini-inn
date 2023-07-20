@@ -25,6 +25,7 @@ public class UIGod : MonoBehaviour
     public Transform historyRoot;
     public Transform adventurersRoot;
     public Transform adventurersPreviewRoot;
+    public FontAwesome adventurerGroupIcon;
 
     [Header("Negotiation")]
     public TextWriter questTitle;
@@ -99,20 +100,24 @@ public class UIGod : MonoBehaviour
         quest.questLine = spawnedQuest.GetComponent<QuestLine>();
     }
 
-    public void FillDrawerWithAdventurers(List<Adventurer> adventurers, bool usePreviewRoot = false)
+    public void FillDrawerWithAdventureGroup(AdventurerGroup adventurerGroup, bool usePreviewRoot = false)
     {
         Transform root = usePreviewRoot ? adventurersPreviewRoot : adventurersRoot;
         for (int i = 0; i < root.childCount; i++)
         {
             Destroy(root.GetChild(i).gameObject);
         }
-        foreach (Adventurer adventurer in adventurers)
+        foreach (Adventurer adventurer in adventurerGroup.adventurers)
         {
             GameObject spawnedAdventurer = Instantiate(adventurerPrefab);
             spawnedAdventurer.GetComponent<AdventurerLine>().SetAdventurer(adventurer);
             spawnedAdventurer.transform.SetParent(root, false);
         }
         UpdateAdventurersCounter(AdventurerManager.instance.adventurers.Count);
+        if (usePreviewRoot)
+        {
+            adventurerGroupIcon.ChangeIcon(adventurerGroup.icon);
+        }
     }
 
     public void AppendDrawerWithAdventurer(Adventurer adventurer, bool usePreviewRoot = false)

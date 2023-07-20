@@ -60,17 +60,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   adventurerTableLights: {fileID: 0}
   fadeDuration: 0.5
-  groupState: 0
+  possibleGroupIcons:
+  - fa-podcast
+  - fa-eercast
+  - fa-grav
+  - fa-superpowers
+  - fa-wpexplorer
+  - fa-beer
+  - fa-bomb
+  - fa-coffee
+  - fa-eye
+  - fa-fire
+  - fa-hand-lizard-o
+  - fa-hand-peace-o
+  - fa-hourglass
+  - fa-bolt
+  - fa-lemon-o
+  - fa-heart
+  - fa-snowflake-o
+  - fa-shield
+  - fa-tree
+  - fa-diamond
+  - fa-cloud
+  icon: 
   adventurers: []
-  quest:
-    questName: 
-    questDescription: 
-    Biomes: []
-    successAttempts: 0
-    timeout: 0
-    baseDuration: 15
-    successOnTimeout: 0
-    BaseSuccessRate: 1
-    AbilityModifiers: []
-    StatModifiers: []
-    questState: 0

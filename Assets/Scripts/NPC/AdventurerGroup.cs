@@ -17,6 +17,8 @@ public class QuestGroup
     [HideInInspector] public GroupState groupState = GroupState.Idle;
     [HideInInspector] public List<Adventurer> adventurers;
     [HideInInspector] public Quest quest;
+
+    public string icon;
 }
 
 public class AdventurerGroup : MonoBehaviour
@@ -26,6 +28,9 @@ public class AdventurerGroup : MonoBehaviour
 
     [Header("Settings")]
     public float fadeDuration = 0.5f;
+    public List<string> possibleGroupIcons;
+
+    public string icon;
 
     [HideInInspector] public List<Adventurer> adventurers;
 
@@ -44,6 +49,8 @@ public class AdventurerGroup : MonoBehaviour
             defaultIntensities.Add(light, light.intensity);
             light.intensity = 0.0f;
         }
+
+        PickRandomIcon();
     }
 
     void Update()
@@ -100,6 +107,15 @@ public class AdventurerGroup : MonoBehaviour
         return true;
     }
 
+    public string PickRandomIcon()
+    {
+        int index = Random.Range(0, possibleGroupIcons.Count);
+        string newIcon = possibleGroupIcons[index];
+        icon = newIcon;
+        // update icon in widgets if visible
+        return icon;
+    }
+
     private void RecalculateGroupStats()
     {
         // some code for recalculating group stats
@@ -137,6 +153,7 @@ public class AdventurerGroup : MonoBehaviour
         questGroup.quest = GameMode.instance.selectedQuest;
         questGroup.quest.questGroup = questGroup;
         questGroup.quest.questState = QuestState.OnRoad;
+        questGroup.icon = icon;
         GameMode.instance.RegisterQuestGroup(questGroup);
 
         for (int i = 0; i < adventurers.Count; i++)
@@ -150,5 +167,6 @@ public class AdventurerGroup : MonoBehaviour
 
         UIGod.instance.ReleaseRemovedAdventurers();
         RecalculateGroupStats();
+        PickRandomIcon();
     }
 }
