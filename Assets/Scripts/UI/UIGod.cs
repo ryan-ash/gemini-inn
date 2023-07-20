@@ -40,6 +40,8 @@ public class UIGod : MonoBehaviour
     private Window[] windows;
     private GameObject spawnedQuests;
 
+    private bool priorityWindowPinned = false;
+
     void Start()
     {
         instance = this;
@@ -168,18 +170,22 @@ public class UIGod : MonoBehaviour
 
     public void BeginAcceptingQuest()
     {
+        UnpinPriorityWindow();
         CloseAllWindows();
         GameMode.instance.AgreeToQuest();
     }
 
     public void BeginDecliningQuest()
     {
+        UnpinPriorityWindow();
         CloseAllWindows();
         GameMode.instance.DisagreeToQuest();
     }
 
     public void OpenWindow(WindowType windowType)
     {
+        if (priorityWindowPinned)
+            return;
         AudioRevolver.Fire(AudioNames.Click);
         CloseAllWindows();
         foreach (Window window in windows)
@@ -203,6 +209,16 @@ public class UIGod : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public void PinPriorityWindow()
+    {
+        priorityWindowPinned = true;
+    }
+
+    public void UnpinPriorityWindow()
+    {
+        priorityWindowPinned = false;
     }
 
     public void OpenWindowSettings()

@@ -259,7 +259,8 @@ public class GameMode : MonoBehaviour
 
     public void ToggleMap()
     {
-        if (Inn.instance.isCameraMoving && !Inn.instance.IsCloserToTarget())
+        bool justStartedMovingIntoOtherState = Inn.instance.isCameraMoving && !Inn.instance.IsCloserToTarget();
+        if (justStartedMovingIntoOtherState || isNegotiating)
             return;
 
         AudioRevolver.Fire(AudioNames.MapSound);
@@ -322,6 +323,7 @@ public class GameMode : MonoBehaviour
         float OpenWindowTime = rotationLengthBeforeMovingDuringNegotiation + CalculateMoveTime() + delayBeforeMovingDuringNegotiation;
         Wait.Run(OpenWindowTime, () => {
             UIGod.instance.OpenWindowNegotiation();
+            UIGod.instance.PinPriorityWindow();
         });
 
         isNegotiating = true;
