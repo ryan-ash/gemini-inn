@@ -46,10 +46,11 @@ public class AdventurerManager : MonoBehaviour
         StartCoroutine(TryToSpawnAdventurer());
     }
 
-    public void ReleaseAdventurer(Adventurer adventurer)
+    public void ReleaseAdventurer(Adventurer adventurer, bool notifyUI = false)
     {
         adventurers.Remove(adventurer);
-        UIGod.instance.ReleaseRemovedAdventurers();
+        if (notifyUI)
+            UIGod.instance.ReleaseRemovedAdventurers();
     }
 
     private void SpawnAdventurer(bool ignoreChance = false)

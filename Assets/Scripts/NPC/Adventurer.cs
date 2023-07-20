@@ -32,7 +32,7 @@ public class Adventurer : MonoBehaviour
     [SerializeField]
     private List<Mesh> FeetVariations;
 
-    [HideInInspector] public AdventurerGroup group;
+    [HideInInspector] public QuestGroup group;
 
     private Vector3 initialPosition;
     private Quaternion initialRotation;

@@ -48,9 +48,10 @@ public class GameMode : MonoBehaviour
     private bool isChoosingAdventurers = false;
     private bool isNegotiating = false;
 
-    [HideInInspector] public List<Mission> activeMissions;
-    [HideInInspector] public List<Mission> failedMissions;
-    [HideInInspector] public List<Mission> successfulMissions;
+    [HideInInspector] public List<Mission> activeMissions = new List<Mission>();
+    [HideInInspector] public List<Mission> failedMissions = new List<Mission>();
+    [HideInInspector] public List<Mission> successfulMissions = new List<Mission>();
+    [HideInInspector] public List<QuestGroup> questGroups = new List<QuestGroup>();
 
     private GameObject consideredQuestMarker;
     private Quest consideredQuest;
@@ -333,15 +334,10 @@ public class GameMode : MonoBehaviour
 
     public void AgreeToQuest()
     {
-        selectedQuest.adventureGroup = selectedAdventurerGroup;
-        selectedAdventurerGroup.quest = selectedQuest;
+        selectedAdventurerGroup.AcceptQuest();
+        selectedAdventurerGroup = null;
         UIGod.instance.UpdateQuestTitle("");
 
-        GameObject newAdventurerGroup = Instantiate(selectedAdventurerGroup.gameObject, selectedAdventurerGroup.transform.position, selectedAdventurerGroup.transform.rotation);
-        AdventurerGroup newAdventurerGroupComponent = newAdventurerGroup.GetComponent<AdventurerGroup>();
-        newAdventurerGroupComponent.adventurers = new List<Adventurer>();
-
-        selectedAdventurerGroup.AcceptQuest();
         selectedQuestMarker.GetComponent<QuestInfo>().SetInProgress();
 
         UpdateQuestCount();
@@ -370,6 +366,11 @@ public class GameMode : MonoBehaviour
             adventurer.MoveBack(moveTime);
         }
         selectedAdventurerGroup.LightUpAdventurerTable();
+    }
+
+    public void RegisterQuestGroup(QuestGroup questGroup)
+    {
+        questGroups.Add(questGroup);
     }
 
     public void UpdateQuestState(Mission mission, Quest quest, QuestState newState, bool isTimeout = false)

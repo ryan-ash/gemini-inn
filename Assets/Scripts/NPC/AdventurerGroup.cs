@@ -4,13 +4,19 @@ using UnityEngine;
 
 public enum GroupState
 {
-    Empty,
     Idle,
     Negotiating,
     OnRoadToQuest,
     Successful,
     Dead,
     Mad
+}
+
+public class QuestGroup
+{
+    [HideInInspector] public GroupState groupState = GroupState.Idle;
+    [HideInInspector] public List<Adventurer> adventurers;
+    [HideInInspector] public Quest quest;
 }
 
 public class AdventurerGroup : MonoBehaviour
@@ -21,9 +27,7 @@ public class AdventurerGroup : MonoBehaviour
     [Header("Settings")]
     public float fadeDuration = 0.5f;
 
-    [HideInInspector] public GroupState groupState = GroupState.Empty;
     [HideInInspector] public List<Adventurer> adventurers;
-    [HideInInspector] public Quest quest;
 
     private bool isAnimatingLight = false;
     private bool isLightUp = false;
@@ -74,13 +78,12 @@ public class AdventurerGroup : MonoBehaviour
 
     public void AddAdventurer(Adventurer adventurer)
     {
-        adventurers.Add(adventurer);
-        adventurer.group = this;
-        if (groupState == GroupState.Empty)
+        if (adventurers.Count == 0)
         {
-            groupState = GroupState.Idle;
-            OnGroupStateUpdated();
+            LightUpAdventurerTable();
         }
+        adventurers.Add(adventurer);
+        RecalculateGroupStats();
     }
 
     private bool AllLightsFinishedAnimating(float targetIntensity)
@@ -95,21 +98,6 @@ public class AdventurerGroup : MonoBehaviour
                 return false;
         }
         return true;
-    }
-
-    private void OnGroupStateUpdated()
-    {
-        RecalculateGroupStats();
-        if (groupState == GroupState.Idle && adventurers.Count == 1)
-        {
-            LightUpAdventurerTable();
-        }
-
-        if (groupState == GroupState.OnRoadToQuest)
-        {
-            quest.questState = QuestState.OnRoad;
-            GameMode.instance.OnQuestUpdated(quest);
-        }
     }
 
     private void RecalculateGroupStats()
@@ -143,10 +131,14 @@ public class AdventurerGroup : MonoBehaviour
 
     public void AcceptQuest()
     {
-        groupState = GroupState.OnRoadToQuest;
-        quest = GameMode.instance.selectedQuest;
-        OnGroupStateUpdated();
-                
+        QuestGroup questGroup = new QuestGroup();
+        questGroup.groupState = GroupState.OnRoadToQuest;
+        questGroup.adventurers = adventurers;
+        questGroup.quest = GameMode.instance.selectedQuest;
+        questGroup.quest.questGroup = questGroup;
+        questGroup.quest.questState = QuestState.OnRoad;
+        GameMode.instance.RegisterQuestGroup(questGroup);
+
         for (int i = 0; i < adventurers.Count; i++)
         {
             var adventurer = adventurers[i];
@@ -154,6 +146,9 @@ public class AdventurerGroup : MonoBehaviour
             AdventurerManager.instance.ReleaseAdventurer(adventurer);
         }
 
-        GetComponent<Collider>().enabled = false;
+        adventurers.Clear();
+
+        UIGod.instance.ReleaseRemovedAdventurers();
+        RecalculateGroupStats();
     }
 }
