@@ -40,9 +40,12 @@ public class GameMode : MonoBehaviour
     [SerializeField] private float randomReplicSpawnDelayDuringNegotiation = 0.5f;
     [SerializeField] private Vector3 callbackReplicOffset = new Vector3(0.0f, 0.0f, 0.0f);
 
-    [Header("Quest Reporting")]
-    [SerializeField] private GameObject _questEventPrefab;
-    [SerializeField] private GameObject _questEventRoot;
+    [Header("Quest Progress")]
+    [SerializeField] private GameObject questEventPrefab;
+    [SerializeField] private GameObject questEventRoot;
+    [SerializeField] private GameObject mapGroupPrefab;
+    [SerializeField] private GameObject mapGroupRoot;
+    [SerializeField] private float moveToQuestTime = 5.0f;
 
     private bool isMapOpen = false;
     private bool isChoosingAdventurers = false;
@@ -337,9 +340,16 @@ public class GameMode : MonoBehaviour
     public void AgreeToQuest()
     {
         selectedAdventurerGroup.AcceptQuest();
+
+        GameObject spawnedMapGroup = Instantiate(mapGroupPrefab, generatedInn.transform.position, Quaternion.identity);
+        spawnedMapGroup.transform.SetParent(mapGroupRoot.transform, false);
+        spawnedMapGroup.transform.localPosition = new Vector3(spawnedMapGroup.transform.localPosition.x, spawnedMapGroup.transform.localPosition.y, 0.1f);
+        GroupOnMap groupOnMap = spawnedMapGroup.GetComponent<GroupOnMap>();
+        groupOnMap.SetIcon(selectedAdventurerGroup.icon);
+        groupOnMap.Move(selectedQuestMarker.transform.position, moveToQuestTime, true);
+
         selectedAdventurerGroup = null;
         UIGod.instance.UpdateQuestTitle("");
-
         selectedQuestMarker.GetComponent<QuestInfo>().SetInProgress();
 
         UpdateQuestCount();
@@ -460,10 +470,10 @@ public class GameMode : MonoBehaviour
 
     public void OnQuestUpdated(Quest quest)
     {
-        if (_questEventPrefab == null || _questEventRoot == null)
+        if (questEventPrefab == null || questEventRoot == null)
             return;
 
-        var questEventObject = Instantiate(_questEventPrefab, _questEventRoot.transform);
+        var questEventObject = Instantiate(questEventPrefab, questEventRoot.transform);
         var questEvent = questEventObject.GetComponent<QuestEvent>();
         questEvent.SetQuest(quest);
         questEvent.ShowEvent();

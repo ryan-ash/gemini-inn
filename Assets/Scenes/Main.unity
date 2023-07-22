@@ -782,8 +782,11 @@ MonoBehaviour:
   mandatoryReplicSpawnDelayDuringNegotiation: 0.1
   randomReplicSpawnDelayDuringNegotiation: 0.5
   callbackReplicOffset: {x: 0, y: 2, z: -1}
-  _questEventPrefab: {fileID: 0}
-  _questEventRoot: {fileID: 0}
+  questEventPrefab: {fileID: 0}
+  questEventRoot: {fileID: 0}
+  mapGroupPrefab: {fileID: 5943494684835930226, guid: f688588decf472b4f91fc2693a440154, type: 3}
+  mapGroupRoot: {fileID: 177470658}
+  moveToQuestTime: 5
   activeMissions: []
   failedMissions: []
   successfulMissions: []

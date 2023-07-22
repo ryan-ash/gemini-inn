@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4599432396856266960}
+  - component: {fileID: 2754913774271230310}
   m_Layer: 0
-  m_Name: MapGroupIcon
+  m_Name: MapGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,6 +34,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2754913774271230310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5943494684835930226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a538dcf98bbf5e40999cec1e9697630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 1203032631697253587}
+  circle: {fileID: 6951728358534881517}
+  fadeTime: 1
+  fadeType: 6
+  moveType: 6
 --- !u!1 &7581880602956640153
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,7 +126,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8460d8600e458024e8c8ee2874353d79, type: 3}
-  m_Color: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 0.39215687}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.72156864}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -188,6 +206,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66fa0b8113455a14cb87b56b59ea89b0, type: 3}
+--- !u!114 &1203032631697253587 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114592145934093050, guid: 66fa0b8113455a14cb87b56b59ea89b0, type: 3}
+  m_PrefabInstance: {fileID: 1235423629676064297}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8b13bd774399774ead87e0f4207c554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1237324355964353315 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4152635649594634, guid: 66fa0b8113455a14cb87b56b59ea89b0, type: 3}
