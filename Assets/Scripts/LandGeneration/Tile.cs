@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
+    public SpriteRenderer spriteRenderer;
     public BiomePreset selectedBiome;
     public bool controlRotation = false;
     public float waitBeforeRotating = 0.1f;
@@ -29,7 +30,6 @@ public class Tile : MonoBehaviour
     public Color darkColor = Color.red;
     public Color lightColor = Color.blue;
     public const float stepForce = 0.5f;
-    private SpriteRenderer spriteRenderer;
 
     void Update()
     {
@@ -65,7 +65,6 @@ public class Tile : MonoBehaviour
 
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
         initialColor = spriteRenderer.color;
         SetColor(initialColor);
         if (controlRotation || controlColor)

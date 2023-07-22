@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2d1d2caf9b4ef440921e78287c2e8ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 6340725537460707043}
   selectedBiome: {fileID: 0}
   controlRotation: 1
   waitBeforeRotating: 0.01
