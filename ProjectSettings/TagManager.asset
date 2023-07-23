@@ -50,6 +50,9 @@ TagManager:
   - name: MiddleGround
     uniqueID: 2077378767
     locked: 0
+  - name: PreForeGround
+    uniqueID: 2996325147
+    locked: 0
   - name: ForeGround
     uniqueID: 2991409007
     locked: 0

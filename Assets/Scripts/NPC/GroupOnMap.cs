@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GroupOnMap : MonoBehaviour
 {
-    public FontAwesome3D icon;
+    public FontAwesome icon;
     public SpriteRenderer circle;
 
     public float fadeTime = 1.0f;
