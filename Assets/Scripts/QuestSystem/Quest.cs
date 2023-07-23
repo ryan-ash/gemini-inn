@@ -38,6 +38,7 @@ public class Quest
     [System.NonSerialized] [HideInInspector] public Mission mission;
     [System.NonSerialized] [HideInInspector] public QuestInfo questInfo;
     [System.NonSerialized] [HideInInspector] public QuestLine questLine;
+    [System.NonSerialized] [HideInInspector] public GroupOnMap groupOnMap;
 
     [System.NonSerialized][HideInInspector] public Tile tile;
 

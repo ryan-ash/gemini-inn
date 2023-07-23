@@ -358,13 +358,12 @@ public class GameMode : MonoBehaviour
         spawnedMapGroup.transform.localPosition = new Vector3(spawnedMapGroup.transform.localPosition.x, spawnedMapGroup.transform.localPosition.y, 0.1f);
         GroupOnMap groupOnMap = spawnedMapGroup.GetComponent<GroupOnMap>();
         groupOnMap.SetIcon(selectedAdventurerGroup.icon);
+        selectedQuest.groupOnMap = groupOnMap;
 
-        // rough estimate for now since we're not checking which corner is furthest
-        // TODO: check for furthest corner first
-        // TODO: apply group speed as well
-        float maxMoveDistance = Vector3.Distance(generatedInn.transform.position, Map.instance.GetTilePosition(0, 0));
+        // TODO: apply group speed modifier as well
+        float maxMoveDistance = Vector3.Distance(mapGroupRoot.transform.position, Map.instance.GetTilePosition(0, 0));
         float distanceToQuest = Vector3.Distance(generatedInn.transform.position, selectedQuestMarker.transform.position);
-        float moveTimeAlpha = distanceToQuest / maxMoveDistance;
+        float moveTimeAlpha = Mathf.Clamp01(distanceToQuest / maxMoveDistance);
         float moveToQuestTime = Mathf.Lerp(minMoveToQuestTime, maxMoveToQuestTime, moveTimeAlpha);
 
         groupOnMap.Move(selectedQuestMarker.transform.position, moveToQuestTime, true);
@@ -422,6 +421,8 @@ public class GameMode : MonoBehaviour
         {
             //temp shading
             Map.instance.ChangeRegionShade(tile.X, tile.Y, QuestShadeSize, ShadeType.Light);
+
+            quest.groupOnMap.Move(generatedInn.transform.position, quest.roadDuration, true, true);
 
             Quest newAvailableQuest = mission.GetAvailableQuest();
             bool newQuestSuccess = newAvailableQuest != null;
