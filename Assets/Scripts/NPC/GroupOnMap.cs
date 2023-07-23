@@ -24,13 +24,15 @@ public class GroupOnMap : MonoBehaviour
         icon.ChangeIcon(iconName);
     }
 
-    public void Move(Vector3 position, float time, bool dieInTheEnd = false)
+    public void Move(Vector3 position, float time, bool fadeOutInTheEnd = false, bool dieInTheEnd = false)
     {
         moveTime = time;
         movePosition = position;
         LeanTween.move(gameObject, position, time).setEase(moveType).setOnComplete(() => {
-            if (dieInTheEnd)
-                Die();
+            if (fadeOutInTheEnd)
+                FadeOut(dieInTheEnd);
+            else if (dieInTheEnd)
+                Destroy(gameObject);
         });
     }
 
@@ -43,13 +45,14 @@ public class GroupOnMap : MonoBehaviour
         }).setEase(fadeType);
     }
 
-    public void Die()
+    public void FadeOut(bool die = false)
     {
         LeanTween.alpha(gameObject, 0.0f, fadeTime).setOnUpdate((float val) => {
             icon.color = Color.Lerp(initialIconColor, offIconColor, val);
             circle.color = Color.Lerp(initialCircleColor, offCircleColor, val);
         }).setEase(fadeType).setOnComplete(() => {
-            Destroy(gameObject);
+            if (die)
+                Destroy(gameObject);
         });
     }
 

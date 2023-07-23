@@ -47,6 +47,10 @@ public class GameMode : MonoBehaviour
     [SerializeField] private GameObject mapGroupRoot;
     [SerializeField] private float moveToQuestTime = 5.0f;
 
+    [Header("Quest Result")]
+    [SerializeField] private GameObject questResultPrefab;
+    [SerializeField] private GameObject questResultRoot;
+
     private bool isMapOpen = false;
     private bool isChoosingAdventurers = false;
     private bool isNegotiating = false;
@@ -399,7 +403,7 @@ public class GameMode : MonoBehaviour
         if (newState == QuestState.Success)
         {
             //temp shading
-            Map.instance.ChangeRegionShade(tile.X, tile.Y, 5, ShadeType.Light);
+            Map.instance.ChangeRegionShade(tile.X, tile.Y, QuestShadeSize, ShadeType.Light);
 
             Quest newAvailableQuest = mission.GetAvailableQuest();
             bool newQuestSuccess = newAvailableQuest != null;
@@ -419,7 +423,7 @@ public class GameMode : MonoBehaviour
         else if (newState == QuestState.Failure)
         {
             //temp shading
-            Map.instance.ChangeRegionShade(tile.X, tile.Y, 5, ShadeType.Dark);
+            Map.instance.ChangeRegionShade(tile.X, tile.Y, QuestShadeSize, ShadeType.Dark);
 
             failedMissions.Add(mission);
         }
