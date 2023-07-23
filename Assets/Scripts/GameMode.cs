@@ -353,7 +353,7 @@ public class GameMode : MonoBehaviour
     {
         selectedAdventurerGroup.AcceptQuest();
 
-        GameObject spawnedMapGroup = Instantiate(mapGroupPrefab, generatedInn.transform.position, Quaternion.identity);
+        GameObject spawnedMapGroup = Instantiate(mapGroupPrefab, generatedInn.transform.localPosition, Quaternion.identity);
         spawnedMapGroup.transform.SetParent(mapGroupRoot.transform, false);
         spawnedMapGroup.transform.localPosition = new Vector3(spawnedMapGroup.transform.localPosition.x, spawnedMapGroup.transform.localPosition.y, 0.1f);
         GroupOnMap groupOnMap = spawnedMapGroup.GetComponent<GroupOnMap>();
@@ -422,6 +422,7 @@ public class GameMode : MonoBehaviour
             //temp shading
             Map.instance.ChangeRegionShade(tile.X, tile.Y, QuestShadeSize, ShadeType.Light);
 
+            quest.groupOnMap.FadeIn();
             quest.groupOnMap.Move(generatedInn.transform.position, quest.roadDuration, true, true);
 
             Quest newAvailableQuest = mission.GetAvailableQuest();

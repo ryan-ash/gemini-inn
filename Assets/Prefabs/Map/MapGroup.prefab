@@ -178,7 +178,7 @@ MonoBehaviour:
   circle: {fileID: 6951728358534881517}
   fadeTime: 1
   fadeType: 6
-  moveType: 6
+  moveType: 4
 --- !u!1 &7581880602956640153
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,7 +254,7 @@ SpriteRenderer:
   m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8460d8600e458024e8c8ee2874353d79, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.72156864}
+  m_Color: {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 0.72156864}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -290,15 +290,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4011028831949063439, guid: 4bbd3563fc231aa4586405159ff57ab0, type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0.735849
       objectReference: {fileID: 0}
     - target: {fileID: 4011028831949063439, guid: 4bbd3563fc231aa4586405159ff57ab0, type: 3}
       propertyPath: m_Color.g
-      value: 1
+      value: 0.735849
       objectReference: {fileID: 0}
     - target: {fileID: 4011028831949063439, guid: 4bbd3563fc231aa4586405159ff57ab0, type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.735849
       objectReference: {fileID: 0}
     - target: {fileID: 4011028831949063439, guid: 4bbd3563fc231aa4586405159ff57ab0, type: 3}
       propertyPath: m_FontData.m_FontSize
@@ -310,15 +310,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4011028831949158945, guid: 4bbd3563fc231aa4586405159ff57ab0, type: 3}
       propertyPath: color.b
-      value: 1
+      value: 0.735849
       objectReference: {fileID: 0}
     - target: {fileID: 4011028831949158945, guid: 4bbd3563fc231aa4586405159ff57ab0, type: 3}
       propertyPath: color.g
-      value: 1
+      value: 0.735849
       objectReference: {fileID: 0}
     - target: {fileID: 4011028831949158945, guid: 4bbd3563fc231aa4586405159ff57ab0, type: 3}
       propertyPath: color.r
-      value: 1
+      value: 0.735849
       objectReference: {fileID: 0}
     - target: {fileID: 4011028831954601099, guid: 4bbd3563fc231aa4586405159ff57ab0, type: 3}
       propertyPath: m_Name

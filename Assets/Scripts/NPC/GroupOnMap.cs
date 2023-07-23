@@ -26,8 +26,6 @@ public class GroupOnMap : MonoBehaviour
 
     public void Move(Vector3 position, float time, bool fadeOutInTheEnd = false, bool dieInTheEnd = false)
     {
-        FadeIn();
-
         moveTime = time;
         movePosition = position;
         LeanTween.move(gameObject, position, time).setEase(moveType).setOnComplete(() => {
@@ -40,7 +38,6 @@ public class GroupOnMap : MonoBehaviour
 
     public void FadeIn()
     {
-        // LeanTween.alpha(gameObject, 0.0f, 0.0f);
         LeanTween.alpha(icon.gameObject, 1.0f, fadeTime).setOnUpdate((float val) => {
             icon.color = Color.Lerp(offIconColor, initialIconColor, val);
             circle.color = Color.Lerp(offCircleColor, initialCircleColor, val);
@@ -49,7 +46,8 @@ public class GroupOnMap : MonoBehaviour
 
     public void FadeOut(bool die = false)
     {
-        LeanTween.alpha(icon.gameObject, 0.0f, fadeTime).setOnUpdate((float val) => {
+        Debug.Log("FadeOut");
+        LeanTween.alpha(icon.gameObject, 1.0f, fadeTime).setOnUpdate((float val) => {
             icon.color = Color.Lerp(initialIconColor, offIconColor, val);
             circle.color = Color.Lerp(initialCircleColor, offCircleColor, val);
         }).setEase(fadeType).setOnComplete(() => {
@@ -67,6 +65,7 @@ public class GroupOnMap : MonoBehaviour
         offCircleColor = new Color(initialCircleColor.r, initialCircleColor.g, initialCircleColor.b, 0.0f);
         icon.color = offIconColor;
         circle.color = offCircleColor;
+        FadeIn();
     }
 
     // Update is called once per frame
