@@ -32,6 +32,7 @@ public class Quest
     [System.NonSerialized] [HideInInspector] public Vector3 questPosition;
     [HideInInspector] public QuestState questState = QuestState.NotStarted;
     [System.NonSerialized] [HideInInspector] public float questTimer = 0.0f;
+    [System.NonSerialized] [HideInInspector] public float roadDuration = 0.0f;
 
     [System.NonSerialized] [HideInInspector] public QuestGroup questGroup;
     [System.NonSerialized] [HideInInspector] public Mission mission;

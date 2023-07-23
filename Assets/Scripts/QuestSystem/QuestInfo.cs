@@ -16,6 +16,7 @@ public class QuestInfo : MonoBehaviour
     [Header("Settings")]
     public float fadeDuration = 0.5f;
     public Color timeoutColor = Color.white;
+    public Color roadColor = Color.cyan;
     public Color progressColor = Color.yellow;
     public Color successColor = Color.green;
     public Color failureColor = Color.red;
@@ -26,19 +27,16 @@ public class QuestInfo : MonoBehaviour
     private BoxCollider closeCollider;
     private Animator animator;
     private bool isQuestTimeoutActive = false;
+    private bool isQuestOnRoad = false;
     private bool isQuestInProgress = false;
     private bool isQuestOver = false;
     private bool isQuestSuccess = false;
-    private float questTimeout = 0.0f;
-    private float questDuration = 0.0f;
     private Quest quest;
 
     public void SetQuest(Quest InQuest)
     {
         quest = InQuest;
-        questTimeout = quest.timeout;
-        questDuration = quest.baseDuration;
-        isQuestTimeoutActive = questTimeout > 0.0f;
+        isQuestTimeoutActive = quest.timeout > 0.0f;
         if (isQuestTimeoutActive)
         {
             questSliderFill.color = timeoutColor;
@@ -81,39 +79,49 @@ public class QuestInfo : MonoBehaviour
         }
     }
 
+    public void SetOnRoad()
+    {
+        isQuestOnRoad = true;
+
+        questName.color = roadColor;
+        questInProgress.SetActive(true);
+        questSliderFill.color = roadColor;
+        questSlider.value = 0.0f;
+    }
+
     public void SetInProgress()
     {
-        animator.SetBool("QuestInProgress", true);
-        questName.color = Color.yellow;
-        questInProgress.SetActive(true);
+        isQuestOnRoad = false;
         isQuestInProgress = true;
+
+        animator.SetBool("QuestInProgress", true);
+        questName.color = progressColor;
         questSliderFill.color = progressColor;
         questSlider.value = 0.0f;
     }
 
     public void SetOver(bool isSuccess = false, bool isTimeout = false)
     {
-        animator.SetBool("QuestOver", true);
-        questName.color = Color.gray;
-        questInProgress.SetActive(false);
         isQuestInProgress = false;
         isQuestOver = true;
         isQuestSuccess = isSuccess;
+
+        animator.SetBool("QuestOver", true);
+        questInProgress.SetActive(false);
         questSliderFill.color = isSuccess ? successColor : failureColor;
+        questName.color = questSliderFill.color;
         questSlider.value = 1.0f;
         AudioRevolver.Fire(isTimeout ? AudioNames.MugOnTable : isSuccess ? AudioNames.QuestCompleted : AudioNames.QuestFailed);
-
-        // GameMode.instance.UpdateQuestState(quest.mission, quest, isSuccess ? QuestState.Success : QuestState.Failure);
-        // update audio logic later
     }
 
     void UpdateQuestSlider()
     {
         // update quest slider
         questSlider.value = 
-            isQuestInProgress ? quest.questTimer / questDuration : 
+            isQuestOnRoad ? quest.questTimer / quest.roadDuration :
+            isQuestInProgress ? quest.questTimer / quest.baseDuration : 
             isQuestOver ? 1.0f :
-            isQuestTimeoutActive ? 1.0f - quest.questTimer / questTimeout :
+            isQuestTimeoutActive ? 1.0f - quest.questTimer / quest.timeout :
             0.0f;
     }
 

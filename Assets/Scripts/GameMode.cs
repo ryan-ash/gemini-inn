@@ -45,7 +45,8 @@ public class GameMode : MonoBehaviour
     [SerializeField] private GameObject questEventRoot;
     [SerializeField] private GameObject mapGroupPrefab;
     [SerializeField] private GameObject mapGroupRoot;
-    [SerializeField] private float moveToQuestTime = 5.0f;
+    [SerializeField] private float minMoveToQuestTime = 2.0f;
+    [SerializeField] private float maxMoveToQuestTime = 10.0f;
 
     [Header("Quest Result")]
     [SerializeField] private GameObject questResultPrefab;
@@ -189,7 +190,14 @@ public class GameMode : MonoBehaviour
                     questsToStop.Add(questToStop);
                 }
             }
-            else if (quest.questState == QuestState.InProgress || quest.questState == QuestState.OnRoad)
+            else if (quest.questState == QuestState.OnRoad)
+            {
+                if (quest.questTimer >= quest.roadDuration)
+                {
+                    UpdateQuestState(mission, quest, QuestState.InProgress, false);
+                }
+            }
+            else if (quest.questState == QuestState.InProgress)
             {
                 quest.questTimer += Time.deltaTime;
                 if (quest.questTimer >= quest.baseDuration)
@@ -350,11 +358,21 @@ public class GameMode : MonoBehaviour
         spawnedMapGroup.transform.localPosition = new Vector3(spawnedMapGroup.transform.localPosition.x, spawnedMapGroup.transform.localPosition.y, 0.1f);
         GroupOnMap groupOnMap = spawnedMapGroup.GetComponent<GroupOnMap>();
         groupOnMap.SetIcon(selectedAdventurerGroup.icon);
+
+        // rough estimate for now since we're not checking which corner is furthest
+        // TODO: check for furthest corner first
+        // TODO: apply group speed as well
+        float maxMoveDistance = Vector3.Distance(generatedInn.transform.position, Map.instance.GetTilePosition(0, 0));
+        float distanceToQuest = Vector3.Distance(generatedInn.transform.position, selectedQuestMarker.transform.position);
+        float moveTimeAlpha = distanceToQuest / maxMoveDistance;
+        float moveToQuestTime = Mathf.Lerp(minMoveToQuestTime, maxMoveToQuestTime, moveTimeAlpha);
+
         groupOnMap.Move(selectedQuestMarker.transform.position, moveToQuestTime, true);
+        selectedQuest.roadDuration = moveToQuestTime;
 
         selectedAdventurerGroup = null;
         UIGod.instance.UpdateQuestTitle("");
-        selectedQuestMarker.GetComponent<QuestInfo>().SetInProgress();
+        selectedQuestMarker.GetComponent<QuestInfo>().SetOnRoad();
 
         UpdateQuestCount();
         UpdateAdventureCount();
@@ -426,6 +444,10 @@ public class GameMode : MonoBehaviour
             Map.instance.ChangeRegionShade(tile.X, tile.Y, QuestShadeSize, ShadeType.Dark);
 
             failedMissions.Add(mission);
+        }
+        else if (newState == QuestState.InProgress)
+        {
+            quest.questInfo.SetInProgress();
         }
         UpdateQuestCount();
     }
