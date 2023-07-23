@@ -11,7 +11,7 @@ public class QuestInfo : MonoBehaviour
     public Text questDescription;
     public Slider questSlider;
     public Image questSliderFill;
-    public GameObject questInProgress;
+    public SpriteRenderer questMapCircle;
 
     [Header("Settings")]
     public float fadeDuration = 0.5f;
@@ -84,7 +84,7 @@ public class QuestInfo : MonoBehaviour
         isQuestOnRoad = true;
 
         questName.color = roadColor;
-        questInProgress.SetActive(true);
+        questMapCircle.gameObject.SetActive(true);
         questSliderFill.color = roadColor;
         questSlider.value = 0.0f;
     }
@@ -97,6 +97,7 @@ public class QuestInfo : MonoBehaviour
         animator.SetBool("QuestInProgress", true);
         questName.color = progressColor;
         questSliderFill.color = progressColor;
+        questMapCircle.color = progressColor;
         questSlider.value = 0.0f;
     }
 
@@ -107,7 +108,7 @@ public class QuestInfo : MonoBehaviour
         isQuestSuccess = isSuccess;
 
         animator.SetBool("QuestOver", true);
-        questInProgress.SetActive(false);
+        questMapCircle.gameObject.SetActive(false);
         questSliderFill.color = isSuccess ? successColor : failureColor;
         questName.color = questSliderFill.color;
         questSlider.value = 1.0f;

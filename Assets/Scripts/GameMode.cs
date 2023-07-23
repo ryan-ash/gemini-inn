@@ -356,8 +356,10 @@ public class GameMode : MonoBehaviour
         GameObject spawnedMapGroup = Instantiate(mapGroupPrefab, generatedInn.transform.localPosition, Quaternion.identity);
         spawnedMapGroup.transform.SetParent(mapGroupRoot.transform, false);
         spawnedMapGroup.transform.localPosition = new Vector3(spawnedMapGroup.transform.localPosition.x, spawnedMapGroup.transform.localPosition.y, 0.1f);
+        
         GroupOnMap groupOnMap = spawnedMapGroup.GetComponent<GroupOnMap>();
-        groupOnMap.SetIcon(selectedAdventurerGroup.icon);
+        groupOnMap.SetIcon(selectedQuest.questGroup.icon);
+        groupOnMap.adventurers = selectedQuest.questGroup.adventurers;
         selectedQuest.groupOnMap = groupOnMap;
 
         // TODO: apply group speed modifier as well

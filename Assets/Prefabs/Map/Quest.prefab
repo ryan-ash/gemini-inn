@@ -591,7 +591,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1303558289
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8460d8600e458024e8c8ee2874353d79, type: 3}
   m_Color: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 1}
@@ -935,7 +935,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1303558289
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 2058610059, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -986,9 +986,10 @@ MonoBehaviour:
   questDescription: {fileID: 9036173395170640873}
   questSlider: {fileID: 3285869686042312065}
   questSliderFill: {fileID: 985934144270131054}
-  questInProgress: {fileID: 5702882415039733317}
+  questMapCircle: {fileID: 1109841416871851196}
   fadeDuration: 0.25
   timeoutColor: {r: 0.754717, g: 0.754717, b: 0.754717, a: 1}
+  roadColor: {r: 0, g: 1, b: 1, a: 1}
   progressColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   successColor: {r: 0, g: 1, b: 0, a: 1}
   failureColor: {r: 1, g: 0, b: 0, a: 1}

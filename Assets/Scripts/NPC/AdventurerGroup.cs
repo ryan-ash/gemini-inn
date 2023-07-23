@@ -15,7 +15,7 @@ public enum GroupState
 public class QuestGroup
 {
     [HideInInspector] public GroupState groupState = GroupState.Idle;
-    [HideInInspector] public List<Adventurer> adventurers;
+    [HideInInspector] public List<Adventurer> adventurers = new List<Adventurer>();
     [HideInInspector] public Quest quest;
 
     public string icon;
@@ -149,7 +149,10 @@ public class AdventurerGroup : MonoBehaviour
     {
         QuestGroup questGroup = new QuestGroup();
         questGroup.groupState = GroupState.OnRoadToQuest;
-        questGroup.adventurers = adventurers;
+        foreach (var adventurer in adventurers)
+        {
+            questGroup.adventurers.Add(adventurer);
+        }
         questGroup.quest = GameMode.instance.selectedQuest;
         questGroup.quest.questGroup = questGroup;
         questGroup.quest.questState = QuestState.OnRoad;

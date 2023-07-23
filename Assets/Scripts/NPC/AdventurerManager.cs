@@ -53,13 +53,15 @@ public class AdventurerManager : MonoBehaviour
             UIGod.instance.ReleaseRemovedAdventurers();
     }
 
-    private void SpawnAdventurer(bool ignoreChance = false)
+    public void SpawnAdventurer(bool ignoreChance = false, GameObject adventurerToRespawn = null)
     {
         if (adventurers.Count >= maxAdventurers)
             return;
 
         if (Random.Range(0.0f, 1.0f) > spawnChance && !ignoreChance)
             return;
+
+        bool isRespawn = adventurerToRespawn != null;
 
         int adventurerGroupIndex = Random.Range(0, adventurerGroups.Length);
         AdventurerGroup adventurerGroup = adventurerGroups[adventurerGroupIndex];
@@ -82,11 +84,21 @@ public class AdventurerManager : MonoBehaviour
             isColliding = colliders.Length > 0;
         }
 
-        // look at light source
-        GameObject adventurerObject = Instantiate(adventurerPrefab, proposedPosition, Quaternion.identity);
-        adventurerObject.transform.SetParent(adventurerParent.transform, true);
-        GameObject groupLight = adventurerGroup.adventurerTableLights;
+        GameObject adventurerObject = null;
+        if (isRespawn)
+        {
+            adventurerObject = adventurerToRespawn;
+            adventurerObject.SetActive(true);
+            adventurerObject.transform.position = proposedPosition;
+        }
+        else
+        {
+            adventurerObject = Instantiate(adventurerPrefab, proposedPosition, Quaternion.identity);
+            adventurerObject.transform.SetParent(adventurerParent.transform, true);
+        }
 
+        // look at light source
+        GameObject groupLight = adventurerGroup.adventurerTableLights;
         Vector3 targetDirection = groupLight.transform.position - adventurerObject.transform.position;
         adventurerObject.transform.rotation = Quaternion.LookRotation(targetDirection);
         float adventurerInitialYRotation = adventurerObject.transform.localEulerAngles.y + 90.0f;
@@ -98,8 +110,11 @@ public class AdventurerManager : MonoBehaviour
         adventurerObject.transform.localEulerAngles = new Vector3(0.0f, adventurerInitialYRotation, 0.0f);
 
         Adventurer adventurer = adventurerObject.GetComponent<Adventurer>();
-        adventurer.SetRandomGender();
-        adventurer.RunNameGenerator();
+        if (!isRespawn)
+        {
+            adventurer.SetRandomGender();
+            adventurer.RunNameGenerator();
+        }
 
         adventurerGroups[adventurerGroupIndex].AddAdventurer(adventurer);
         adventurers.Add(adventurer);

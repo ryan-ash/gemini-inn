@@ -16,6 +16,8 @@ public class GroupOnMap : MonoBehaviour
     private Color offIconColor;
     private Color offCircleColor;
 
+    [HideInInspector] public List<Adventurer> adventurers;
+
     Vector3 movePosition;
     float moveTime = 1.0f;
 
@@ -46,13 +48,23 @@ public class GroupOnMap : MonoBehaviour
 
     public void FadeOut(bool die = false)
     {
-        Debug.Log("FadeOut");
         LeanTween.alpha(icon.gameObject, 1.0f, fadeTime).setOnUpdate((float val) => {
             icon.color = Color.Lerp(initialIconColor, offIconColor, val);
             circle.color = Color.Lerp(initialCircleColor, offCircleColor, val);
         }).setEase(fadeType).setOnComplete(() => {
             if (die)
+            {
+                AudioRevolver.Fire(AudioNames.DoorSquek);
+                AudioRevolver.Fire(AudioNames.DoorClosing);
+                AudioRevolver.Fire(AudioNames.Footsteps);
+
+                // restore adventurers in bar
+                foreach (Adventurer adventurer in adventurers)
+                {
+                    AdventurerManager.instance.SpawnAdventurer(true, adventurer.gameObject);
+                }
                 Destroy(gameObject);
+            }
         });
     }
 
