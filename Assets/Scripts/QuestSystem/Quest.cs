@@ -42,6 +42,8 @@ public class Quest
 
     [System.NonSerialized][HideInInspector] public Tile tile;
 
+    [HideInInspector] public int ID = 0;
+
     public Quest()
     {
         AbilityModifiers = new List<AbilityModifier>();

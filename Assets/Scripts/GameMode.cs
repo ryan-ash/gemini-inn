@@ -73,6 +73,7 @@ public class GameMode : MonoBehaviour
 
     private List<Transform> generatedQuests = new List<Transform>();
     private GameObject generatedInn;
+    private int lastMissionID = 0;
 
     void Start()
     {
@@ -199,9 +200,9 @@ public class GameMode : MonoBehaviour
             }
             else if (quest.questState == QuestState.InProgress)
             {
-                quest.questTimer += Time.deltaTime;
                 if (quest.questTimer >= quest.baseDuration)
                 {
+                    // TODO: use success rate
                     QuestState questResult = QuestState.Success;
                     QuestToStop questToStop = new QuestToStop(mission, quest, questResult, false);
                     questsToStop.Add(questToStop);
@@ -410,6 +411,7 @@ public class GameMode : MonoBehaviour
 
     public void UpdateQuestState(Mission mission, Quest quest, QuestState newState, bool isTimeout = false)
     {
+        quest.questTimer = 0.0f;
         quest.questState = newState;
         var tile = quest.tile;
 
@@ -549,6 +551,8 @@ public class GameMode : MonoBehaviour
 
     private bool ProcessSpawnedQuest(Mission mission, Quest quest)
     {
+        Debug.Log("Spawning quest [" + quest.questName + " | " + quest.ID +"] for mission [" + mission.MissionName + " | " + mission.ID + "]");
+
         var availableBiomeTiles = Map.GetBiomeTiles(quest.Biomes.ToArray());
         if (availableBiomeTiles.Count == 0)
         {
@@ -598,8 +602,6 @@ public class GameMode : MonoBehaviour
         UIGod.instance.SpawnActiveQuest(quest);
 
         generatedQuests.Add(questVisual.transform);
-
-        activeMissions.Add(mission);
         UpdateQuestCount();
 
         return true;
@@ -613,6 +615,11 @@ public class GameMode : MonoBehaviour
             if (Random.Range(0.0f, 1.0f) <= _questGenerationChance || activeMissions.Count == 0 /*for now...*/)
             {
                 Mission mission = useMockQuests ? Mission.GenerateRandomMission() : Deep.Clone(Mission.GrabRandomMissionFromDB());
+                mission.ID = lastMissionID++;
+
+                int questID = 0;
+                foreach (Quest quest in mission.Quests)
+                    quest.ID = questID++;
 
                 if (!useMockQuests && bannedMissions.Count == MissionsDatabase.instance.Missions.Count)
                 {
@@ -657,15 +664,18 @@ public class GameMode : MonoBehaviour
                     Debug.LogWarning("No available quests for mission: " + mission.MissionName);
                     continue;
                 }
-
-                bool questProcessSuccess = ProcessSpawnedQuest(mission, newAvailableQuest);
                 if (Map.GetBiomeTiles(newAvailableQuest.Biomes.ToArray()).Count == 0)
                 {
                     Debug.LogWarning("No available tiles for quest: " + newAvailableQuest.questName);
                     continue;
                 }
 
-                if (!questProcessSuccess)
+                bool questProcessSuccess = ProcessSpawnedQuest(mission, newAvailableQuest);
+                if (questProcessSuccess)
+                {
+                    activeMissions.Add(mission);
+                }
+                else
                 {
                     yield return new WaitForSeconds(_questGenerationInterval);
                     continue;

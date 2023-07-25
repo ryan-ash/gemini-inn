@@ -12,6 +12,8 @@ public class Mission
     public Reward CompletionReward;
     public MissionRecurrenceType RecurrenceType = MissionRecurrenceType.Simultaneous;
 
+    [HideInInspector] public int ID = 0;
+
     public Mission()
     {
         Quests = new List<Quest>();
