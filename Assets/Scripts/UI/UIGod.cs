@@ -150,6 +150,7 @@ public class UIGod : MonoBehaviour
     public void BeginStartingGame()
     {
         AudioRevolver.Fire(AudioNames.Click);
+        UIGod.instance.topTitleWriter.Write("", false);
         mainFader.FadeIn("EndStartingGame");
         CursorSetter.SetDefaultCursor();
     }

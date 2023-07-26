@@ -462,7 +462,6 @@ public class GameMode : MonoBehaviour
     public void StartGame()
     {
         AudioRevolver.Fire(AudioNames.Crowd);
-        UIGod.instance.topTitleWriter.Write("", true);
         Wait.Run(0.1f, () => {
             InitGame();
         });
