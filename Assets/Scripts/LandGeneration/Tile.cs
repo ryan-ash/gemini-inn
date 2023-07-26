@@ -27,6 +27,7 @@ public class Tile : MonoBehaviour
 
     private Color targetColor = Color.white;
     private Color initialColor = Color.white;
+    private Color modifiedColor = Color.white;
     public Color darkColor = Color.red;
     public Color lightColor = Color.blue;
     public const float stepForce = 0.5f;
@@ -66,6 +67,7 @@ public class Tile : MonoBehaviour
     void Start()
     {
         initialColor = spriteRenderer.color;
+        modifiedColor = initialColor;
         SetColor(initialColor);
         if (controlRotation || controlColor)
             Hide();
@@ -99,7 +101,7 @@ public class Tile : MonoBehaviour
         isOn = true;
         startOffset = XFromCenter;
         StartCoroutine(StartRotation());
-        SetColor(initialColor);
+        SetColor(modifiedColor);
     }
 
     public void Hide()
@@ -119,25 +121,25 @@ public class Tile : MonoBehaviour
 
     public void AddDarkShade()
     {
-        var currentColor = spriteRenderer.color;
-        var lerpedColor = GetLerpedColor(currentColor, darkColor);
-        spriteRenderer.color = lerpedColor;
-        //Temp?
-        initialColor = lerpedColor;
+        UpdateSpriteColor(GetLerpedColor(modifiedColor, darkColor));
     }
 
     public void AddLightShade()
     {
-        var currentColor = spriteRenderer.color;
-        var lerpedColor = GetLerpedColor(currentColor, lightColor);
-        spriteRenderer.color = lerpedColor;
-        //Temp?
-        initialColor = lerpedColor;
+        UpdateSpriteColor(GetLerpedColor(modifiedColor, lightColor));
+    }
+
+    private void UpdateSpriteColor(Color color)
+    {
+        if (isOn)
+            SetColor(color);
+        modifiedColor = color;
     }
 
     public void ResetShade()
     {
-        spriteRenderer.color = initialColor;
+        modifiedColor = initialColor;
+        SetColor(initialColor);
     }
 
     private Color GetLerpedColor(Color start, Color finish)

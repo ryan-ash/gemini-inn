@@ -36,10 +36,14 @@ public class Map : MonoBehaviour
     public int neighbourThreshold = 3;
     public int neighbourDepth = 1;
 
-    private Tile[,] tiles;
+    [Header("Shading")]
+    public float delayBetweenShadeSteps = 0.5f;
+
+    [HideInInspector] public Tile[,] tiles;
     private static Dictionary<string, List<Tile>> biomeTilesCache;
 
     private List<string> nonPresentBiomes = new List<string>();
+    private List<MapShadingData> shadingData = new List<MapShadingData>();
 
     void Start()
     {
@@ -97,6 +101,8 @@ public class Map : MonoBehaviour
             FilterGeneratedMap();
 
         UpdateTileCache();
+
+        StartCoroutine(RegionShadingIteration());
     }
 
     public void UpdateTileCache()
@@ -336,21 +342,8 @@ public class Map : MonoBehaviour
         var centerTile = tiles[x, y];
         SetTileShade(centerTile, shadeType);
 
-        const double threshold = 0.8;
-
-        for (int i = Math.Max(0, x - radius - 1); i <= Math.Min(width - 1, x + radius + 1); i++)
-        {
-            for (int j = Math.Max(0, y - radius - 1); j <= Math.Min(height - 1, y + radius + 1); j++)
-            {
-                var distance = Math.Sqrt(Math.Pow(i - x, 2) + Math.Pow(j - y, 2));
-                var coverage = Math.Min(1, Math.Max(0, radius + threshold - distance));
-                if (coverage > 0)
-                {
-                    var selectedTile = tiles[i, j];
-                    SetTileShade(selectedTile, shadeType);
-                }
-            }
-        }
+        MapShadingData data = new MapShadingData(x, y, radius, shadeType);
+        shadingData.Add(data);
     }
 
     private void SetTileShade(Tile tile, ShadeType shadeType)
@@ -368,6 +361,76 @@ public class Map : MonoBehaviour
                 break;
         }
     }
+
+    IEnumerator RegionShadingIteration()
+    {
+        while(true)
+        {
+            List<MapShadingData> shadingDataToForget = new List<MapShadingData>();
+            foreach (var data in shadingData)
+            {
+                if (data.tilesToProcess.Count == 0)
+                {
+                    shadingDataToForget.Add(data);
+                    continue;
+                }
+
+                List<Tile> radiusTiles = data.tilesToProcess[0];
+                foreach (var tile in radiusTiles)
+                {
+                    SetTileShade(tile, data.shadeType);
+                }
+                data.tilesToProcess.RemoveAt(0);
+            }
+
+            foreach (var data in shadingDataToForget)
+            {
+                shadingData.Remove(data);
+            }
+
+            yield return new WaitForSeconds(delayBetweenShadeSteps);
+        }
+    }
+}
+
+public class MapShadingData
+{
+    public int x;
+    public int y;
+    public int radius;
+    public ShadeType shadeType;
+    public MapShadingData(int x, int y, int radius, ShadeType shadeType)
+    {
+        this.x = x;
+        this.y = y;
+        this.radius = radius;
+        this.shadeType = shadeType;
+
+        const double threshold = 0.8;
+
+        List<Tile> processedTiles = new List<Tile>();
+        for (int r = 1; r <= radius; r++)
+        {
+            List<Tile> radiusTiles = new List<Tile>();
+            tilesToProcess.Add(radiusTiles);
+            for (int i = Math.Max(0, x - r - 1); i <= Math.Min(Map.instance.width - 1, x + r + 1); i++)
+            {
+                for (int j = Math.Max(0, y - r - 1); j <= Math.Min(Map.instance.height - 1, y + r + 1); j++)
+                {
+                    var distance = Math.Sqrt(Math.Pow(i - x, 2) + Math.Pow(j - y, 2));
+                    var coverage = Math.Min(1, Math.Max(0, r + threshold - distance));
+                    var selectedTile = Map.instance.tiles[i, j];
+                    if (coverage > 0 && !processedTiles.Contains(selectedTile))
+                    {
+                        radiusTiles.Add(selectedTile);
+                        processedTiles.Add(selectedTile);
+                    }
+                }
+            }
+        }
+    }
+
+    public List<List<Tile>> tilesToProcess = new List<List<Tile>>();
 }
 
 public class BiomeTempData

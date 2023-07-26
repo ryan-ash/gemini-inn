@@ -112,7 +112,8 @@ public class QuestInfo : MonoBehaviour
         questSliderFill.color = isSuccess ? successColor : failureColor;
         questName.color = questSliderFill.color;
         questSlider.value = 1.0f;
-        AudioRevolver.Fire(isTimeout ? AudioNames.MugOnTable : isSuccess ? AudioNames.QuestCompleted : AudioNames.QuestFailed);
+        // AudioRevolver.Fire(isTimeout ? AudioNames.MugOnTable : isSuccess ? AudioNames.QuestCompleted : AudioNames.QuestFailed);
+        AudioRevolver.Fire(isSuccess ? AudioNames.QuestCompleted : AudioNames.QuestFailed);
     }
 
     void UpdateQuestSlider()

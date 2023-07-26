@@ -5626,7 +5626,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: I'm Title
+  m_Text: Gemini Inn
 --- !u!222 &425280768
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -30485,6 +30485,7 @@ MonoBehaviour:
   filterIterations: 3
   neighbourThreshold: 10
   neighbourDepth: 2
+  delayBetweenShadeSteps: 0.33
 --- !u!1 &2012568935 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4713816504426831000, guid: 403e1302fc369734bbef782f3908119e, type: 3}
