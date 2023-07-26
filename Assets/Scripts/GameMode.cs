@@ -438,6 +438,7 @@ public class GameMode : MonoBehaviour
             if (newQuestSuccess)
             {
                 activeMissions.Add(mission);
+                UpdateQuestCount();
             }
             else
             {
@@ -602,7 +603,6 @@ public class GameMode : MonoBehaviour
         UIGod.instance.SpawnActiveQuest(quest);
 
         generatedQuests.Add(questVisual.transform);
-        UpdateQuestCount();
 
         return true;
     }
@@ -674,6 +674,7 @@ public class GameMode : MonoBehaviour
                 if (questProcessSuccess)
                 {
                     activeMissions.Add(mission);
+                    UpdateQuestCount();
                 }
                 else
                 {
