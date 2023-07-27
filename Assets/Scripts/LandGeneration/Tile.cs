@@ -35,11 +35,7 @@ public class Tile : MonoBehaviour
 
     void Start()
     {
-        currentLightLevel = Map.instance.initialLightLevel;
-        UpdateSpriteColor(CalculateLightLevelColor());
-        SetColor(modifiedColor);
-        if (controlRotation || controlColor)
-            Hide();
+
     }
 
     void Update()
@@ -95,6 +91,12 @@ public class Tile : MonoBehaviour
         if (initialZ > 180.0f)
             initialZ -= 180.0f;
         transform.localEulerAngles = new Vector3(0.0f, initialY, initialZ);
+
+        currentLightLevel = Map.instance.initialLightLevel;
+        UpdateSpriteColor(CalculateLightLevelColor());
+        SetColor(modifiedColor);
+        if (controlRotation || controlColor)
+            Hide();
     }
 
     public void Show()

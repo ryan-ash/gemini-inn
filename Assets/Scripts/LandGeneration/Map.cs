@@ -50,6 +50,19 @@ public class Map : MonoBehaviour
     public static int tileCount;
 
     [HideInInspector] public float averageLightLevelBalance = 0.0f;
+    public float AverageLightLevelBalance
+    {
+        get
+        {
+            return averageLightLevelBalance;
+        }
+
+        set
+        {
+            averageLightLevelBalance = value;
+            UIGod.instance.lightLevelSlider.value = averageLightLevelBalance;
+        }
+    }
 
 
     void Start()
@@ -151,24 +164,30 @@ public class Map : MonoBehaviour
 
     public void RecalculateLightLevel()
     {
-        float totalLightLevel = 0.0f;
+        int totalLightLevel = 0;
         foreach (var tile in tiles)
         {
             totalLightLevel += tile.currentLightLevel;
+            // Debug.Log($"Tile {tile.X},{tile.Y} light level: {tile.currentLightLevel}");
         }
 
-        averageLightLevelBalance = totalLightLevel / (tileCount * lightLevels);
+        // Debug.Log($"Total light level: {totalLightLevel}");
+        Debug.Log($"Tile count: {tileCount}");
+        Debug.Log($"Light levels: {lightLevels}");
+        Debug.Log($"Initial light level: {initialLightLevel}");
+
+        AverageLightLevelBalance = (float)totalLightLevel / (tileCount * lightLevels);
     }
 
     public void UpdateAverageForTileShift(bool lightShift)
     {
         if (lightShift)
         {
-            averageLightLevelBalance += 1.0f / (lightLevels * tileCount);
+            AverageLightLevelBalance += 1.0f / (lightLevels * tileCount);
         }
         else
         {
-            averageLightLevelBalance -= 1.0f / (lightLevels * tileCount);
+            AverageLightLevelBalance -= 1.0f / (lightLevels * tileCount);
         }
     }
 

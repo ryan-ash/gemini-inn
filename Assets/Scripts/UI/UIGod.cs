@@ -28,6 +28,7 @@ public class UIGod : MonoBehaviour
     public Transform adventurersPreviewRoot;
     public FontAwesome adventurerGroupIcon;
     public GameObject restartButton;
+    public Slider lightLevelSlider;
 
     [Header("Negotiation")]
     public TextWriter questTitle;
