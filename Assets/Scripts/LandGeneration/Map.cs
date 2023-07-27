@@ -36,8 +36,10 @@ public class Map : MonoBehaviour
     public int neighbourThreshold = 3;
     public int neighbourDepth = 1;
 
-    [Header("Shading")]
+    [Header("Light")]
     public float delayBetweenShadeSteps = 0.5f;
+    public int lightLevels = 5;
+    public int initialLightLevel = 2;
 
     [HideInInspector] public Tile[,] tiles;
     private static Dictionary<string, List<Tile>> biomeTilesCache;
@@ -45,9 +47,15 @@ public class Map : MonoBehaviour
     private List<string> nonPresentBiomes = new List<string>();
     private List<MapShadingData> shadingData = new List<MapShadingData>();
 
+    public static int tileCount;
+
+    [HideInInspector] public float averageLightLevelBalance = 0.0f;
+
+
     void Start()
     {
         instance = this;
+        tileCount = width * height;
     }
 
     void Update()
@@ -101,6 +109,7 @@ public class Map : MonoBehaviour
             FilterGeneratedMap();
 
         UpdateTileCache();
+        RecalculateLightLevel();
 
         StartCoroutine(RegionShadingIteration());
     }
@@ -137,6 +146,29 @@ public class Map : MonoBehaviour
                 var cachedTiles = new List<Tile> { tile };
                 biomeTilesCache.Add(currentTileBiomeName, cachedTiles);
             }
+        }
+    }
+
+    public void RecalculateLightLevel()
+    {
+        float totalLightLevel = 0.0f;
+        foreach (var tile in tiles)
+        {
+            totalLightLevel += tile.currentLightLevel;
+        }
+
+        averageLightLevelBalance = totalLightLevel / (tileCount * lightLevels);
+    }
+
+    public void UpdateAverageForTileShift(bool lightShift)
+    {
+        if (lightShift)
+        {
+            averageLightLevelBalance += 1.0f / (lightLevels * tileCount);
+        }
+        else
+        {
+            averageLightLevelBalance -= 1.0f / (lightLevels * tileCount);
         }
     }
 

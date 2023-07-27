@@ -505,8 +505,9 @@ public class GameMode : MonoBehaviour
 
         int fillStartX = xCoord - innSandFillRange.x / 2;
         int fillStartY = yCoord - innSandFillRange.y / 2;
+        const int diffToCompensateInnSize = 2;
 
-        Map.instance.ChangeRegionShade(xCoord, yCoord + 2 /*diff to compensate Inn size*/, GeminiInnShadeSize, ShadeType.Light);
+        Map.instance.ChangeRegionShade(xCoord, yCoord + diffToCompensateInnSize, GeminiInnShadeSize, ShadeType.Light);
        
         // Map.instance.FillAreaWithBiom("Desert", fillStartX, fillStartY, innSandFillRange.x, innSandFillRange.y);
     }

@@ -29,13 +29,13 @@ public class Tile : MonoBehaviour
     private Color modifiedColor = Color.white;
     public Color darkColor = Color.red;
     public Color lightColor = Color.blue;
-    public const int lightLevels = 5;
-    public const int initialLightLevel = 2;
 
-    private int currentLightLevel = initialLightLevel;
+    [HideInInspector] public int currentLightLevel = 0;
+
 
     void Start()
     {
+        currentLightLevel = Map.instance.initialLightLevel;
         UpdateSpriteColor(CalculateLightLevelColor());
         SetColor(modifiedColor);
         if (controlRotation || controlColor)
@@ -122,13 +122,21 @@ public class Tile : MonoBehaviour
 
     public void AddDarkShade()
     {
-        currentLightLevel = Mathf.Max(currentLightLevel - 1, 0);
+        if (currentLightLevel > 0)
+        {
+            Map.instance.UpdateAverageForTileShift(false);
+            currentLightLevel -= 1;
+        }
         UpdateSpriteColor(CalculateLightLevelColor());
     }
 
     public void AddLightShade()
     {
-        currentLightLevel = Mathf.Min(currentLightLevel + 1, lightLevels);
+        if (currentLightLevel < Map.instance.lightLevels)
+        {
+            Map.instance.UpdateAverageForTileShift(true);
+            currentLightLevel += 1;
+        }
         UpdateSpriteColor(CalculateLightLevelColor());
     }
 
@@ -141,13 +149,13 @@ public class Tile : MonoBehaviour
 
     public void ResetShade()
     {
-        currentLightLevel = initialLightLevel;
+        currentLightLevel = Map.instance.initialLightLevel;
         UpdateSpriteColor(CalculateLightLevelColor());
     }
 
     private Color CalculateLightLevelColor()
     {
-        return Color.Lerp(darkColor, lightColor, (float)currentLightLevel / (float)lightLevels);
+        return Color.Lerp(darkColor, lightColor, (float)currentLightLevel / (float)Map.instance.lightLevels);
     }
 
     IEnumerator StartRotation()

@@ -30892,6 +30892,8 @@ MonoBehaviour:
   neighbourThreshold: 10
   neighbourDepth: 2
   delayBetweenShadeSteps: 0.33
+  lightLevels: 5
+  initialLightLevel: 2
   averageLightLevelBalance: 0
 --- !u!1 &2012568935 stripped
 GameObject:

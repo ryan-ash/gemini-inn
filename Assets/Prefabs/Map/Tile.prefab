@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -109,5 +109,6 @@ MonoBehaviour:
   XFromCenter: 0
   controlColor: 1
   hideColor: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 0}
-  darkColor: {r: 0.23584908, g: 0.11681204, b: 0.11681204, a: 1}
+  darkColor: {r: 0, g: 0, b: 0, a: 1}
   lightColor: {r: 0, g: 1, b: 1, a: 1}
+  currentLightLevel: 2
