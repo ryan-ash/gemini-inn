@@ -31,6 +31,10 @@ public class Map : MonoBehaviour
     public Wave[] heatWaves;
     private float[,] heatMap;
 
+    [Header("Light Map")]
+    public Wave[] lightWaves;
+    private float[,] lightMap;
+
     [Header("Filtering")]
     public int filterIterations = 1;
     public int neighbourThreshold = 3;
@@ -40,6 +44,9 @@ public class Map : MonoBehaviour
     public float delayBetweenShadeSteps = 0.5f;
     public int lightLevels = 5;
     public int initialLightLevel = 2;
+    public int lightLevelStep = 1;
+    public float lightWaveInfluenceModifier = 0.5f;
+    public float initialLightInfluenceModifier = 0.5f;
 
     [HideInInspector] public Tile[,] tiles;
     private static Dictionary<string, List<Tile>> biomeTilesCache;
@@ -87,6 +94,8 @@ public class Map : MonoBehaviour
         moistureMap = NoiseGenerator.Generate(width, height, scale, moistureWaves, offset);
         // heat map
         heatMap = NoiseGenerator.Generate(width, height, scale, heatWaves, offset);
+        // light map
+        lightMap = NoiseGenerator.Generate(width, height, scale, lightWaves, offset);
 
         int halfWidth = width / 2;
         int halfHeight = height / 2;
@@ -110,11 +119,14 @@ public class Map : MonoBehaviour
 
         tileParent.transform.SetParent(mapRoot.transform, false);
 
+        float initialLightAlpha = initialLightLevel / (float)lightLevels;
         for (int x = 0; x < width; ++x)
         {
             for (int y = 0; y < height; ++y)
             {
                 tiles[x, y].Prepare();
+                float tileAlpha = lightWaveInfluenceModifier * lightMap[x, y] + initialLightInfluenceModifier * initialLightAlpha;
+                tiles[x, y].SetShadeByAlpha(tileAlpha);
             }
         }
 
@@ -183,11 +195,11 @@ public class Map : MonoBehaviour
     {
         if (lightShift)
         {
-            AverageLightLevelBalance += 1.0f / (lightLevels * tileCount);
+            AverageLightLevelBalance += lightLevelStep / (lightLevels * tileCount);
         }
         else
         {
-            AverageLightLevelBalance -= 1.0f / (lightLevels * tileCount);
+            AverageLightLevelBalance -= lightLevelStep / (lightLevels * tileCount);
         }
     }
 

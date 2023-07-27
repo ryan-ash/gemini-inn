@@ -127,7 +127,7 @@ public class Tile : MonoBehaviour
         if (currentLightLevel > 0)
         {
             Map.instance.UpdateAverageForTileShift(false);
-            currentLightLevel -= 1;
+            currentLightLevel -= Map.instance.lightLevelStep;
         }
         UpdateSpriteColor(CalculateLightLevelColor());
     }
@@ -137,8 +137,15 @@ public class Tile : MonoBehaviour
         if (currentLightLevel < Map.instance.lightLevels)
         {
             Map.instance.UpdateAverageForTileShift(true);
-            currentLightLevel += 1;
+            currentLightLevel += Map.instance.lightLevelStep;
         }
+        UpdateSpriteColor(CalculateLightLevelColor());
+    }
+
+    public void SetShadeByAlpha(float alpha)
+    {
+        int newLightLevel = Mathf.RoundToInt(alpha * Map.instance.lightLevels);
+        currentLightLevel = newLightLevel;
         UpdateSpriteColor(CalculateLightLevelColor());
     }
 

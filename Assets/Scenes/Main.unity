@@ -31185,42 +31185,58 @@ MonoBehaviour:
   heightWaves:
   - seed: 56
     seedRandomness: 1000
-    frequency: 0.05
+    frequency: 0.01
     frequencyRandomness: 0
     amplitude: 1
     amplitudeRandomness: 0
   - seed: 0
     seedRandomness: 3000
-    frequency: 0.05
-    frequencyRandomness: 0.01
-    amplitude: 1
+    frequency: 0.005
+    frequencyRandomness: 0.005
+    amplitude: 0.2
     amplitudeRandomness: 0
   moistureWaves:
   - seed: 500
     seedRandomness: 1000
-    frequency: 0.03
+    frequency: 0.001
     frequencyRandomness: 0.01
     amplitude: 0.4
     amplitudeRandomness: 0
   heatWaves:
-  - seed: 318.6
+  - seed: 5000
     seedRandomness: 1000
-    frequency: 0.04
+    frequency: 0.01
     frequencyRandomness: 0
     amplitude: 1
     amplitudeRandomness: 0
   - seed: 329.7
     seedRandomness: 1000
-    frequency: 0.02
+    frequency: 0.001
     frequencyRandomness: 0
     amplitude: 0.3
+    amplitudeRandomness: 0
+  lightWaves:
+  - seed: 0
+    seedRandomness: 1000
+    frequency: 0.02
+    frequencyRandomness: 0
+    amplitude: 0.8
+    amplitudeRandomness: 0
+  - seed: 0
+    seedRandomness: 1000
+    frequency: 0.1
+    frequencyRandomness: 0
+    amplitude: 0.2
     amplitudeRandomness: 0
   filterIterations: 3
   neighbourThreshold: 10
   neighbourDepth: 2
   delayBetweenShadeSteps: 0.33
-  lightLevels: 6
-  initialLightLevel: 3
+  lightLevels: 10
+  initialLightLevel: 5
+  lightLevelStep: 2
+  lightWaveInfluenceModifier: 0.5
+  initialLightInfluenceModifier: 0.5
   averageLightLevelBalance: 0
 --- !u!1 &2012568935 stripped
 GameObject:
