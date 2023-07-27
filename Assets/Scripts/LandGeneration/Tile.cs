@@ -26,11 +26,21 @@ public class Tile : MonoBehaviour
     private int startOffset = 0;
 
     private Color targetColor = Color.white;
-    private Color initialColor = Color.white;
     private Color modifiedColor = Color.white;
     public Color darkColor = Color.red;
     public Color lightColor = Color.blue;
-    public const float stepForce = 0.5f;
+    public const int lightLevels = 5;
+    public const int initialLightLevel = 2;
+
+    private int currentLightLevel = initialLightLevel;
+
+    void Start()
+    {
+        UpdateSpriteColor(CalculateLightLevelColor());
+        SetColor(modifiedColor);
+        if (controlRotation || controlColor)
+            Hide();
+    }
 
     void Update()
     {
@@ -62,15 +72,6 @@ public class Tile : MonoBehaviour
                 isFading = false;
             }
         }
-    }
-
-    void Start()
-    {
-        initialColor = spriteRenderer.color;
-        modifiedColor = initialColor;
-        SetColor(initialColor);
-        if (controlRotation || controlColor)
-            Hide();
     }
 
     public void Prepare()
@@ -121,12 +122,14 @@ public class Tile : MonoBehaviour
 
     public void AddDarkShade()
     {
-        UpdateSpriteColor(GetLerpedColor(modifiedColor, darkColor));
+        currentLightLevel = Mathf.Max(currentLightLevel - 1, 0);
+        UpdateSpriteColor(CalculateLightLevelColor());
     }
 
     public void AddLightShade()
     {
-        UpdateSpriteColor(GetLerpedColor(modifiedColor, lightColor));
+        currentLightLevel = Mathf.Min(currentLightLevel + 1, lightLevels);
+        UpdateSpriteColor(CalculateLightLevelColor());
     }
 
     private void UpdateSpriteColor(Color color)
@@ -138,13 +141,13 @@ public class Tile : MonoBehaviour
 
     public void ResetShade()
     {
-        modifiedColor = initialColor;
-        SetColor(initialColor);
+        currentLightLevel = initialLightLevel;
+        UpdateSpriteColor(CalculateLightLevelColor());
     }
 
-    private Color GetLerpedColor(Color start, Color finish)
+    private Color CalculateLightLevelColor()
     {
-        return Color.Lerp(start, finish, stepForce);
+        return Color.Lerp(darkColor, lightColor, (float)currentLightLevel / (float)lightLevels);
     }
 
     IEnumerator StartRotation()
