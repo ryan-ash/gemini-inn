@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using System.Linq;
 
 public class GameMode : MonoBehaviour
@@ -74,6 +75,9 @@ public class GameMode : MonoBehaviour
     private List<Transform> generatedQuests = new List<Transform>();
     private GameObject generatedInn;
     private int lastMissionID = 0;
+
+    [HideInInspector] public bool gamePaused = false;
+    [HideInInspector] public bool gameStarted = false;
 
     void Start()
     {
@@ -470,6 +474,13 @@ public class GameMode : MonoBehaviour
             UIGod.instance.mainFader.FadeOut();
             StartCoroutine(SpawnQuest());
         });
+
+        gameStarted = true;
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void InitGame()
@@ -545,8 +556,7 @@ public class GameMode : MonoBehaviour
 
     public static bool IsTimersRunning()
     {
-        // add conditions for timers if necessary (game pause? negotiation maybe?..)
-        return !instance.isNegotiating;
+        return !instance.isNegotiating && !instance.gamePaused;
     }
 
     private bool ProcessSpawnedQuest(Mission mission, Quest quest)

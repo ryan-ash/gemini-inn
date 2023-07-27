@@ -18,14 +18,16 @@ public class UIGod : MonoBehaviour
     public Counter adventureCounter;
     public Counter historyCounter;
     public Counter adventurersCounter;
-    public GameObject innHUD;
     public Fader mainFader;
+    public Fader menuFader;
+    public Fader HUDFader;
     public Transform ownerReplicsRoot;
     public Transform questsRoot;
     public Transform historyRoot;
     public Transform adventurersRoot;
     public Transform adventurersPreviewRoot;
     public FontAwesome adventurerGroupIcon;
+    public GameObject restartButton;
 
     [Header("Negotiation")]
     public TextWriter questTitle;
@@ -150,23 +152,28 @@ public class UIGod : MonoBehaviour
     public void BeginStartingGame()
     {
         AudioRevolver.Fire(AudioNames.Click);
+        CursorSetter.SetDefaultCursor();
+        if (GameMode.instance.gameStarted)
+        {
+            ResumeGame();
+            return;
+        }
         UIGod.instance.topTitleWriter.Write("", false);
         mainFader.FadeIn("EndStartingGame");
-        CursorSetter.SetDefaultCursor();
     }
 
     public void EndStartingGame()
     {
-        Menu.instance.HideMenu();
-        innHUD.SetActive(true);
+        menuFader.FadeOut();
+        HUDFader.FadeIn();
         GameMode.instance.StartGame();
     }
 
     public void BeginQuitingGame()
     {
         AudioRevolver.Fire(AudioNames.Click);
-        mainFader.FadeIn("EndQuitingGame");
         CursorSetter.SetDefaultCursor();
+        mainFader.FadeIn("EndQuitingGame");
     }
 
     public void EndQuitingGame()
@@ -277,5 +284,33 @@ public class UIGod : MonoBehaviour
         response.transform.position = replicSpawnPosition;
         response.transform.LookAt(Camera.main.transform);
         response.transform.Rotate(0.0f, 180.0f, 0.0f);
+    }
+
+    public void PauseGame()
+    {
+        AudioRevolver.Fire(AudioNames.Click);
+        menuFader.FadeIn();
+        HUDFader.FadeOut();
+        GameMode.instance.gamePaused = true;
+        restartButton.SetActive(true);
+    }
+
+    public void ResumeGame()
+    {
+        AudioRevolver.Fire(AudioNames.Click);
+        menuFader.FadeOut();
+        HUDFader.FadeIn();
+        GameMode.instance.gamePaused = false;
+    }
+
+    public void BeginRestartingGame()
+    {
+        AudioRevolver.Fire(AudioNames.Click);
+        mainFader.FadeIn("EndRestartingGame");
+    }
+
+    public void EndRestartingGame()
+    {
+        GameMode.instance.RestartGame();
     }
 }
