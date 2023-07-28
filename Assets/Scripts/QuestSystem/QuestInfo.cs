@@ -107,6 +107,8 @@ public class QuestInfo : MonoBehaviour
         isQuestOver = true;
         isQuestSuccess = isSuccess;
 
+        animator.SetBool("QuestSuccess", isSuccess);
+        animator.SetInteger("Variation", Random.Range(0, 3));
         animator.SetBool("QuestOver", true);
         questMapCircle.gameObject.SetActive(false);
         questSliderFill.color = isSuccess ? successColor : failureColor;

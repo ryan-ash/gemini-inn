@@ -13,14 +13,10 @@ MonoBehaviour:
   m_Name: Mountains
   m_EditorClassIdentifier: 
   tiles:
-  - {fileID: -1437172753, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: -318664119, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: -1744136294, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: -1324198163, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: 1001055168, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: -501507921, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: -1421497799, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
-  - {fileID: 496649818, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: -645027081, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: 983083583, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: 6827320, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
+  - {fileID: -1748810926, guid: 75681ad5ad9630f409fcca935e593b8c, type: 3}
   minHeight: 0.5
   minMoisture: 0
   minHeat: 0
