@@ -31499,8 +31499,8 @@ MonoBehaviour:
   lightLevels: 10
   initialLightLevel: 5
   lightLevelStep: 2
-  lightWaveInfluenceModifier: 0.5
-  initialLightInfluenceModifier: 0.5
+  lightWaveInfluenceModifier: 0.7
+  initialLightInfluenceModifier: 0.3
   averageLightLevelBalance: 0
 --- !u!1 &2012568935 stripped
 GameObject:
