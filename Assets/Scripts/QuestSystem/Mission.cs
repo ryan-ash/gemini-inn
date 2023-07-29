@@ -27,13 +27,14 @@ public class Mission
         int QuestsNum = Random.Range(2, 6);
         for (int I = 0; I < QuestsNum; ++I)
         {
-            Quest Quest = new Quest();
-            Quest.questName = "Quest " + Random.Range(0, 1000).ToString();
-            Quest.questDescription = textMockup;
-            Quest.Biomes.Add("Jungle");
-            Quest.Biomes.Add("Forest");
-            Quest.Biomes.Add("Lake");
-            Quest.BaseSuccessRate = Random.Range(0.5f, 1.0f);
+            Quest quest = new Quest();
+            quest.questName = "Quest " + Random.Range(0, 1000).ToString();
+            quest.questDescription = textMockup;
+            quest.Biomes.Add("Jungle");
+            quest.Biomes.Add("Forest");
+            quest.Biomes.Add("Lake");
+            quest.BaseSuccessRate = Random.Range(0.5f, 1.0f);
+
             int MaxAbilities = Enum.GetValues(typeof(AbilityType)).Length;
             int MaxStats = Enum.GetValues(typeof(StatType)).Length;
 
@@ -45,7 +46,7 @@ public class Mission
                 AbilityModifier Mod = new AbilityModifier();
                 Mod.Type = (AbilityType)Random.Range(1, MaxAbilities);
                 Mod.Modifier = Random.Range(0.75f, 1.25f);
-                Quest.AbilityModifiers.Add(Mod);
+                quest.AbilityModifiers.Add(Mod);
             }
 
             for (int J = 0; J < StatsNum; ++J)
@@ -53,10 +54,10 @@ public class Mission
                 StatModifier Mod = new StatModifier();
                 Mod.Type = (StatType)Random.Range(1, MaxStats);
                 Mod.Modifier = Random.Range(0.75f, 1.25f);
-                Quest.StatModifiers.Add(Mod);
+                quest.StatModifiers.Add(Mod);
             }
 
-            Generated.Quests.Add(Quest);
+            Generated.Quests.Add(quest);
         }
         return Generated;
     }
@@ -68,16 +69,16 @@ public class Mission
 
     public Quest GetAvailableQuest()
     {
-        foreach (Quest Quest in Quests)
+        foreach (Quest quest in Quests)
         {
-            if (Quest.questState == QuestState.InProgress || Quest.questState == QuestState.OnRoad)
+            if (quest.questState == QuestState.InProgress || quest.questState == QuestState.OnRoad)
             {
                 return null;
             }
 
-            if (Quest.questState == QuestState.NotStarted)
+            if (quest.questState == QuestState.NotStarted)
             {
-                return Quest;
+                return quest;
             }
         }
         return null;
@@ -85,11 +86,11 @@ public class Mission
 
     public Quest GetCurrentQuest()
     {
-        foreach (Quest Quest in Quests)
+        foreach (Quest quest in Quests)
         {
-            if (Quest.questState == QuestState.InProgress || Quest.questState == QuestState.OnRoad || Quest.questState == QuestState.NotStarted)
+            if (quest.questState == QuestState.InProgress || quest.questState == QuestState.OnRoad || quest.questState == QuestState.NotStarted)
             {
-                return Quest;
+                return quest;
             }
         }
         return null;

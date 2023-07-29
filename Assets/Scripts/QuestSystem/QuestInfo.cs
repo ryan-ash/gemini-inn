@@ -138,7 +138,7 @@ public class QuestInfo : MonoBehaviour
     void Start()
     {
         openCollider = infoCanvas.gameObject.GetComponent<BoxCollider>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         infoCanvas.alpha = 0.0f;
     }
 

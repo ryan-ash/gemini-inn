@@ -608,7 +608,7 @@ public class GameMode : MonoBehaviour
         QuestInfo questInfo = questVisual.GetComponent<QuestInfo>();
         questInfo.SetQuest(quest);
         generatedQuestInfos.Add(questInfo);
-        generatedMapObjects.Add(questInfo.GetComponent<MapObject>());
+        generatedMapObjects.Add(questInfo.GetComponentInChildren<MapObject>());
 
         quest.questInfo = questInfo;
         quest.questTimer = 0.0f;
