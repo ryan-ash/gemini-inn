@@ -42,6 +42,11 @@ public class Counter : MonoBehaviour
         }
     }
 
+    public int GetCurrentCount()
+    {
+        return currentCount;
+    }
+
     public void UpdateCounter(int newCount)
     {
         if (newCount == currentCount)

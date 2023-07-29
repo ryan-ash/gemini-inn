@@ -387,8 +387,8 @@ public class GameMode : MonoBehaviour
         selectedQuest.questTimer = 0.0f;
 
         AudioRevolver.Fire(AudioNames.QuestGoing);
+        AudioRevolver.Fire(AudioNames.MugOnTable);
         Wait.Run(2.0f, () => {
-            AudioRevolver.Fire(AudioNames.DoorSquek);
             AudioRevolver.Fire(AudioNames.DoorClosing);
         });
 
@@ -444,7 +444,6 @@ public class GameMode : MonoBehaviour
             if (newQuestSuccess)
             {
                 activeMissions.Add(mission);
-                UpdateQuestCount();
             }
             else
             {

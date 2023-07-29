@@ -74,25 +74,23 @@ public class UIGod : MonoBehaviour
 
     public void UpdateQuestCounter(int newCount)
     {
-        // AudioRevolver.Fire(AudioNames.PencilWriting);
+        if (questCounter.GetCurrentCount() != newCount)
+            AudioRevolver.Fire(AudioNames.PencilWriting);
         questCounter.UpdateCounter(newCount);
     }
 
     public void UpdateAdventureCounter(int newCount)
     {
-        // AudioRevolver.Fire(AudioNames.PencilWriting);
         adventureCounter.UpdateCounter(newCount);
     }
 
     public void UpdateHistoryCounter()
     {
-        // AudioRevolver.Fire(AudioNames.PencilWriting);
         historyCounter.UpdateCounter(historyRoot.childCount);
     }
 
     public void UpdateAdventurersCounter(int newCount)
     {
-        // AudioRevolver.Fire(AudioNames.PencilWriting);
         adventurersCounter.UpdateCounter(newCount);
     }
 
