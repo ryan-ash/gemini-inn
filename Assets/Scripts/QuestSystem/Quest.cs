@@ -87,4 +87,22 @@ public class Quest
     {
         this.tile = tile;
     }
+
+    public bool RollSuccessDice()
+    {
+        float SuccessRate = BaseSuccessRate;
+
+        // TODO: base modifiers influence on group / individuals' stats and abilities
+        // foreach (AbilityModifier Mod in AbilityModifiers)
+        // {
+        //     SuccessRate *= Mod.Modifier;
+        // }
+        // foreach (StatModifier Mod in StatModifiers)
+        // {
+        //     SuccessRate *= Mod.Modifier;
+        // }
+        float Roll = Random.Range(0.0f, 1.0f);
+
+        return Roll <= SuccessRate;
+    }
 }

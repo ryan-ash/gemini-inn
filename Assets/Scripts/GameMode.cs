@@ -206,8 +206,7 @@ public class GameMode : MonoBehaviour
             {
                 if (quest.questTimer >= quest.baseDuration)
                 {
-                    // TODO: use success rate
-                    QuestState questResult = QuestState.Success;
+                    QuestState questResult = quest.RollSuccessDice() ? QuestState.Success : QuestState.Failure;
                     QuestToStop questToStop = new QuestToStop(mission, quest, questResult, false);
                     questsToStop.Add(questToStop);
                 }
