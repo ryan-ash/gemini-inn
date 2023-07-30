@@ -6,7 +6,6 @@ public class Tile : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
     public BiomePreset selectedBiome;
-    public bool controlRotation = false;
     public float waitBeforeRotating = 0.1f;
     public float rotationSpeed = 10.0f;
     public float fadeSpeed = 5.0f;
@@ -15,22 +14,24 @@ public class Tile : MonoBehaviour
     public int XFromEnd;
     public int XFromCenter;
 
-    public bool controlColor = true;
+    public bool hideThroughRotation = true;
+    public bool hideThroughColor = true;
+    public float hideYAngle = 90.0f;
     public Color hideColor = Color.clear;
+    public Color darkColor = Color.red;
+    public Color lightColor = Color.blue;
 
     private bool isRotating = false;
     private bool isFading = false;
     private bool isOn = false;
-    private float initialY = 0.0f;
-    private float initialZ = 0.0f;
     private int startOffset = 0;
 
     private Color targetColor = Color.white;
     private Color modifiedColor = Color.white;
-    public Color darkColor = Color.red;
-    public Color lightColor = Color.blue;
 
     [HideInInspector] public int currentLightLevel = 0;
+
+    private Quaternion offRotation, targetRotation;
 
 
     void Start()
@@ -43,22 +44,22 @@ public class Tile : MonoBehaviour
         if (!isRotating && !isFading)
             return;
 
-        if (isRotating && controlRotation)
+        if (isRotating && hideThroughRotation)
         {
             float step = Time.deltaTime * rotationSpeed;
-            float newY = isOn ? (transform.localEulerAngles.y % 180) - step : (transform.localEulerAngles.y % 180) + step;
-            float newZ = isOn ? (transform.localEulerAngles.z % 180) - step : (transform.localEulerAngles.z % 180) + step;
+            var targetRotation = isOn ? Quaternion.identity : offRotation;
 
-            transform.localEulerAngles = new Vector3(0.0f, newY, newZ);
-            float currentEdge = isOn ? Mathf.Abs(transform.localEulerAngles.y) : Mathf.Abs(transform.localEulerAngles.y - initialY);
-            if (currentEdge < step * 2)
+            transform.localRotation = Quaternion.RotateTowards(transform.localRotation, targetRotation, step);
+            float angle = Quaternion.Angle(targetRotation, transform.localRotation);
+
+            if (angle < 1.0f)
             {
-                transform.localEulerAngles = isOn ? Vector3.zero : new Vector3(0.0f, initialY, initialZ);
+                transform.localRotation = targetRotation;
                 isRotating = false;
             }
         }
 
-        if (isFading && controlColor)
+        if (isFading)
         {
             float step = Time.deltaTime * fadeSpeed;
             Color newColor = Color.Lerp(spriteRenderer.color, targetColor, step);
@@ -72,30 +73,21 @@ public class Tile : MonoBehaviour
 
     public void Prepare()
     {
-        if (!controlRotation)
+        if (!hideThroughRotation)
             return;
 
         Vector3 targetDirection = Camera.main.transform.position - transform.position;
+        targetDirection.Normalize();
+
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, Mathf.PI, 0.0f);
         transform.rotation = Quaternion.LookRotation(newDirection);
-        initialY = transform.localEulerAngles.y + 90.0f;
-        initialZ = transform.localEulerAngles.z + 90.0f;
-        initialY = initialY % 360.0f;
-        initialZ = initialZ % 360.0f;
-        if (initialY < 0.0f)
-            initialY += 180.0f;
-        if (initialY > 180.0f)
-            initialY -= 180.0f;
-        if (initialZ < 0.0f)
-            initialZ += 180.0f;
-        if (initialZ > 180.0f)
-            initialZ -= 180.0f;
-        transform.localEulerAngles = new Vector3(0.0f, initialY, initialZ);
+        transform.Rotate(Vector3.up, hideYAngle, Space.Self);
+        offRotation = transform.localRotation;
 
         currentLightLevel = Map.instance.initialLightLevel;
         UpdateSpriteColor(CalculateLightLevelColor());
         SetColor(modifiedColor);
-        if (controlRotation || controlColor)
+        if (hideThroughRotation || hideThroughColor)
             Hide();
     }
 
@@ -104,7 +96,8 @@ public class Tile : MonoBehaviour
         isOn = true;
         startOffset = XFromCenter;
         StartCoroutine(StartRotation());
-        SetColor(modifiedColor);
+        if (hideThroughColor)
+            SetColor(modifiedColor);
     }
 
     public void Hide()
@@ -112,14 +105,14 @@ public class Tile : MonoBehaviour
         isOn = false;
         startOffset = Mathf.Min(X, XFromEnd);
         StartCoroutine(StartRotation());
-        SetColor(hideColor);
+        if (hideThroughColor)
+            SetColor(hideColor);
     }
 
     public void SetColor(Color color)
     {
         targetColor = color;
-        if (controlColor)
-            isFading = true;
+        isFading = true;
     }
 
     public void AddDarkShade()
@@ -170,7 +163,7 @@ public class Tile : MonoBehaviour
     IEnumerator StartRotation()
     {
         yield return new WaitForSeconds(waitBeforeRotating * startOffset);
-        if (controlRotation)
+        if (hideThroughRotation)
             isRotating = true;
     }
 }

@@ -99,16 +99,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 6340725537460707043}
   selectedBiome: {fileID: 0}
-  controlRotation: 1
-  waitBeforeRotating: 0.01
-  rotationSpeed: 100
+  waitBeforeRotating: 0.005
+  rotationSpeed: 300
   fadeSpeed: 5
   X: 0
   Y: 0
   XFromEnd: 0
   XFromCenter: 0
-  controlColor: 1
-  hideColor: {r: 0, g: 0, b: 0, a: 0}
+  hideThroughRotation: 1
+  hideThroughColor: 1
+  hideYAngle: 90
+  hideColor: {r: 0, g: 0, b: 0, a: 0.015686275}
   darkColor: {r: 0, g: 0, b: 0, a: 1}
   lightColor: {r: 0, g: 1, b: 1, a: 1}
   currentLightLevel: 2

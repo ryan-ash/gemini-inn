@@ -99,7 +99,6 @@ public class Map : MonoBehaviour
 
         int halfWidth = width / 2;
         int halfHeight = height / 2;
-        int totalTiles = width;
         for (int x = 0; x < width; ++x)
         {
             for (int y = 0; y < height; ++y)
@@ -108,8 +107,8 @@ public class Map : MonoBehaviour
                 Tile tile = tileObject.GetComponent<Tile>();
                 tile.X = x;
                 tile.Y = y;
-                tile.XFromEnd = totalTiles - tile.X;
-                tile.XFromCenter = Mathf.Abs(tile.X - (totalTiles / 2));
+                tile.XFromEnd = width - tile.X;
+                tile.XFromCenter = Mathf.Abs(tile.X - (width / 2));
                 tile.selectedBiome = GetBiome(heightMap[x, y], moistureMap[x, y], heatMap[x, y]);
                 tileObject.transform.SetParent(tileParent.transform);
                 tileObject.GetComponent<SpriteRenderer>().sprite = tile.selectedBiome.GetTileSprite();
