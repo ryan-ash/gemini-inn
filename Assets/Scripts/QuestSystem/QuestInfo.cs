@@ -12,7 +12,8 @@ public class QuestInfo : MonoBehaviour
     public Slider questSlider;
     public Image questSliderFill;
     public SpriteRenderer questMapCircle;
-    public Transform questRequirementHolder;
+    public Transform abilitiesHolder;
+    public Transform statsHolder;
 
     [Header("Settings")]
     public float fadeDuration = 0.5f;
@@ -52,9 +53,16 @@ public class QuestInfo : MonoBehaviour
 
         foreach (AbilityModifier abilityModifier in quest.AbilityModifiers)
         {
-            GameObject questRequirement = Instantiate(questRequirementPrefab, questRequirementHolder);
+            GameObject questRequirement = Instantiate(questRequirementPrefab, abilitiesHolder);
             QuestRequirement questRequirementScript = questRequirement.GetComponent<QuestRequirement>();
             questRequirementScript.SelectAbility(abilityModifier.Type);
+        }
+
+        foreach (StatModifier statModifier in quest.StatModifiers)
+        {
+            GameObject questRequirement = Instantiate(questRequirementPrefab, statsHolder);
+            QuestRequirement questRequirementScript = questRequirement.GetComponent<QuestRequirement>();
+            questRequirementScript.SelectStat(statModifier.Type);
         }
     }
 

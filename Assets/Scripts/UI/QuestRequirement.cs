@@ -64,8 +64,8 @@ public class QuestRequirement : MonoBehaviour
 
 	void UpdateConnectedFields()
     {
-        icon.ChangeIcon(abilityDescription.icon);
-        icon.ChangeColor(abilityDescription.color);
+        icon.ChangeIcon(isAbility ? abilityDescription.icon : statDescription.icon);
+        icon.ChangeColor(isAbility ? abilityDescription.color : statDescription.color);
     }
 }
 
