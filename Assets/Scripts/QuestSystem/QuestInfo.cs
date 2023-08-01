@@ -12,6 +12,7 @@ public class QuestInfo : MonoBehaviour
     public Slider questSlider;
     public Image questSliderFill;
     public SpriteRenderer questMapCircle;
+    public Transform questRequirementHolder;
 
     [Header("Settings")]
     public float fadeDuration = 0.5f;
@@ -20,6 +21,7 @@ public class QuestInfo : MonoBehaviour
     public Color progressColor = Color.yellow;
     public Color successColor = Color.green;
     public Color failureColor = Color.red;
+    public GameObject questRequirementPrefab;
 
     private bool isInfoOpen = false;
     private bool isInfoAnimating = false;
@@ -46,6 +48,13 @@ public class QuestInfo : MonoBehaviour
         {
             questSliderFill.color = progressColor;
             questSlider.value = 0.0f;
+        }
+
+        foreach (AbilityModifier abilityModifier in quest.AbilityModifiers)
+        {
+            GameObject questRequirement = Instantiate(questRequirementPrefab, questRequirementHolder);
+            QuestRequirement questRequirementScript = questRequirement.GetComponent<QuestRequirement>();
+            questRequirementScript.SelectAbility(abilityModifier.Type);
         }
     }
 
