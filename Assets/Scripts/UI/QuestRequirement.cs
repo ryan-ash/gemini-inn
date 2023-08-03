@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
+using UnityEngine.UI;
 
 
 [ExecuteInEditMode]
@@ -10,23 +10,19 @@ public class QuestRequirement : MonoBehaviour
     public List<AbilityRequirementDecription> abilityRequirements;
     public List<StatRequirementDecription> statRequirements;
 
+    [Header("Mapping")]
+    public FontAwesome icon;
+    public Slider slider;
+    public Image sliderFill;
+
     [HideInInspector] public AbilityRequirementDecription abilityDescription;
     [HideInInspector] public StatRequirementDecription statDescription;
 
     private bool isAbility = false;
-    private FontAwesome fontAwesome;
-    private FontAwesome icon {
-        get {
-            if (fontAwesome == null) {
-                fontAwesome = GetComponent<FontAwesome>();
-            }
-            return fontAwesome;
-        }
-    }
 
     void Start()
     {
-        // SelectRandomAbility(); // for now
+
     }
 
     void Update()
@@ -46,6 +42,7 @@ public class QuestRequirement : MonoBehaviour
         isAbility = false;
         statDescription = statRequirements[Random.Range(0, statRequirements.Count)];
         UpdateConnectedFields();
+        sliderFill.color = statDescription.color;
     }
 
     public void SelectAbility(AbilityType ability)
@@ -60,6 +57,7 @@ public class QuestRequirement : MonoBehaviour
         isAbility = false;
         statDescription = statRequirements.Find(St => St.statType == stat);
         UpdateConnectedFields();
+        sliderFill.color = statDescription.color;
     }
 
 	void UpdateConnectedFields()

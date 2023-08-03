@@ -23,6 +23,7 @@ public class QuestInfo : MonoBehaviour
     public Color successColor = Color.green;
     public Color failureColor = Color.red;
     public GameObject questRequirementPrefab;
+    public GameObject statRequirementPrefab;
 
     private bool isInfoOpen = false;
     private bool isInfoAnimating = false;
@@ -53,16 +54,16 @@ public class QuestInfo : MonoBehaviour
 
         foreach (AbilityModifier abilityModifier in quest.AbilityModifiers)
         {
-            GameObject questRequirement = Instantiate(questRequirementPrefab, abilitiesHolder);
-            QuestRequirement questRequirementScript = questRequirement.GetComponent<QuestRequirement>();
-            questRequirementScript.SelectAbility(abilityModifier.Type);
+            GameObject ability = Instantiate(questRequirementPrefab, abilitiesHolder);
+            QuestRequirement questRequirement = ability.GetComponent<QuestRequirement>();
+            questRequirement.SelectAbility(abilityModifier.Type);
         }
 
         foreach (StatModifier statModifier in quest.StatModifiers)
         {
-            GameObject questRequirement = Instantiate(questRequirementPrefab, statsHolder);
-            QuestRequirement questRequirementScript = questRequirement.GetComponent<QuestRequirement>();
-            questRequirementScript.SelectStat(statModifier.Type);
+            GameObject stat = Instantiate(statRequirementPrefab, statsHolder);
+            QuestRequirement questRequirement = stat.GetComponent<QuestRequirement>();
+            questRequirement.SelectStat(statModifier.Type);
         }
     }
 

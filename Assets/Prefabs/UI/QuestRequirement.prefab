@@ -144,6 +144,9 @@ MonoBehaviour:
     statType: 4
     icon: fa-smile-o
     color: {r: 0.5019608, g: 1, b: 0.5019608, a: 1}
+  icon: {fileID: 5255538271062659434}
+  slider: {fileID: 0}
+  sliderFill: {fileID: 0}
   abilityDescription:
     name: Melee Damage
     abilityType: 3
