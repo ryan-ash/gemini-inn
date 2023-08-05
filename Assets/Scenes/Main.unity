@@ -15769,7 +15769,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4011028831949158945, guid: 4bbd3563fc231aa4586405159ff57ab0, type: 3}
       propertyPath: size
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4011028831949158945, guid: 4bbd3563fc231aa4586405159ff57ab0, type: 3}
       propertyPath: color.b
@@ -25290,7 +25290,7 @@ GameObject:
   - component: {fileID: 1496382541}
   - component: {fileID: 1496382544}
   m_Layer: 6
-  m_Name: GameObject
+  m_Name: GroupCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33230,7 +33230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 474422427698273396, guid: c3f3b805bb9b5a84c8b93baae6d75136, type: 3}
       propertyPath: m_Alpha
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 474422428138672847, guid: c3f3b805bb9b5a84c8b93baae6d75136, type: 3}
       propertyPath: m_SizeDelta.x

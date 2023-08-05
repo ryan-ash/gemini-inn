@@ -40,6 +40,8 @@ public class Adventurer : MonoBehaviour
     [HideInInspector] public string adventurerName;
     [HideInInspector] public bool femaleGender = false;
 
+    public List<Stat> Stats = new List<Stat>();
+
     private TextBuilder nameBuilder;
 
     public void RandomizeCharacter()
@@ -114,6 +116,18 @@ public class Adventurer : MonoBehaviour
     {
         nameBuilder = GetComponent<TextBuilder>();
         adventurerName = nameBuilder.BuildText();
+    }
+
+    public void RandomizeStats()
+    {
+        Stats.Clear();
+        for (int I = 0; I < 4; I++)
+        {
+            Stat NewStat = new Stat();
+            NewStat.Type = (StatType)I + 1;
+            NewStat.Value = Random.Range(0, 101);
+            Stats.Add(NewStat);
+        }
     }
 
     void Start()

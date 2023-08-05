@@ -114,6 +114,7 @@ public class AdventurerManager : MonoBehaviour
         {
             adventurer.SetRandomGender();
             adventurer.RunNameGenerator();
+            adventurer.RandomizeStats();
         }
 
         adventurerGroups[adventurerGroupIndex].AddAdventurer(adventurer);

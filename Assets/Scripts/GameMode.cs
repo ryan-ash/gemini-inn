@@ -87,10 +87,10 @@ public class GameMode : MonoBehaviour
 
     void Update()
     {
-        UpdateQuestTimers();
-
-        if (!isMapOpen && !isChoosingAdventurers && !isNegotiating)
+        if (!gameStarted)
             return;
+
+        UpdateQuestTimers();
 
         if (isMapOpen)
         {
@@ -121,38 +121,35 @@ public class GameMode : MonoBehaviour
 
             TrackQuestUnderMouse();
         }
-
-        if (isChoosingAdventurers)
+        else if (!isNegotiating)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (isChoosingAdventurers)
             {
-                isChoosingAdventurers = false;
-                if (consideredAdventurerGroup != null && consideredAdventurerGroup.adventurers.Count > 0)
+                if (Input.GetMouseButtonDown(0))
                 {
-                    selectedAdventurerGroup = consideredAdventurerGroup;
-                    CursorSetter.ResetPriorityCursor();
-                    MoveSelectedAdventurersToNegotiation();
+                    isChoosingAdventurers = false;
+                    if (consideredAdventurerGroup != null && consideredAdventurerGroup.adventurers.Count > 0)
+                    {
+                        selectedAdventurerGroup = consideredAdventurerGroup;
+                        CursorSetter.ResetPriorityCursor();
+                        MoveSelectedAdventurersToNegotiation();
+                    }
+                    else if (consideredAdventurerGroup == null)
+                    {
+                        CursorSetter.ResetPriorityCursor();
+                        // ToggleMap();
+                        UIGod.instance.UpdateQuestTitle("");
+                    }
+                    else
+                    {
+                        isChoosingAdventurers = true;
+                        // spawn "there's no one there" replic
+                    }
+                    return;
                 }
-                else if (consideredAdventurerGroup == null)
-                {
-                    CursorSetter.ResetPriorityCursor();
-                    // ToggleMap();
-                    UIGod.instance.UpdateQuestTitle("");
-                }
-                else
-                {
-                    isChoosingAdventurers = true;
-                    // spawn "there's no one there" replic
-                }
-                return;
             }
 
             TrackAdventureGroupUnderMouse();
-        }
-
-        if (isNegotiating)
-        {
-            // for now, only control negotiations through UI
         }
     }
 
