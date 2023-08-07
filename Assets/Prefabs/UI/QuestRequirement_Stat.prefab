@@ -189,8 +189,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 9.999985, y: 0}
-  m_SizeDelta: {x: -20, y: 2}
+  m_AnchoredPosition: {x: 10, y: 0}
+  m_SizeDelta: {x: -20, y: 3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4586734655060058591
 MonoBehaviour:
@@ -237,8 +237,8 @@ MonoBehaviour:
   m_HandleRect: {fileID: 4949998703304751251}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
+  m_MaxValue: 100
+  m_WholeNumbers: 1
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 4519680480219582495}
   - component: {fileID: 388008576998808306}
   m_Layer: 0
-  m_Name: StatRequirement
+  m_Name: QuestRequirement_Stat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

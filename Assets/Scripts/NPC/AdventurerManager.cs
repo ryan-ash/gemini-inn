@@ -115,6 +115,7 @@ public class AdventurerManager : MonoBehaviour
             adventurer.SetRandomGender();
             adventurer.RunNameGenerator();
             adventurer.RandomizeStats();
+            adventurer.RandomizeAbilities();
         }
 
         adventurerGroups[adventurerGroupIndex].AddAdventurer(adventurer);

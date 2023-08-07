@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 173515943746376314}
   - component: {fileID: 665690673258061899}
   m_Layer: 0
-  m_Name: QuestRequirement
+  m_Name: QuestRequirement_Ability
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

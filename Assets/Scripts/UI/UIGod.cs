@@ -198,17 +198,30 @@ public class UIGod : MonoBehaviour
     {
         if (priorityWindowPinned)
             return;
-        AudioRevolver.Fire(AudioNames.Click);
-        CloseAllWindows();
         foreach (Window window in windows)
         {
             if (window.windowType == windowType)
             {
+                if (!window.isOverlay)
+                    CloseAllWindows();
+                AudioRevolver.Fire(window.isOverlay ? AudioNames.Hover : AudioNames.Click);
                 window.OpenWindow();
                 break;
             }
         }
         CursorSetter.SetDefaultCursor();
+    }
+
+    public void CloseWindow(WindowType windowType)
+    {
+        foreach (Window window in windows)
+        {
+            if (window.windowType == windowType)
+            {
+                window.CloseWindow();
+                break;
+            }
+        }
     }
 
     public Window GetWindow(WindowType windowType)

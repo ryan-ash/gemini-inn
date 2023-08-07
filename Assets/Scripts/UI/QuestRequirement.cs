@@ -60,6 +60,11 @@ public class QuestRequirement : MonoBehaviour
         sliderFill.color = statDescription.color;
     }
 
+    public void SetStatValue(float value)
+    {
+        slider.value = value;
+    }
+
 	void UpdateConnectedFields()
     {
         icon.ChangeIcon(isAbility ? abilityDescription.icon : statDescription.icon);

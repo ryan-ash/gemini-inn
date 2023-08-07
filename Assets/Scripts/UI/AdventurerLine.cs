@@ -14,6 +14,13 @@ public class AdventurerLine : MonoBehaviour
     [Header("Mapping")]
     public TextWriter nameWriter;
     public FontAwesome statusIcon;
+    public Transform abilitiesContainer;
+    public Transform statsContainer;
+    public GameObject abilitiesSeparator;
+
+    [Header("Prefabs")]
+    public GameObject adventurerAbility;
+    public GameObject adventurerStat;
 
     void Start()
     {
@@ -30,5 +37,22 @@ public class AdventurerLine : MonoBehaviour
         this.adventurer = adventurer;
         nameWriter.Write(adventurer.adventurerName);
         statusIcon.ChangeIcon(adventurer.femaleGender ? femaleIcon : maleIcon);
+
+        foreach (Ability ability in adventurer.Abilities)
+        {
+            GameObject abilityUI = Instantiate(adventurerAbility, abilitiesContainer);
+            QuestRequirement questRequirement = abilityUI.GetComponent<QuestRequirement>();
+            questRequirement.SelectAbility(ability.Type);
+        }
+        if (adventurer.Abilities.Count == 0)
+            abilitiesSeparator.SetActive(false);
+
+        foreach (Stat stat in adventurer.Stats)
+        {
+            GameObject statUI = Instantiate(adventurerStat, statsContainer);
+            QuestRequirement questRequirement = statUI.GetComponent<QuestRequirement>();
+            questRequirement.SelectStat(stat.Type);
+            questRequirement.SetStatValue(stat.Value);
+        }
     }
 }

@@ -272,7 +272,7 @@ public class GameMode : MonoBehaviour
         {
             consideredAdventurerGroup.UnfocusAdventurerTable();
             consideredAdventurerGroup = null;
-            UIGod.instance.CloseAllWindows();
+            UIGod.instance.CloseWindow(WindowType.AdventurerPreview);
         }
     }
 

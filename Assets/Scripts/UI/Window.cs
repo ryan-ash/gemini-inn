@@ -7,6 +7,7 @@ public class Window : MonoBehaviour
 {
     public WindowType windowType;
     public Text windowTitle;
+    public bool isOverlay = false;
 
     [HideInInspector] public bool isOpen = false;
     

@@ -10,6 +10,7 @@ public class AudioNames {
     public static string CameraWoosh = "CameraWoosh";
     public static string Crowd = "Crowd";
     public static string Click = "Click";
+    public static string Hover = "Hover";
     public static string MapSound = "MapSound";
     public static string PencilWriting = "PencilWriting";
     public static string MugOnTable = "MugOnTable";
