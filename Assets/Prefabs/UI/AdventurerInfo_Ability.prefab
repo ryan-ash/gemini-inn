@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 173515943746376314, guid: 32eb81e1d7d905240aec5eaa18aecd7c, type: 3}
       propertyPath: m_FontData.m_FontSize
-      value: 22
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1234161968744220665, guid: 32eb81e1d7d905240aec5eaa18aecd7c, type: 3}
       propertyPath: m_Pivot.x
@@ -41,11 +41,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1234161968744220665, guid: 32eb81e1d7d905240aec5eaa18aecd7c, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 22
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1234161968744220665, guid: 32eb81e1d7d905240aec5eaa18aecd7c, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 16
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1234161968744220665, guid: 32eb81e1d7d905240aec5eaa18aecd7c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -97,11 +97,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5255538271062659434, guid: 32eb81e1d7d905240aec5eaa18aecd7c, type: 3}
       propertyPath: size
-      value: 22
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7028662176189348226, guid: 32eb81e1d7d905240aec5eaa18aecd7c, type: 3}
       propertyPath: m_Name
-      value: AbilityRequirement
+      value: AdventurerInfo_Ability
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32eb81e1d7d905240aec5eaa18aecd7c, type: 3}
