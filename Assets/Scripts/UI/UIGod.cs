@@ -106,7 +106,10 @@ public class UIGod : MonoBehaviour
         Transform root = usePreviewRoot ? adventurersPreviewRoot : adventurersRoot;
         for (int i = 0; i < root.childCount; i++)
         {
-            Destroy(root.GetChild(i).gameObject);
+            if (root.GetChild(i).GetComponent<AdventurerLine>() != null)
+            {
+                Destroy(root.GetChild(i).gameObject);
+            }
         }
         foreach (Adventurer adventurer in adventurerGroup.adventurers)
         {
