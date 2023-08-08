@@ -10,6 +10,7 @@ public class Window : MonoBehaviour
     public bool isOverlay = false;
 
     [HideInInspector] public bool isOpen = false;
+    [HideInInspector] public bool isPinned = false;
     
     private Fader fader;
 
@@ -24,6 +25,16 @@ public class Window : MonoBehaviour
         
     }
 
+    public void Pin()
+    {
+        isPinned = true;
+    }
+
+    public void Unpin()
+    {
+        isPinned = false;
+    }
+
     public void OpenWindow()
     {
         fader.FadeIn();
@@ -32,6 +43,8 @@ public class Window : MonoBehaviour
 
     public void CloseWindow()
     {
+        if (isPinned)
+            return;
         fader.FadeOut();
         isOpen = false;
     }

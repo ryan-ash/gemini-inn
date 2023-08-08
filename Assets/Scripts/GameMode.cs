@@ -315,7 +315,7 @@ public class GameMode : MonoBehaviour
     public void MoveSelectedAdventurersToNegotiation()
     {
         UIGod.instance.SpawnOwnerReplic();
-        UIGod.instance.CloseAllWindows();
+        UIGod.instance.GetWindow(WindowType.AdventurerPreview).Pin();
         AudioRevolver.Fire(AudioNames.Footsteps);
         foreach (Adventurer adventurer in selectedAdventurerGroup.adventurers)
         {
@@ -347,7 +347,7 @@ public class GameMode : MonoBehaviour
         float OpenWindowTime = rotationLengthBeforeMovingDuringNegotiation + CalculateMoveTime() + delayBeforeMovingDuringNegotiation;
         Wait.Run(OpenWindowTime, () => {
             UIGod.instance.OpenWindowNegotiation();
-            UIGod.instance.PinPriorityWindow();
+            UIGod.instance.GetWindow(WindowType.Negotiation).Pin();
         });
 
         isNegotiating = true;

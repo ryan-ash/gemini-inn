@@ -44,8 +44,6 @@ public class UIGod : MonoBehaviour
     private Window[] windows;
     private GameObject spawnedQuests;
 
-    private bool priorityWindowPinned = false;
-
     void Start()
     {
         instance = this;
@@ -185,22 +183,18 @@ public class UIGod : MonoBehaviour
 
     public void BeginAcceptingQuest()
     {
-        UnpinPriorityWindow();
-        CloseAllWindows();
         GameMode.instance.AgreeToQuest();
+        CloseAllWindows(true);
     }
 
     public void BeginDecliningQuest()
     {
-        UnpinPriorityWindow();
-        CloseAllWindows();
         GameMode.instance.DisagreeToQuest();
+        CloseAllWindows(true);
     }
 
     public void OpenWindow(WindowType windowType)
     {
-        if (priorityWindowPinned)
-            return;
         foreach (Window window in windows)
         {
             if (window.windowType == windowType)
@@ -239,16 +233,6 @@ public class UIGod : MonoBehaviour
         return null;
     }
 
-    public void PinPriorityWindow()
-    {
-        priorityWindowPinned = true;
-    }
-
-    public void UnpinPriorityWindow()
-    {
-        priorityWindowPinned = false;
-    }
-
     public void OpenWindowSettings()
     {
         OpenWindow(WindowType.Settings);
@@ -256,8 +240,11 @@ public class UIGod : MonoBehaviour
 
     public void OpenWindowNegotiation()
     {
-        questTitle.Write(GameMode.instance.selectedQuest.questName);
-        questDescription.Write(GameMode.instance.selectedQuest.questDescription);
+        // init negotiation dialog
+        questTitle.Write("negotiation will be here");
+        questDescription.Write("imagine it for now");
+        // questTitle.Write(GameMode.instance.selectedQuest.questName);
+        // questDescription.Write(GameMode.instance.selectedQuest.questDescription);
         OpenWindow(WindowType.Negotiation);
     }
 
@@ -276,15 +263,14 @@ public class UIGod : MonoBehaviour
         OpenWindow(WindowType.Adventurers);
     }
 
-    public void CloseAllWindows()
+    public void CloseAllWindows(bool includePinned = false)
     {
         foreach (Window window in windows)
         {
+            if (includePinned)
+                window.Unpin();
             if (window.isOpen)
-            {
                 window.CloseWindow();
-                break;
-            }
         }
     }
 
