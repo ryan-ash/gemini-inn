@@ -429,6 +429,10 @@ public class GameMode : MonoBehaviour
             activeMissions.Remove(mission);
             quest.questInfo.SetOver(newState == QuestState.Success, isTimeout);
             quest.questLine.transform.SetParent(UIGod.instance.historyRoot, false);
+            if (quest == selectedQuest && isChoosingAdventurers)
+            {
+                isChoosingAdventurers = false;
+            }
         }
         if (newState == QuestState.Success)
         {
