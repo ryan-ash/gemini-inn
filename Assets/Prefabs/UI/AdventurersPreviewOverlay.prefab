@@ -689,11 +689,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4011028831949063439, guid: 4bbd3563fc231aa4586405159ff57ab0, type: 3}
       propertyPath: m_FontData.m_FontSize
-      value: 10
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 4011028831949158945, guid: 4bbd3563fc231aa4586405159ff57ab0, type: 3}
       propertyPath: size
-      value: 10
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 4011028831949158945, guid: 4bbd3563fc231aa4586405159ff57ab0, type: 3}
       propertyPath: color.b
