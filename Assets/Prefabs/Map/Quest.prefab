@@ -280,8 +280,10 @@ MonoBehaviour:
   fadeDuration: 0.25
   moveDuration: 1
   moveBackDuration: 1
+  waitBeforeHidingAfterMoveBack: 1
   moveEaseType: 16
   moveBackEaseType: 6
+  pinnedCanvasHeight: 240
   timeoutColor: {r: 0.754717, g: 0.754717, b: 0.754717, a: 1}
   roadColor: {r: 0, g: 1, b: 1, a: 1}
   progressColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -313,10 +315,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 2257886083114654870, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5903398990973935828, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -331,7 +329,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6664273338299532358, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
       propertyPath: m_Pivot.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6664273338299532358, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
       propertyPath: m_RootOrder
@@ -343,7 +341,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6664273338299532358, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6664273338299532358, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
       propertyPath: m_AnchorMin.x
@@ -351,7 +349,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6664273338299532358, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6664273338299532358, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
       propertyPath: m_SizeDelta.x
@@ -395,7 +393,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6664273338299532358, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -2.64
+      value: 3.36
       objectReference: {fileID: 0}
     - target: {fileID: 6664273338299532358, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

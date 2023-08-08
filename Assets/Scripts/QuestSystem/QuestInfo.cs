@@ -22,6 +22,7 @@ public class QuestInfo : MonoBehaviour
     public float waitBeforeHidingAfterMoveBack = 1.0f;
     public LeanTweenType moveEaseType = LeanTweenType.easeInOutSine;
     public LeanTweenType moveBackEaseType = LeanTweenType.easeInOutSine;
+    public float pinnedCanvasHeight = 250.0f;
     public Color timeoutColor = Color.white;
     public Color roadColor = Color.cyan;
     public Color progressColor = Color.yellow;
@@ -42,11 +43,13 @@ public class QuestInfo : MonoBehaviour
     private Vector3 initialPosition;
     private Quaternion initialRotation;
     private Vector3 initialScale;
+    private float initialCanvasHeight;
 
     private Animator animator;
     private BoxCollider openCollider;
     private BoxCollider closeCollider;
     private Quest quest;
+    private RectTransform infoCanvasRectTransform;
 
     public void SetQuest(Quest InQuest)
     {
@@ -111,6 +114,7 @@ public class QuestInfo : MonoBehaviour
             infoCanvas.transform.position = Vector3.Lerp(initialPosition, Inn.instance.questInfoTransform.position, value);
             infoCanvas.transform.rotation = Quaternion.Lerp(initialRotation, Inn.instance.questInfoTransform.rotation, value);
             infoCanvas.transform.localScale = Vector3.Lerp(initialScale, Inn.instance.questInfoTransform.localScale, value);
+            infoCanvasRectTransform.sizeDelta = new Vector2(infoCanvasRectTransform.sizeDelta.x, Mathf.Lerp(initialCanvasHeight, pinnedCanvasHeight, value));
         });
     }
 
@@ -120,6 +124,7 @@ public class QuestInfo : MonoBehaviour
             infoCanvas.transform.position = Vector3.Lerp(initialPosition, Inn.instance.questInfoTransform.position, value);
             infoCanvas.transform.rotation = Quaternion.Lerp(initialRotation, Inn.instance.questInfoTransform.rotation, value);
             infoCanvas.transform.localScale = Vector3.Lerp(initialScale, Inn.instance.questInfoTransform.localScale, value);
+            infoCanvasRectTransform.sizeDelta = new Vector2(infoCanvasRectTransform.sizeDelta.x, Mathf.Lerp(initialCanvasHeight, pinnedCanvasHeight, value));
         }).setOnComplete(() => {
             isInfoPinned = false;
             Wait.Run(waitBeforeHidingAfterMoveBack, () => {
@@ -202,11 +207,13 @@ public class QuestInfo : MonoBehaviour
     {
         openCollider = infoCanvas.gameObject.GetComponent<BoxCollider>();
         animator = GetComponentInChildren<Animator>();
+        infoCanvasRectTransform = infoCanvas.GetComponent<RectTransform>();
         infoCanvas.alpha = 0.0f;
 
         initialPosition = infoCanvas.transform.position;
         initialRotation = infoCanvas.transform.rotation;
         initialScale = infoCanvas.transform.localScale;
+        initialCanvasHeight = infoCanvasRectTransform.sizeDelta.y;
     }
 
     void Update()
