@@ -277,6 +277,7 @@ MonoBehaviour:
   questMapCircle: {fileID: 1109841416871851196}
   abilitiesHolder: {fileID: 1931882504253331610}
   statsHolder: {fileID: 6943276249307988350}
+  closeButtonFader: {fileID: 7767668815633724867}
   fadeDuration: 0.25
   moveDuration: 1
   moveBackDuration: 1
@@ -311,6 +312,86 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3194820059133904913}
     m_Modifications:
+    - target: {fileID: 677129726691314689, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 677129726691314689, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 677129726691314689, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2426173546411212718}
+    - target: {fileID: 677129726691314689, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2426173546411212718}
+    - target: {fileID: 677129726691314689, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayButtonHoverSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 677129726691314689, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayButtonUnhoverSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 677129726691314689, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: QuestInfo, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 677129726691314689, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: QuestInfo, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 677129726701410394, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 677129726701410394, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 677129726701410394, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 677129726701410394, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2426173546411212718}
+    - target: {fileID: 677129726701410394, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 2426173546411212718}
+    - target: {fileID: 677129726701410394, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 677129726701410394, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Unpin
+      objectReference: {fileID: 0}
+    - target: {fileID: 677129726701410394, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: PlayButtonClickSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 677129726701410394, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: QuestInfo, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 677129726701410394, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      value: QuestInfo, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 677129726701410394, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 677129726701410394, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1848358927979056211, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -464,6 +545,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7767668815633724867 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 461532824911815346, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
+  m_PrefabInstance: {fileID: 7902687094147323761}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bfcba85dc0184e7b952e385d81d7f09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &9036173395170640873 stripped

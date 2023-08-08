@@ -14,6 +14,7 @@ public class QuestInfo : MonoBehaviour
     public SpriteRenderer questMapCircle;
     public Transform abilitiesHolder;
     public Transform statsHolder;
+    public Fader closeButtonFader;
 
     [Header("Settings")]
     public float fadeDuration = 0.5f;
@@ -110,6 +111,7 @@ public class QuestInfo : MonoBehaviour
     public void Pin()
     {
         isInfoPinned = true;
+        closeButtonFader.FadeIn();
         LeanTween.value(gameObject, 0.0f, 1.0f, moveDuration).setEase(moveEaseType).setOnUpdate((float value) => {
             infoCanvas.transform.position = Vector3.Lerp(initialPosition, Inn.instance.questInfoTransform.position, value);
             infoCanvas.transform.rotation = Quaternion.Lerp(initialRotation, Inn.instance.questInfoTransform.rotation, value);
@@ -120,6 +122,7 @@ public class QuestInfo : MonoBehaviour
 
     public void Unpin()
     {
+        closeButtonFader.FadeOut();
         LeanTween.value(gameObject, 1.0f, 0.0f, moveBackDuration).setEase(moveBackEaseType).setOnUpdate((float value) => {
             infoCanvas.transform.position = Vector3.Lerp(initialPosition, Inn.instance.questInfoTransform.position, value);
             infoCanvas.transform.rotation = Quaternion.Lerp(initialRotation, Inn.instance.questInfoTransform.rotation, value);
@@ -184,6 +187,21 @@ public class QuestInfo : MonoBehaviour
         questSlider.value = 1.0f;
         // AudioRevolver.Fire(isTimeout ? AudioNames.MugOnTable : isSuccess ? AudioNames.QuestCompleted : AudioNames.QuestFailed);
         AudioRevolver.Fire(isSuccess ? AudioNames.QuestCompleted : AudioNames.QuestFailed);
+    }
+
+    public void PlayButtonHoverSound()
+    {
+        AudioRevolver.Fire(AudioNames.Hover);
+    }
+
+    public void PlayButtonUnhoverSound()
+    {
+        // AudioRevolver.Fire(AudioNames.ButtonHover);
+    }
+
+    public void PlayButtonClickSound()
+    {
+        AudioRevolver.Fire(AudioNames.Click);
     }
 
     void UpdateQuestSlider()
