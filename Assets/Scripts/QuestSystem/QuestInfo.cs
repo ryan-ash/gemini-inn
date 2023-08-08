@@ -17,6 +17,11 @@ public class QuestInfo : MonoBehaviour
 
     [Header("Settings")]
     public float fadeDuration = 0.5f;
+    public float moveDuration = 0.5f;
+    public float moveBackDuration = 0.5f;
+    public float waitBeforeHidingAfterMoveBack = 1.0f;
+    public LeanTweenType moveEaseType = LeanTweenType.easeInOutSine;
+    public LeanTweenType moveBackEaseType = LeanTweenType.easeInOutSine;
     public Color timeoutColor = Color.white;
     public Color roadColor = Color.cyan;
     public Color progressColor = Color.yellow;
@@ -27,14 +32,20 @@ public class QuestInfo : MonoBehaviour
 
     private bool isInfoOpen = false;
     private bool isInfoAnimating = false;
-    private BoxCollider openCollider;
-    private BoxCollider closeCollider;
-    private Animator animator;
+    private bool isInfoPinned = false;
     private bool isQuestTimeoutActive = false;
     private bool isQuestOnRoad = false;
     private bool isQuestInProgress = false;
     private bool isQuestOver = false;
     private bool isQuestSuccess = false;
+
+    private Vector3 initialPosition;
+    private Quaternion initialRotation;
+    private Vector3 initialScale;
+
+    private Animator animator;
+    private BoxCollider openCollider;
+    private BoxCollider closeCollider;
     private Quest quest;
 
     public void SetQuest(Quest InQuest)
@@ -65,6 +76,8 @@ public class QuestInfo : MonoBehaviour
             QuestRequirement questRequirement = stat.GetComponent<QuestRequirement>();
             questRequirement.SelectStat(statModifier.Type);
         }
+
+        FillData();
     }
 
     public Quest GetQuest()
@@ -74,8 +87,7 @@ public class QuestInfo : MonoBehaviour
 
     public void ShowInfo()
     {
-        HideAll();
-        FillData();
+        HideAll(this);
         isInfoOpen = true;
         isInfoAnimating = true;
         openCollider.gameObject.SetActive(true); // why doesn't this work?..
@@ -84,16 +96,49 @@ public class QuestInfo : MonoBehaviour
 
     public void HideInfo()
     {
+        if (isInfoPinned)
+            return;
+
         isInfoOpen = false;
         isInfoAnimating = true;
         CursorSetter.SetDefaultCursor();
     }
 
-    public static void HideAll()
+    public void Pin()
+    {
+        isInfoPinned = true;
+        LeanTween.value(gameObject, 0.0f, 1.0f, moveDuration).setEase(moveEaseType).setOnUpdate((float value) => {
+            infoCanvas.transform.position = Vector3.Lerp(initialPosition, Inn.instance.questInfoTransform.position, value);
+            infoCanvas.transform.rotation = Quaternion.Lerp(initialRotation, Inn.instance.questInfoTransform.rotation, value);
+            infoCanvas.transform.localScale = Vector3.Lerp(initialScale, Inn.instance.questInfoTransform.localScale, value);
+        });
+    }
+
+    public void Unpin()
+    {
+        LeanTween.value(gameObject, 1.0f, 0.0f, moveBackDuration).setEase(moveBackEaseType).setOnUpdate((float value) => {
+            infoCanvas.transform.position = Vector3.Lerp(initialPosition, Inn.instance.questInfoTransform.position, value);
+            infoCanvas.transform.rotation = Quaternion.Lerp(initialRotation, Inn.instance.questInfoTransform.rotation, value);
+            infoCanvas.transform.localScale = Vector3.Lerp(initialScale, Inn.instance.questInfoTransform.localScale, value);
+        }).setOnComplete(() => {
+            isInfoPinned = false;
+            Wait.Run(waitBeforeHidingAfterMoveBack, () => {
+                HideInfo();
+            });
+        });
+    }
+
+    public bool IsPinned()
+    {
+        return isInfoPinned;
+    }
+
+    public static void HideAll(QuestInfo except = null)
     {
         foreach (QuestInfo questInfo in GameMode.instance.generatedQuestInfos)
         {
-            questInfo.HideInfo();
+            if (questInfo != except)
+                questInfo.HideInfo();
         }
     }
 
@@ -158,6 +203,10 @@ public class QuestInfo : MonoBehaviour
         openCollider = infoCanvas.gameObject.GetComponent<BoxCollider>();
         animator = GetComponentInChildren<Animator>();
         infoCanvas.alpha = 0.0f;
+
+        initialPosition = infoCanvas.transform.position;
+        initialRotation = infoCanvas.transform.rotation;
+        initialScale = infoCanvas.transform.localScale;
     }
 
     void Update()

@@ -12,6 +12,9 @@ public class Inn : MonoBehaviour
     public bool trackMouse = false;
     public Vector2 trackMouseAngleRange = new Vector2(20.0f, 10.0f);
 
+    [Header("Quest Info")]
+    public Transform questInfoTransform;
+
     private Vector3 originalCameraPosition;
     private Quaternion originalCameraRotation;
 

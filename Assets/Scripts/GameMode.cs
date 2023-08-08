@@ -98,11 +98,12 @@ public class GameMode : MonoBehaviour
             {
                 selectedQuestMarker = consideredQuestMarker;
                 selectedQuest = consideredQuest;
-                selectedQuestMarker.GetComponent<QuestInfo>().HideInfo();
+                // selectedQuestMarker.GetComponent<QuestInfo>().HideInfo();
 
                 switch (selectedQuest.questState)
                 {
                     case QuestState.NotStarted:
+                        selectedQuest.questInfo.Pin();
                         ToggleMap();
                         StartChoosingAdventurers();
                         break;
@@ -287,6 +288,10 @@ public class GameMode : MonoBehaviour
         isMapOpen = !isMapOpen;
         if (isMapOpen)
         {
+            if (selectedQuest != null && selectedQuest.questInfo != null && selectedQuest.questInfo.IsPinned())
+            {
+                selectedQuest.questInfo.Unpin();
+            }
             UIGod.instance.UpdateQuestTitle("");
             Inn.instance.ShowMap();
             Map.instance.ShowMap();
@@ -355,6 +360,7 @@ public class GameMode : MonoBehaviour
 
     public void AgreeToQuest()
     {
+        selectedQuest.questInfo.Unpin();
         selectedAdventurerGroup.AcceptQuest();
 
         GameObject spawnedMapGroup = Instantiate(mapGroupPrefab, generatedInn.transform.localPosition, Quaternion.identity);

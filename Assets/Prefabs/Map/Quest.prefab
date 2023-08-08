@@ -278,6 +278,10 @@ MonoBehaviour:
   abilitiesHolder: {fileID: 1931882504253331610}
   statsHolder: {fileID: 6943276249307988350}
   fadeDuration: 0.25
+  moveDuration: 1
+  moveBackDuration: 1
+  moveEaseType: 16
+  moveBackEaseType: 6
   timeoutColor: {r: 0.754717, g: 0.754717, b: 0.754717, a: 1}
   roadColor: {r: 0, g: 1, b: 1, a: 1}
   progressColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}

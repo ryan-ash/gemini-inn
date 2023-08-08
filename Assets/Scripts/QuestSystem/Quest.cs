@@ -18,6 +18,7 @@ public class Quest
     public string questName;
     public string questDescription;
     public List<string> Biomes;
+    public AllianceType Alliance;
     public int successAttempts = 0;
     public float timeout = 0.0f;
     public float baseDuration = 15.0f;
@@ -105,4 +106,18 @@ public class Quest
 
         return Roll <= SuccessRate;
     }
+}
+
+[System.Serializable]
+public enum AllianceType
+{
+    None,
+    Nature,
+    Humans,
+    Elves,
+    Dwarves,
+    Orcs,
+    Goblins,
+    Druids,
+    Frogs
 }
