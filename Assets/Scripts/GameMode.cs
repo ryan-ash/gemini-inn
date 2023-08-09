@@ -263,7 +263,7 @@ public class GameMode : MonoBehaviour
                 consideredAdventurerGroup = adventurerGroup;
                 if (adventurerGroup.adventurers.Count > 0)
                 {
-                    UIGod.instance.FillDrawerWithAdventureGroup(adventurerGroup, true);
+                    UIGod.instance.FillPreviewDrawerWithAdventureGroup(adventurerGroup);
                     UIGod.instance.OpenWindow(WindowType.AdventurerPreview);
                 }
                 adventurerGroup.FocusAdventurerTable();

@@ -7,8 +7,8 @@ public class Adventurer : MonoBehaviour
     [Header("Character")]
     public string adventurerName;
     public bool femaleGender = false;
-    public List<Stat> Stats = new List<Stat>();
-    public List<Ability> Abilities = new List<Ability>();
+    public List<Stat> stats = new List<Stat>();
+    public List<Ability> abilities = new List<Ability>();
     public int maxAbilitiesAtStart = 3;
     public float abilitySpawnChance = 0.25f;
 
@@ -124,20 +124,20 @@ public class Adventurer : MonoBehaviour
 
     public void RandomizeStats()
     {
-        Stats.Clear();
+        stats.Clear();
         int statTypesNum = 4;
         for (int I = 0; I < statTypesNum; I++)
         {
             Stat NewStat = new Stat();
             NewStat.Type = (StatType)I + 1;
             NewStat.Value = Random.Range(0, 101);
-            Stats.Add(NewStat);
+            stats.Add(NewStat);
         }
     }
 
     public void RandomizeAbilities()
     {
-        Abilities.Clear();
+        abilities.Clear();
         int abilityTypesNum = 4;
         for (int I = 0; I < abilityTypesNum; I++)
         {
@@ -146,8 +146,8 @@ public class Adventurer : MonoBehaviour
                 Ability NewAbility = new Ability();
                 NewAbility.Type = (AbilityType)I + 1;
                 NewAbility.Level = Random.Range(0, 101); // levels are ignored for now
-                Abilities.Add(NewAbility);
-                if (Abilities.Count >= maxAbilitiesAtStart)
+                abilities.Add(NewAbility);
+                if (abilities.Count >= maxAbilitiesAtStart)
                     break;
             }
         }

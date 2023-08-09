@@ -27,6 +27,7 @@ public class UIGod : MonoBehaviour
     public Transform adventurersRoot;
     public Transform adventurersPreviewRoot;
     public FontAwesome adventurerGroupIcon;
+    public GroupLine adventurerGroupLine;
     public GameObject restartButton;
     public Slider lightLevelSlider;
 
@@ -99,27 +100,23 @@ public class UIGod : MonoBehaviour
         quest.questLine = spawnedQuest.GetComponent<QuestLine>();
     }
 
-    public void FillDrawerWithAdventureGroup(AdventurerGroup adventurerGroup, bool usePreviewRoot = false)
+    public void FillPreviewDrawerWithAdventureGroup(AdventurerGroup adventurerGroup)
     {
-        Transform root = usePreviewRoot ? adventurersPreviewRoot : adventurersRoot;
-        for (int i = 0; i < root.childCount; i++)
+        for (int i = 0; i < adventurersPreviewRoot.childCount; i++)
         {
-            if (root.GetChild(i).GetComponent<AdventurerLine>() != null)
+            if (adventurersPreviewRoot.GetChild(i).GetComponent<AdventurerLine>() != null)
             {
-                Destroy(root.GetChild(i).gameObject);
+                Destroy(adventurersPreviewRoot.GetChild(i).gameObject);
             }
         }
         foreach (Adventurer adventurer in adventurerGroup.adventurers)
         {
             GameObject spawnedAdventurer = Instantiate(adventurerPrefab);
             spawnedAdventurer.GetComponent<AdventurerLine>().SetAdventurer(adventurer);
-            spawnedAdventurer.transform.SetParent(root, false);
+            spawnedAdventurer.transform.SetParent(adventurersPreviewRoot, false);
         }
-        UpdateAdventurersCounter(AdventurerManager.instance.adventurers.Count);
-        if (usePreviewRoot)
-        {
-            adventurerGroupIcon.ChangeIcon(adventurerGroup.icon);
-        }
+        adventurerGroupIcon.ChangeIcon(adventurerGroup.icon);
+        adventurerGroupLine.SetGroup(adventurerGroup.groupStats, adventurerGroup.adventurers);
     }
 
     public void AppendDrawerWithAdventurer(Adventurer adventurer, bool usePreviewRoot = false)

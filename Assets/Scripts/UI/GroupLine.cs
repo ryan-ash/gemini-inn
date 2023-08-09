@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AdventurerLine : MonoBehaviour
+public class GroupLine : MonoBehaviour
 {
     [HideInInspector] public Adventurer adventurer;
 
@@ -13,7 +13,7 @@ public class AdventurerLine : MonoBehaviour
 
     [Header("Mapping")]
     public TextWriter nameWriter;
-    public FontAwesome statusIcon;
+    public Text teamSize;
     public Transform abilitiesContainer;
     public Transform statsContainer;
     public GameObject abilitiesSeparator;
@@ -32,22 +32,26 @@ public class AdventurerLine : MonoBehaviour
 
     }
 
-    public void SetAdventurer(Adventurer adventurer)
+    public void SetGroup(GroupStats groupStats, List<Adventurer> adventurers)
     {
-        this.adventurer = adventurer;
-        nameWriter.Write(adventurer.adventurerName);
-        statusIcon.ChangeIcon(adventurer.femaleGender ? femaleIcon : maleIcon);
+        nameWriter.Write(groupStats.name);
+        for (int i = 0; i < abilitiesContainer.childCount; i++)
+            Destroy(abilitiesContainer.GetChild(i).gameObject);
+        for (int i = 0; i < statsContainer.childCount; i++)
+            Destroy(statsContainer.GetChild(i).gameObject);
 
-        foreach (Ability ability in adventurer.abilities)
+        teamSize.text = adventurers.Count.ToString();
+
+        foreach (Ability ability in groupStats.abilities)
         {
             GameObject abilityUI = Instantiate(adventurerAbility, abilitiesContainer);
             QuestRequirement questRequirement = abilityUI.GetComponent<QuestRequirement>();
             questRequirement.SelectAbility(ability.Type);
         }
-        if (adventurer.abilities.Count == 0)
+        if (groupStats.abilities.Count == 0)
             abilitiesSeparator.SetActive(false);
 
-        foreach (Stat stat in adventurer.stats)
+        foreach (Stat stat in groupStats.stats)
         {
             GameObject statUI = Instantiate(adventurerStat, statsContainer);
             QuestRequirement questRequirement = statUI.GetComponent<QuestRequirement>();

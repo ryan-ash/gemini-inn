@@ -12,13 +12,29 @@ public enum GroupState
     Mad
 }
 
+public enum NameAbbreviationStyle
+{
+    FirstLetter,
+    FirstTwoLetters,
+    FirstThreeLetters,
+    RandomLetters
+}
+
 public class QuestGroup
 {
     [HideInInspector] public GroupState groupState = GroupState.Idle;
     [HideInInspector] public List<Adventurer> adventurers = new List<Adventurer>();
     [HideInInspector] public Quest quest;
+    [HideInInspector] public GroupStats groupStats;
 
     public string icon;
+}
+
+public class GroupStats
+{
+    public string name;
+    public List<Ability> abilities;
+    public List<Stat> stats;
 }
 
 public class AdventurerGroup : MonoBehaviour
@@ -31,8 +47,10 @@ public class AdventurerGroup : MonoBehaviour
     public List<string> possibleGroupIcons;
 
     public string icon;
+    public NameAbbreviationStyle nameAbbreviationStyle = NameAbbreviationStyle.FirstLetter;
 
-    [HideInInspector] public List<Adventurer> adventurers;
+    [HideInInspector] public List<Adventurer> adventurers = new List<Adventurer>();
+    [HideInInspector] public GroupStats groupStats;
 
     private bool isAnimatingLight = false;
     private bool isLightUp = false;
@@ -50,7 +68,7 @@ public class AdventurerGroup : MonoBehaviour
             light.intensity = 0.0f;
         }
 
-        PickRandomIcon();
+        Reinitialize();
     }
 
     void Update()
@@ -116,9 +134,97 @@ public class AdventurerGroup : MonoBehaviour
         return icon;
     }
 
+    public void PickRandomNameAbbreviationStyle()
+    {
+        int index = Random.Range(0, 4);
+        nameAbbreviationStyle = (NameAbbreviationStyle)index;
+    }
+
+    public void Reinitialize()
+    {
+        adventurers.Clear();
+        groupStats = new GroupStats();
+        PickRandomIcon();
+        PickRandomNameAbbreviationStyle();
+    }
+
     private void RecalculateGroupStats()
     {
-        // some code for recalculating group stats
+        groupStats.abilities = new List<Ability>();
+        groupStats.stats = new List<Stat>();
+        RecalculateName();
+
+        Dictionary<StatType, int> aggregatedStats = new Dictionary<StatType, int>();
+        for (int i = 0; i < adventurers.Count; i++)
+        {
+            var adventurer = adventurers[i];
+            for (int j = 0; j < adventurer.abilities.Count; j++)
+            {
+                var ability = adventurer.abilities[j];
+                Ability existingAbility = groupStats.abilities.Find(ab => ab.Type == ability.Type);
+                if (existingAbility == null)
+                {
+                    existingAbility = new Ability();
+                    existingAbility.Type = ability.Type;
+                    existingAbility.Level = ability.Level;
+                    groupStats.abilities.Add(existingAbility);
+                }
+                else
+                {
+                    existingAbility.Level += ability.Level;
+                }
+            }
+
+            for (int j = 0; j < adventurer.stats.Count; j++)
+            {
+                var stat = adventurer.stats[j];
+                if (!aggregatedStats.ContainsKey(stat.Type))
+                {
+                    aggregatedStats.Add(stat.Type, stat.Value);
+                }
+                else
+                {
+                    aggregatedStats[stat.Type] += stat.Value;
+                }
+            }
+        }
+        foreach (var stat in aggregatedStats)
+        {
+            Stat newStat = new Stat();
+            newStat.Type = stat.Key;
+            newStat.Value = stat.Value / adventurers.Count;
+            groupStats.stats.Add(newStat);
+        }
+    }
+
+    private void RecalculateName()
+    {
+        string newName = "";
+        for (int i = 0; i < adventurers.Count; i++)
+        {
+            var adventurer = adventurers[i];
+            if (nameAbbreviationStyle == NameAbbreviationStyle.FirstLetter)
+            {
+                newName += adventurer.adventurerName[0];
+            }
+            else if (nameAbbreviationStyle == NameAbbreviationStyle.FirstTwoLetters)
+            {
+                newName += adventurer.adventurerName[0];
+                newName += adventurer.adventurerName[1];
+            }
+            else if (nameAbbreviationStyle == NameAbbreviationStyle.FirstThreeLetters)
+            {
+                newName += adventurer.adventurerName[0];
+                newName += adventurer.adventurerName[1];
+                newName += adventurer.adventurerName[2];
+            }
+            else if (nameAbbreviationStyle == NameAbbreviationStyle.RandomLetters)
+            {
+                int index = Random.Range(0, adventurer.adventurerName.Length);
+                newName += adventurer.adventurerName[index];
+            }
+        }
+        groupStats.name = newName;
     }
 
     public void LightUpAdventurerTable()
@@ -149,6 +255,7 @@ public class AdventurerGroup : MonoBehaviour
     {
         QuestGroup questGroup = new QuestGroup();
         questGroup.groupState = GroupState.OnRoadToQuest;
+        questGroup.groupStats = groupStats;
         foreach (var adventurer in adventurers)
         {
             questGroup.adventurers.Add(adventurer);
@@ -166,10 +273,7 @@ public class AdventurerGroup : MonoBehaviour
             AdventurerManager.instance.ReleaseAdventurer(adventurer);
         }
 
-        adventurers.Clear();
-
+        Reinitialize();
         UIGod.instance.ReleaseRemovedAdventurers();
-        RecalculateGroupStats();
-        PickRandomIcon();
     }
 }
