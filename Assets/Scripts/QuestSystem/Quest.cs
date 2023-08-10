@@ -56,21 +56,22 @@ public class Quest
     {
         AbilityModifier Mod = InQuest.AbilityModifiers.Find(Ab => Ab.Type == InAbility.Type);
         if (Mod == null)
-        {
-            return 1.0f;
-        }
-        float Modifier = Mod.Modifier * Mathf.Lerp(1.0f, 2.0f, InAbility.Level / 100.0f);
+            return 0.0f;
+        float Modifier = Mod.ModifierPerLevel * Mathf.Min(Mod.MaxLevel, InAbility.Level);
         return Modifier;
     }
 
     public static float CalculateModifier(Quest InQuest, Stat InStat)
     {
         StatModifier Mod = InQuest.StatModifiers.Find(St => St.Type == InStat.Type);
-        if (Mod == null || InStat.Value == 0)
-        {
-            return 1.0f;
-        }
-        float Modifier = Mod.Modifier * Mathf.Lerp(1.0f, 2.0f, InStat.Value / 100.0f);
+        if (Mod == null)
+            return 0.0f;
+        const float StatDelta = 25;
+        float StatRequirenemt = (int)(Mod.Strength) * StatDelta;
+        float StatCap = StatRequirenemt + StatDelta;
+        float StatFloor = StatRequirenemt - StatDelta;
+        float ModifierAlpha = Mathf.Max(InStat.Value - StatFloor, 0) / (StatDelta * 2);
+        float Modifier = Mathf.Lerp(Mod.MaxFailureModifier, Mod.MaxSuccessModifier, ModifierAlpha);
         return Modifier;
     }
 
@@ -93,17 +94,17 @@ public class Quest
     {
         float SuccessRate = BaseSuccessRate;
 
-        // TODO: base modifiers influence on group / individuals' stats and abilities
-        // foreach (AbilityModifier Mod in AbilityModifiers)
-        // {
-        //     SuccessRate *= Mod.Modifier;
-        // }
-        // foreach (StatModifier Mod in StatModifiers)
-        // {
-        //     SuccessRate *= Mod.Modifier;
-        // }
-        float Roll = Random.Range(0.0f, 1.0f);
+        foreach(Ability ability in questGroup.groupStats.abilities)
+        {
+            SuccessRate += CalculateModifier(this, ability);
+        }
 
+        foreach(Stat stat in questGroup.groupStats.stats)
+        {
+            SuccessRate += CalculateModifier(this, stat);
+        }
+
+        float Roll = Random.Range(0.0f, 1.0f);
         return Roll <= SuccessRate;
     }
 }
@@ -119,5 +120,6 @@ public enum AllianceType
     Orcs,
     Goblins,
     Druids,
-    Frogs
+    Frogs,
+    Mermaids
 }

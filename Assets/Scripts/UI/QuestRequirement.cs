@@ -12,8 +12,10 @@ public class QuestRequirement : MonoBehaviour
 
     [Header("Mapping")]
     public FontAwesome icon;
+    public Counter abilityCounter;
     public Slider slider;
     public Image sliderFill;
+    public Image statFill;
 
     [HideInInspector] public AbilityRequirementDecription abilityDescription;
     [HideInInspector] public StatRequirementDecription statDescription;
@@ -45,9 +47,11 @@ public class QuestRequirement : MonoBehaviour
         sliderFill.color = statDescription.color;
     }
 
-    public void SelectAbility(AbilityType ability)
+    public void SelectAbility(AbilityType ability, int level = 1)
     {
         isAbility = true;
+        abilityCounter.gameObject.SetActive(level > 1);
+        abilityCounter.UpdateCounter(level);
         abilityDescription = abilityRequirements.Find(Ab => Ab.abilityType == ability);
         UpdateConnectedFields();
     }
@@ -63,6 +67,12 @@ public class QuestRequirement : MonoBehaviour
     public void SetStatValue(float value)
     {
         slider.value = value;
+    }
+
+    public void SetStatRequirement(StatRequirementStrength strength)
+    {
+        statFill.fillAmount = 0.33f * (int)strength;
+        Debug.Log("SetStatRequirement: " + strength + " " + statFill.fillAmount);
     }
 
 	void UpdateConnectedFields()

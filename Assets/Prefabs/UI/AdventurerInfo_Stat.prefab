@@ -99,9 +99,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4697379850985352657, guid: ae4e2f1857447474da2bbdaf7c245da8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4809601831088557260, guid: ae4e2f1857447474da2bbdaf7c245da8, type: 3}
       propertyPath: m_Name
       value: AdventurerInfo_Stat
+      objectReference: {fileID: 0}
+    - target: {fileID: 4949998703304751251, guid: ae4e2f1857447474da2bbdaf7c245da8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4949998703304751251, guid: ae4e2f1857447474da2bbdaf7c245da8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4949998703304751251, guid: ae4e2f1857447474da2bbdaf7c245da8, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5986213143823402393, guid: ae4e2f1857447474da2bbdaf7c245da8, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8403524215078131855, guid: ae4e2f1857447474da2bbdaf7c245da8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae4e2f1857447474da2bbdaf7c245da8, type: 3}

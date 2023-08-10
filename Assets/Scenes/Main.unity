@@ -32679,18 +32679,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1466211590309657464, guid: 95601369d3b8d6746ad4c3e05b03f399, type: 3}
-      propertyPath: Missions.Array.data[0].Quests.Array.data[0].timeout
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 1466211590309657464, guid: 95601369d3b8d6746ad4c3e05b03f399, type: 3}
-      propertyPath: Missions.Array.data[1].Quests.Array.data[0].timeout
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 1466211590309657464, guid: 95601369d3b8d6746ad4c3e05b03f399, type: 3}
-      propertyPath: Missions.Array.data[2].Quests.Array.data[0].timeout
-      value: 30
-      objectReference: {fileID: 0}
     - target: {fileID: 1466211590309657465, guid: 95601369d3b8d6746ad4c3e05b03f399, type: 3}
       propertyPath: m_Name
       value: Missions

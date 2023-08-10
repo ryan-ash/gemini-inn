@@ -51,99 +51,129 @@ MonoBehaviour:
       questDescription: 'Get rid of especially loud birds '
       Biomes:
       - Forest
+      Alliance: 0
       successAttempts: 0
-      timeout: 0
+      timeout: 30
+      baseDuration: 15
       successOnTimeout: 0
       BaseSuccessRate: 0.7146497
       AbilityModifiers:
       - Type: 2
-        Modifier: 1.090657
+        ModifierPerLevel: 0.1
+        MaxLevel: 1
       StatModifiers:
       - Type: 1
-        Modifier: 0.787
+        Strength: 1
+        MaxSuccessModifier: 0.1
+        MaxFailureModifier: 0
       - Type: 3
-        Modifier: 0.9502914
-      questPosition: {x: 0, y: 0, z: 0}
+        Strength: 1
+        MaxSuccessModifier: 0.1
+        MaxFailureModifier: 0
       questState: 0
-      adventureGroup: {fileID: 0}
+      ID: 0
     - questName: "It\u2019s just another obstacle"
       questDescription: Help the young heroes to move the trees
       Biomes:
       - Forest
+      Alliance: 0
       successAttempts: 0
       timeout: 0
+      baseDuration: 15
       successOnTimeout: 0
       BaseSuccessRate: 0.67482877
       AbilityModifiers:
       - Type: 3
-        Modifier: 0.273
+        ModifierPerLevel: 0.1
+        MaxLevel: 1
       StatModifiers:
       - Type: 1
-        Modifier: 1.0945842
-      questPosition: {x: 0, y: 0, z: 0}
+        Strength: 1
+        MaxSuccessModifier: 0.1
+        MaxFailureModifier: 0
       questState: 0
-      adventureGroup: {fileID: 0}
+      ID: 0
     - questName: Hellfire
       questDescription: It seems someone making a campfire, should you see?
       Biomes:
       - Forest
+      Alliance: 0
       successAttempts: 0
       timeout: 0
+      baseDuration: 15
       successOnTimeout: 0
       BaseSuccessRate: 0.67482877
       AbilityModifiers:
       - Type: 1
-        Modifier: 0.8804643
+        ModifierPerLevel: 0.1
+        MaxLevel: 1
       - Type: 4
-        Modifier: 0.8804643
+        ModifierPerLevel: 0.1
+        MaxLevel: 1
       StatModifiers:
       - Type: 3
-        Modifier: 1.0945842
+        Strength: 1
+        MaxSuccessModifier: 0.1
+        MaxFailureModifier: 0
       - Type: 2
-        Modifier: 0.83769155
-      questPosition: {x: 0, y: 0, z: 0}
+        Strength: 1
+        MaxSuccessModifier: 0.1
+        MaxFailureModifier: 0
       questState: 0
-      adventureGroup: {fileID: 0}
+      ID: 0
     - questName: What did the chicken say?
       questDescription: " It seems that the insects go crazy somehow, wanna try fight
         with \u2018em ?"
       Biomes:
       - Forest
+      Alliance: 0
       successAttempts: 0
       timeout: 0
+      baseDuration: 15
       successOnTimeout: 0
       BaseSuccessRate: 0.67482877
       AbilityModifiers:
       - Type: 2
-        Modifier: 0.8804643
+        ModifierPerLevel: 0.1
+        MaxLevel: 1
       StatModifiers:
       - Type: 3
-        Modifier: 1.0945842
+        Strength: 1
+        MaxSuccessModifier: 0.1
+        MaxFailureModifier: 0
       - Type: 2
-        Modifier: 0.83769155
-      questPosition: {x: 0, y: 0, z: 0}
+        Strength: 1
+        MaxSuccessModifier: 0.1
+        MaxFailureModifier: 0
       questState: 0
-      adventureGroup: {fileID: 0}
+      ID: 0
     - questName: New generation
       questDescription: 'Teach youngsters how to fight '
       Biomes:
       - Forest
+      Alliance: 0
       successAttempts: 0
       timeout: 0
+      baseDuration: 15
       successOnTimeout: 0
       BaseSuccessRate: 0.67482877
       AbilityModifiers:
       - Type: 2
-        Modifier: 0.8804643
+        ModifierPerLevel: 0.1
+        MaxLevel: 1
       StatModifiers:
       - Type: 3
-        Modifier: 1.0945842
+        Strength: 1
+        MaxSuccessModifier: 0.1
+        MaxFailureModifier: 0
       - Type: 3
-        Modifier: 0.83769155
-      questPosition: {x: 0, y: 0, z: 0}
+        Strength: 1
+        MaxSuccessModifier: 0.1
+        MaxFailureModifier: 0
       questState: 0
-      adventureGroup: {fileID: 0}
+      ID: 0
     RecurrenceType: 1
+    ID: 0
   - MissionName: WaterAdventures
     Quests:
     - questName: The frogs are now dancing the ballet
@@ -151,61 +181,79 @@ MonoBehaviour:
         you won\u2019t understand)"
       Biomes:
       - Lake
+      Alliance: 0
       successAttempts: 0
-      timeout: 0
+      timeout: 30
+      baseDuration: 15
       successOnTimeout: 0
       BaseSuccessRate: 0.91040885
       AbilityModifiers:
       - Type: 4
-        Modifier: 0
+        ModifierPerLevel: 0.1
+        MaxLevel: 1
       StatModifiers:
       - Type: 4
-        Modifier: 0.9837458
-      questPosition: {x: 0, y: 0, z: 0}
+        Strength: 1
+        MaxSuccessModifier: 0.1
+        MaxFailureModifier: 0
       questState: 0
-      adventureGroup: {fileID: 0}
+      ID: 0
     - questName: Lake of thieves
       questDescription: Find the treasure Ms Goldman told you to
       Biomes:
       - Lake
+      Alliance: 0
       successAttempts: 0
       timeout: 0
+      baseDuration: 15
       successOnTimeout: 0
       BaseSuccessRate: 0.65935695
       AbilityModifiers:
       - Type: 4
-        Modifier: 0.205
+        ModifierPerLevel: 0.1
+        MaxLevel: 1
       StatModifiers:
       - Type: 2
-        Modifier: 1.0402977
+        Strength: 1
+        MaxSuccessModifier: 0.1
+        MaxFailureModifier: 0
       - Type: 3
-        Modifier: 0.9205047
-      questPosition: {x: 0, y: 0, z: 0}
+        Strength: 1
+        MaxSuccessModifier: 0.1
+        MaxFailureModifier: 0
       questState: 0
-      adventureGroup: {fileID: 0}
+      ID: 0
     - questName: Dancing queen
       questDescription: Go and help the greatest frog queen catching the insects
         on the lake
       Biomes:
       - Lake
+      Alliance: 0
       successAttempts: 0
       timeout: 0
+      baseDuration: 15
       successOnTimeout: 0
       BaseSuccessRate: 0.65935695
       AbilityModifiers:
       - Type: 4
-        Modifier: 0.184
+        ModifierPerLevel: 0.1
+        MaxLevel: 1
       - Type: 2
-        Modifier: 1.090256
+        ModifierPerLevel: 0.1
+        MaxLevel: 1
       StatModifiers:
       - Type: 4
-        Modifier: 1.0402977
+        Strength: 1
+        MaxSuccessModifier: 0.1
+        MaxFailureModifier: 0
       - Type: 3
-        Modifier: 0.9205047
-      questPosition: {x: 0, y: 0, z: 0}
+        Strength: 1
+        MaxSuccessModifier: 0.1
+        MaxFailureModifier: 0
       questState: 0
-      adventureGroup: {fileID: 0}
+      ID: 0
     RecurrenceType: 0
+    ID: 0
   - MissionName: JungleQuest
     Quests:
     - questName: No masks allowed
@@ -219,26 +267,35 @@ MonoBehaviour:
         you don't forget your \t\tmain goal. "
       Biomes:
       - Jungle
+      Alliance: 0
       successAttempts: 0
-      timeout: 0
+      timeout: 30
+      baseDuration: 15
       successOnTimeout: 0
       BaseSuccessRate: 0.7214161
       AbilityModifiers:
       - Type: 2
-        Modifier: 1.1005473
+        ModifierPerLevel: 0.1
+        MaxLevel: 1
       - Type: 3
-        Modifier: 0.791
+        ModifierPerLevel: 0.1
+        MaxLevel: 1
       - Type: 1
-        Modifier: 1.1450653
+        ModifierPerLevel: 0.1
+        MaxLevel: 1
       StatModifiers:
       - Type: 2
-        Modifier: 0.90962315
+        Strength: 1
+        MaxSuccessModifier: 0.1
+        MaxFailureModifier: 0
       - Type: 3
-        Modifier: 1.116034
-      questPosition: {x: 0, y: 0, z: 0}
+        Strength: 1
+        MaxSuccessModifier: 0.1
+        MaxFailureModifier: 0
       questState: 0
-      adventureGroup: {fileID: 0}
+      ID: 0
     RecurrenceType: 0
+    ID: 0
   - MissionName: GrassHopping
     Quests:
     - questName: Plants or zombies?
@@ -246,23 +303,30 @@ MonoBehaviour:
         help citizens to defend themselves.
       Biomes:
       - Grassland
+      Alliance: 0
       successAttempts: 0
       timeout: 0
+      baseDuration: 15
       successOnTimeout: 0
       BaseSuccessRate: 0.7214161
       AbilityModifiers:
       - Type: 2
-        Modifier: 1.1005473
+        ModifierPerLevel: 0.1
+        MaxLevel: 1
       - Type: 4
-        Modifier: 1.1450653
+        ModifierPerLevel: 0.1
+        MaxLevel: 1
       StatModifiers:
       - Type: 2
-        Modifier: 0.90962315
+        Strength: 1
+        MaxSuccessModifier: 0.1
+        MaxFailureModifier: 0
       - Type: 4
-        Modifier: 1.116034
-      questPosition: {x: 0, y: 0, z: 0}
+        Strength: 1
+        MaxSuccessModifier: 0.1
+        MaxFailureModifier: 0
       questState: 0
-      adventureGroup: {fileID: 0}
+      ID: 0
     - questName: 'Traveler''s Request: "The Silly Seeker''s Sought-After Squirrel"
         - another weird request from this village, be careful with those crazy men.'
       questDescription: "Dear traveler, I have an utterly preposterous and amusing
@@ -271,24 +335,32 @@ MonoBehaviour:
         elusive, mischievous, and outrageously comedic tap-dancing squirrel!"
       Biomes:
       - Grassland
+      Alliance: 0
       successAttempts: 0
       timeout: 0
+      baseDuration: 15
       successOnTimeout: 0
       BaseSuccessRate: 0.7214161
       AbilityModifiers:
       - Type: 2
-        Modifier: 1.1005473
+        ModifierPerLevel: 0.1
+        MaxLevel: 1
       - Type: 3
-        Modifier: 1.1450653
+        ModifierPerLevel: 0.1
+        MaxLevel: 1
       StatModifiers:
       - Type: 2
-        Modifier: 0.90962315
+        Strength: 1
+        MaxSuccessModifier: 0.1
+        MaxFailureModifier: 0
       - Type: 3
-        Modifier: 1.116034
-      questPosition: {x: 0, y: 0, z: 0}
+        Strength: 1
+        MaxSuccessModifier: 0.1
+        MaxFailureModifier: 0
       questState: 0
-      adventureGroup: {fileID: 0}
+      ID: 0
     RecurrenceType: 1
+    ID: 0
   - MissionName: JourneyAcross
     Quests:
     - questName: Sand is not sweet
@@ -298,21 +370,27 @@ MonoBehaviour:
         secrets of this concealed sanctuary. Find the gold lizard. '
       Biomes:
       - Desert
+      Alliance: 0
       successAttempts: 0
       timeout: 0
+      baseDuration: 15
       successOnTimeout: 0
       BaseSuccessRate: 0.60316545
       AbilityModifiers:
       - Type: 1
-        Modifier: 0.7761333
+        ModifierPerLevel: 0.1
+        MaxLevel: 1
       StatModifiers:
       - Type: 2
-        Modifier: 0.8564949
+        Strength: 1
+        MaxSuccessModifier: 0.1
+        MaxFailureModifier: 0
       - Type: 3
-        Modifier: 1.1940929
-      questPosition: {x: 0, y: 0, z: 0}
+        Strength: 1
+        MaxSuccessModifier: 0.1
+        MaxFailureModifier: 0
       questState: 0
-      adventureGroup: {fileID: 0}
+      ID: 0
     - questName: "Or they\u2019ll drown in their own tears"
       questDescription: We've been struck by a dry spell, no rain has touched our
         lands for months and we're starting to feel its toll. Many of us are already
@@ -324,20 +402,25 @@ MonoBehaviour:
       - Jungle
       - Forest
       - Lake
+      Alliance: 0
       successAttempts: 0
       timeout: 0
+      baseDuration: 15
       successOnTimeout: 0
       BaseSuccessRate: 0.6709784
       AbilityModifiers:
       - Type: 1
-        Modifier: 0.925
+        ModifierPerLevel: 0.1
+        MaxLevel: 1
       StatModifiers:
       - Type: 3
-        Modifier: 1.1034129
-      questPosition: {x: 0, y: 0, z: 0}
+        Strength: 1
+        MaxSuccessModifier: 0.1
+        MaxFailureModifier: 0
       questState: 0
-      adventureGroup: {fileID: 0}
+      ID: 0
     RecurrenceType: 2
+    ID: 0
   - MissionName: AllOverTheWorld
     Quests:
     - questName: It is not easy to bury a body
@@ -353,23 +436,30 @@ MonoBehaviour:
       - Grassland
       - Mountains
       - Tundra
+      Alliance: 0
       successAttempts: 0
       timeout: 0
+      baseDuration: 15
       successOnTimeout: 0
       BaseSuccessRate: 0.8795219
       AbilityModifiers:
       - Type: 1
-        Modifier: 1.2288952
+        ModifierPerLevel: 0.1
+        MaxLevel: 1
       - Type: 4
-        Modifier: 1.2288952
+        ModifierPerLevel: 0.1
+        MaxLevel: 1
       StatModifiers:
       - Type: 2
-        Modifier: 1.0686331
+        Strength: 1
+        MaxSuccessModifier: 0.1
+        MaxFailureModifier: 0
       - Type: 3
-        Modifier: 0.7878046
-      questPosition: {x: 0, y: 0, z: 0}
+        Strength: 1
+        MaxSuccessModifier: 0.1
+        MaxFailureModifier: 0
       questState: 0
-      adventureGroup: {fileID: 0}
+      ID: 0
     - questName: it is not about the size
       questDescription: We've been under constant harassment, our food has been stolen
         along with our gold and we're powerless to do anything to stop them. Hero,
@@ -385,23 +475,30 @@ MonoBehaviour:
       - Grassland
       - Mountains
       - Tundra
+      Alliance: 0
       successAttempts: 0
       timeout: 0
+      baseDuration: 15
       successOnTimeout: 0
       BaseSuccessRate: 0.8795219
       AbilityModifiers:
       - Type: 2
-        Modifier: 1.2288952
+        ModifierPerLevel: 0.1
+        MaxLevel: 1
       - Type: 4
-        Modifier: 1.2288952
+        ModifierPerLevel: 0.1
+        MaxLevel: 1
       StatModifiers:
       - Type: 3
-        Modifier: 0.804
+        Strength: 1
+        MaxSuccessModifier: 0.1
+        MaxFailureModifier: 0
       - Type: 1
-        Modifier: 0.922
-      questPosition: {x: 0, y: 0, z: 0}
+        Strength: 1
+        MaxSuccessModifier: 0.1
+        MaxFailureModifier: 0
       questState: 0
-      adventureGroup: {fileID: 0}
+      ID: 0
     - questName: "Don\u2019t repeat the mistakes of the past generations"
       questDescription: "Kill all the rats in \u201CThe safest village\u201D"
       Biomes:
@@ -412,21 +509,27 @@ MonoBehaviour:
       - Grassland
       - Mountains
       - Tundra
+      Alliance: 0
       successAttempts: 0
       timeout: 0
+      baseDuration: 15
       successOnTimeout: 0
       BaseSuccessRate: 0.8795219
       AbilityModifiers:
       - Type: 2
-        Modifier: 1.2288952
+        ModifierPerLevel: 0.1
+        MaxLevel: 1
       StatModifiers:
       - Type: 3
-        Modifier: 1.0686331
+        Strength: 1
+        MaxSuccessModifier: 0.1
+        MaxFailureModifier: 0
       - Type: 2
-        Modifier: 0.7878046
-      questPosition: {x: 0, y: 0, z: 0}
+        Strength: 1
+        MaxSuccessModifier: 0.1
+        MaxFailureModifier: 0
       questState: 0
-      adventureGroup: {fileID: 0}
+      ID: 0
     - questName: "Crazy? I was crazy once\u2026"
       questDescription: 'A recent outbreak of some weird disease has caused the townsfolk
         to go insane. Unfortunately we have no cure and their disease will lead to
@@ -443,19 +546,26 @@ MonoBehaviour:
       - Grassland
       - Mountains
       - Tundra
+      Alliance: 0
       successAttempts: 0
       timeout: 0
+      baseDuration: 15
       successOnTimeout: 0
       BaseSuccessRate: 0.8795219
       AbilityModifiers:
       - Type: 2
-        Modifier: 1.2288952
+        ModifierPerLevel: 0.1
+        MaxLevel: 1
       StatModifiers:
       - Type: 3
-        Modifier: 1.0686331
+        Strength: 1
+        MaxSuccessModifier: 0.1
+        MaxFailureModifier: 0
       - Type: 2
-        Modifier: 0.7878046
-      questPosition: {x: 0, y: 0, z: 0}
+        Strength: 1
+        MaxSuccessModifier: 0.1
+        MaxFailureModifier: 0
       questState: 0
-      adventureGroup: {fileID: 0}
+      ID: 0
     RecurrenceType: 2
+    ID: 0

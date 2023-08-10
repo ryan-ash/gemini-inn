@@ -71,7 +71,7 @@ public class QuestInfo : MonoBehaviour
         {
             GameObject ability = Instantiate(questRequirementPrefab, abilitiesHolder);
             QuestRequirement questRequirement = ability.GetComponent<QuestRequirement>();
-            questRequirement.SelectAbility(abilityModifier.Type);
+            questRequirement.SelectAbility(abilityModifier.Type, abilityModifier.MaxLevel);
         }
 
         foreach (StatModifier statModifier in quest.StatModifiers)
@@ -79,6 +79,7 @@ public class QuestInfo : MonoBehaviour
             GameObject stat = Instantiate(statRequirementPrefab, statsHolder);
             QuestRequirement questRequirement = stat.GetComponent<QuestRequirement>();
             questRequirement.SelectStat(statModifier.Type);
+            questRequirement.SetStatRequirement(statModifier.Strength);
         }
 
         FillData();

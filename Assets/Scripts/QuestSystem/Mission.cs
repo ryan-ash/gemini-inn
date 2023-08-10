@@ -45,7 +45,8 @@ public class Mission
             {
                 AbilityModifier Mod = new AbilityModifier();
                 Mod.Type = (AbilityType)Random.Range(1, MaxAbilities);
-                Mod.Modifier = Random.Range(0.75f, 1.25f);
+                Mod.ModifierPerLevel = Random.Range(0.1f, 0.2f);
+                Mod.MaxLevel = Random.Range(1, 3);
                 quest.AbilityModifiers.Add(Mod);
             }
 
@@ -53,7 +54,8 @@ public class Mission
             {
                 StatModifier Mod = new StatModifier();
                 Mod.Type = (StatType)Random.Range(1, MaxStats);
-                Mod.Modifier = Random.Range(0.75f, 1.25f);
+                Mod.MaxSuccessModifier = Random.Range(0.1f, 0.2f);
+                Mod.MaxFailureModifier = Random.Range(-0.1f, -0.2f);
                 quest.StatModifiers.Add(Mod);
             }
 
