@@ -1,0 +1,1 @@
+Forbidden place. Everyone who enters there, waiting for death. Depending on luck, death will be quick or painful. There are [[Crazy Druids]] ([[Crazy jungle folks]]) who have troubles with the head and [[Living mushrooms]]. The jungle is a breeding ground for disease and mutation. The more travelers go in there, the faster the filth spreads.

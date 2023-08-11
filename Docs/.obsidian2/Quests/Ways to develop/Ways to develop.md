@@ -1,0 +1,4 @@
+- [[Everything's good]]
+- [[Balanced]]
+- [[Everything's bad]]
+- [[Ignored]] 

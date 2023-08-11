@@ -1,0 +1,1 @@
+[[Humans]] cause a lot of troubles. They consume everything they see such as fish in waters, trees and game in forest, treasures in mountains and desert. They are everywhere and they don't like anybody even themselves. They want a better life so much, so they are ready to destroy the world.

@@ -1,4 +1,9 @@
 [
   "obsidian-kanban",
-  "obsidian-git"
+  "obsidian-git",
+  "periodic-notes",
+  "cm-editor-syntax-highlight-obsidian",
+  "dataview",
+  "calendar",
+  "table-editor-obsidian"
 ]

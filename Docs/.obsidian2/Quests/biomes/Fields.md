@@ -1,0 +1,1 @@
+Places for construction and settlement of [[Humans]]. There are often conflicts in villages, [[Humans]] are dissatisfied with their lives and are not educated.
