@@ -53,6 +53,26 @@ public class GameMode : MonoBehaviour
     [SerializeField] private GameObject questResultPrefab;
     [SerializeField] private GameObject questResultRoot;
 
+    [Header("Quest Result")]
+    [SerializeField] private int initialMaxWorldLightLevel = 3;
+    [SerializeField] private int maxWorldLightLevelRaisePerQuests = 5;
+    [HideInInspector] public int worldLightLevel = 0;
+    [HideInInspector] public int maxWorldLightLevel = 0;
+
+    public int WorldLightLevel { 
+        get { return worldLightLevel; } 
+        set 
+        { 
+            worldLightLevel = value;
+            Debug.Log("World light level: " + worldLightLevel + "/" + maxWorldLightLevel);
+            if (worldLightLevel > maxWorldLightLevel)
+            {
+                Debug.Log("GAME OVER");
+                worldLightLevel = maxWorldLightLevel;
+            }
+        }
+    }
+
     private bool isMapOpen = false;
     private bool isChoosingAdventurers = false;
     private bool isNegotiating = false;
@@ -75,6 +95,19 @@ public class GameMode : MonoBehaviour
     private List<Transform> generatedQuests = new List<Transform>();
     private GameObject generatedInn;
     private int lastMissionID = 0;
+    private int questsEverSpawned = 0;
+    private int QuestsEverSpawned { 
+        get { return questsEverSpawned; } 
+        set 
+        { 
+            questsEverSpawned = value;
+            if (questsEverSpawned % maxWorldLightLevelRaisePerQuests == 0)
+            {
+                maxWorldLightLevel++;
+                UIGod.instance.OnMaxWorldLightLevelChanged(maxWorldLightLevel);
+            }
+        } 
+    }
 
     [HideInInspector] public bool gamePaused = false;
     [HideInInspector] public bool gameStarted = false;
@@ -151,22 +184,6 @@ public class GameMode : MonoBehaviour
             }
 
             TrackAdventureGroupUnderMouse();
-        }
-    }
-
-    private class QuestToStop
-    {
-        public Mission mission;
-        public Quest quest;
-        public QuestState questResult;
-        public bool isTimeout;
-
-        public QuestToStop(Mission mission, Quest quest, QuestState questResult, bool isTimeout)
-        {
-            this.mission = mission;
-            this.quest = quest;
-            this.questResult = questResult;
-            this.isTimeout = isTimeout;
         }
     }
 
@@ -456,6 +473,7 @@ public class GameMode : MonoBehaviour
             {
                 successfulMissions.Add(mission);
             }
+            WorldLightLevel++;
         }
         else if (newState == QuestState.Failure)
         {
@@ -463,6 +481,7 @@ public class GameMode : MonoBehaviour
             Map.instance.ChangeRegionShade(tile.X, tile.Y, QuestShadeSize, ShadeType.Dark);
 
             failedMissions.Add(mission);
+            WorldLightLevel--;
         }
         else if (newState == QuestState.InProgress)
         {
@@ -484,6 +503,8 @@ public class GameMode : MonoBehaviour
         });
 
         gameStarted = true;
+        maxWorldLightLevel = initialMaxWorldLightLevel;
+        UIGod.instance.OnMaxWorldLightLevelChanged(maxWorldLightLevel);
     }
 
     public void RestartGame()
@@ -565,7 +586,7 @@ public class GameMode : MonoBehaviour
 
     public static bool IsTimersRunning()
     {
-        return !instance.isNegotiating && !instance.gamePaused;
+        return !instance.isNegotiating && !instance.gamePaused && instance.gameStarted;
     }
 
     private bool ProcessSpawnedQuest(Mission mission, Quest quest)
@@ -621,6 +642,8 @@ public class GameMode : MonoBehaviour
         UIGod.instance.SpawnActiveQuest(quest);
 
         generatedQuests.Add(questVisual.transform);
+
+        QuestsEverSpawned++;
 
         return true;
     }

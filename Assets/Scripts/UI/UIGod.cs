@@ -30,6 +30,9 @@ public class UIGod : MonoBehaviour
     public GroupLine adventurerGroupLine;
     public GameObject restartButton;
     public Slider lightLevelSlider;
+    public Transform lightLevelBars;
+    public Transform lightLevelTop;
+    public Transform lightLevelBottom;
 
     [Header("Negotiation")]
     public TextWriter questTitle;
@@ -41,9 +44,11 @@ public class UIGod : MonoBehaviour
     public GameObject responsePrefab;
     public GameObject questPrefab;
     public GameObject adventurerPrefab;
+    public GameObject lightBarPrefab;
 
     private Window[] windows;
     private GameObject spawnedQuests;
+    List<Transform> lightLevelPoints = new List<Transform>();
 
     void Start()
     {
@@ -58,7 +63,9 @@ public class UIGod : MonoBehaviour
 
     void Update()
     {
-        
+        if (!GameMode.IsTimersRunning())
+            return;
+        InterpolateLightLevel();
     }
 
     public void SetInitialQuestTitle()
@@ -310,5 +317,34 @@ public class UIGod : MonoBehaviour
     public void EndRestartingGame()
     {
         GameMode.instance.RestartGame();
+    }
+
+    public void OnMaxWorldLightLevelChanged(int maxWorldLightLevel)
+    {
+        for (int i = 0; i < lightLevelBars.childCount; i++)
+            Destroy(lightLevelBars.GetChild(i).gameObject);
+
+        for (int barsAmount = 0; barsAmount < (maxWorldLightLevel * 2) - 1; barsAmount++)
+            Instantiate(lightBarPrefab, lightLevelBars);
+
+        lightLevelPoints = new List<Transform>();
+        lightLevelPoints.Add(lightLevelTop);
+        for (int i = 0; i < lightLevelBars.childCount; i++)
+        {
+            Transform possiblePoint = lightLevelBars.GetChild(i);
+            if (possiblePoint)
+                lightLevelPoints.Add(possiblePoint);
+        }
+        lightLevelPoints.Add(lightLevelBottom);
+    }
+
+    private void InterpolateLightLevel()
+    {
+        int normalizedWorldLightLevel = GameMode.instance.maxWorldLightLevel - GameMode.instance.worldLightLevel;
+        Transform targetLightBar = lightLevelPoints[normalizedWorldLightLevel];
+
+        float targetSliderAlpha = (targetLightBar.position.y - lightLevelBottom.position.y) / (lightLevelTop.position.y - lightLevelBottom.position.y);
+        float sliderAlpha = Mathf.Lerp(lightLevelSlider.value, targetSliderAlpha, Time.deltaTime * 5.0f);
+        lightLevelSlider.value = sliderAlpha;
     }
 }

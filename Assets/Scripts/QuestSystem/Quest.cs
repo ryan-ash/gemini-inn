@@ -109,6 +109,22 @@ public class Quest
     }
 }
 
+public class QuestToStop
+{
+    public Mission mission;
+    public Quest quest;
+    public QuestState questResult;
+    public bool isTimeout;
+
+    public QuestToStop(Mission mission, Quest quest, QuestState questResult, bool isTimeout)
+    {
+        this.mission = mission;
+        this.quest = quest;
+        this.questResult = questResult;
+        this.isTimeout = isTimeout;
+    }
+}
+
 [System.Serializable]
 public enum AllianceType
 {

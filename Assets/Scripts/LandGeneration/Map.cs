@@ -67,7 +67,6 @@ public class Map : MonoBehaviour
         set
         {
             averageLightLevelBalance = value;
-            UIGod.instance.lightLevelSlider.value = averageLightLevelBalance;
         }
     }
 
