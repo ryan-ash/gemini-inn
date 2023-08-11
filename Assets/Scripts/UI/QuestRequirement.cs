@@ -71,8 +71,8 @@ public class QuestRequirement : MonoBehaviour
 
     public void SetStatRequirement(StatRequirementStrength strength)
     {
+        slider.value = 25 * (int)strength;
         statFill.fillAmount = 0.33f * (int)strength;
-        Debug.Log("SetStatRequirement: " + strength + " " + statFill.fillAmount);
     }
 
 	void UpdateConnectedFields()
