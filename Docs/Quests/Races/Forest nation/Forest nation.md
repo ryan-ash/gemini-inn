@@ -1,0 +1,4 @@
+- ![[Werewolves]]
+- ![[Elves]]
+- ![[Druids]]
+- ![[Magical creatures]]

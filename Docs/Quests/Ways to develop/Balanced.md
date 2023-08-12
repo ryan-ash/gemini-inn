@@ -1,0 +1,1 @@
+When 30-70% of the tasks are good or bad. People are both sad and happy, everything is as it should be.
