@@ -1,1 +1,0 @@
-When more than 70% of completed quests are good. As a result, the world becomes too boring.

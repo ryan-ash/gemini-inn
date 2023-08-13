@@ -1,1 +1,0 @@
-The [[sirens]] are not satisfied that [[Humans]] are so dirty and ugly, but still come to the water to collect algae, fishing, bathing and replenish water, even after killing their relatives.

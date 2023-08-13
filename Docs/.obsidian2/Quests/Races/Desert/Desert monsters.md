@@ -1,5 +1,0 @@
-- ![[worms]]
-- ![[manticores]]
-- ![[scorpions]]
-- ![[mummies]]
-- 

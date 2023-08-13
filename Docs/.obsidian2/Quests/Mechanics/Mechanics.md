@@ -1,1 +1,0 @@
-- [[Lightness and darkness]]

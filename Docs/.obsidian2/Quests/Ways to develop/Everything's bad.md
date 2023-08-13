@@ -1,1 +1,0 @@
-When more than 70% of quests are bad. The world becomes too dangerous, many people die.

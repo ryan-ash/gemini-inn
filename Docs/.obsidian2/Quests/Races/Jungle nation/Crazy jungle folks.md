@@ -1,2 +1,0 @@
-- ![[Crazy Druids]]
-- ![[Living mushrooms]]

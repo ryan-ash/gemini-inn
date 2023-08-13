@@ -1,1 +1,0 @@
-Just empty rocks, the most you can find is a couple of caves, with [[Cave monsters]] inside ([[Cave party]]) and a few minerals if you go far enough. Houses for peaceful [[Vampires]]. 

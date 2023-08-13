@@ -1,1 +1,0 @@
-[[Werewolves]] are actually forest people, attacking [[Humans]] at the request of [[Elves]] to scare them away from the forest. That’s why people started training and hiring special creatures [[Hunters]].

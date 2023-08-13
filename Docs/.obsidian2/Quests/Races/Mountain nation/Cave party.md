@@ -1,2 +1,0 @@
-- ![[Cave monsters]]
-- ![[Vampires]]

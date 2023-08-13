@@ -1,1 +1,0 @@
-The more [[darkness]], the more frightening everything becomes around - the more [[lightness]], vice versa. (Mechanics of balance, karma, harmony). If the quest is not completed, then the territory darkens - if not, it lights up. The more light, the more «good» quests.
