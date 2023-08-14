@@ -1056,7 +1056,7 @@ MonoBehaviour:
   mapOpenedTransform: {fileID: 614014134}
   cameraMoveSpeed: 3
   trackMouse: 1
-  trackMouseAngleRange: {x: 10, y: 5}
+  trackMouseAngleRange: {x: 10, y: 6}
   questInfoTransform: {fileID: 736453879}
   isCameraMoving: 0
 --- !u!1001 &99812968
