@@ -55,4 +55,9 @@ public class AdventurerLine : MonoBehaviour
             questRequirement.SetStatValue(stat.Value);
         }
     }
+
+    public void HideBG()
+    {
+        GetComponent<Image>().enabled = false;
+    }
 }

@@ -131,7 +131,9 @@ public class UIGod : MonoBehaviour
     {
         Transform root = usePreviewRoot ? adventurersPreviewRoot : adventurersRoot;
         GameObject spawnedAdventurer = Instantiate(adventurerPrefab, root);
-        spawnedAdventurer.GetComponent<AdventurerLine>().SetAdventurer(adventurer);
+        AdventurerLine adventurerLine = spawnedAdventurer.GetComponent<AdventurerLine>();
+        adventurerLine.SetAdventurer(adventurer);
+        adventurerLine.HideBG();
         UpdateAdventurersCounter(AdventurerManager.instance.adventurers.Count);
     }
 
