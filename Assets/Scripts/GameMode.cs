@@ -53,7 +53,8 @@ public class GameMode : MonoBehaviour
     [SerializeField] private GameObject questResultPrefab;
     [SerializeField] private GameObject questResultRoot;
 
-    [Header("Quest Result")]
+    [Header("Game Over")]
+    [SerializeField] private float waitBeforeMenuOnGameOver = 5.0f;
     [SerializeField] private int initialMaxWorldLightLevel = 3;
     [SerializeField] private int maxWorldLightLevelRaisePerQuests = 5;
     [HideInInspector] public int worldLightLevel = 0;
@@ -66,7 +67,7 @@ public class GameMode : MonoBehaviour
             worldLightLevel = value;
             if (Mathf.Abs(worldLightLevel) >= maxWorldLightLevel)
             {
-                Debug.Log("GAME OVER");
+                GameOver();
                 worldLightLevel = maxWorldLightLevel * Mathf.RoundToInt(Mathf.Sign(worldLightLevel));
             }
             else
@@ -114,6 +115,7 @@ public class GameMode : MonoBehaviour
 
     [HideInInspector] public bool gamePaused = false;
     [HideInInspector] public bool gameStarted = false;
+    [HideInInspector] public bool gameOver = false;
 
     void Start()
     {
@@ -235,6 +237,55 @@ public class GameMode : MonoBehaviour
         {
             UpdateQuestState(questToStop.mission, questToStop.quest, questToStop.questResult, questToStop.isTimeout);
         }
+    }
+
+    public void StartGame()
+    {
+        AudioRevolver.Fire(AudioNames.Crowd);
+        Wait.Run(0.1f, () => {
+            InitGame();
+        });
+        Wait.Run(1.0f, () => { 
+            UIGod.instance.SetInitialQuestTitle();
+            UIGod.instance.mainFader.FadeOut();
+            StartCoroutine(SpawnQuest());
+        });
+
+        gameStarted = true;
+        maxWorldLightLevel = initialMaxWorldLightLevel;
+        UIGod.instance.OnMaxWorldLightLevelChanged(maxWorldLightLevel);
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    private void InitGame()
+    {
+        AdventurerManager.instance.StartSpawning();
+        Map.instance.GenerateMap();
+        GenerateInn();
+    }
+
+    private void GameOver()
+    {
+        if (gameOver)
+            return;
+
+        gameOver = true;
+        gamePaused = true;
+        isMapOpen = false;
+        isChoosingAdventurers = false;
+        isNegotiating = false;
+        AudioRevolver.Fire(AudioNames.Crowd + "/Stop");
+        UIGod.instance.UpdateQuestTitle("");
+        UIGod.instance.OpenWindow(WorldLightLevel > 0 ? WindowType.GameOverLight : WindowType.GameOverDarkness);
+        TextWriter gameOverWriter = UIGod.instance.activeWindow.GetComponentInChildren<TextWriter>();
+        gameOverWriter.WriteCurrentText();
+        Wait.Run(waitBeforeMenuOnGameOver, () => {
+            UIGod.instance.ShowMenu();
+        });
     }
 
     private void TrackQuestUnderMouse()
@@ -491,35 +542,6 @@ public class GameMode : MonoBehaviour
             quest.questInfo.SetInProgress();
         }
         UpdateQuestCount();
-    }
-
-    public void StartGame()
-    {
-        AudioRevolver.Fire(AudioNames.Crowd);
-        Wait.Run(0.1f, () => {
-            InitGame();
-        });
-        Wait.Run(1.0f, () => { 
-            UIGod.instance.SetInitialQuestTitle();
-            UIGod.instance.mainFader.FadeOut();
-            StartCoroutine(SpawnQuest());
-        });
-
-        gameStarted = true;
-        maxWorldLightLevel = initialMaxWorldLightLevel;
-        UIGod.instance.OnMaxWorldLightLevelChanged(maxWorldLightLevel);
-    }
-
-    public void RestartGame()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
-    private void InitGame()
-    {
-        AdventurerManager.instance.StartSpawning();
-        Map.instance.GenerateMap();
-        GenerateInn();
     }
 
     private void GenerateInn()

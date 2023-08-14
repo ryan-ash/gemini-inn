@@ -28,6 +28,7 @@ public class UIGod : MonoBehaviour
     public Transform adventurersPreviewRoot;
     public FontAwesome adventurerGroupIcon;
     public GroupLine adventurerGroupLine;
+    public GameObject resumeButton;
     public GameObject restartButton;
     public Slider lightLevelSlider;
     public Transform lightLevelBars;
@@ -207,6 +208,7 @@ public class UIGod : MonoBehaviour
                     CloseAllWindows();
                 AudioRevolver.Fire(window.isOverlay ? AudioNames.Hover : AudioNames.Click);
                 window.OpenWindow();
+                activeWindow = window;
                 break;
             }
         }
@@ -271,11 +273,16 @@ public class UIGod : MonoBehaviour
     {
         foreach (Window window in windows)
         {
-            if (includePinned)
-                window.Unpin();
-            if (window.isOpen)
-                window.CloseWindow();
+            CloseWindow(window, includePinned);
         }
+    }
+
+    public void CloseWindow(Window window, bool includePinned = false)
+    {
+        if (includePinned)
+            window.Unpin();
+        if (window.isOpen)
+            window.CloseWindow();
     }
 
     public void SpawnOwnerReplic()
@@ -294,18 +301,13 @@ public class UIGod : MonoBehaviour
     public void PauseGame()
     {
         AudioRevolver.Fire(AudioNames.Click);
-        menuFader.FadeIn();
-        HUDFader.FadeOut();
-        GameMode.instance.gamePaused = true;
-        restartButton.SetActive(true);
+        ShowMenu();
     }
 
     public void ResumeGame()
     {
         AudioRevolver.Fire(AudioNames.Click);
-        menuFader.FadeOut();
-        HUDFader.FadeIn();
-        GameMode.instance.gamePaused = false;
+        HideMenu();
     }
 
     public void BeginRestartingGame()
@@ -317,6 +319,23 @@ public class UIGod : MonoBehaviour
     public void EndRestartingGame()
     {
         GameMode.instance.RestartGame();
+    }
+
+    public void ShowMenu()
+    {
+        restartButton.SetActive(true);
+        if (GameMode.instance.gameOver)
+            resumeButton.SetActive(false);
+        menuFader.FadeIn();
+        HUDFader.FadeOut();
+        GameMode.instance.gamePaused = true;
+    }
+
+    public void HideMenu()
+    {
+        menuFader.FadeOut();
+        HUDFader.FadeIn();
+        GameMode.instance.gamePaused = false;
     }
 
     public void OnMaxWorldLightLevelChanged(int maxWorldLightLevel)

@@ -134,7 +134,8 @@ public class AdventurerManager : MonoBehaviour
     {
         while (true)
         {
-            SpawnAdventurer();
+            if (GameMode.IsTimersRunning())
+                SpawnAdventurer();
             yield return new WaitForSeconds(spawnInterval);
         }
     }

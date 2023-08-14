@@ -42,6 +42,11 @@ public class TextWriter : MonoBehaviour
         StartCoroutine("WriteText");
     }
 
+    public void WriteCurrentText()
+    {
+        Write(MyText.text);
+    }
+
     private void UpdateText(string newText)
     {
         currentText = newText;

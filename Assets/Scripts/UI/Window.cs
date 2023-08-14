@@ -17,7 +17,8 @@ public class Window : MonoBehaviour
     void Start()
     {
         fader = GetComponent<Fader>();
-        windowTitle.text = windowType.ToString();
+        if (windowTitle != null)
+            windowTitle.text = windowType.ToString();
     }
 
     void Update()
@@ -60,4 +61,6 @@ public enum WindowType
     History,
     Adventurers,
     AdventurerPreview,
+    GameOverLight,
+    GameOverDarkness
 }
