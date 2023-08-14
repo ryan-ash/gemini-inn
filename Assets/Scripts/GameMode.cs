@@ -64,11 +64,14 @@ public class GameMode : MonoBehaviour
         set 
         { 
             worldLightLevel = value;
-            Debug.Log("World light level: " + worldLightLevel + "/" + maxWorldLightLevel);
-            if (worldLightLevel > maxWorldLightLevel)
+            if (Mathf.Abs(worldLightLevel) >= maxWorldLightLevel)
             {
                 Debug.Log("GAME OVER");
-                worldLightLevel = maxWorldLightLevel;
+                worldLightLevel = maxWorldLightLevel * Mathf.RoundToInt(Mathf.Sign(worldLightLevel));
+            }
+            else
+            {
+                Debug.Log("World light level: " + worldLightLevel + "/" + maxWorldLightLevel);
             }
         }
     }
@@ -92,7 +95,7 @@ public class GameMode : MonoBehaviour
     [HideInInspector] public List<QuestInfo> generatedQuestInfos = new List<QuestInfo>();
     [HideInInspector] public List<MapObject> generatedMapObjects = new List<MapObject>();
 
-    private List<Transform> generatedQuests = new List<Transform>();
+    private List<QuestInfo> generatedQuests = new List<QuestInfo>();
     private GameObject generatedInn;
     private int lastMissionID = 0;
     private int questsEverSpawned = 0;
@@ -554,9 +557,12 @@ public class GameMode : MonoBehaviour
 
     private bool CheckIfSafe(Vector3 positionToTest)
     {
-        foreach (Transform questPosition in generatedQuests)
+        foreach (QuestInfo quest in generatedQuests)
         {
-            if (Vector3.Distance(positionToTest, questPosition.localPosition) < _questSafeDistance)
+            // skipping failed quests in safe distance check for now
+            if (quest.GetQuest().questState == QuestState.Failure)
+                continue;
+            if (Vector3.Distance(positionToTest, quest.transform.localPosition) < _questSafeDistance)
                 return false;
         }
 
@@ -641,7 +647,7 @@ public class GameMode : MonoBehaviour
         quest.questTimer = 0.0f;
         UIGod.instance.SpawnActiveQuest(quest);
 
-        generatedQuests.Add(questVisual.transform);
+        generatedQuests.Add(questInfo);
 
         QuestsEverSpawned++;
 

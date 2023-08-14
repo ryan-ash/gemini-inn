@@ -324,17 +324,15 @@ public class UIGod : MonoBehaviour
         for (int i = 0; i < lightLevelBars.childCount; i++)
             Destroy(lightLevelBars.GetChild(i).gameObject);
 
-        for (int barsAmount = 0; barsAmount < (maxWorldLightLevel * 2) - 1; barsAmount++)
-            Instantiate(lightBarPrefab, lightLevelBars);
-
-        lightLevelPoints = new List<Transform>();
+        lightLevelPoints.Clear();
         lightLevelPoints.Add(lightLevelTop);
-        for (int i = 0; i < lightLevelBars.childCount; i++)
+
+        for (int barsAmount = 0; barsAmount < (maxWorldLightLevel * 2) - 1; barsAmount++)
         {
-            Transform possiblePoint = lightLevelBars.GetChild(i);
-            if (possiblePoint)
-                lightLevelPoints.Add(possiblePoint);
+            GameObject newPoint = Instantiate(lightBarPrefab, lightLevelBars);
+            lightLevelPoints.Add(newPoint.transform);
         }
+
         lightLevelPoints.Add(lightLevelBottom);
     }
 
