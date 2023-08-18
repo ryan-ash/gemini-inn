@@ -50,13 +50,6 @@
       }
     },
     {
-      "query": "path:Charcters",
-      "color": {
-        "a": 1,
-        "rgb": 5600467
-      }
-    },
-    {
       "query": "path:Dialogues",
       "color": {
         "a": 1,
@@ -67,28 +60,28 @@
       "query": "path:\"Quests/Desert placed quests\"",
       "color": {
         "a": 1,
-        "rgb": 3670016
+        "rgb": 3675136
       }
     },
     {
       "query": "path:\"Quests/Fields placed quests\"",
       "color": {
         "a": 1,
-        "rgb": 3680512
+        "rgb": 5068544
       }
     },
     {
       "query": "path:\"Quests/Forest placed quests\"",
       "color": {
         "a": 1,
-        "rgb": 2424883
+        "rgb": 1464894
       }
     },
     {
       "query": "path:\"Quests/Mountains placed quests\"",
       "color": {
         "a": 1,
-        "rgb": 1529600
+        "rgb": 1513239
       }
     },
     {
@@ -104,18 +97,25 @@
         "a": 1,
         "rgb": 458808
       }
+    },
+    {
+      "query": "path:Charcters",
+      "color": {
+        "a": 1,
+        "rgb": 4119289
+      }
     }
   ],
-  "collapse-display": true,
+  "collapse-display": false,
   "showArrow": true,
   "textFadeMultiplier": -0.6,
-  "nodeSizeMultiplier": 2.1671875,
-  "lineSizeMultiplier": 2.29479166666667,
-  "collapse-forces": true,
-  "centerStrength": 0.34375,
-  "repelStrength": 9.58333333333333,
-  "linkStrength": 0.505208333333333,
-  "linkDistance": 250,
-  "scale": 0.08317427835927559,
+  "nodeSizeMultiplier": 2.72864583333333,
+  "lineSizeMultiplier": 2.4734375,
+  "collapse-forces": false,
+  "centerStrength": 0.203125,
+  "repelStrength": 15.5208333333333,
+  "linkStrength": 0.489583333333333,
+  "linkDistance": 248,
+  "scale": 0.03018289506732434,
   "close": true
 }

@@ -1,1 +1,2 @@
 - [[Lightness and darkness]]
+- [[Perks and stats]]

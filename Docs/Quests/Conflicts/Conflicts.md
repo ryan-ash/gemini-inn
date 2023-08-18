@@ -1,5 +1,5 @@
 - [[Humans as main resource consumers]]
 - [[Vampires want to find friends]]
-- [[Sirens want to see beatiful and healthy food]]
+- [[Sirens want to see beautiful and healthy food]]
 - [[Werewolves are protecting the forest]]
 - [[Crazy druids might cause the real danger]]
