@@ -1,0 +1,1 @@
+Diseases from [[Jungles]] with [[Crazy jungle folks]] take all over the kingdom

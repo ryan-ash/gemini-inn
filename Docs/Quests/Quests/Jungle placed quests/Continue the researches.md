@@ -1,0 +1,1 @@
+[[The Plague]] The disease isn't under control

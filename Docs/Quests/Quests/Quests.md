@@ -2,9 +2,7 @@
 -  [[Berries gathering]]. (Не требуется особых навыков)
 -  [[Werewolf hunting]]. (Условия: требуются охотники, особые навыки: сила, скорость, интеллект).
 
-
 [[Waters]]:
-
 - [[Help with fishing]]. (Не требуется особых навыков )
 
 [[Desert]]:
@@ -18,3 +16,6 @@
  
 [[Fields]]:
 - [[Help with the construction]].
+
+[[Jungles]]:
+ - 

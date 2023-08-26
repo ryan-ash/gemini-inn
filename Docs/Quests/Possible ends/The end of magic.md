@@ -1,0 +1,1 @@
+[[Humans]] win and [[Forest nation]] go away, people keep developing and we now how it always ends

@@ -1,0 +1,1 @@
+ [[Forest nation]] win and [[Humans]] go away, people probably steel keep developing but in another place

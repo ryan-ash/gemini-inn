@@ -1,0 +1,1 @@
+[[Jungles]] become a normal place to visit and [[Crazy jungle folks]] die.

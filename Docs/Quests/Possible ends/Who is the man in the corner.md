@@ -1,0 +1,1 @@
+If it's [[Ignored]] path, then the `observer`/`viewer` tell everything about `the truth` of this world.

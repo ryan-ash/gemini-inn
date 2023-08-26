@@ -1,0 +1,1 @@
+Unite with people against the evil. And attack Jungles -> [[Compromise, probably]], [[Jungle nation die]].
