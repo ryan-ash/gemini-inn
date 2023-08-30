@@ -1,0 +1,27 @@
+{
+	"nodes":[
+		{"type":"file","file":"Missions/Conflicts/Conflicts.md","id":"a665835a9215d51c","x":400,"y":80,"width":400,"height":400,"color":"#d4fe81"},
+		{"type":"file","file":"Missions/Mechanics/Mechanics.md","id":"3413ea8c6b657b61","x":-360,"y":-880,"width":400,"height":400,"color":"#a08ee6"},
+		{"type":"file","file":"Missions/Ways to develop/Ways to develop.md","id":"e276205e4a0175ae","x":-160,"y":180,"width":400,"height":400,"color":"#02599c"},
+		{"type":"file","file":"Missions/Possible ends/Possible ends.md","id":"2c6cd7625a3932b2","x":-560,"y":180,"width":400,"height":400,"color":"#e08452"},
+		{"type":"file","file":"Missions/Quests/Quests.md","id":"21dfe59f744843fe","x":-360,"y":-200,"width":400,"height":60,"color":"#52e08f"},
+		{"type":"file","file":"Missions/Q&A.md","id":"96570b5a8f30cb45","x":-920,"y":-295,"width":420,"height":290},
+		{"type":"file","file":"Missions/Races/Races.md","id":"afce7a25f1999804","x":400,"y":-320,"width":400,"height":300,"color":"#da6362"},
+		{"type":"file","file":"Missions/biomes/Biomes.md","id":"23689ef422570cc4","x":400,"y":-760,"width":400,"height":340,"color":"#207e78"},
+		{"type":"file","file":"Missions/Charcters/Characters.md","id":"449100bc0e1b33d3","x":920,"y":-370,"width":400,"height":400,"color":"#3edaf9"},
+		{"type":"file","file":"Missions/Dialogues/Dialogues.md","id":"4a6217152ebc3e2a","x":1440,"y":-370,"width":400,"height":400,"color":"#e052b1"}
+	],
+	"edges":[
+		{"id":"c980b720bd17f543","fromNode":"21dfe59f744843fe","fromSide":"right","toNode":"23689ef422570cc4","toSide":"left"},
+		{"id":"5b7dcccd73349184","fromNode":"21dfe59f744843fe","fromSide":"right","toNode":"afce7a25f1999804","toSide":"left"},
+		{"id":"82eb7555695c380f","fromNode":"afce7a25f1999804","fromSide":"bottom","toNode":"a665835a9215d51c","toSide":"top"},
+		{"id":"1ce2516b3b1b3347","fromNode":"23689ef422570cc4","fromSide":"bottom","toNode":"afce7a25f1999804","toSide":"top"},
+		{"id":"e01b8a43c01af2b5","fromNode":"a665835a9215d51c","fromSide":"left","toNode":"21dfe59f744843fe","toSide":"right"},
+		{"id":"183347b064f5bf8e","fromNode":"3413ea8c6b657b61","fromSide":"bottom","toNode":"21dfe59f744843fe","toSide":"top"},
+		{"id":"a587ed6268710c6e","fromNode":"21dfe59f744843fe","fromSide":"bottom","toNode":"e276205e4a0175ae","toSide":"top"},
+		{"id":"f64756a98b1aaa1a","fromNode":"21dfe59f744843fe","fromSide":"bottom","toNode":"2c6cd7625a3932b2","toSide":"top"},
+		{"id":"a57d1159f39fff5a","fromNode":"afce7a25f1999804","fromSide":"right","toNode":"449100bc0e1b33d3","toSide":"left"},
+		{"id":"413e7e95bb8505ac","fromNode":"a665835a9215d51c","fromSide":"right","toNode":"449100bc0e1b33d3","toSide":"bottom"},
+		{"id":"d02260f49fc08694","fromNode":"449100bc0e1b33d3","fromSide":"right","toNode":"4a6217152ebc3e2a","toSide":"left"}
+	]
+}

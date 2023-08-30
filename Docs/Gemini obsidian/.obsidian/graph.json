@@ -1,0 +1,121 @@
+{
+  "collapse-filter": false,
+  "search": "",
+  "showTags": false,
+  "showAttachments": false,
+  "hideUnresolved": false,
+  "showOrphans": true,
+  "collapse-color-groups": false,
+  "colorGroups": [
+    {
+      "query": "path:biomes",
+      "color": {
+        "a": 1,
+        "rgb": 2129528
+      }
+    },
+    {
+      "query": "path:Races",
+      "color": {
+        "a": 1,
+        "rgb": 14312290
+      }
+    },
+    {
+      "query": "path:Conflicts",
+      "color": {
+        "a": 1,
+        "rgb": 13958785
+      }
+    },
+    {
+      "query": "path:\"Ways to develop\"",
+      "color": {
+        "a": 1,
+        "rgb": 154012
+      }
+    },
+    {
+      "query": "path:Mechanics",
+      "color": {
+        "a": 1,
+        "rgb": 10522342
+      }
+    },
+    {
+      "query": "path:\"Possible ends\"",
+      "color": {
+        "a": 1,
+        "rgb": 16085273
+      }
+    },
+    {
+      "query": "path:Dialogues",
+      "color": {
+        "a": 1,
+        "rgb": 14701233
+      }
+    },
+    {
+      "query": "path:\"Quests/Desert placed quests\"",
+      "color": {
+        "a": 1,
+        "rgb": 3675136
+      }
+    },
+    {
+      "query": "path:\"Quests/Fields placed quests\"",
+      "color": {
+        "a": 1,
+        "rgb": 5068544
+      }
+    },
+    {
+      "query": "path:\"Quests/Forest placed quests\"",
+      "color": {
+        "a": 1,
+        "rgb": 1464894
+      }
+    },
+    {
+      "query": "path:\"Quests/Mountains placed quests\"",
+      "color": {
+        "a": 1,
+        "rgb": 1513239
+      }
+    },
+    {
+      "query": "path:\"Quests/Water placed quests\"",
+      "color": {
+        "a": 1,
+        "rgb": 10808
+      }
+    },
+    {
+      "query": "path:\"Quests/Jungle placed quests\"",
+      "color": {
+        "a": 1,
+        "rgb": 458808
+      }
+    },
+    {
+      "query": "path:Charcters",
+      "color": {
+        "a": 1,
+        "rgb": 4119289
+      }
+    }
+  ],
+  "collapse-display": false,
+  "showArrow": true,
+  "textFadeMultiplier": -2.6,
+  "nodeSizeMultiplier": 2.80520833333333,
+  "lineSizeMultiplier": 3.0859375,
+  "collapse-forces": false,
+  "centerStrength": 0.239583333333333,
+  "repelStrength": 15.3125,
+  "linkStrength": 0.567708333333333,
+  "linkDistance": 228,
+  "scale": 0.030182895067325827,
+  "close": true
+}
