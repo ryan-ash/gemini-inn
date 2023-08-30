@@ -1,0 +1,1 @@
+An old man, always rude to his customers, tired of life, just doing his job

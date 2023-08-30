@@ -1,0 +1,1 @@
+The only one, who understands the world is the matrix. The only one, who can explain us everything and open our eyes. He knows the difference between the Tavernkeeper and the Player.
