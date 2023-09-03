@@ -811,7 +811,21 @@ MonoBehaviour:
   activeMissions: []
   failedMissions: []
   successfulMissions: []
-  selectedQuestMarker: {fileID: 0}
+  consideredQuest:
+    questName: 
+    questDescription: 
+    Biomes: []
+    Alliance: 0
+    successAttempts: 0
+    timeout: 0
+    baseDuration: 15
+    successOnTimeout: 0
+    BaseSuccessRate: 1
+    AbilityModifiers: []
+    StatModifiers: []
+    questState: 0
+    ID: 0
+  consideredQuestMarker: {fileID: 0}
   selectedQuest:
     questName: 
     questDescription: 
@@ -826,6 +840,8 @@ MonoBehaviour:
     StatModifiers: []
     questState: 0
     ID: 0
+  selectedQuestMarker: {fileID: 0}
+  consideredAdventurerGroup: {fileID: 0}
   selectedAdventurerGroup: {fileID: 0}
   generatedQuestInfos: []
   generatedMapObjects: []
@@ -10999,7 +11015,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 736453878}
   m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
-  m_LocalPosition: {x: 5.076, y: 2.612, z: -22.506}
+  m_LocalPosition: {x: 5.076, y: 2.8, z: -22.4}
   m_LocalScale: {x: 0.2, y: 0.04, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
