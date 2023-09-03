@@ -8,6 +8,7 @@ public class Window : MonoBehaviour
     public WindowType windowType;
     public Text windowTitle;
     public bool isOverlay = false;
+    public bool soundOnOpen = true;
 
     [HideInInspector] public bool isOpen = false;
     [HideInInspector] public bool isPinned = false;
@@ -62,5 +63,6 @@ public enum WindowType
     Adventurers,
     AdventurerPreview,
     GameOverLight,
-    GameOverDarkness
+    GameOverDarkness,
+    Intro
 }

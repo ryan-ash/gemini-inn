@@ -248,7 +248,6 @@ public class GameMode : MonoBehaviour
         });
         Wait.Run(1.0f, () => { 
             UIGod.instance.SetInitialQuestTitle();
-            UIGod.instance.mainFader.FadeOut();
             StartCoroutine(SpawnQuest());
         });
 

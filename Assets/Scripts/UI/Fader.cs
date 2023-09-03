@@ -6,9 +6,18 @@ using UnityEngine.UI;
 public class Fader : MonoBehaviour
 {
     public float fadeDuration = 0.5f;
+    public bool switchOnStart = true;
     public bool isOn = true;
+    public bool canEverBeInteractable = true;
 
-    private CanvasGroup canvas;
+    private CanvasGroup canvasRef = null;
+    private CanvasGroup canvas {
+        get {
+            if (canvasRef == null)
+                canvasRef = GetComponent<CanvasGroup>();
+            return canvasRef;
+        }
+    }
     private bool isFading = false;
     private bool sendScheduledCallback = false;
     private bool sendScheduledCallbackToSelf = false;
@@ -16,8 +25,8 @@ public class Fader : MonoBehaviour
 
     void Start()
     {
-        canvas = GetComponent<CanvasGroup>();
-        Switch(isOn);
+        if (switchOnStart)
+            Switch(isOn);
     }
 
     void Update()
@@ -51,8 +60,16 @@ public class Fader : MonoBehaviour
     {
         this.isOn = isOn;
         canvas.alpha = isOn ? 1.0f : 0.0f;
-        canvas.interactable = isOn;
-        canvas.blocksRaycasts = isOn;
+        if (canEverBeInteractable)
+        {
+            canvas.blocksRaycasts = isOn;
+            canvas.interactable = isOn;
+        }
+        else
+        {
+            canvas.blocksRaycasts = false;
+            canvas.interactable = false;
+        }
     }
 
     public void FadeIn(string callbackMessage = "", bool sendToSelf = false)
@@ -61,8 +78,11 @@ public class Fader : MonoBehaviour
         isOn = true;
         scheduledCallback = callbackMessage;
         sendScheduledCallbackToSelf = sendToSelf;
-        canvas.blocksRaycasts = true;
-        canvas.interactable = true;
+        if (canEverBeInteractable)
+        {
+            canvas.blocksRaycasts = true;
+            canvas.interactable = true;
+        }
     }
 
     public void FadeOut(string callbackMessage = "", bool sendToSelf = false)

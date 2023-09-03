@@ -166,14 +166,29 @@ public class UIGod : MonoBehaviour
             return;
         }
         UIGod.instance.topTitleWriter.Write("", false);
-        mainFader.FadeIn("EndStartingGame");
+        OpenWindow(WindowType.Intro);
+        Wait.Run(1f, () => { 
+            EndStartingGame();
+        });
     }
 
     public void EndStartingGame()
     {
         menuFader.FadeOut();
-        HUDFader.FadeIn();
+        StoryManager.instance.StartStory();
+        StoryManager.instance.endStoryAction = () => {
+            mainFader.FadeIn("FinishIntro");
+        };
+    }
+
+    public void FinishIntro()
+    {
+        CloseWindow(WindowType.Intro);
         GameMode.instance.StartGame();
+        Wait.Run(0.5f, () => { 
+            mainFader.FadeOut();
+            HUDFader.FadeIn();
+        });
     }
 
     public void BeginQuitingGame()
@@ -208,7 +223,8 @@ public class UIGod : MonoBehaviour
             {
                 if (!window.isOverlay)
                     CloseAllWindows();
-                AudioRevolver.Fire(window.isOverlay ? AudioNames.Hover : AudioNames.Click);
+                if (window.soundOnOpen)
+                    AudioRevolver.Fire(window.isOverlay ? AudioNames.Hover : AudioNames.Click);
                 window.OpenWindow();
                 activeWindow = window;
                 break;
