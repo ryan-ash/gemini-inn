@@ -354,12 +354,9 @@ public class Map : MonoBehaviour
             }
             if (!biomeTilesCache.ContainsKey(biome))
             {
-                if (!biomeTilesCache.ContainsKey(biome))
-                {
-                    Debug.LogWarning($"No tiles for '{biome}' found");
-                    instance.nonPresentBiomes.Add(biome);
-                }
-                return result;
+                Debug.LogWarning($"No tiles for '{biome}' found");
+                instance.nonPresentBiomes.Add(biome);
+                continue;
             }
 
             result.AddRange(biomeTilesCache[biome]);
