@@ -8,6 +8,9 @@ using Ink.Runtime;
 // This is a super bare bones example of how to play and display a ink story in Unity.
 public class StoryManager : MonoBehaviour {
 
+	[Header("Settings")]
+	public bool createEndDialogOption = false;
+
 	[SerializeField]
 	private TextAsset inkJSONAsset;
 	private Story story;
@@ -79,12 +82,23 @@ public class StoryManager : MonoBehaviour {
 				});
 			}
 		} else {
-			Button choice = CreateChoiceView("[End Dialog]");
-			choice.onClick.AddListener(delegate{
-				if (endStoryAction != null) {
-					endStoryAction();
-				}
-			});
+			if (createEndDialogOption)
+			{
+				Button choice = CreateChoiceView("[End Dialog]");
+				choice.onClick.AddListener(delegate{
+					TriggerEndStory();
+				});
+			}
+			else
+			{
+				TriggerEndStory();
+			}
+		}
+	}
+
+	void TriggerEndStory() {
+		if (endStoryAction != null) {
+			endStoryAction();
 		}
 	}
 
