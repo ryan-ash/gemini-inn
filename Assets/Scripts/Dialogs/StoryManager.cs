@@ -78,14 +78,16 @@ public class StoryManager : MonoBehaviour {
 				// Debug.Log("Choice: " + choiceInfo.text);
 				// Tell the button what to do when we press it
 				button.onClick.AddListener (delegate {
+					AudioRevolver.Fire(AudioNames.Click);
 					OnClickChoiceButton (choiceInfo.index);
 				});
 			}
 		} else {
 			if (createEndDialogOption)
 			{
-				Button choice = CreateChoiceView("[End Dialog]");
-				choice.onClick.AddListener(delegate{
+				Button button = CreateChoiceView("[End Dialog]");
+				button.onClick.AddListener(delegate{
+					AudioRevolver.Fire(AudioNames.Click);
 					TriggerEndStory();
 				});
 			}

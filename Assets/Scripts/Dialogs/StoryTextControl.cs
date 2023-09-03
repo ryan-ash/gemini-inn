@@ -82,6 +82,10 @@ public class StoryTextControl : MonoBehaviour
             return;
         }
 
+        if (currentTextIndex > 0) {
+            AudioRevolver.Fire(AudioNames.Hover);
+        }
+
         Show(storyboard[currentTextIndex]);
         currentTextIndex += 1;
 
