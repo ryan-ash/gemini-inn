@@ -8,9 +8,13 @@ using Random=UnityEngine.Random;
 public class Mission
 {
     public string MissionName;
+    public bool ExcludeFromSpawn = false;
+    public bool Solo = false;
     public List<Quest> Quests;
     public Reward CompletionReward;
     public MissionRecurrenceType RecurrenceType = MissionRecurrenceType.Simultaneous;
+    public PostMissionSpawn MissionsToSpawnOnSuccess;
+    public PostMissionSpawn MissionsToSpawnOnFailure;
 
     [HideInInspector] public int ID = 0;
 
@@ -66,7 +70,24 @@ public class Mission
 
     public static Mission GrabRandomMissionFromDB()
     {
-        return MissionsDatabase.instance.Missions[Random.Range(0, MissionsDatabase.instance.Missions.Count)];
+        Mission missionToFind = null;
+        while (missionToFind == null)
+        {
+            List<Mission> soloMissions = MissionsDatabase.instance.Missions.FindAll(mission => mission.Solo);
+            List<Mission> missionsSubset = soloMissions.Count > 0 ? soloMissions : MissionsDatabase.instance.Missions;
+            missionToFind = missionsSubset[Random.Range(0, missionsSubset.Count)];
+            if (missionToFind.ExcludeFromSpawn)
+            {
+                missionToFind = null;
+            }
+        }
+        return missionToFind;
+    }
+
+    public static Mission GrabMissionByName(string name)
+    {
+        Mission missionToFind = MissionsDatabase.instance.Missions.Find(mission => mission.MissionName == name);
+        return missionToFind;
     }
 
     public Quest GetAvailableQuest()
@@ -121,6 +142,13 @@ public class Mission
         }
         return true;
     }
+}
+
+[System.Serializable]
+public class PostMissionSpawn
+{
+    public List<string> MissionsToSpawn;
+    public bool MutuallyExclusive = true;
 }
 
 [System.Serializable]

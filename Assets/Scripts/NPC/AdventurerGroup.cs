@@ -262,9 +262,9 @@ public class AdventurerGroup : MonoBehaviour
         }
         questGroup.quest = GameMode.instance.selectedQuest;
         questGroup.quest.questGroup = questGroup;
-        questGroup.quest.questState = QuestState.OnRoad;
         questGroup.icon = icon;
         GameMode.instance.RegisterQuestGroup(questGroup);
+        GameMode.instance.UpdateQuestState(questGroup.quest.mission, questGroup.quest, QuestState.OnRoad);
 
         for (int i = 0; i < adventurers.Count; i++)
         {

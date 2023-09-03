@@ -41,7 +41,9 @@ public class Quest
     [System.NonSerialized] [HideInInspector] public QuestLine questLine;
     [System.NonSerialized] [HideInInspector] public GroupOnMap groupOnMap;
 
-    [System.NonSerialized][HideInInspector] public Tile tile;
+    [System.NonSerialized] [HideInInspector] public Tile tile;
+
+    [System.NonSerialized] [HideInInspector] public List<Quest> questsToFailOnStart;
 
     [HideInInspector] public int ID = 0;
 
@@ -50,6 +52,7 @@ public class Quest
         AbilityModifiers = new List<AbilityModifier>();
         StatModifiers = new List<StatModifier>();
         Biomes = new List<string>();
+        questsToFailOnStart = new List<Quest>();
     }
 
     public static float CalculateModifier(Quest InQuest, Ability InAbility)

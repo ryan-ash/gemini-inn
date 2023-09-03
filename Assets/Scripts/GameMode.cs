@@ -429,6 +429,7 @@ public class GameMode : MonoBehaviour
         return moveTimeDuringNegotiation + Random.Range(-moveTimeRandomizationDuringNegotiation, moveTimeRandomizationDuringNegotiation);
     }
 
+    // TODO: create quest manager and move quest related stuff there
     public void AgreeToQuest()
     {
         selectedQuest.questInfo.Unpin();
@@ -454,11 +455,9 @@ public class GameMode : MonoBehaviour
 
         selectedAdventurerGroup = null;
         UIGod.instance.UpdateQuestTitle("");
-        selectedQuestMarker.GetComponent<QuestInfo>().SetOnRoad();
 
         UpdateQuestCount();
         UpdateAdventureCount();
-        selectedQuest.questTimer = 0.0f;
 
         AudioRevolver.Fire(AudioNames.QuestGoing);
         AudioRevolver.Fire(AudioNames.MugOnTable);
@@ -525,7 +524,7 @@ public class GameMode : MonoBehaviour
             }
             else
             {
-                successfulMissions.Add(mission);
+                ProcessMissionOver(mission, true);
             }
             WorldLightLevel++;
         }
@@ -534,14 +533,77 @@ public class GameMode : MonoBehaviour
             //temp shading
             Map.instance.ChangeRegionShade(tile.X, tile.Y, QuestShadeSize, ShadeType.Dark);
 
-            failedMissions.Add(mission);
+            ProcessMissionOver(mission, false);
             WorldLightLevel--;
         }
         else if (newState == QuestState.InProgress)
         {
             quest.questInfo.SetInProgress();
         }
+        else if (newState == QuestState.OnRoad)
+        {
+            quest.questInfo.SetOnRoad();
+            foreach (Quest questToFail in quest.questsToFailOnStart)
+            {
+                UpdateQuestState(questToFail.mission, questToFail, QuestState.Failure, true);
+            }
+        }
         UpdateQuestCount();
+    }
+
+    public void ProcessMissionOver(Mission mission, bool IsSuccess = true)
+    {
+        List<Quest> spawnedQuests = new List<Quest>();
+        bool isMutuallyExclusive = IsSuccess ? mission.MissionsToSpawnOnSuccess.MutuallyExclusive : mission.MissionsToSpawnOnFailure.MutuallyExclusive;
+        if (IsSuccess)
+        {
+            successfulMissions.Add(mission);
+            foreach (string missionName in mission.MissionsToSpawnOnSuccess.MissionsToSpawn)
+            {
+                Mission missionToSpawn = Deep.Clone(Mission.GrabMissionByName(missionName));
+                Quest questToSpawn = missionToSpawn.GetAvailableQuest();
+                if (questToSpawn != null)
+                {
+                    bool success = ProcessSpawnedQuest(missionToSpawn, questToSpawn);
+                    if (success)
+                    {
+                        activeMissions.Add(missionToSpawn);
+                        spawnedQuests.Add(questToSpawn);
+                    }
+                }
+            }
+        }
+        else
+        {
+            failedMissions.Add(mission);
+            foreach (string missionName in mission.MissionsToSpawnOnFailure.MissionsToSpawn)
+            {
+                Mission missionToSpawn = Deep.Clone(Mission.GrabMissionByName(missionName));
+                Quest questToSpawn = missionToSpawn.GetAvailableQuest();
+                if (questToSpawn != null)
+                {
+                    bool success = ProcessSpawnedQuest(missionToSpawn, questToSpawn);
+                    if (success)
+                    {
+                        activeMissions.Add(missionToSpawn);
+                        spawnedQuests.Add(questToSpawn);
+                    }
+                }
+            }
+        }
+        if (isMutuallyExclusive)
+        {
+            foreach (Quest quest in spawnedQuests)
+            {
+                foreach (Quest questToFail in spawnedQuests)
+                {
+                    if (questToFail != quest)
+                    {
+                        quest.questsToFailOnStart.Add(questToFail);
+                    }
+                }
+            }
+        }
     }
 
     private void GenerateInn()
@@ -630,6 +692,7 @@ public class GameMode : MonoBehaviour
 
         int initialTileCount = availableBiomeTiles.Count;
         quest.mission = mission;
+        quest.questsToFailOnStart = new List<Quest>();
 
         Vector3 questPosition = Vector3.zero;
         Tile questTile = null;
