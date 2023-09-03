@@ -93,20 +93,32 @@ public class Quest
         this.tile = tile;
     }
 
-    public bool RollSuccessDice()
+    public float CalculateSuccessRateWithGroupStats(GroupStats groupStats)
     {
         float SuccessRate = BaseSuccessRate;
 
-        foreach(Ability ability in questGroup.groupStats.abilities)
+        if (groupStats.abilities != null)
         {
-            SuccessRate += CalculateModifier(this, ability);
+            foreach (Ability ability in groupStats.abilities)
+            {
+                SuccessRate += CalculateModifier(this, ability);
+            }
         }
 
-        foreach(Stat stat in questGroup.groupStats.stats)
+        if (groupStats.stats != null)
         {
-            SuccessRate += CalculateModifier(this, stat);
+            foreach (Stat stat in groupStats.stats)
+            {
+                SuccessRate += CalculateModifier(this, stat);
+            }
         }
 
+        return SuccessRate;
+    }
+
+    public bool RollSuccessDice()
+    {
+        float SuccessRate = CalculateSuccessRateWithGroupStats(questGroup.groupStats);
         float Roll = Random.Range(0.0f, 1.0f);
         return Roll <= SuccessRate;
     }

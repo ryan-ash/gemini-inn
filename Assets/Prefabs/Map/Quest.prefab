@@ -273,6 +273,7 @@ MonoBehaviour:
   questName: {fileID: 7657191571150893666}
   questDescription: {fileID: 9036173395170640873}
   questAlliance: {fileID: 5501598429748153281}
+  questSuccessRate: {fileID: 1940205730798065284}
   questSlider: {fileID: 3285869686042312065}
   questSliderFill: {fileID: 985934144270131054}
   questMapCircle: {fileID: 1109841416871851196}
@@ -511,6 +512,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8603160532888375275, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
   m_PrefabInstance: {fileID: 7902687094147323761}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1940205730798065284 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8594841573459640821, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}
+  m_PrefabInstance: {fileID: 7902687094147323761}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!225 &2705619728368826264 stripped
 CanvasGroup:
   m_CorrespondingSourceObject: {fileID: 5199325249614733545, guid: 1e8d40bf9fd07f94ea1b94dd7013a3e7, type: 3}

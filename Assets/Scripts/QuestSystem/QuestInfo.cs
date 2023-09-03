@@ -10,6 +10,7 @@ public class QuestInfo : MonoBehaviour
     public Text questName;
     public Text questDescription;
     public Text questAlliance;
+    public Text questSuccessRate;
     public Slider questSlider;
     public Image questSliderFill;
     public SpriteRenderer questMapCircle;
@@ -52,6 +53,8 @@ public class QuestInfo : MonoBehaviour
     private BoxCollider closeCollider;
     private Quest quest;
     private RectTransform infoCanvasRectTransform;
+
+    private int lastCalculatedSuccessRate = 0;
 
     public void SetQuest(Quest InQuest)
     {
@@ -191,6 +194,45 @@ public class QuestInfo : MonoBehaviour
         AudioRevolver.Fire(isSuccess ? AudioNames.QuestCompleted : AudioNames.QuestFailed);
     }
 
+    public void UpdateQuestSuccessRate()
+    {
+        // edge cases:
+        // - this quest is selected quest in gamemode, and there's considered adventurer group => use their modifiers
+        // - this quest is on road // in progress, there's quest group attached to it => use their modifiers
+        // - this quest is over, set empty string for now
+
+        if (isQuestOver)
+        {
+            questSuccessRate.text = "";
+            return;
+        }
+
+        float successRate = quest.BaseSuccessRate;
+        if (GameMode.instance.selectedQuest == quest)
+        {
+            if (GameMode.instance.consideredAdventurerGroup != null)
+            {
+                successRate = quest.CalculateSuccessRateWithGroupStats(GameMode.instance.consideredAdventurerGroup.groupStats);
+            }
+            else if (GameMode.instance.selectedAdventurerGroup != null)
+            {
+                successRate = quest.CalculateSuccessRateWithGroupStats(GameMode.instance.selectedAdventurerGroup.groupStats);
+            }
+        }
+        else if (quest.questGroup != null)
+        {
+            successRate = quest.CalculateSuccessRateWithGroupStats(quest.questGroup.groupStats);
+        }
+
+        int successRateInt = (int)(successRate * 100);
+        if (lastCalculatedSuccessRate != successRateInt)
+        {
+            lastCalculatedSuccessRate = successRateInt;
+            // trigger update animation (copy from counter)
+        }
+        questSuccessRate.text = successRateInt.ToString() + "%";
+    }
+
     public void PlayButtonHoverSound()
     {
         AudioRevolver.Fire(AudioNames.Hover);
@@ -223,6 +265,7 @@ public class QuestInfo : MonoBehaviour
         questDescription.text = quest.questDescription;
         var questAllianceString = quest.Alliance == AllianceType.None ? "" : quest.Alliance.ToString();
         questAlliance.text = questAllianceString;
+        UpdateQuestSuccessRate();
     }
 
     void Start()

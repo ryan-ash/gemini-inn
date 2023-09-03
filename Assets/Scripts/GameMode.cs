@@ -86,12 +86,12 @@ public class GameMode : MonoBehaviour
     [HideInInspector] public List<Mission> successfulMissions = new List<Mission>();
     [HideInInspector] public List<QuestGroup> questGroups = new List<QuestGroup>();
 
-    private GameObject consideredQuestMarker;
-    private Quest consideredQuest;
-    private AdventurerGroup consideredAdventurerGroup;
 
-    [HideInInspector] public GameObject selectedQuestMarker;
+    [HideInInspector] public Quest consideredQuest;
+    [HideInInspector] public GameObject consideredQuestMarker;
     [HideInInspector] public Quest selectedQuest;
+    [HideInInspector] public GameObject selectedQuestMarker;
+    [HideInInspector] public AdventurerGroup consideredAdventurerGroup;
     [HideInInspector] public AdventurerGroup selectedAdventurerGroup;
     [HideInInspector] public List<QuestInfo> generatedQuestInfos = new List<QuestInfo>();
     [HideInInspector] public List<MapObject> generatedMapObjects = new List<MapObject>();
@@ -170,6 +170,7 @@ public class GameMode : MonoBehaviour
                     if (consideredAdventurerGroup != null && consideredAdventurerGroup.adventurers.Count > 0)
                     {
                         selectedAdventurerGroup = consideredAdventurerGroup;
+                        UpdateSelectedQuestSuccessRate();
                         CursorSetter.ResetPriorityCursor();
                         MoveSelectedAdventurersToNegotiation();
                     }
@@ -332,6 +333,7 @@ public class GameMode : MonoBehaviour
                     adventurerPreviewWindow.isOpen = false;
                 }
                 consideredAdventurerGroup = adventurerGroup;
+                UpdateSelectedQuestSuccessRate();
                 if (adventurerGroup.adventurers.Count > 0)
                 {
                     UIGod.instance.FillPreviewDrawerWithAdventureGroup(adventurerGroup);
@@ -344,6 +346,7 @@ public class GameMode : MonoBehaviour
         {
             consideredAdventurerGroup.UnfocusAdventurerTable();
             consideredAdventurerGroup = null;
+            UpdateSelectedQuestSuccessRate();
             UIGod.instance.CloseWindow(WindowType.AdventurerPreview);
         }
     }
@@ -492,6 +495,7 @@ public class GameMode : MonoBehaviour
     {
         quest.questTimer = 0.0f;
         quest.questState = newState;
+        quest.questInfo.UpdateQuestSuccessRate();
         var tile = quest.tile;
 
         if (newState == QuestState.Success || newState == QuestState.Failure)
@@ -549,6 +553,14 @@ public class GameMode : MonoBehaviour
             }
         }
         UpdateQuestCount();
+    }
+
+    private void UpdateSelectedQuestSuccessRate()
+    {
+        if (selectedQuest != null && selectedQuest.questInfo != null)
+        {
+            selectedQuest.questInfo.UpdateQuestSuccessRate();
+        }
     }
 
     public void ProcessMissionOver(Mission mission, bool IsSuccess = true)
