@@ -9,6 +9,7 @@ public class QuestInfo : MonoBehaviour
     public CanvasGroup infoCanvas;
     public Text questName;
     public Text questDescription;
+    public Text questAlliance;
     public Slider questSlider;
     public Image questSliderFill;
     public SpriteRenderer questMapCircle;
@@ -220,6 +221,8 @@ public class QuestInfo : MonoBehaviour
     {
         questName.text = quest.questName;
         questDescription.text = quest.questDescription;
+        var questAllianceString = quest.Alliance == AllianceType.None ? "" : quest.Alliance.ToString();
+        questAlliance.text = questAllianceString;
     }
 
     void Start()
