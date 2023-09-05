@@ -4,31 +4,29 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using Ink.Runtime;
+using System.Linq;
 
 // This is a super bare bones example of how to play and display a ink story in Unity.
 public class StoryManager : MonoBehaviour {
 
+	public static StoryManager instance;
+
 	[Header("Settings")]
 	public bool createEndDialogOption = false;
+	public List<TextWrapper> texts;
 
-	[SerializeField]
-	private TextAsset inkJSONAsset;
 	private Story story;
 
-	[SerializeField]
-	private RectTransform storyParent, buttonsParent;
-
-	// UI Prefabs
-	[SerializeField]
-	private Text textPrefab;
-	[SerializeField]
-	private Button buttonPrefab;
-
+	[Header("Mapping")]
+	public RectTransform storyParent, buttonsParent;
 	public StoryTextControl storyText;
 
-	private InkNarratorService inkService;
+	[Header("Prefabs")]
+	public Text textPrefab;
+	public Button buttonPrefab;
 
-	public static StoryManager instance;
+	private TextAsset inkJSONAsset;
+	private InkNarratorService inkService;
 
 	public UnityAction endStoryAction;
 
@@ -49,6 +47,10 @@ public class StoryManager : MonoBehaviour {
 
 	public void SelectStory(TextAsset newStory) {
 		inkJSONAsset = newStory;
+	}
+
+	public void SelectStory(string storyName) {
+		SelectStory(texts.Find(x => x.name == storyName).story);
 	}
 	
 	// This is the main function called every time the story changes. It does a few things:
@@ -148,4 +150,10 @@ public class StoryManager : MonoBehaviour {
 			Destroy(item.gameObject);
 		}
 	}
+}
+
+[System.Serializable]
+public class TextWrapper {
+	public string name;
+	public TextAsset story;
 }

@@ -64,5 +64,6 @@ public enum WindowType
     AdventurerPreview,
     GameOverLight,
     GameOverDarkness,
-    Intro
+    Intro,
+    Dialog
 }

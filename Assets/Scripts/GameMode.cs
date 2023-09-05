@@ -80,6 +80,7 @@ public class GameMode : MonoBehaviour
     private bool isMapOpen = false;
     private bool isChoosingAdventurers = false;
     private bool isNegotiating = false;
+    private bool tutorialOver = false;
 
     [HideInInspector] public List<Mission> activeMissions = new List<Mission>();
     [HideInInspector] public List<Mission> failedMissions = new List<Mission>();
@@ -125,7 +126,7 @@ public class GameMode : MonoBehaviour
 
     void Update()
     {
-        if (!gameStarted)
+        if (!gameStarted || !tutorialOver)
             return;
 
         UpdateQuestTimers();
@@ -246,14 +247,21 @@ public class GameMode : MonoBehaviour
         Wait.Run(0.1f, () => {
             InitGame();
         });
-        Wait.Run(1.0f, () => { 
-            UIGod.instance.SetInitialQuestTitle();
-            StartCoroutine(SpawnQuest());
-        });
 
         gameStarted = true;
         maxWorldLightLevel = initialMaxWorldLightLevel;
         UIGod.instance.OnMaxWorldLightLevelChanged(maxWorldLightLevel);
+    }
+
+    public void StartSpawningQuests()
+    {
+        StartCoroutine(SpawnQuest());
+    }
+
+    public void FinishTutorial()
+    {
+        tutorialOver = true;
+        StartSpawningQuests();
     }
 
     public void RestartGame()

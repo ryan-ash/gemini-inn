@@ -34,6 +34,11 @@ public class UIGod : MonoBehaviour
     public Transform lightLevelBars;
     public Transform lightLevelTop;
     public Transform lightLevelBottom;
+    public RectTransform dialogStoryParent, dialogButtonsParent;
+
+    // TODO: move from here; a lot of stuff really...
+    [Header("Intro")]
+    public AnimatedCharacterController observer;
 
     [Header("Negotiation")]
     public TextWriter questTitle;
@@ -167,6 +172,9 @@ public class UIGod : MonoBehaviour
         }
         UIGod.instance.topTitleWriter.Write("", false);
         OpenWindow(WindowType.Intro);
+        Wait.Run(0.25f, () => {
+            menuFader.FadeOut();
+        });
         Wait.Run(1f, () => { 
             EndStartingGame();
         });
@@ -174,7 +182,7 @@ public class UIGod : MonoBehaviour
 
     public void EndStartingGame()
     {
-        menuFader.FadeOut();
+        StoryManager.instance.SelectStory("intro");
         StoryManager.instance.StartStory();
         StoryManager.instance.endStoryAction = () => {
             mainFader.FadeIn("FinishIntro");
@@ -185,10 +193,35 @@ public class UIGod : MonoBehaviour
     {
         CloseWindow(WindowType.Intro);
         GameMode.instance.StartGame();
+        observer.GetIntoPosition();
         Wait.Run(0.5f, () => { 
-            mainFader.FadeOut();
-            HUDFader.FadeIn();
+            mainFader.FadeOut("StartInitialDialog");
         });
+    }
+
+    public void StartInitialDialog()
+    {
+        StoryManager.instance.storyParent = dialogStoryParent;
+        StoryManager.instance.buttonsParent = dialogButtonsParent;
+        StoryManager.instance.storyText = dialogStoryParent.GetComponent<StoryTextControl>();
+
+        StoryManager.instance.SelectStory("observer_intro");
+        StoryManager.instance.endStoryAction = () => {
+            FinishInitialDialog();
+        };
+        Wait.Run(2f, () => { 
+            OpenWindow(WindowType.Dialog);
+            StoryManager.instance.StartStory();
+        });
+    }
+
+    public void FinishInitialDialog()
+    {
+        GameMode.instance.FinishTutorial();
+        CloseWindow(WindowType.Dialog);
+        HUDFader.FadeIn();
+        SetInitialQuestTitle();
+        observer.GoBack();
     }
 
     public void BeginQuitingGame()
