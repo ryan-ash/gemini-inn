@@ -1,5 +1,5 @@
 #ingame 
-**From Elves**:
+**From: Elves**
 Biome: Forest
 Abilities: Healing
 Stats: Intelligence
