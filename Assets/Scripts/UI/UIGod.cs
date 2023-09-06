@@ -239,6 +239,7 @@ public class UIGod : MonoBehaviour
         });
         StoryManager.instance.inkService.addObservableToTag("hide_quest", () => {
             GameMode.instance.generatedQuestInfos[0].Unpin();
+            GameMode.instance.ReenableTutorial();
         });
     }
 
@@ -247,6 +248,7 @@ public class UIGod : MonoBehaviour
         CloseWindow(WindowType.Dialog);
         SetInitialQuestTitle();
         observer.GoBack();
+        GameMode.instance.FinishTutorial();
     }
 
     public void BeginQuitingGame()

@@ -13,6 +13,7 @@ public class StoryTextControl : MonoBehaviour
     [HideInInspector]
     public bool ready = false;
 
+    public float lineCooldown = 0.2f;
     public StoryManager storyManager;
 
     private List<GameObject> previousLines = new List<GameObject>();
@@ -76,6 +77,10 @@ public class StoryTextControl : MonoBehaviour
     void Update() {
         if (ready && Input.anyKeyDown) {
             storyManager.PrepareAndPushNextLine();
+            ready = false;
+            Wait.Run(lineCooldown, () => {
+                ready = true;
+            });
         }
     }
 

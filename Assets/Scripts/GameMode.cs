@@ -262,6 +262,12 @@ public class GameMode : MonoBehaviour
         tutorialOver = true;
     }
 
+    public void ReenableTutorial()
+    {
+        tutorialOver = false;
+        HideConsideredGroupPreview();
+    }
+
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -328,14 +334,7 @@ public class GameMode : MonoBehaviour
             AdventurerGroup adventurerGroup = hit.transform.gameObject.GetComponent<AdventurerGroup>();
             if (adventurerGroup != consideredAdventurerGroup)
             {
-                if (consideredAdventurerGroup != null)
-                {
-                    consideredAdventurerGroup.UnfocusAdventurerTable();
-                    var adventurerPreviewWindow = UIGod.instance.GetWindow(WindowType.AdventurerPreview);
-                    var adventurerPreviewFader = adventurerPreviewWindow.GetComponent<Fader>();
-                    adventurerPreviewFader.Switch(false);
-                    adventurerPreviewWindow.isOpen = false;
-                }
+                HideConsideredGroupPreview();
                 consideredAdventurerGroup = adventurerGroup;
                 UpdateSelectedQuestSuccessRate();
                 if (adventurerGroup.adventurers.Count > 0)
@@ -352,6 +351,18 @@ public class GameMode : MonoBehaviour
             consideredAdventurerGroup = null;
             UpdateSelectedQuestSuccessRate();
             UIGod.instance.CloseWindow(WindowType.AdventurerPreview);
+        }
+    }
+
+    private void HideConsideredGroupPreview()
+    {
+        if (consideredAdventurerGroup != null)
+        {
+            consideredAdventurerGroup.UnfocusAdventurerTable();
+            var adventurerPreviewWindow = UIGod.instance.GetWindow(WindowType.AdventurerPreview);
+            var adventurerPreviewFader = adventurerPreviewWindow.GetComponent<Fader>();
+            adventurerPreviewFader.Switch(false);
+            adventurerPreviewWindow.isOpen = false;
         }
     }
 
