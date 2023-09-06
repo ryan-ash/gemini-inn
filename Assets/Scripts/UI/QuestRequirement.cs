@@ -75,7 +75,7 @@ public class QuestRequirement : MonoBehaviour
         statFill.fillAmount = 0.33f * (int)strength;
     }
 
-	void UpdateConnectedFields()
+    void UpdateConnectedFields()
     {
         icon.ChangeIcon(isAbility ? abilityDescription.icon : statDescription.icon);
         icon.ChangeColor(isAbility ? abilityDescription.color : statDescription.color);

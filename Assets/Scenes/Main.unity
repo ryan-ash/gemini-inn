@@ -957,6 +957,7 @@ MonoBehaviour:
   storyText: {fileID: 1580336176}
   textPrefab: {fileID: 8616247256547453127, guid: 8d434748743628e4eb2bd9b54586f82d, type: 3}
   buttonPrefab: {fileID: 2629820637558460266, guid: 1a6746ded44ddcf4a9b5b00b7d2f401d, type: 3}
+  inkService: {fileID: 0}
 --- !u!4 &85580566 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1149450743610261583, guid: dc02f77b0506f764c9d22c61c681c4af, type: 3}
@@ -8493,7 +8494,7 @@ MonoBehaviour:
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
+  m_ChildControlWidth: 1
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
@@ -17684,7 +17685,7 @@ MonoBehaviour:
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
+  m_ChildControlWidth: 1
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0

@@ -53,7 +53,7 @@ public static class PlayerPrefsWrapper {
             PlayerIsNewToTheGame = false;
         }
     }
-		
+
     public static void Clear() 
     {
         PlayerPrefs.DeleteAll();

@@ -28,26 +28,27 @@ Hey.
     -> menu
 
 = tutorial_customers
-Your customers.
+Your customers. #show_customers
 There's nothing interesting about them, really.
 But they have their use, so treat them well.
 Or don't. Up to you.
--> tutorial_quest
+Now open the map. #show_hud
+* [Open the map] -> tutorial_quest
 
 = tutorial_quest
-You first request appeared.
-You should be cautious. Some of them don't live long.
+You first request. #spawn_quest
+Be cautious. Some of them don't live long.
 After all, patience is limited. Same goes for lives.
-Now open the map.
--> tutorial_abilities
+* [Check quest] -> tutorial_abilities
 
 = tutorial_abilities
-The quests may require abilities & stats.
+The quests may require abilities & stats. #show_quest
 You could choose Travelers with such skills or not, your choice.
--> tutorial_end
+Forget about the quest for now.
+* [Dismiss quest] -> tutorial_end
 
 = tutorial_end
-This is it. This is your job.
+This is it. This is your job. #hide_quest
 At last...
 Everything you're doing here is your choice.
 You can run from this fact, but in the end you'll face it.

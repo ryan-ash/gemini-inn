@@ -161,6 +161,7 @@ public class UIGod : MonoBehaviour
         UpdateAdventurersCounter(AdventurerManager.instance.adventurers.Count);
     }
 
+    // TODO: move intro into separate class?..
     public void BeginStartingGame()
     {
         AudioRevolver.Fire(AudioNames.Click);
@@ -176,11 +177,11 @@ public class UIGod : MonoBehaviour
             menuFader.FadeOut();
         });
         Wait.Run(1f, () => { 
-            EndStartingGame();
+            PrepareIntro();
         });
     }
 
-    public void EndStartingGame()
+    public void PrepareIntro()
     {
         StoryManager.instance.SelectStory("intro");
         StoryManager.instance.StartStory();
@@ -195,11 +196,11 @@ public class UIGod : MonoBehaviour
         GameMode.instance.StartGame();
         observer.GetIntoPosition();
         Wait.Run(0.5f, () => { 
-            mainFader.FadeOut("StartInitialDialog");
+            mainFader.FadeOut("PrepareInitialDialog");
         });
     }
 
-    public void StartInitialDialog()
+    public void PrepareInitialDialog()
     {
         StoryManager.instance.storyParent = dialogStoryParent;
         StoryManager.instance.buttonsParent = dialogButtonsParent;
@@ -210,16 +211,40 @@ public class UIGod : MonoBehaviour
             FinishInitialDialog();
         };
         Wait.Run(2f, () => { 
-            OpenWindow(WindowType.Dialog);
-            StoryManager.instance.StartStory();
+            StartInitialDialog();
+        });
+    }
+
+    public void StartInitialDialog()
+    {
+        OpenWindow(WindowType.Dialog);
+        StoryManager.instance.StartStory();
+
+        StoryManager.instance.inkService.addObservableToTag("show_customers", () => {
+            AdventurerManager.instance.StartSpawning();
+            AudioRevolver.Fire(AudioNames.Crowd);
+        });
+        StoryManager.instance.inkService.addObservableToTag("show_hud", () => {
+            HUDFader.FadeIn();
+        });
+        StoryManager.instance.inkService.addObservableToTag("spawn_quest", () => {
+            GameMode.instance.StartSpawningQuests();
+            GameMode.instance.ToggleMap();
+        });
+        StoryManager.instance.inkService.addObservableToTag("show_quest", () => {
+            GameMode.instance.FinishTutorial();
+            GameMode.instance.generatedQuestInfos[0].ShowInfo();
+            GameMode.instance.generatedQuestInfos[0].Pin();
+            GameMode.instance.ToggleMap();
+        });
+        StoryManager.instance.inkService.addObservableToTag("hide_quest", () => {
+            GameMode.instance.generatedQuestInfos[0].Unpin();
         });
     }
 
     public void FinishInitialDialog()
     {
-        GameMode.instance.FinishTutorial();
         CloseWindow(WindowType.Dialog);
-        HUDFader.FadeIn();
         SetInitialQuestTitle();
         observer.GoBack();
     }

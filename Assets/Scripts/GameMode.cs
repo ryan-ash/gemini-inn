@@ -243,14 +243,13 @@ public class GameMode : MonoBehaviour
 
     public void StartGame()
     {
-        AudioRevolver.Fire(AudioNames.Crowd);
-        Wait.Run(0.1f, () => {
-            InitGame();
-        });
-
         gameStarted = true;
         maxWorldLightLevel = initialMaxWorldLightLevel;
         UIGod.instance.OnMaxWorldLightLevelChanged(maxWorldLightLevel);
+
+        Wait.Run(0.1f, () => {
+            InitGame();
+        });
     }
 
     public void StartSpawningQuests()
@@ -261,7 +260,6 @@ public class GameMode : MonoBehaviour
     public void FinishTutorial()
     {
         tutorialOver = true;
-        StartSpawningQuests();
     }
 
     public void RestartGame()
@@ -271,7 +269,6 @@ public class GameMode : MonoBehaviour
 
     private void InitGame()
     {
-        AdventurerManager.instance.StartSpawning();
         Map.instance.GenerateMap();
         GenerateInn();
     }
@@ -695,7 +692,7 @@ public class GameMode : MonoBehaviour
 
     public static bool IsTimersRunning()
     {
-        return !instance.isNegotiating && !instance.gamePaused && instance.gameStarted;
+        return !instance.isNegotiating && !instance.gamePaused && instance.gameStarted && instance.tutorialOver;
     }
 
     private bool ProcessSpawnedQuest(Mission mission, Quest quest)
