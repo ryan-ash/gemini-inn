@@ -17,4 +17,7 @@ Long Version:
  In ardent anticipation, we stand united, By the grace of the Forest Nation.
 
 If it's completed, then
-	[[1 forest conflict]]
+	[[Humans as main resource consumers]]
+Choice:
+- From [[Villagers]]: [[Promote the opening of a training camp for hunters]].
+- From [[Elves]]: [[Help increase forest guard]]

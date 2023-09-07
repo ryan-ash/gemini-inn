@@ -1,4 +1,8 @@
-It's time for us to discuss the troubles. And tell the truth about everything
+#togame 
+elves
+
+At last, harmony reigns supreme, but malevolence remains afoot. It is imperative that we divulge the unvarnished truth concerning our once-infected brethren of the jungle. Your comrades are cordially invited to join us and partake in our discourse.
 
 When it's done
 	[[Bring peace to the World]]
+	[[Shall we try to help them]]
