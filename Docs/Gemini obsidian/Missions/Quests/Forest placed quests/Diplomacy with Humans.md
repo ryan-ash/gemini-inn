@@ -5,4 +5,4 @@ At last, harmony reigns supreme, but malevolence remains afoot. It is imperative
 
 When it's done
 	[[Bring peace to the World]]
-	[[Shall we try to help them]]
+	[[Try talking to them]]
